@@ -51,7 +51,6 @@
 #define ERS_ROOT_SIZE 256
 #define ERS_BLOCK_ENTRIES 4096
 
-typedef struct ers_instance_t;
 struct ers_list
 {
 	struct ers_list *Next;
@@ -129,8 +128,10 @@ static ers_cache_t *ers_find_cache(unsigned int size)
 	}
 	else
 	{
-		CacheList->Next = cache;
-		cache->Prev = CacheList;
+		cache->Next = CacheList;
+		cache->Next->Prev = cache;
+		CacheList = cache;
+		CacheList->Prev = NULL;
 	}
 
 	return cache;
@@ -143,13 +144,12 @@ static void ers_free_cache(ers_cache_t *cache, bool remove)
 	for (i = 0; i < cache->Used; i++)
 		aFree(cache->Blocks[i]);
 
-	if (cache->Prev)
-		cache->Prev->Next = cache->Next;
-
 	if (cache->Next)
 		cache->Next->Prev = cache->Prev;
 
-	if (CacheList == cache)
+	if (cache->Prev)
+		cache->Prev->Next = cache->Next;
+	else
 		CacheList = cache->Next;
 
 	aFree(cache->Blocks);
@@ -169,7 +169,7 @@ static void *ers_obj_alloc_entry(ERS self)
 
 	if (instance->Cache->ReuseList != NULL)
 	{
-		ret = (void *)((unsigned int)instance->Cache->ReuseList + sizeof(struct ers_list));
+		ret = (void *)((unsigned char *)instance->Cache->ReuseList + sizeof(struct ers_list));
 		instance->Cache->ReuseList = instance->Cache->ReuseList->Next;
 	} 
 	else if (instance->Cache->Free > 0) 
@@ -200,7 +200,7 @@ static void *ers_obj_alloc_entry(ERS self)
 static void ers_obj_free_entry(ERS self, void *entry)
 {
 	ers_instance_t *instance = (ers_instance_t *)self;
-	struct ers_list *reuse = (struct ers_list *)((unsigned int)entry - sizeof(struct ers_list));
+	struct ers_list *reuse = (struct ers_list *)((unsigned char *)entry - sizeof(struct ers_list));
 
 	if (instance == NULL) 
 	{
