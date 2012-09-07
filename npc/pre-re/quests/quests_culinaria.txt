@@ -3,7 +3,7 @@
 //===== Por: ================================================= 
 //= Reddozen
 //===== Versão Atual: ======================================== 
-//= 1.4
+//= 1.5a
 //===== Compatível Com: ====================================== 
 //= Cronus 1400+
 //===== Descrição: =========================================== 
@@ -16,6 +16,8 @@
 //= 1.2c Corrigido sprs, coordenadas e direções [Kamper]
 //= 1.3 Retirado shops de Cozinheiro [Kamper]
 //= 1.4 Nomes corrigidos [Hildds]
+//= 1.5 Consertado verificação de itens no NPC 'Sharle'
+//= 1.5a Otimização do NPC 'Sharle' [Socramjunio]
 //============================================================ 
 
 prt_castle,43,30,6	script	Chefe#1	878,{
@@ -332,98 +334,76 @@ prt_castle,45,35,4	script	Sharle	886,{
 	L_First_Cooking:
 		mes "Eu preciso de alguns ingredientes especiais.";
 		mes "Traga-me:";
+				deletearray @item[0],127;
 		if(first_cooking == 1){
-			set @item1,577;
-			set @item1a,1;
-			set @item2,908;
-			set @item2a,10;
-			set @item3,1024;
-			set @item3a,1;
 			set @food1,12056;
-
+			setarray @item[0],
+			517,1,
+			908,10,
+			1024,1;
 			mes "1 Sacola de Grãos, 10 Ovas de Sapo, e";
 			mes "1 Tinta de Polvo.";
 		}
 
 		if(first_cooking == 2){
-			set @item1,518;
-			set @item1a,1;
-			set @item2,514;
-			set @item2a,2;
-			set @item3,501;
-			set @item3a,1;
-			set @food1,12061;
-
+			set @food1,12061;			
+			setarray @item[0],
+			518,1,
+			514,2,
+			501,1;
 			mes "1 Mel, 2 Uvas, e";
 			mes "1 Poção Vermelha.";
 		}
 
 		if(first_cooking == 3){
-			set @item1,514;
-			set @item1a,3;
-			set @item2,501;
-			set @item2a,2;
-			set @item3,0;
-			set @item3a,0;
-			set @food1,12046;
-
+			set @food1,12046;			
+			setarray @item[0],
+			514,3,
+			501,2;
 			mes "3 Uvas e 2 Poções Vermelhas.";
 		}
 
 		if(first_cooking == 4){
-			set @item1,942;
-			set @item1a,5;
-			set @item2,7031;
-			set @item2a,1;
-			set @item3,7457;
-			set @item3a,1;
-			set @food1,12066;
-
+			set @food1,12066;			
+			setarray @item[0],
+			942,5,
+			7031,1,
+			7457,1;
 			mes "5 Caudas de Yoyo, 1 Frigideira Velha, e";
 			mes "1 Óleo de Cozinha.";
 		}
 
 		if(first_cooking == 5){
-			set @item1,940;
-			set @item1a,5;
-			set @item2,7031;
-			set @item2a,1;
-			set @item3,7457;
-			set @item3a,1;
-			set @food1,12041;
-
+			set @food1,12041;			
+			setarray @item[0],940,5,7031,1,7457,1;
 			mes "5 Pernas de Gafanhoto, 1 Frigideira Velha, e";
 			mes "1 Óleo de Cozinha.";
 		}
 
-		if(first_cooking == 6){
-			set @item1,960;
-			set @item1a,10;
-			set @item2,511;
-			set @item2a,10;
-			set @item3,503;
-			set @item3a,1;
-			set @food1,12051;
-
+		if(first_cooking == 6){		
+			set @food1,12051;			
+			setarray @item[0],
+			960,10,
+			511,10,
+			503,1;
 			mes "10 Garras de Crustáceo, 10 Ervas Verdes, e";
 			mes "1 Poção Amarela.";
 		}
-
-		if(countitem(@item1) < @item1a || countitem(@item2) < @item2a || countitem(@item3) < @item3a) close;
-
-		delitem @item1,@item1a;
-		delitem @item2,@item2a;
-		delitem @item3,@item3a;
-		next;
-		set cooking_q, 2;
-
-		mes "[Sharle]";
-		mes "Parabéns!";
-		mes "Agora você pode comprar um";
-		mes "Kit de Culinária Portátil.";
-		getitem @food1,1;
-		set first_cooking, 0;
-		close;
+		
+		while(1){
+			for(set @i,0; @i<getarraysize(@item); set @i,@i+2){
+				if( countitem(@item[@i])  < @item[@i+1] ) close;
+			}
+			next;
+				set cooking_q, 2;
+				mes "[Sharle]";
+				mes "Parabéns!";
+				mes "Agora você pode comprar um";
+				mes "Kit de Culinária Portátil.";
+				getitem @food1,1;
+				set first_cooking, 0;
+				close;
+		}
 
 	L_Cooking_7:
 		mes "Você gostaria de ver alguns";

@@ -51,6 +51,7 @@
 //=     and added extended anouncement format for mapannounce.
 //= 1.8 Fixed a possible exploit in guild castle investment. [Brian]
 //= 1.9 Partially rewrote Script. [Masao]
+//= 2.0 Investimento de economia consertado. [Socramjunio]
 //============================================================
 
 // WoE : Main Functions
@@ -870,7 +871,7 @@ OnRecvCastle:
 				close;
 			}
 			set Zeny, Zeny - 10000;
-			enablenpc "Kafra Staff#"+strnpcinfo(2);
+			enablenpc "Kafra#"+strnpcinfo(2);
 			SetCastleData strnpcinfo(2),9,1;
 			mes "["+strnpcinfo(1)+"]";
 			mes "We obtained a contract with the kafra Main Office, and hired a Kafra Employee.";
@@ -1246,19 +1247,25 @@ OnClock0001:
 
 	// Apply investment to Eco. and Def. Only happens if there were investments made.
 	// Permanent Development can only happen once per day.
+	// Modificado a mecânica de investimento da Economia e Defesa, loop adicionado para haver
+	// injeção de pontos com 50% de chance de investir a cada ponto de investimento 
+	// O investimento ficou da forma correta [ Socramjunio ]
 	if (GetCastleData(strnpcinfo(2),4)) {
-		set .@Economy,GetCastleData(strnpcinfo(2),2);
-		SetCastleData strnpcinfo(2),2,.@Economy + GetCastleData(strnpcinfo(2),4) + (rand(2) && getgdskilllv(.@GID,10014));
+		while( GetCastleData(strnpcinfo(2),4) > 0 ){
+			set .@Eco,(getgdskilllv(.@GID,10014)) ? rand(2) : 1;
+			SetCastleData strnpcinfo(2),2,GetCastleData(strnpcinfo(2),2) + .@Eco;
+			SetCastleData strnpcinfo(2),4,GetCastleData(strnpcinfo(2),4)-1;
+		}
 		if (GetCastleData(strnpcinfo(2),2) > 100) SetCastleData strnpcinfo(2),2,100;
 	}
 	if (GetCastleData(strnpcinfo(2),5)) {
-		set .@Defence,GetCastleData(strnpcinfo(2),3);
-		SetCastleData strnpcinfo(2),3,.@Defence + GetCastleData(strnpcinfo(2),5);
+		while( GetCastleData(strnpcinfo(2),5) > 0 ){
+			set .@Def,(getgdskilllv(.@GID,10014)) ? rand(2) : 1;
+			SetCastleData strnpcinfo(2),3,GetCastleData(strnpcinfo(2),3) + .@Def;
+			SetCastleData strnpcinfo(2),5,GetCastleData(strnpcinfo(2),5)-1;
+		}
 		if (GetCastleData(strnpcinfo(2),3) > 100) SetCastleData strnpcinfo(2),3,100;
 	}
-	// Reset daily investment limits.
-	setcastledata strnpcinfo(2),4,0;
-	setcastledata strnpcinfo(2),5,0;
 
 	// Spawn boxes in proper order.
 	for (set .@i,0; .@i < .@Treasure ; set .@i,.@i+1) {
