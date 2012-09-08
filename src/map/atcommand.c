@@ -3169,12 +3169,9 @@ ACMD_FUNC(doommap)
 /*==========================================
  *
  *------------------------------------------*/
-static void atcommand_raise_sub(struct map_session_data* sd)
-{
-	if(pc_isdead(sd))
-		status_revive(&sd->bl, 100, 100);
-	else
-		status_percent_heal(&sd->bl, 100, 100);
+static void atcommand_raise_sub(struct map_session_data* sd) {
+
+	status_revive(&sd->bl, 100, 100); 
 	
 	clif_skill_nodamage(&sd->bl,&sd->bl,ALL_RESURRECTION,4,1);
 	clif_displaymessage(sd->fd, msg_txt(63)); // Mercy has been shown.
@@ -3192,7 +3189,8 @@ ACMD_FUNC(raise)
 
 	iter = mapit_getallusers();
 	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
-		atcommand_raise_sub(pl_sd);
+		if( pc_isdead(pl_sd) )
+			atcommand_raise_sub(pl_sd);
 	mapit_free(iter);
 
 	clif_displaymessage(fd, msg_txt(64)); // Mercy has been granted.
@@ -3212,7 +3210,7 @@ ACMD_FUNC(raisemap)
 
 	iter = mapit_getallusers();
 	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
-		if (sd->bl.m == pl_sd->bl.m)
+		if (sd->bl.m == pl_sd->bl.m && pc_isdead(pl_sd) )
 			atcommand_raise_sub(pl_sd);
 	mapit_free(iter);
 
@@ -3287,8 +3285,8 @@ ACMD_FUNC(kickat)
 
 	iter = mapit_getallusers();
 	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) ) {
-	 if( ( pc_get_group_level(sd) >= pc_get_group_level(pl_sd) ) && pl_sd->state.autotrade ) {
-		clif_GM_kick(NULL, pl_sd);
+		if( ( pc_get_group_level(sd) >= pc_get_group_level(pl_sd) ) && pl_sd->state.autotrade ) {
+			clif_GM_kick(NULL, pl_sd);
 		}
 	}
 	mapit_free(iter);
@@ -9324,7 +9322,16 @@ bool is_atcommand(const int fd, struct map_session_data* sd, const char* message
 				sprintf(atcmd_msg, "%s", command);
 				break;
 			}
-		
+			
+			if( !pc_get_group_level(sd) ) {
+				if( x >= 1 || y >= 1 ) { /* we have command */
+					info = get_atcommandinfo_byname(atcommand_checkalias(command + 1));
+					if( !info || info->char_groups[sd->group_pos] == 0 ) /* if we can't use or doesn't exist: don't even display the command failed message */
+							return false;
+				} else
+					return false;/* display as normal message */
+			}
+			
 			sprintf(output, msg_txt(1388), charcommand_symbol); // Charcommand failed. Usage: %c<command> <char name> <params>.
 			clif_displaymessage(fd, output);
 			return true;

@@ -13990,7 +13990,7 @@ BUILDIN_FUNC(replacestr)
 	}
 
 	if(script_hasdata(st, 5)) {
-		if(script_isint(st,5))
+		if( !script_isstring(st,5) )
 			usecase = script_getnum(st, 5) != 0;
 		else {
 			ShowError("script:replacestr: Invalid usecase value. Expected int got string\n");
@@ -14070,7 +14070,7 @@ BUILDIN_FUNC(countstr)
 		return 1;
 	}
 
-	if(script_hasdata(st, 4)) {
+	if( !script_isstring(st,4) ) {
 		if(script_isint(st,4))
 			usecase = script_getnum(st, 4) != 0;
 		else {
