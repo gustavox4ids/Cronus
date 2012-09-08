@@ -37,3 +37,4 @@ receive_requests: Ability to receive @requests.
 show_bossmobs: Ability to see boss mobs with @showmobs.
 disable_pvm: Ability to disable Player v.s. Monster.
 disable_pvp: Ability to disable Player v.s. Player.
+disable_commands_when_dead: Ability to disable @command usage when dead.
