@@ -42,7 +42,7 @@ pvp_y_room,77,85,4	script	Guia de Batalha	105,{
 	mes "do Time "+.@j+". Você está";
 	mes "pronto para ir agora?";
 	next;
-	if(select("Sim:Não")==2) {
+	if(select("Sim:Não") == 2) {
 		mes "[Guia de Batalha de Clãs]";
 		mes "Tudo bem, espero ver";
 		mes "você novamente nos";
