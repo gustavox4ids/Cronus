@@ -5,7 +5,7 @@
 //= Converted by kobra_k88
 //= Further bugfixed and tested by Lupus
 //===== Versão Atual: ======================================== 
-//= 3.4c
+//= 3.4d
 //===== Compatível com: ====================================== 
 //= Cronus SVN
 //===== Descrição: =========================================== 
@@ -53,6 +53,7 @@
 //= 3.4a Tradução e Revisão do Script [Cronus-Emulator]
 //= 3.4b Corrigido pequeno erro de tradução [Asus]
 //= 3.4c Mais correções (bugreport: 15)  [Asus]
+//= 3.4d Correções na tradução dos nomes dos npcs, relacionado com eventos. (bugreport: 000407) [SoulBlaker]
 //============================================================
 
 // Nóticia na Antiga Guilda dos Caçadores
@@ -988,7 +989,7 @@ OnInit:
 
 OnStartArena:
 	warpwaitingpc "job_hunte", 90, 67;
-	donpcevent "Manager#hnt::OnEnable";
+	donpcevent "Gerente#hnt::OnEnable";
 	disablewaitingroomevent;
 	end;
 
@@ -997,54 +998,54 @@ OnStart:
 	end;
 }
 
-job_hunte,1,1,1	script	Manager#hnt	66,{
+job_hunte,1,1,1	script	Gerente#hnt	66,{
 OnInit:
-	disablenpc "Manager#hnt";
+	disablenpc "Gerente#hnt";
 	end;
 
 OnEnable:
 	donpcevent "Interruptor#hnt::OnDisable";
-	enablenpc "Manager#hnt";
+	enablenpc "Gerente#hnt";
 	set .MyMobs,6;
 	initnpctimer;
 	// Target Mosnters
-	monster "job_hunte",67,80,"Monstro Alvo",1015,1,"Manager#hnt::OnMyMobDead";
-	monster "job_hunte",114,78,"Monstro Alvo",1015,1,"Manager#hnt::OnMyMobDead";
-	monster "job_hunte",89,127,"Monstro Alvo",1002,1,"Manager#hnt::OnMyMobDead";
-	monster "job_hunte",53,73,"Monstro Alvo",1041,1,"Manager#hnt::OnMyMobDead";
-	monster "job_hunte",125,70,"Monstro Alvo",1016,1,"Manager#hnt::OnMyMobDead";
-	monster "job_hunte",90,92,"Monstro Alvo",1015,1,"Manager#hnt::OnMyMobDead";
+	monster "job_hunte",67,80,"Monstro Alvo",1015,1,"Gerente#hnt::OnMyMobDead";
+	monster "job_hunte",114,78,"Monstro Alvo",1015,1,"Gerente#hnt::OnMyMobDead";
+	monster "job_hunte",89,127,"Monstro Alvo",1002,1,"Gerente#hnt::OnMyMobDead";
+	monster "job_hunte",53,73,"Monstro Alvo",1041,1,"Gerente#hnt::OnMyMobDead";
+	monster "job_hunte",125,70,"Monstro Alvo",1016,1,"Gerente#hnt::OnMyMobDead";
+	monster "job_hunte",90,92,"Monstro Alvo",1015,1,"Gerente#hnt::OnMyMobDead";
 	// Decoy Monsters
-	monster "job_hunte",85,100,"Monstro Teste",1016,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",72,102,"Monstro Teste",1041,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",108,103,"Monstro Teste",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",88,127,"Monstro Teste",1002,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",125,69,"Monstro Teste",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",77,112,"Monstro Teste",1016,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",53,106,"Monstro Teste",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",53,73,"Monstro Teste",1002,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",125,70,"Monstro Auvo",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",90,91,"Monstro Auvo",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",67,80,"Monstro Auvo",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",77,112,"Monstro Alvu",1016,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",53,106,"Monstro Auvo",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",53,73,"Monstro Auvo",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",125,70,"Monstro Auvo",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",90,91,"Monstro Alvu",1041,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",85,100,"Monstro Alvu",1002,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",72,102,"Monstro Auvo",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",108,103,"Monstro Auvo",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",77,112,"Monstro Auvo",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",112,139,"Binnie",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",112,139,"Darrel",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",112,139,"Rex",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",112,139,"Anselmo",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",90,91,"Anolian",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",53,73,"Demonstração de Monstro",1002,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",53,106,"Eu não",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",77,112,"Me ajude",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",72,102,"Não me ataque",1015,1,"Manager#hnt::OnMyMobDead2";
-	monster "job_hunte",108,103,"Monstro Auvo",1015,1,"Manager#hnt::OnMyMobDead2";
+	monster "job_hunte",85,100,"Monstro Teste",1016,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",72,102,"Monstro Teste",1041,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",108,103,"Monstro Teste",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",88,127,"Monstro Teste",1002,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",125,69,"Monstro Teste",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",77,112,"Monstro Teste",1016,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",53,106,"Monstro Teste",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",53,73,"Monstro Teste",1002,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",125,70,"Monstro Auvo",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",90,91,"Monstro Auvo",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",67,80,"Monstro Auvo",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",77,112,"Monstro Alvu",1016,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",53,106,"Monstro Auvo",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",53,73,"Monstro Auvo",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",125,70,"Monstro Auvo",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",90,91,"Monstro Alvu",1041,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",85,100,"Monstro Alvu",1002,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",72,102,"Monstro Auvo",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",108,103,"Monstro Auvo",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",77,112,"Monstro Auvo",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",112,139,"Binnie",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",112,139,"Darrel",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",112,139,"Rex",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",112,139,"Anselmo",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",90,91,"Anolian",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",53,73,"Demonstração de Monstro",1002,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",53,106,"Eu não",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",77,112,"Me ajude",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",72,102,"Não me ataque",1015,1,"Gerente#hnt::OnMyMobDead2";
+	monster "job_hunte",108,103,"Monstro Auvo",1015,1,"Gerente#hnt::OnMyMobDead2";
 	end;
 
 OnMyMobDead:
@@ -1053,7 +1054,7 @@ OnMyMobDead:
 		mapannounce "job_hunte","Certo, bom trabalho... Agora, ache o interruptor no centro do mapa!! Cuidado com as armadilhas!!",bc_map;
 		set HNTR_Q,14;
 		donpcevent "Interruptor#hnt::OnEnable";
-		donpcevent "Manager#hnt::OnDisable";
+		donpcevent "Gerente#hnt::OnDisable";
 	}
 	else {
 		mapannounce "job_hunte","Ok~ Você está quase lá!!",bc_map;
@@ -1064,7 +1065,7 @@ OnMyMobDead2:
 	mapannounce "job_hunte",strcharinfo(0)+ "!! Você cometeu um erro... Por favor tente novamente.",bc_map;
 	set HNTR_Q,13;
 	warp "job_hunte",176,22;
-	donpcevent "Manager#hnt::OnReset";
+	donpcevent "Gerente#hnt::OnReset";
 	donpcevent "Sala de Espera#hnt::OnStart";
 	end;
 
@@ -1073,7 +1074,7 @@ OnReset:
 
 OnDisable:
 	killmonsterall "job_hunte";
-	disablenpc "Manager#hnt";
+	disablenpc "Gerente#hnt";
 	end;
 
 OnTimer1000:
@@ -1153,7 +1154,7 @@ OnTimer195000:
 	end;
 
 OnTimer197000:
-	donpcevent "Manager#hnt::OnReset";
+	donpcevent "Gerente#hnt::OnReset";
 	donpcevent "Sala de Espera#hnt::OnStart";
 	end;
 }
@@ -1592,8 +1593,8 @@ OnTouch:
 	mapannounce "job_hunte",strcharinfo(0) + ", falhou! Volte para onde começou!",bc_map;
 	set HNTR_Q,13;
 	warp "job_hunte",176,22;
-	donpcevent "Manager#hnt::OnReset";
-	donpcevent "Waiting Room#hnt::OnStart";
+	donpcevent "Gerente#hnt::OnReset";
+	donpcevent "Sala de Espera#hnt::OnStart";
 	end;
 }
 
