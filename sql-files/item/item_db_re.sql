@@ -1072,7 +1072,7 @@ REPLACE INTO `item_db_re` VALUES (1528,'Grande_Cruz','Grande Cruz',4,20,NULL,150
 REPLACE INTO `item_db_re` VALUES (1529,'Taco','Taco',4,20,NULL,3000,'155',NULL,2,0,0x00008100,7,2,2,3,78,1,8
 , '', '', '');
 REPLACE INTO `item_db_re` VALUES (1530,'Mjolnir','Mjolnir',4,20,NULL,6000,'350',NULL,1,NULL,0x000444A2,7,2,2,4,'95',NULL,8,
-'bonus bAtkEle,Ele_Wind; bonus bDex,50; bonus bStr,20; bonus bAspdRate,10; autobonus "{bonus bSplashRange,1;}",50,10000;}', '', '');
+'bonus bAtkEle,Ele_Wind; bonus bDex,50; bonus bStr,20; bonus bAspdRate,10; bonus3 bAutoSpell,"MG_THUNDERSTORM",10,100; autobonus "{bonus bSplashRange,1;}",50,10000;}', '', '');
 REPLACE INTO `item_db_re` VALUES (1531,'Chave_Inglesa','Chave Inglesa',4,20,NULL,2500,'115',NULL,1,0,0x00008110,7,2,2,3,55,1,8
 , ' bonus2 bAddEff,Eff_Blind,100; bonus2 bAddEff,Eff_Stun,100; bonus2 bAddEff,Eff_Poison,100; bonus2 bAddEff,Eff_Freeze,100; ', '', '');
 REPLACE INTO `item_db_re` VALUES (1532,'Atordoador','Atordoador',4,60000,NULL,2000,'140',NULL,1,2,0x00008110,7,2,2,3,27,1,8
