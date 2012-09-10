@@ -2644,13 +2644,14 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 				  skill_num == LG_SHIELDPRESS ) )
 				ATK_ADDRATE(sc->data[SC_GLOOMYDAY_SK]->val2);
 			if( sc->data[SC_EDP] ){
-			// FIX ME: Should Rolling Cutter be affected by EDP?
 				switch(skill_num){
-					case AS_SPLASHER:       case AS_VENOMKNIFE:
-					case GC_ROLLINGCUTTER:
-					break;
+					case AS_SPLASHER:
+					case AS_VENOMKNIFE:
+						break;
 #ifndef RENEWAL_EDP
-					case ASC_BREAKER:       case ASC_METEORASSAULT: break;
+					case ASC_BREAKER:
+					case ASC_METEORASSAULT: 
+						break;
 					case AS_GRIMTOOTH: // Na renovação a 'Tocaia' não recebe bônus EDP [Axl]
 #else
 					case AS_SONICBLOW:
@@ -3084,7 +3085,12 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 
 			if( wd.flag&BF_LONG )
 				cardfix = cardfix * ( 100 + sd->bonus.long_attack_atk_rate ) / 100;
-
+#ifdef RENEWAL_EDP
+			if( sc && sc->data[SC_EDP] ) {
+				cardfix = cardfix * (100 + sc->data[SC_EDP]->val1 * 60 ) / 100;
+				cardfix_ = cardfix_ * (100 + sc->data[SC_EDP]->val1 * 60 ) / 100;
+			}
+#endif
 			if( cardfix != 1000 || cardfix_ != 1000 )
 				ATK_RATE2(cardfix/10, cardfix_/10);	//What happens if you use right-to-left and there's no right weapon, only left?
 		}
