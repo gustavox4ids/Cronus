@@ -1038,7 +1038,7 @@ int mmo_auth(struct login_session_data* sd)
 	
 	if( !accounts->load_str(accounts, &acc, sd->userid) )
 	{
-		ShowNotice("Conta desconhecida (conta: %s, ip: %s)\n", sd->userid, ip); //Senha recebiba retirada de mensagem por motivos de segurança
+		ShowNotice("Conta desconhecida (conta: %s, ip: %s)\n", sd->userid, ip); //Senha recebida retirada de mensagem por motivos de segurança
 		return 0; // 0 = Unregistered ID
 	}
 
@@ -1075,7 +1075,7 @@ int mmo_auth(struct login_session_data* sd)
 
 		if( !sd->has_client_hash )
 		{
-			ShowNotice("Client doesn't sent client hash (account: %s, pass: %s, ip: %s)\n", sd->userid, sd->passwd, acc.state, ip);
+			ShowNotice("Cliente não enviou o hash (conta: %s, ip: %s)\n", sd->userid, ip);
 			return 5;
 		}
 
@@ -1098,8 +1098,8 @@ int mmo_auth(struct login_session_data* sd)
 			for( i = 0; i < 16; i++ )
 				sprintf(&smd5[i * 2], "%02x", sd->client_hash[i]);
 
-			ShowNotice("Invalid client hash (account: %s, pass: %s, sent md5: %d, ip: %s)\n", sd->userid, sd->passwd, smd5, ip);
-			return 5;
+			ShowNotice("Hash de cliente inválido (conta: %s, sent md5: %d, ip: %s)\n", sd->userid, smd5, ip);
+			return 16;
 		}
 	}
 
@@ -1286,6 +1286,7 @@ void login_auth_failed(struct login_session_data* sd, int result)
 		case  13: error = "Bloqueio próprio"; break; // 13 = MSI_REFUSE_SELF_LOCK
 		case  14: error = "Grupo não permitido"; break; // 14 = MSI_REFUSE_NOT_PERMITTED_GROUP
 		case  15: error = "Grupo não permitido"; break; // 15 = MSI_REFUSE_NOT_PERMITTED_GROUP
+		case  16: error = "Jogo sofreu modificações."; break; // 16 = Hash de verificação falhou
 		case  99: error = "Conta apagada."; break; // 99 = This ID has been totally erased
 		case 100: error = "Informação de Login mantida."; break; // 100 = Login information remains at %s
 		case 101: error = "Conta sob investigação."; break; // 101 = Account has been locked for a hacking investigation. Please contact the GM Team for more information
