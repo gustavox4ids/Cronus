@@ -58,7 +58,6 @@ manuk,107,233,5	script	Soldado#ep13_3	454,{
 }
 
 // ep13_2_hiki
-/*
 manuk,100,100,3	script	Piom	454,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
 		mes "[Piom]";
@@ -77,7 +76,6 @@ manuk,100,100,3	script	Piom	454,{
 		close;
 	}
 }
-*/
 
 manuk,188,216,3	script	Benknee#ep13_2_1	449,{
 	if ((isequipped(2782) == 1) && (ep13_2_rhea == 100)) {
