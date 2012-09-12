@@ -14,7 +14,6 @@
 
 // Sealed Catacomb Entrance
 monk_test,309,146,3	script	Frei Patrick#edq	412,{
-	if (checkquest(3040)>=0) erasequest 3040;
 	cutin "ins_cata_pri_n",2;
 	mes "[Frei Patrick]";
 	mes "A paz do mundo jamais pode durar para sempre... As mãos do Mal estão chegando ao mundo novamente...";
