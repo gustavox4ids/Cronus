@@ -874,7 +874,7 @@ ACMD_FUNC(storage)
 		return -1;
 	}
 	
-	clif_displaymessage(fd, msg_txt(918)); // Storage opened.
+	clif_displaymessage(fd, msg_txt(919)); // Storage opened.
 	
 	return 0;
 }
