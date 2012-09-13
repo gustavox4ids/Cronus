@@ -6085,7 +6085,7 @@ int status_get_sc_def(struct block_list *bl, enum sc_type type, int rate, int ti
 		if( tick == 5000 ) // 100% on caster
 			break;
 		if( bl->type == BL_PC )
-			tick -= (status_get_lv(bl)) / 5 + status->vit / 4 + status->agi /10)*100;
+			tick -= (status_get_lv(bl) / 5 + status->vit / 4 + status->agi / 10)*100;
 		else
 			tick -= (status->vit + status->luk) / 20 * 1000; 
 		break;
