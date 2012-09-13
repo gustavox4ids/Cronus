@@ -3637,7 +3637,7 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, int 
 			status_change_end(src, SC_EXPLOSIONSPIRITS, INVALID_TIMER);
 			status_change_end(src, SC_BLADESTOP, INVALID_TIMER);
 #ifdef RENEWAL 
-			sc_start(src,SC_EXTREMITYFIST2,100,skilllv,skill_get_time(skillid,skilllv);
+			sc_start(src,SC_EXTREMITYFIST2,100,skilllv,skill_get_time(skillid,skilllv));
 #endif
 		}
 		//Client expects you to move to target regardless of distance
