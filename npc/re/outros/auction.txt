@@ -36,30 +36,28 @@ function	script	F_AuctionWarper	{
 	mes "[Guia do Leilão]";
 	mes "Você quer entrar no Salão de Leilões?";
 	next;
-	switch (select("Sim.","Não.")) {
-		if (getarg(0) == 1 || getarg(0) == 4) {
-			mes "[Guia do Leilão]";
-			mes "Divirta-se durante o leilão.";
+	if (select("Sim.:Não.") == 2) {
+		mes "[Guia do Leilão]";
+		mes "Vejo você depois.";
+		close;
+	}
+		mes "[Guia do Leilão]";
+		mes "Divirta-se durante o leilão.";
 		close2;
 		switch(getarg(0)) {
-		case 1:
-			warp "auction_01",179,53; 
-			end;
-		case 2:
-			warp "auction_01",21,43; 
-			end;
-		case 3:
-			warp "auction_02",151,23; 
-			end;
-		case 4:
-			warp "auction_02",43,24; 
-			end;
+			case 1:
+				warp "auction_01",179,53; 
+				end;
+			case 2:
+				warp "auction_01",21,43; 
+				end;
+			case 3:
+				warp "auction_02",151,23; 
+				end;
+			case 4:
+				warp "auction_02",43,24; 
+				end;
 		}
-	}
-	mes "[Guia do Leilão]";
-	mes "Vejo você depois.";
-	close;
-	}
 }
 
 // Postos de Informações
