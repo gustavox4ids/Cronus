@@ -9,6 +9,7 @@
 #include "../common/showmsg.h"
 #include "../common/strlib.h"
 #include "../common/timer.h"
+#include "../config/renewal.h"
 #include "char.h"
 #include "inter.h"
 #include "int_guild.h"
@@ -604,12 +605,16 @@ int inter_guild_ReadEXP(void)
 	int i;
 	FILE *fp;
 	char line[1024];
-	for (i=0;i<sizeof(guild_exp);i++) guild_exp[i]=0;
+	for (i=0;i<100;i++) guild_exp[i]=0;
 	//this is going to be discussed, temp fix
+#ifdef RENEWAL
+	sprintf(line, "%s/re/exp_guild.txt", db_path);
+#else
 	sprintf(line, "%s/pre-re/exp_guild.txt", db_path);
+#endif
 	fp=fopen(line,"r");
 	if(fp==NULL){
-		ShowError("não foi possível ler %s\n", line);
+		ShowError("Não foi possível ler %s\n", line);
 		return 1;
 	}
 	i=0;
