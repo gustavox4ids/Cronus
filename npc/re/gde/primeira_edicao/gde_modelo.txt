@@ -51,6 +51,7 @@
 //=     and added extended anouncement format for mapannounce.
 //= 1.8 Fixed a possible exploit in guild castle investment. [Brian]
 //= 1.9 Partially rewrote Script. [Masao]
+//= 2.0 Investimento de economia consertado. [Socramjunio]
 //============================================================
 
 // WoE : Main Functions
@@ -101,7 +102,7 @@ OnAgitBreak:
 	set .@GID,getcharid(2);
 	// Show and log error if an unguilded player breaks the Emperium. (Should NEVER happen)
 	if (.@GID <= 0) {
-		set .@notice$,"O Jogador "+strcharinfo(0)+" ("+getcharid(0)+") quebrou o Emperim no Castelo: "+strnpcinfo(2)+" enquanto estava sem clã. As informações não serão salvas e o Emperium reaparecerá.";
+		set .@notice$,"Character "+strcharinfo(0)+" ("+getcharid(0)+") broke the Emperium in Castle: "+strnpcinfo(2)+" while guildless. No data will be saved and Emperium respawned.";
  		logmes .@notice$; debugmes .@notice$;
 		donpcevent "Agit#"+strnpcinfo(2)+"::OnStartArena";
 		end;
@@ -119,12 +120,12 @@ OnAgitBreak:
 	SetCastleData strnpcinfo(2),1, .@GID;
 
 	// Announce that the Emperium is destroyed, and respawn all but new castle-occupants.
-	mapannounce strnpcinfo(2),"O Emperium foi quebrado!.",bc_map|bc_woe,"0x00CCFF",FW_NORMAL,12;
+	mapannounce strnpcinfo(2),"The emperium has been destroyed.",bc_map|bc_woe,"0x00CCFF",FW_NORMAL,12;
 	MapRespawnGuildID strnpcinfo(2),.@GID,6;
 
 	// Refresh castle data, disable Kafra and reset Invest information.
 	donpcevent strnpcinfo(0)+"::OnRecvCastle";
-	disablenpc "Kafra#"+strnpcinfo(2);
+	disablenpc "Kafra Staff#"+strnpcinfo(2);
 	for( set .@i, 4; .@i <= 9; set .@i, .@i+1 ) {
 		SetCastleData strnpcinfo(2), .@i, 0;
 	}
@@ -157,11 +158,11 @@ OnGuildBreak:
 	if (strnpcinfo(0) == "Gld_Agit_Manager") end;
 	// Kill guardians, disable the Kafra, and set owner to 0.
 	killmonster strnpcinfo(2),"Guardian#"+strnpcinfo(2)+"::OnGuardianDied";
-	disablenpc "Kafra#"+strnpcinfo(2);
+	disablenpc "Kafra Staff#"+strnpcinfo(2);
 	SetCastleData strnpcinfo(2),0,0;
 	// Wait before refreshing guild information.
 	sleep 7000;
-	Announce "O Castelo [" + GetCastleName(strnpcinfo(2)) + "] foi abandonado.",0;
+	Announce "Guild Base [" + GetCastleName(strnpcinfo(2)) + "] has been abandoned.",0;
 	donpcevent strnpcinfo(0)+"::OnRecvCastle";
 	end;
 
@@ -174,29 +175,29 @@ OnRecvCastle:
 		killmonsterall strnpcinfo(2);
 		if (compare(strnpcinfo(2),"aldeg")) {
 			// Normal Spawns
-			monster strnpcinfo(2),0,0,"Druida Maligno",1117,10;
+			monster strnpcinfo(2),0,0,"Evil Druid",1117,10;
 			monster strnpcinfo(2),0,0,"Khalitzburg",1132,4;
-			monster strnpcinfo(2),0,0,"Cavaleiro do Abismo",1219,2;
-			monster strnpcinfo(2),0,0,"Executor",1205,1;
+			monster strnpcinfo(2),0,0,"Abysmal Knight",1219,2;
+			monster strnpcinfo(2),0,0,"Executioner",1205,1;
 			monster strnpcinfo(2),0,0,"Penomena",1216,10;
-			monster strnpcinfo(2),0,0,"Alarme",1193,18;
-			monster strnpcinfo(2),0,0,"Relógio",1269,9;
-			monster strnpcinfo(2),0,0,"Raydric Arqueiro",1276,7;
-			monster strnpcinfo(2),0,0,"Andarilho",1208,3;
+			monster strnpcinfo(2),0,0,"Alarm",1193,18;
+			monster strnpcinfo(2),0,0,"Clock",1269,9;
+			monster strnpcinfo(2),0,0,"Raydric Archer",1276,7;
+			monster strnpcinfo(2),0,0,"Wanderer",1208,3;
 			monster strnpcinfo(2),0,0,"Alice",1275,1;
-			monster strnpcinfo(2),0,0,"Cavaleiro Sanguinário",1268,1;
-			monster strnpcinfo(2),0,0,"Senhor das Trevas",1272,1;
+			monster strnpcinfo(2),0,0,"Bloody Knight",1268,1;
+			monster strnpcinfo(2),0,0,"Dark Lord",1272,1;
 			// Set Emperium room spawn coordinates and spawn monsters.
 			if (strnpcinfo(2) == "aldeg_cas01") { setarray .@emproom[0],216,23; }
 			else if (strnpcinfo(2) == "aldeg_cas02") { setarray .@emproom[0],213,23; }
 			else if (strnpcinfo(2) == "aldeg_cas03") { setarray .@emproom[0],205,31; }
 			else if (strnpcinfo(2) == "aldeg_cas04") { setarray .@emproom[0],36,217; }
 			else if (strnpcinfo(2) == "aldeg_cas05") { setarray .@emproom[0],27,101; }
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Senhor das Trevas",1272,1;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Gerente",1270,4;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Cavaleiro Sanguinário",1268,1;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Cavaleiro do Abismo",1219,1;
-			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Raydric Arqueiro",1276,5;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Dark Lord",1272,1;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Tower Keeper",1270,4;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Bloody Knight",1268,1;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Abysmal Knight",1219,1;
+			monster strnpcinfo(2),.@emproom[0],.@emproom[1],"Raydric Archer",1276,5;
 		}
 		else if (compare(strnpcinfo(2),"gefg")) {
 			// Normal Spawns
@@ -274,8 +275,8 @@ OnRecvCastle:
 			end;
 		}
 		donpcevent "Agit#"+strnpcinfo(2)+"::OnStartArena";
-		// Disable Kafra...
-		disablenpc "Kafra#"+strnpcinfo(2);
+		// Disable Kafra Staff...
+		disablenpc "Kafra Staff#"+strnpcinfo(2);
 		end;
 	}
 	else {
@@ -307,14 +308,14 @@ OnRecvCastle:
 		// And load purchased Guardian in castles.
 		donpcevent "Guardian#"+strnpcinfo(2)+"::OnSpawnGuardians";
 		// And display Kafra if purchased.
-		if (GetCastleData(strnpcinfo(2),9) < 1) disablenpc "Kafra#"+strnpcinfo(2);
+		if (GetCastleData(strnpcinfo(2),9) < 1) disablenpc "Kafra Staff#"+strnpcinfo(2);
 	}
 	end;
 }
 
 // WoE : Guild Kafras
 //============================================================
--	script	Kafra#woe::guildkafra	-1,{
+-	script	Kafra Staff#woe::guildkafra	-1,{
 
 	set .@GID,GetCastleData(strnpcinfo(2),1);
 
@@ -846,7 +847,7 @@ OnRecvCastle:
 				mes "She worked hard in my opinion. It was a good decision to keep her.";
 				close;
 			}
-			disablenpc "Kafra#"+strnpcinfo(2);
+			disablenpc "Kafra Staff#"+strnpcinfo(2);
 			SetCastleData strnpcinfo(2),9,0;
 			mes "["+strnpcinfo(1)+"]";
 			mes "....";
@@ -870,7 +871,7 @@ OnRecvCastle:
 				close;
 			}
 			set Zeny, Zeny - 10000;
-			enablenpc "Kafra Staff#"+strnpcinfo(2);
+			enablenpc "Kafra#"+strnpcinfo(2);
 			SetCastleData strnpcinfo(2),9,1;
 			mes "["+strnpcinfo(1)+"]";
 			mes "We obtained a contract with the kafra Main Office, and hired a Kafra Employee.";
@@ -1246,19 +1247,25 @@ OnClock0001:
 
 	// Apply investment to Eco. and Def. Only happens if there were investments made.
 	// Permanent Development can only happen once per day.
+	// Modificado a mecânica de investimento da Economia e Defesa, loop adicionado para haver
+	// injeção de pontos com 50% de chance de investir a cada ponto de investimento 
+	// O investimento ficou da forma correta [ Socramjunio ]
 	if (GetCastleData(strnpcinfo(2),4)) {
-		set .@Economy,GetCastleData(strnpcinfo(2),2);
-		SetCastleData strnpcinfo(2),2,.@Economy + GetCastleData(strnpcinfo(2),4) + (rand(2) && getgdskilllv(.@GID,10014));
+		while( GetCastleData(strnpcinfo(2),4) > 0 ){
+			set .@Eco,(getgdskilllv(.@GID,10014)) ? rand(2) : 1;
+			SetCastleData strnpcinfo(2),2,GetCastleData(strnpcinfo(2),2) + .@Eco;
+			SetCastleData strnpcinfo(2),4,GetCastleData(strnpcinfo(2),4)-1;
+		}
 		if (GetCastleData(strnpcinfo(2),2) > 100) SetCastleData strnpcinfo(2),2,100;
 	}
 	if (GetCastleData(strnpcinfo(2),5)) {
-		set .@Defence,GetCastleData(strnpcinfo(2),3);
-		SetCastleData strnpcinfo(2),3,.@Defence + GetCastleData(strnpcinfo(2),5);
+		while( GetCastleData(strnpcinfo(2),5) > 0 ){
+			set .@Def,(getgdskilllv(.@GID,10014)) ? rand(2) : 1;
+			SetCastleData strnpcinfo(2),3,GetCastleData(strnpcinfo(2),3) + .@Def;
+			SetCastleData strnpcinfo(2),5,GetCastleData(strnpcinfo(2),5)-1;
+		}
 		if (GetCastleData(strnpcinfo(2),3) > 100) SetCastleData strnpcinfo(2),3,100;
 	}
-	// Reset daily investment limits.
-	setcastledata strnpcinfo(2),4,0;
-	setcastledata strnpcinfo(2),5,0;
 
 	// Spawn boxes in proper order.
 	for (set .@i,0; .@i < .@Treasure ; set .@i,.@i+1) {

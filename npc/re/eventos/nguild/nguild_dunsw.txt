@@ -15,18 +15,17 @@
 
 function	script	F_GldDunSw	{
 	set .@GID, GetCastleData(getarg(0),1);
+	mes "[ Voz Ecoante ]";
 	if (.@GID == 0) {
-		mes "[ Voz Ecoante ]";
 		mes " ' Um Guerreiro que mesmo tendo vencido a batalha, procura vencer a Guerra. Este é o verdadeiro Líder. ' ";
 		close;
 	}
-		mes "[ Voz Ecoante ]";
 		mes " ' Um teste de braveza... '";
 		next;
 		mes " ";
 		mes "Há uma pequena alavanca, você deseja acioná-la?";
 		next;
-		if(select("Acionar.:Não acionar.") == 1) {
+		if(select("Acionar.:Não acionar.") == 2) close;
 			if (getcharid(2) == .@GID) {
 				warp "gld_dun"+getarg(1),getarg(2),getarg(3);
 				end;
@@ -34,7 +33,6 @@ function	script	F_GldDunSw	{
 			mes " ";
 			mes " Nada aconteceu.";
 			close;
-		}
 }
 
 // Castle 1 ===============================================
