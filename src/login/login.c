@@ -241,7 +241,7 @@ void chrif_server_reset(int id)
 /// Called when the connection to Char Server is disconnected.
 void chrif_on_disconnect(int id)
 {
-	ShowStatus("Char-server '%s' desconectou-se.\n", server[id].name);
+	ShowStatus("Char-server '"CL_WHITE"%s"CL_RESET"' desconectou-se.\n", server[id].name);
 	chrif_server_reset(id);
 }
 
@@ -354,7 +354,7 @@ int login_lan_config_read(const char *lancfgName)
 		}
 	}
 
-	ShowStatus("Lida informação sobre %d sub-redes.\n", subnet_count);
+	ShowStatus("Lida informação sobre "CL_WHITE"%d"CL_RESET" sub-redes.\n", subnet_count);
 
 	fclose(fp);
 	return 0;
@@ -517,7 +517,7 @@ int parse_fromchar(int fd)
 			// how many users on world? (update)
 			if( server[id].users != users )
 			{
-				ShowStatus("setar usuário %s : %d\n", server[id].name, users);
+				ShowStatus("Quantidade de usuários do "CL_WHITE"%s"CL_RESET" : "CL_WHITE"%d"CL_RESET"\n", server[id].name, users);
 
 				server[id].users = users;
 			}
@@ -536,13 +536,13 @@ int parse_fromchar(int fd)
 			RFIFOSKIP(fd,46);
 
 			if( e_mail_check(email) == 0 )
-				ShowNotice("Char-server '%s': Tentativa de criar email em uma conta com email padrão RECUSADA - email inválido (conta: %d, ip: %s)\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Tentativa de criar email em uma conta com email padrão "CL_RED"RECUSADA"CL_RESET" - email inválido (conta: %d, ip: %s)\n", server[id].name, account_id, ip);
 			else
 			if( !accounts->load_num(accounts, &acc, account_id) || strcmp(acc.email, "a@a.com") == 0 || acc.email[0] == '\0' )
-				ShowNotice("Char-server '%s': Tentativa de criar email em uma conta com email padrão RECUSADA - conta não existe ou email da conta não é o padrão (conta: %d, ip: %s).\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Tentativa de criar email em uma conta com email padrão "CL_RED"RECUSADA"CL_RESET" - conta não existe ou email da conta não é o padrão (conta: %d, ip: %s).\n", server[id].name, account_id, ip);
 			else {
 				memcpy(acc.email, email, 40);
-				ShowNotice("Char-server '%s': Criação de email em uma conta conta com email padrão (conta: %d, novo email: %s, ip: %s).\n", server[id].name, account_id, email, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Criação de email em uma conta conta com email padrão (conta: %d, novo email: %s, ip: %s).\n", server[id].name, account_id, email, ip);
 				// Save
 				accounts->save(accounts, &acc);
 			}
@@ -563,7 +563,7 @@ int parse_fromchar(int fd)
 			RFIFOSKIP(fd,6);
 
 			if( !accounts->load_num(accounts, &acc, account_id) )
-				ShowNotice("Char-server '%s': conta %d NÃO encontrada (ip: %s).\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': conta "CL_WHITE"%d"CL_RESET" "CL_RED"NÃO"CL_RESET" encontrada (ip: "CL_WHITE"%s"CL_RESET").\n", server[id].name, account_id, ip);
 			else
 			{
 				safestrncpy(email, acc.email, sizeof(email));
@@ -606,22 +606,22 @@ int parse_fromchar(int fd)
 			RFIFOSKIP(fd, 86);
 
 			if( e_mail_check(actual_email) == 0 )
-				ShowNotice("Char-server '%s': Tentaiva de modificação de email numa conta (comando @email de GM), mas o email atual é inválido (conta: %d, ip: %s)\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Tentaiva de modificação de email numa conta (comando @email de GM), mas o email atual é inválido (conta: %d, ip: %s)\n", server[id].name, account_id, ip);
 			else
 			if( e_mail_check(new_email) == 0 )
-				ShowNotice("Char-server '%s': Tentaiva de modificação de email numa conta (comando @email de GM) com um novo email inválido (conta: %d, ip: %s)\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Tentaiva de modificação de email numa conta (comando @email de GM) com um novo email inválido (conta: %d, ip: %s)\n", server[id].name, account_id, ip);
 			else
 			if( strcmpi(new_email, "a@a.com") == 0 )
-				ShowNotice("Char-server '%s': Tentaiva de modificação de email numa conta (comando @email de GM) com email padrão (conta: %d, ip: %s)\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Tentaiva de modificação de email numa conta (comando @email de GM) com email padrão (conta: %d, ip: %s)\n", server[id].name, account_id, ip);
 			else
 			if( !accounts->load_num(accounts, &acc, account_id) )
-				ShowNotice("Char-server '%s': Tentaiva de modificação de email numa conta (comando @email de GM), mas a conta não existe (conta: %d, ip: %s).\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Tentaiva de modificação de email numa conta (comando @email de GM), mas a conta não existe (conta: %d, ip: %s).\n", server[id].name, account_id, ip);
 			else
 			if( strcmpi(acc.email, actual_email) != 0 )
-				ShowNotice("Char-server '%s': Tentaiva de modificação de email numa conta (comando @email de GM), mas o email atual está incorreto (conta: %d (%s), email atual: %s, email proposto: %s, ip: %s).\n", server[id].name, account_id, acc.userid, acc.email, actual_email, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Tentaiva de modificação de email numa conta (comando @email de GM), mas o email atual está incorreto (conta: %d (%s), email atual: %s, email proposto: %s, ip: %s).\n", server[id].name, account_id, acc.userid, acc.email, actual_email, ip);
 			else {
 				safestrncpy(acc.email, new_email, 40);
-				ShowNotice("Char-server '%s': Modificando um email em uma conta (comando @email de GM) (conta: %d (%s), novo email: %s, ip: %s).\n", server[id].name, account_id, acc.userid, new_email, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Modificando um email em uma conta (comando @email de GM) (conta: %d (%s), novo email: %s, ip: %s).\n", server[id].name, account_id, acc.userid, new_email, ip);
 				// Save
 				accounts->save(accounts, &acc);
 			}
@@ -639,12 +639,12 @@ int parse_fromchar(int fd)
 			RFIFOSKIP(fd,10);
 
 			if( !accounts->load_num(accounts, &acc, account_id) )
-				ShowNotice("Char-server '%s': Erro na mudaça de status (conta: %d não encontrada, estado sugerido %d, ip: %s).\n", server[id].name, account_id, state, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Erro na mudaça de status (conta: %d não encontrada, estado sugerido %d, ip: %s).\n", server[id].name, account_id, state, ip);
 			else
 			if( acc.state == state )
-				ShowNotice("Char-server '%s': Erro na mudaça de status - status atual é o status bom (conta: %d, status %d, ip: %s).\n", server[id].name, account_id, state, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Erro na mudaça de status - status atual é o status bom (conta: %d, status %d, ip: %s).\n", server[id].name, account_id, state, ip);
 			else {
-				ShowNotice("Char-server '%s': Mudança de status (conta: %d, novo status %d, ip: %s).\n", server[id].name, account_id, state, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Mudança de status (conta: %d, novo status %d, ip: %s).\n", server[id].name, account_id, state, ip);
 
 				acc.state = state;
 				// Save
@@ -679,7 +679,7 @@ int parse_fromchar(int fd)
 			RFIFOSKIP(fd,18);
 
 			if( !accounts->load_num(accounts, &acc, account_id) )
-				ShowNotice("Char-server '%s': Erro na requisição de Ban (conta: %d não-encontrada, ip: %s).\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Erro na requisição de Ban (conta: %d não-encontrada, ip: %s).\n", server[id].name, account_id, ip);
 			else
 			{
 				time_t timestamp;
@@ -697,16 +697,16 @@ int parse_fromchar(int fd)
 				tmtime->tm_sec  = tmtime->tm_sec + sec;
 				timestamp = mktime(tmtime);
 				if (timestamp == -1)
-					ShowNotice("Char-server '%s': Erro na requisição de Ban (conta: %d, data inválida, ip: %s).\n", server[id].name, account_id, ip);
+					ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Erro na requisição de Ban (conta: %d, data inválida, ip: %s).\n", server[id].name, account_id, ip);
 				else
 				if( timestamp <= time(NULL) || timestamp == 0 )
-					ShowNotice("Char-server '%s': Erro na requisição de Ban (conta: %d, nova data para desbanir a conta, ip: %s).\n", server[id].name, account_id, ip); //Alguém tem ideia melhor para "desbane"?
+					ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Erro na requisição de Ban (conta: %d, nova data para desbanir a conta, ip: %s).\n", server[id].name, account_id, ip); //Alguém tem ideia melhor para "desbane"?
 				else
 				{
 					uint8 buf[11];
 					char tmpstr[24];
 					timestamp2string(tmpstr, sizeof(tmpstr), timestamp, login_config.date_format);
-					ShowNotice("Char-server '%s': Requisição de Ban (conta: %d, nova data final do banimento: %d (%s), ip: %s).\n", server[id].name, account_id, timestamp, tmpstr, ip);
+					ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Requisição de Ban (conta: %d, nova data final do banimento: %d (%s), ip: %s).\n", server[id].name, account_id, timestamp, tmpstr, ip);
 
 					acc.unban_time = timestamp;
 
@@ -733,16 +733,16 @@ int parse_fromchar(int fd)
 			RFIFOSKIP(fd,6);
 
 			if( !accounts->load_num(accounts, &acc, account_id) )
-				ShowNotice("Char-server '%s': Erro na mudança de sexo (conta: %d não-encontrada, ip: %s).\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Erro na mudança de sexo (conta: %d não-encontrada, ip: %s).\n", server[id].name, account_id, ip);
 			else
 			if( acc.sex == 'S' )
-				ShowNotice("Char-server '%s': Erro na mudança de sexo - conta para mudança é conta do Servidor (conta: %d, ip: %s).\n", server[id].name, account_id, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Erro na mudança de sexo - conta para mudança é conta do Servidor (conta: %d, ip: %s).\n", server[id].name, account_id, ip);
 			else
 			{
 				unsigned char buf[7];
 				char sex = ( acc.sex == 'M' ) ? 'F' : 'M'; //Change gender
 
-				ShowNotice("Char-server '%s': Mudança de sexo (conta: %d, novo sexo %c, ip: %s).\n", server[id].name, account_id, sex, ip);
+				ShowNotice("Char-server '"CL_WHITE"%s"CL_RESET"': Mudança de sexo (conta: %d, novo sexo %c, ip: %s).\n", server[id].name, account_id, sex, ip);
 
 				acc.sex = sex;
 				// Save
@@ -895,7 +895,7 @@ int parse_fromchar(int fd)
 			if( RFIFOREST(fd) < 6 )
 				return 0;
 			server[id].ip = ntohl(RFIFOL(fd,2));
-			ShowInfo("Atualizado IP do server #%d para %d.%d.%d.%d.\n",id, CONVIP(server[id].ip));
+			ShowInfo("Atualizado IP do char-server #%d para %d.%d.%d.%d.\n",id, CONVIP(server[id].ip));
 			RFIFOSKIP(fd,6);
 		break;
 
@@ -963,7 +963,7 @@ int mmo_auth_new(const char* userid, const char* pass, const char sex, const cha
 	if( !accounts->create(accounts, &acc) )
 		return 0;
 
-	ShowNotice("Criação de conta (conta %s, id: %d, senha: %s, sexo: %c)\n", acc.userid, acc.account_id, acc.pass, acc.sex);
+	ShowNotice("Criação de conta (conta "CL_WHITE"%s"CL_RESET", id: "CL_WHITE"%d"CL_RESET", sexo: "CL_WHITE"%c"CL_RESET")\n", acc.userid, acc.account_id, acc.sex);
 
 	if( DIFF_TICK(tick, new_reg_tick) > 0 )
 	{// Update the registration check.
@@ -1006,7 +1006,7 @@ int mmo_auth(struct login_session_data* sd, bool isServer)
 
 		if( matched )
 		{
-			ShowInfo("DNSBL: (%s) em lista negra. Usuário desconectado.\n", r_ip);
+			ShowInfo("DNSBL: ("CL_WHITE"%s"CL_RESET") em "CL_RED"lista negra"CL_RESET". Usuário desconectado.\n", r_ip);
 			return 3;
 		}
 	}
@@ -1038,19 +1038,19 @@ int mmo_auth(struct login_session_data* sd, bool isServer)
 	
 	if( !accounts->load_str(accounts, &acc, sd->userid) )
 	{
-		ShowNotice("Conta desconhecida (conta: %s, ip: %s)\n", sd->userid, ip); //Senha recebida retirada de mensagem por motivos de segurança
+		ShowNotice("Conta "CL_RED"desconhecida"CL_RESET" (conta: "CL_WHITE"%s"CL_RESET", ip: "CL_WHITE"%s"CL_RESET")\n", sd->userid, ip); //Senha recebida retirada de mensagem por motivos de segurança
 		return 0; // 0 = Unregistered ID
 	}
 
 	if( !check_password(sd->md5key, sd->passwdenc, sd->passwd, acc.pass) )
 	{
-		ShowNotice("Senha incorreta (conta: '%s', ip: %s)\n", sd->userid, ip); // Senha correta e senha recebida retiradas de mensagem por motivos de segurança
+		ShowNotice("Senha "CL_RED"incorreta"CL_RESET" (conta: "CL_WHITE"%s"CL_RESET", ip: "CL_WHITE"%s"CL_RESET")\n", sd->userid, ip); // Senha correta e senha recebida retiradas de mensagem por motivos de segurança
 		return 1; // 1 = Incorrect Password
 	}
 
 	if( acc.expiration_time != 0 && acc.expiration_time < time(NULL) )
 	{
-		ShowNotice("Conexão recusada (conta: %s, senha: %s, ID expirado, ip: %s)\n", sd->userid, sd->passwd, ip);
+		ShowNotice("Conexão "CL_RED"recusada"CL_RESET" por causa do IP estar expirado (conta: "CL_WHITE"%s"CL_RESET", ip: "CL_WHITE"%s"CL_RESET")\n", sd->userid, sd->passwd, ip);
 		return 2; // 2 = This ID is expired
 	}
 
@@ -1058,13 +1058,13 @@ int mmo_auth(struct login_session_data* sd, bool isServer)
 	{
 		char tmpstr[24];
 		timestamp2string(tmpstr, sizeof(tmpstr), acc.unban_time, login_config.date_format);
-		ShowNotice("Conexão recusada (conta: %s, senha: %s, banido até %s, ip: %s)\n", sd->userid, sd->passwd, tmpstr, ip);
+		ShowNotice("Conexão "CL_RED"recusada"CL_RESET" (conta: "CL_WHITE"%s"CL_RESET", banido até "CL_WHITE"%s"CL_RESET", ip: "CL_WHITE"%s"CL_RESET")\n", sd->userid, tmpstr, ip);
 		return 6; // 6 = Your are Prohibited to log in until %s
 	}
 
 	if( acc.state != 0 )
 	{
-		ShowNotice("Conexão recusada (conta: %s, senha: %s, estado: %d, ip: %s)\n", sd->userid, sd->passwd, acc.state, ip);
+		ShowNotice("Conexão recusada (conta: "CL_WHITE"%s"CL_RESET", estado: "CL_WHITE"%d"CL_RESET", ip: "CL_WHITE"%s"CL_RESET")\n", sd->userid, acc.state, ip);
 		return acc.state - 1;
 	}
 	
@@ -1075,7 +1075,7 @@ int mmo_auth(struct login_session_data* sd, bool isServer)
 
 		if( !sd->has_client_hash )
 		{
-			ShowNotice("Cliente não enviou o hash (conta: %s, ip: %s)\n", sd->userid, ip);
+			ShowNotice("Cliente não enviou o hash (conta: "CL_WHITE"%s"CL_RESET", ip: "CL_WHITE"%s"CL_RESET")\n", sd->userid, ip);
 			return 5;
 		}
 
@@ -1103,7 +1103,7 @@ int mmo_auth(struct login_session_data* sd, bool isServer)
 		}
 	}
 
-	ShowNotice("Autenticação aceita (conta: %s, id: %d, ip: %s)\n", sd->userid, acc.account_id, ip);
+	ShowStatus("Autenticação aceita (conta: "CL_WHITE"%s"CL_RESET", id: "CL_WHITE"%d"CL_RESET", ip: "CL_WHITE"%s"CL_RESET")\n", sd->userid, acc.account_id, ip);
 
 	// update session data
 	sd->account_id = acc.account_id;
@@ -1122,7 +1122,7 @@ int mmo_auth(struct login_session_data* sd, bool isServer)
 	accounts->save(accounts, &acc);
 
 	if( sd->sex != 'S' && sd->account_id < START_ACCOUNT_NUM )
-		ShowWarning("Conta %s tem ID de conta %d! IDs de conta devem ser maiores que %s para funcionarem corretamente!\n", sd->userid, sd->account_id, START_ACCOUNT_NUM);
+		ShowWarning("Conta "CL_WHITE"%s"CL_RESET" tem ID de conta "CL_WHITE"%d"CL_RESET"! IDs de conta devem ser maiores que "CL_WHITE"%s"CL_RESET" para funcionarem corretamente!\n", sd->userid, sd->account_id, START_ACCOUNT_NUM);
 
 	return -1; // account OK
 }
@@ -1519,7 +1519,7 @@ int parse_login(int fd)
 			new_ = RFIFOW(fd,84);
 			RFIFOSKIP(fd,86);
 
-			ShowInfo("Requisição de conexão do char-server '%s' @ %u.%u.%u.%u:%u (conta: '%s', senha: '%s', ip: '%s')\n", server_name, CONVIP(server_ip), server_port, sd->userid, sd->passwd, ip);
+			ShowInfo("Requisição de conexão do char-server '"CL_WHITE"%s"CL_RESET"' @ "CL_WHITE"%u.%u.%u.%u"CL_RESET":"CL_WHITE"%u"CL_RESET" (conta: '"CL_WHITE"%s"CL_RESET"', ip: '"CL_WHITE"%s"CL_RESET"')\n", server_name, CONVIP(server_ip), server_port, sd->userid, ip);
 			sprintf(message, "char-server - %s@%u.%u.%u.%u:%u", server_name, CONVIP(server_ip), server_port);
 			login_log(session[fd]->client_addr, sd->userid, 100, message);
 
@@ -1530,7 +1530,7 @@ int parse_login(int fd)
 				sd->account_id >= 0 && sd->account_id < ARRAYLENGTH(server) &&
 				!session_isValid(server[sd->account_id].fd) )
 			{
-				ShowStatus("Conexão do char-server '%s' aceita.\n", server_name);
+				ShowStatus("Conexão do char-server '"CL_WHITE"%s"CL_RESET"' aceita.\n", server_name);
 				safestrncpy(server[sd->account_id].name, server_name, sizeof(server[sd->account_id].name));
 				server[sd->account_id].fd = fd;
 				server[sd->account_id].ip = server_ip;
@@ -1551,7 +1551,7 @@ int parse_login(int fd)
 			}
 			else
 			{
-				ShowNotice("Conexão do char-server '%s' RECUSADA.\n", server_name);
+				ShowNotice("Conexão do char-server '"CL_WHITE"%s"CL_RESET"' "CL_RED"RECUSADA"CL_RESET".\n", server_name);
 				WFIFOHEAD(fd,3);
 				WFIFOW(fd,0) = 0x2711;
 				WFIFOB(fd,2) = 3;
@@ -1561,7 +1561,7 @@ int parse_login(int fd)
 		return 0; // processing will continue elsewhere
 
 		default:
-			ShowNotice("Término de conexão anormal (ip: %s): Pacote desconhecido 0x%x\n", ip, command);
+			ShowNotice("Término de conexão anormal (ip: "CL_WHITE"%s"CL_RESET"): Pacote "CL_RED"desconhecido"CL_RESET" "CL_WHITE"0x%x"CL_RESET"\n", ip, command);
 			set_eof(fd);
 			return 0;
 		}
@@ -1609,10 +1609,10 @@ int login_config_read(const char* cfgName)
 	char line[1024], w1[1024], w2[1024];
 	FILE* fp = fopen(cfgName, "r");
 	if (fp == NULL) {
-		ShowError("Arquivo de configuração (%s) não encontrado.\n", cfgName);
+		ShowError("Arquivo de configuração ("CL_WHITE"%s"CL_RESET") não encontrado.\n", cfgName);
 		return 1;
 	}
-	ShowInfo("Lendo arquivo de configuração %s...\n", cfgName);
+	ShowInfo("Lendo arquivo de configuração "CL_WHITE"%s"CL_RESET"...\n", cfgName);
 	while(fgets(line, sizeof(line), fp))
 	{
 		if (line[0] == '/' && line[1] == '/')
@@ -1626,18 +1626,18 @@ int login_config_read(const char* cfgName)
 		else if(!strcmpi(w1,"stdout_with_ansisequence"))
 			stdout_with_ansisequence = config_switch(w2);
 		else if(!strcmpi(w1,"console_silent")) {
-			ShowInfo("Configuração silenciosa do Console: %d\n", atoi(w2));
+			ShowInfo("Configuração de silenciosidade do console: "CL_WHITE"%d"CL_RESET"\n", atoi(w2));
 			msg_silent = atoi(w2);
 		}
 		else if( !strcmpi(w1, "bind_ip") ) {
 			char ip_str[16];
 			login_config.login_ip = host2ip(w2);
 			if( login_config.login_ip )
-				ShowStatus("Login-server que é ligado com o endereço de IP : %s -> %s\n", w2, ip2str(login_config.login_ip, ip_str));
+				ShowStatus("Endereço IP do bind do login-server: "CL_WHITE"%s"CL_RESET" -> "CL_WHITE"%s"CL_RESET"\n", w2, ip2str(login_config.login_ip, ip_str));
 		}
 		else if( !strcmpi(w1, "login_port") ) {
 			login_config.login_port = (uint16)atoi(w2);
-			ShowStatus("set login_port : %s\n",w2);
+			ShowStatus("Definida porta do login-server: "CL_WHITE"%s"CL_RESET"\n",w2);
 		}
 		else if(!strcmpi(w1, "log_login"))
 			login_config.log_login = (bool)config_switch(w2);
@@ -1722,7 +1722,7 @@ int login_config_read(const char* cfgName)
 		}
 	}
 	fclose(fp);
-	ShowInfo("Leitura terminada do %s.\n", cfgName);
+	ShowInfo("Leitura terminada do "CL_WHITE"%s"CL_RESET".\n", cfgName);
 	return 0;
 }
 
@@ -1878,16 +1878,16 @@ int do_init(int argc, char** argv)
 	accounts = get_account_engine();
 	if( accounts == NULL )
 	{
-		ShowFatalError("do_init: método de contas '%s' não encontrado.\n", login_config.account_engine);
+		ShowFatalError("do_init: método de contas '"CL_WHITE"%s"CL_RESET"' não encontrado.\n", login_config.account_engine);
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		ShowInfo("Usando método de contas '%s'.\n", login_config.account_engine);
+		ShowInfo("Usando método de contas '"CL_WHITE"%s"CL_RESET"'.\n", login_config.account_engine);
 
 		if(!accounts->init(accounts))
 		{
-			ShowFatalError("do_init: Falha ao iniciar método de contas '%s'.\n", login_config.account_engine);
+			ShowFatalError("do_init: Falha ao iniciar método de contas '"CL_WHITE"%s"CL_RESET"'.\n", login_config.account_engine);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -1906,7 +1906,7 @@ int do_init(int argc, char** argv)
 		runflag = LOGINSERVER_ST_RUNNING;
 	}
 
-	ShowStatus("O login-server está "CL_GREEN"pronto"CL_RESET" (Servidor está funcionando pela porta %u).\n\n", login_config.login_port);
+	ShowStatus("O login-server está "CL_GREEN"pronto"CL_RESET" (Funcionando pela porta "CL_GREEN"%u"CL_RESET").\n\n", login_config.login_port);
 	login_log(0, "login server", 100, "login server iniciado");
 
 	return 0;

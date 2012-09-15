@@ -15,6 +15,7 @@
 /**
  * "Sane Checks" to save you from compiling with cool bugs 
  **/
+/*
 #if SECURE_NPCTIMEOUT_INTERVAL <= 0
 	#error SECURE_NPCTIMEOUT_INTERVAL should be at least 1 (1s)
 #endif
@@ -24,7 +25,7 @@
 
 /**
  * Path within the /db folder to (non-)renewal specific db files
- **/
+ **/ 
 #ifdef RENEWAL
 	#define DBPATH "re/"
 #else

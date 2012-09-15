@@ -511,18 +511,18 @@ int make_connection(uint32 ip, uint16 port)
 	fd = sSocket(AF_INET, SOCK_STREAM, 0);
 
 	if (fd == -1) {
-		ShowError("make_connection: socket creation failed (%s)!\n", error_msg());
+		ShowError("make_connection: criação do socket falhou ("CL_RED"%s"CL_RESET")!\n", error_msg());
 		return -1;
 	}
 	if( fd == 0 )
 	{// reserved
-		ShowError("make_connection: Socket #0 is reserved - Please report this!!!\n");
+		ShowError("make_connection: Socket #"CL_WHITE"0"CL_RESET" é reservado - Reporte isso!\n");
 		sClose(fd);
 		return -1;
 	}
 	if( fd >= FD_SETSIZE )
 	{// socket number too big
-		ShowError("make_connection: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!\n", fd, FD_SETSIZE);
+		ShowError("make_connection: Novo socket #"CL_WHITE"%d"CL_RESET" é maior que o que suporta-se! Aumente o valor do FD_SETSIZE (atualemente "CL_WHITE"%d"CL_RESET") para seu SO consertar isso!\n", fd, FD_SETSIZE);
 		sClose(fd);
 		return -1;
 	}
@@ -533,11 +533,11 @@ int make_connection(uint32 ip, uint16 port)
 	remote_address.sin_addr.s_addr = htonl(ip);
 	remote_address.sin_port        = htons(port);
 
-	ShowStatus("Conectando-se a %d.%d.%d.%d:%i\n", CONVIP(ip), port);
+	ShowStatus("Conectando-se a "CL_WHITE"%d.%d.%d.%d"CL_RESET":"CL_WHITE"%i"CL_RESET"\n", CONVIP(ip), port);
 
 	result = sConnect(fd, (struct sockaddr *)(&remote_address), sizeof(struct sockaddr_in));
 	if( result == SOCKET_ERROR ) {
-		ShowError("make_connection: conexão falhou (soquete #%d, %s)!\n", fd, error_msg());
+		ShowError("make_connection: conexão falhou (soquete #"CL_WHITE"%d"CL_RESET", "CL_WHITE"%s"CL_RESET")!\n", fd, error_msg());
 		do_close(fd);
 		return -1;
 	}
@@ -861,7 +861,7 @@ static int connect_check(uint32 ip)
 {
 	int result = connect_check_(ip);
 	if( access_debug ) {
-		ShowInfo("connect_check: Connection from %d.%d.%d.%d %s\n", CONVIP(ip),result ? "allowed." : "denied!");
+		ShowInfo("connect_check: Conexão de "CL_WHITE"%d.%d.%d.%d"CL_RESET" "CL_WHITE"%s"CL_RESET"\n", CONVIP(ip),result ? ""CL_GREEN"permitido"CL_RESET"." : ""CL_RED"negado"CL_RESET"!");
 	}
 	return result;
 }
@@ -946,7 +946,7 @@ static int connect_check_(uint32 ip)
 				if( hist->count++ >= ddos_count )
 				{// DDoS attack detected
 					hist->ddos = 1;
-					ShowWarning("connect_check: Ataque DDoS detectado de %d.%d.%d.%d!\n", CONVIP(ip));
+					ShowWarning("connect_check: Ataque DDoS detectado de "CL_WHITE"%d.%d.%d.%d"CL_RESET"!\n", CONVIP(ip));
 					return (connect_ok == 2 ? 1 : 0);
 				}
 				return connect_ok;
@@ -1000,7 +1000,7 @@ static int connect_check_clear(int tid, unsigned int tick, int id, intptr_t data
 		connect_history[i] = root.next;
 	}
 	if( access_debug ){
-		ShowInfo("connect_check_clear: Cleared %d of %d from IP list.\n", clear, list);
+		ShowInfo("connect_check_clear: Limpos "CL_WHITE"%d"CL_RESET" de "CL_WHITE"%d"CL_RESET" da lista de IPs.\n", clear, list);
 	}
 	return list;
 }
@@ -1325,7 +1325,7 @@ void socket_init(void)
 	add_timer_interval(gettick()+1000, connect_check_clear, 0, 0, 5*60*1000);
 #endif
 
-	ShowInfo("Server supports up to '"CL_WHITE"%u"CL_RESET"' concurrent connections.\n", rlim_cur);
+	ShowInfo("Servidor suporta até '"CL_WHITE"%u"CL_RESET"' conexões simultâneas..\n", rlim_cur);
 }
 
 

@@ -3271,7 +3271,7 @@ int map_config_read(char *cfgName)
 		else if(strcmpi(w1,"stdout_with_ansisequence")==0)
 			stdout_with_ansisequence = config_switch(w2);
 		else if(strcmpi(w1,"console_silent")==0) {
-			ShowInfo("Console Silent Setting: %d\n", atoi(w2));
+			ShowInfo("Configuração de silenciosidade do console: "CL_WHITE"%d"CL_RESET"\n", atoi(w2));
 			msg_silent = atoi(w2);
 		} else if (strcmpi(w1, "userid")==0)
 			chrif_setuserid(w2);
@@ -3323,7 +3323,7 @@ int map_config_read(char *cfgName)
 		else if (strcmpi(w1, "console") == 0) {
 			console = config_switch(w2);
 			if (console)
-				ShowNotice("Console Commands are enabled.\n");
+				ShowNotice("Comandos de console estão habilitados.\n");
 		} else if (strcmpi(w1, "enable_spy") == 0)
 			enable_spy = config_switch(w2);
 		else if (strcmpi(w1, "use_grf") == 0)
@@ -3333,7 +3333,7 @@ int map_config_read(char *cfgName)
 		else if (strcmpi(w1, "import") == 0)
 			map_config_read(w2);
 		else
-			ShowWarning("Unknown setting '%s' in file %s\n", w1, cfgName);
+			ShowWarning("Configuração '"CL_WHITE"%s"CL_RESET"' desconhecida no arquivo "CL_WHITE"%s"CL_RESET".\n", w1, cfgName);
 	}
 
 	fclose(fp);
@@ -3707,7 +3707,7 @@ void do_abort(void)
 	if (!chrif_isconnected())
 	{
 		if (pc_db->size(pc_db))
-			ShowFatalError("Servidor fechou sem conexão ao char-server, %u personagens não foram salvos!\n", pc_db->size(pc_db));
+			ShowFatalError("Servidor fechou sem conexão ao char-server, "CL_RED"%u"CL_RESET" personagens não foram salvos!\n", pc_db->size(pc_db));
 		return;
 	}
 	ShowError("Servidor recebeu sinal de erro! Tentando salvar todos os personagens online!\n");
@@ -3914,7 +3914,7 @@ int do_init(int argc, char *argv[])
 		else if (naddr_ > 1)
 			ShowNotice("Múltiplas interfaces detetadas...\n");
 
-		ShowInfo("Definindo %s como nosso endereço IP.\n", ip_str);
+		ShowInfo("Definindo "CL_WHITE"%s"CL_RESET" como o endereço IP.\n", ip_str);
 
 		if (!map_ip_set)
 			clif_setip(ip_str);
@@ -3986,9 +3986,9 @@ int do_init(int argc, char *argv[])
 	}
 
 	if (battle_config.pk_mode)
-		ShowNotice("Servidor iniciado em '"CL_WHITE"Modo PK"CL_RESET"'.\n");
+		ShowNotice("Servidor iniciado em "CL_WHITE"Modo PK"CL_RESET".\n");
 
-	ShowStatus("Servidor está '"CL_GREEN"pronto"CL_RESET"'. (Funcionando pela porta '"CL_WHITE"%d"CL_RESET"'.\n\n", map_port);
+	ShowStatus("Servidor está "CL_GREEN"pronto"CL_RESET" (Funcionando pela porta "CL_GREEN"%d"CL_RESET").\n\n", map_port);
 	
 	if( runflag != CORE_ST_STOP )
 	{

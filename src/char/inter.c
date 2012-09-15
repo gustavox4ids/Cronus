@@ -534,7 +534,7 @@ void mapif_parse_accinfo(int fd) {
 				if( Sql_NumRows(sql_handle) == 0 )
 					inter_to_fd(fd, u_fd, aid,"Esta conta não tem personagens.");
 				else {
-					inter_to_fd(fd, u_fd, aid,"Um erro ocorreu, incomode seu administrador sobre isso.");
+					inter_to_fd(fd, u_fd, aid,"Um erro ocorreu, fale com seu administrador sobre isso.");
 					Sql_ShowDebug(sql_handle);
 				}
 			
@@ -706,23 +706,23 @@ static int inter_config_read(const char* cfgName)
 
 		if(!strcmpi(w1,"char_server_ip")) {
 			strcpy(char_server_ip,w2);
-			ShowStatus ("set char_server_ip : %s\n", w2);
+			ShowStatus ("Definindo char_server_ip como: "CL_WHITE"%s"CL_RESET"\n", w2);
 		} else
 		if(!strcmpi(w1,"char_server_port")) {
 			char_server_port = atoi(w2);
-			ShowStatus ("set char_server_port : %s\n", w2);
+			ShowStatus ("Definindo char_server_port como: "CL_WHITE"%s"CL_RESET"\n", w2);
 		} else
 		if(!strcmpi(w1,"char_server_id")) {
 			strcpy(char_server_id,w2);
-			ShowStatus ("set char_server_id : %s\n", w2);
+			ShowStatus ("Definindo char_server_id como: "CL_WHITE"%s"CL_RESET"\n", w2);
 		} else
 		if(!strcmpi(w1,"char_server_pw")) {
 			strcpy(char_server_pw,w2);
-			ShowStatus ("set char_server_pw : %s\n", w2);
+			ShowStatus ("Definindo char_server_pw como: "CL_WHITE"%s"CL_RESET"\n", w2);
 		} else
 		if(!strcmpi(w1,"char_server_db")) {
 			strcpy(char_server_db,w2);
-			ShowStatus ("set char_server_db : %s\n", w2);
+			ShowStatus ("Definindo char_server_db como: "CL_WHITE"%s"CL_RESET"\n", w2);
 		} else
 		if(!strcmpi(w1,"default_codepage")) {
 			strcpy(default_codepage,w2);
@@ -739,7 +739,7 @@ static int inter_config_read(const char* cfgName)
 	}
 	fclose(fp);
 
-	ShowInfo ("Finalizada leitura de %s.\n", cfgName);
+	ShowInfo ("Finalizada leitura de "CL_WHITE"%s"CL_RESET".\n", cfgName);
 
 	return 0;
 }
@@ -785,7 +785,7 @@ int inter_init_sql(const char *file)
 			Sql_ShowDebug(sql_handle);
 	}
 	
-	ShowStatus("Conectado ao banco de dados principal '%s'.\n", char_server_db);
+	ShowStatus("Conectado ao banco de dados principal '"CL_WHITE"%s"CL_RESET"'.\n", char_server_db);
 	Sql_PrintExtendedInfo(sql_handle);
 
 	wis_db = idb_alloc(DB_OPT_RELEASE_DATA);
