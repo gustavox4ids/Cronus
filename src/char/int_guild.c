@@ -592,7 +592,7 @@ static struct guild_castle* inter_guildcastle_fromsql(int castle_id)
 	idb_put(castle_db, castle_id, gc);
 
 	if (save_log)
-		ShowInfo("Castelo carregado (%d - guild %d)\n", castle_id, gc->guild_id);
+		ShowInfo("Castelo "CL_WHITE"%d"CL_RESET" carregado (Clã "CL_WHITE"%d"CL_RESET").\n", castle_id, gc->guild_id);
 
 	return gc;
 }
@@ -604,7 +604,7 @@ int inter_guild_ReadEXP(void)
 	int i;
 	FILE *fp;
 	char line[1024];
-	for (i=0;i<100;i++) guild_exp[i]=0;
+	for (i=0;i<sizeof(guild_exp);i++) guild_exp[i]=0;
 	//this is going to be discussed, temp fix
 	sprintf(line, "%s/pre-re/exp_guild.txt", db_path);
 	fp=fopen(line,"r");

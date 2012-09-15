@@ -108,10 +108,10 @@ int Sql_Connect(Sql* self, const char* user, const char* passwd, const char* hos
 /// Print extended information.
 void Sql_PrintExtendedInfo(Sql* self)
 {
-	ShowInfo("MySQL client info: %s\n", mysql_get_client_info());
-	ShowInfo("MySQL server info: %s\n", mysql_get_server_info(&self->handle));
-	ShowInfo("MySQL host info: %s\n", mysql_get_host_info(&self->handle));
-	ShowInfo("Compilado com: %s %s\n", MYSQL_COMPILATION_COMMENT, MYSQL_SERVER_VERSION);
+	ShowInfo("MySQL client info: "CL_WHITE"%s"CL_RESET"\n", mysql_get_client_info());
+	ShowInfo("MySQL server info: "CL_WHITE"%s"CL_RESET"\n", mysql_get_server_info(&self->handle));
+	ShowInfo("MySQL host info: "CL_WHITE"%s"CL_RESET"\n", mysql_get_host_info(&self->handle));
+	ShowInfo("Compilado com: "CL_WHITE"%s"CL_RESET" "CL_WHITE"%s"CL_RESET"\n", MYSQL_COMPILATION_COMMENT, MYSQL_SERVER_VERSION);
 }
 
 /// Retrieves the timeout of the connection.
@@ -272,13 +272,13 @@ int Sql_QueryV(Sql* self, const char* query, va_list args)
 	StringBuf_Vprintf(&self->buf, query, args);
 	if( mysql_real_query(&self->handle, StringBuf_Value(&self->buf), (unsigned long)StringBuf_Length(&self->buf)) )
 	{
-		ShowSQL("DB error - %s\n", mysql_error(&self->handle));
+		ShowSQL("DB error - "CL_WHITE"%s"CL_RESET"\n", mysql_error(&self->handle));
 		return SQL_ERROR;
 	}
 	self->result = mysql_store_result(&self->handle);
 	if( mysql_errno(&self->handle) != 0 )
 	{
-		ShowSQL("DB error - %s\n", mysql_error(&self->handle));
+		ShowSQL("DB error - "CL_WHITE"%s"CL_RESET"\n", mysql_error(&self->handle));
 		return SQL_ERROR;
 	}
 	return SQL_SUCCESS;
@@ -297,13 +297,13 @@ int Sql_QueryStr(Sql* self, const char* query)
 	StringBuf_AppendStr(&self->buf, query);
 	if( mysql_real_query(&self->handle, StringBuf_Value(&self->buf), (unsigned long)StringBuf_Length(&self->buf)) )
 	{
-		ShowSQL("DB error - %s\n", mysql_error(&self->handle));
+		ShowSQL("DB error - "CL_WHITE"%s"CL_RESET"\n", mysql_error(&self->handle));
 		return SQL_ERROR;
 	}
 	self->result = mysql_store_result(&self->handle);
 	if( mysql_errno(&self->handle) != 0 )
 	{
-		ShowSQL("DB error - %s\n", mysql_error(&self->handle));
+		ShowSQL("DB error - "CL_WHITE"%s"CL_RESET"\n", mysql_error(&self->handle));
 		return SQL_ERROR;
 	}
 	return SQL_SUCCESS;

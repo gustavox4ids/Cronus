@@ -84,7 +84,7 @@ void ipban_init(void)
 	if( codepage[0] != '\0' && SQL_ERROR == Sql_SetEncoding(sql_handle, codepage) )
 		Sql_ShowDebug(sql_handle);
 		
-	ShowStatus("Conectado ao banco de dados ipban '%s'.\n", database);
+	ShowStatus("Conectado ao banco de dados ipban '"CL_WHITE"%s"CL_RESET"'.\n", database);
 	Sql_PrintExtendedInfo(sql_handle);
 
 	if( login_config.ipban_cleanup_interval > 0 )
