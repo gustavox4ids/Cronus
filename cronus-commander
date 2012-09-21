@@ -7,7 +7,8 @@ make clean ; make sql;;
 make clean ; make sql;;
 	'atualizarsistema') yum update -y ; yum upgrade -y ; apt-get 
 update -y ;;
-	'versao') echo "A versão atual do cronus-commander é 1.0" ;;
+	'mapcache') make tools ; echo "Map_Cache compilado com sucesso!" ;;
+	'versao') echo "A versão atual do cronus-commander é 1.2" ;;
 	'ligar') exec ./login-server_sql & exec ./char-server_sql & exec 
 ./map-server_sql & ;;
 	'desligar') killall map-server_sql char-server_sql login-server_sql ;;
