@@ -34,7 +34,6 @@ Equipe
 - Joao Pedro	- João Pedro
 - Axl			  - José Góis
 - MaminhA		- Marcelo Liberato
-- mkbu95		- Matheus Macabu
 
 ### Desenvolvedores Script/DB
 - Schrwaizer 	- Thiago Schrwaizer
