@@ -5861,7 +5861,7 @@ REPLACE INTO `item_db_re` VALUES (15010,'Uniforme_Valhalla_Intermediário','Unif
 REPLACE INTO `item_db_re` VALUES (15011,'Uniforme_Valhalla_Avançado','Uniforme Valhalla Avançado',5,0,NULL,0,'',58,NULL,0,0xFFFFFFFF,7,2,16,NULL,40,0,0, ' bonus bMaxHP,300; bonus bMaxSP,30; bonus bMdef,5; ', '', '');
 REPLACE INTO `item_db_re` VALUES (15012,'Robe_Puente','Robe Puente',5,12000,NULL,400,'',42,NULL,1,0xFFFFFFFF,7,2,16,NULL,22,1,0, ' /* bonus bFixedCastrate,-3; */ bonus bHealPower,5; ', '', '');
 REPLACE INTO `item_db_re` VALUES (15013,'Trajes_Claire','Trajes Claire',5,28000,NULL,2800,'',58,NULL,1,0xFFFFFFFE,2,2,16,NULL,22,1,0, '', '', '');
-REPLACE INTO `item_db_re` VALUES (15014,'Armadura_Ébano','Armadura Ébano',5,40000,NULL,4500,'',93,NULL,1,0x000FDF80,8,2,16,NULL,100,1,0, '', '', '');
+REPLACE INTO `item_db_re` VALUES (15014,'Armadura_Ébano','Armadura Ébano',5,40000,NULL,4500,'',93,NULL,1,0x00004080,8,2,16,NULL,100,1,0, '', '', '');
 REPLACE INTO `item_db_re` VALUES (15015,'Túnica_Evoluída','Túnica Evoluída',5,20,NULL,150,'',25,NULL,1,0xFFFFFFFF,7,2,16,NULL,1,1,0, ' bonus bMaxHPRate,3; ', '', '');
 REPLACE INTO `item_db_re` VALUES (15016,'Casaco_Evoluído','Casaco Evoluído',5,20,NULL,600,'',47,NULL,1,0xFFFFFFFE,7,2,16,NULL,1,1,0, ' bonus bMaxHPRate,3; ', '', '');
 REPLACE INTO `item_db_re` VALUES (15017,'Manto_Sagrado_Evoluído','Manto Sagrado Evoluído',5,20,NULL,300,'',55,NULL,1,0x00048530,7,2,16,NULL,1,1,0, ' bonus bMdef,5; bonus bMaxHPRate,3; ', '', '');
