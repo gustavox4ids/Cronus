@@ -40,4 +40,5 @@ Equipe
 
 ### Desenvolvedores em Teste
 - GM Cold		- Marcio Montenegro
-- socramjunio	
+- socramjunio	- Marcos
+- sileNtcry		- Rafael
