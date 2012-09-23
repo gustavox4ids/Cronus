@@ -42,3 +42,4 @@ Equipe
 - GM Cold		- Marcio Montenegro
 - socramjunio	- Marcos
 - sileNtcry		- Rafael
+- renashenko	- Renato César
