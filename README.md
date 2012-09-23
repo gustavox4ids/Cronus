@@ -24,7 +24,6 @@ Equipe
 ### Administradores
 - Cainho		- Caio Mateus
 - GreenBox	- Jonathan Lima
-- Matheus		- Matheus Freitas
 
 ### Coordenadores
 - Raizen		- Carlos
@@ -35,13 +34,12 @@ Equipe
 - Joao Pedro	- João Pedro
 - Axl			  - José Góis
 - MaminhA		- Marcelo Liberato
-- mkbu95		- Matheus Macabu
 
 ### Desenvolvedores Script/DB
-- Spike			- Igor
-- SBK			- Romulo
 - Schrwaizer 	- Thiago Schrwaizer
 
 ### Desenvolvedores em Teste
 - GM Cold		- Marcio Montenegro
-- socramjunio	
+- socramjunio	- Marcos
+- sileNtcry		- Rafael
+- renashenko	- Renato César
