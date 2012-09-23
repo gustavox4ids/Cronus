@@ -37,6 +37,7 @@ Equipe
 
 ### Desenvolvedores Script/DB
 - Schrwaizer 	- Thiago Schrwaizer
+- Wolf			- João Victor
 
 ### Desenvolvedores em Teste
 - GM Cold		- Marcio Montenegro
