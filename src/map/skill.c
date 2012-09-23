@@ -6274,7 +6274,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, in
 				case SC_INTFOOD:		case SC_DEXFOOD:		case SC_LUKFOOD:
 				case SC_HITFOOD:		case SC_FLEEFOOD:		case SC_BATKFOOD:
 				case SC_WATKFOOD:		case SC_MATKFOOD:		case SC_DANCING:
-				case SC_EDP:			case SC_AUTOBERSERK:
+				case SC_EDP:			case SC_AUTOBERSERK:	case SC_RECOGNIZEDSPELL:
 				case SC_CARTBOOST:		case SC_MELTDOWN:		case SC_SAFETYWALL:
 				case SC_SMA:			case SC_SPEEDUP0:		case SC_NOCHAT:
 				case SC_ANKLE:			case SC_SPIDERWEB:		case SC_JAILED:
@@ -7717,6 +7717,9 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, in
 				i = sc_start2(bl,type,rate,skilllv,src->id,(src == bl)?5000:(bl->type == BL_PC)?skill_get_time(skillid,skilllv):skill_get_time2(skillid, skilllv));
 				clif_skill_nodamage(src,bl,skillid,skilllv,i);
 			}
+
+			if( tsc && tsc->data[SC_WHITEIMPRISON] )rate = 0; // You can't use it on someone that still have the skill [Sicks]
+
 
 			if( sd && i )
 				skill_blockpc_start(sd,skillid,4000); // Reuse Delay only activated on success
