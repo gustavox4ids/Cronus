@@ -19,11 +19,7 @@ struct _indexes {
 
 int max_index = 0;
 
-#ifdef RENEWAL
-char mapindex_cfgfile[80] = "db/re/map_index.txt";
-#else
-char mapindex_cfgfile[80] = "db/pre-re/map_index.txt";
-#endif
+char mapindex_cfgfile[80] = "db/map_index.txt";
 
 
 #define mapindex_exists(id) (indexes[id].name[0] != '\0')
