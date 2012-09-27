@@ -21,6 +21,7 @@
 //= 1.4 Fixed minor typos. [Joseph]
 //= 1.5 Removed "Mysterious Documents" duplicated in magic_books. [Euphy]
 //= 1.6 Fixed missing checks for quest: Sapha's Visit. [Joseph]
+//= 1.7 Corrigido erro na linha 4495 (rA 16802) [Schrwaizer] 
 //============================================================
 
 // Entrance
@@ -44,9 +45,9 @@ manuk,321,182,5	script	Entrance Manager#ep13_3_	450,{
 		mes "Sorry.";
 		mes "I cannot let you pass because you are not a Sapha.";
 		close; }
-	mes "¢¤¡ð¡ú? ¢£ ¡ù¡ð...";
-	mes "¡ï¡ò¡Ð ¢¤ ?";
-	mes "¡ñ¡ï..?";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½...";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ?";
+	mes "ï¿½ï¿½ï¿½ï¿½..?";
 	close;
 }
 
@@ -139,7 +140,7 @@ dic_dun01,266,113,5	script	Curious Sapha#ep13_3_	449,{
 				}
 		}
 	}
-	mes "¡ö¡ñ¡Ð ¡ò ¡õ?";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½?";
 	next;
 	mes "- Cannot understand a word. -";
 	close;
@@ -206,13 +207,13 @@ function	script	eldicastes_dv	{
 		}
 	switch(getarg(0)) {
 		case 1:
-			mes "¡ô¡ó¡ö ¡÷ ¡þ¡ù¡ó¢¤¡ö¡ø ¢³ ¡÷¢£¡ü ¡ø ¡Ð¡õ¡û.";
-			mes "¡ð¡ú¢± ¡ô ¡ò¡õ¡ú ¡õ..!";
+			mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ó¢¤¡ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ð¡ï¿½ï¿½ï¿½.";
+			mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½..!";
 			break;
 		case 2:
-			mes "¡ô¡ó¡ö ¡÷ ¡þ¡ù¡ó?";
-			mes "¢¤¡ö¡ø ¢³ ¡÷¢£¡ü ¡ø ¡Ð¡õ¡û...";
-			mes "¡ð¡ú¢± ¡ô ¡ò¡õ¡ú ¡õ..!";
+			mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?";
+			mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ð¡ï¿½ï¿½ï¿½...";
+			mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½..!";
 			break; }
 	next;
 	mes "- Cannot understand a word. -";
@@ -238,8 +239,8 @@ dic_dun01,28,212,0	script	Vigilante#ep13_3_26	45,1,1,{
 		close2;
 		warp "manuk",326,180;
 		end; }
-	mes "¡ô¡ó¡ö ¡÷ ¡þ¡ù¡ó?";
-	mes "¢¤¡ö¡ø ¢³ ¡÷¢£¡ü ¡ø ¡Ð¡õ¡û...";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ð¡ï¿½ï¿½ï¿½...";
 	next;
 	mes "- The Vigilante says something and then shakes his head.";
 	mes "Looks like a negative reaction from the looks of his firm pose holding his shield in front of him. -";
@@ -274,8 +275,8 @@ dic_fild01,153,281,4	script	Capital City Guard	492,{
 		close2;
 		warp "dicastes01",199,41;
 		end; }
-	mes "¡ô¡ó¡ö ¡÷ ¡þ¡ù¡ó?";
-	mes "¡ð¡ú¢± ¡ô ¡ò¡õ¡ú ¡õ..!";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½..!";
 	next;
 	mes "- Cannot communicate with him. -";
 	close;	
@@ -380,8 +381,8 @@ dic_in01,48,263,5	script	Hunting Dept. 1 Manager	449,{
 		mes "- The Sapha keeps a distance from you even when you try to talk.";
 		mes "It looks like he is calling for a Galten. Time to go. -";
 		close; }
-	mes "¡õ¢£¡ô";
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	next;
 	mes "- I don't understand him. -";
 	close;
@@ -428,8 +429,8 @@ dic_in01,51,266,6	script	Hunting Dept. 2 Manager	449,{
 		mes "- The Sapha keeps a distance from you even when you try to talk.";
 		mes "It looks like he is calling for a Galten. Time to go. -";
 		close; }
-	mes "¡õ¢£¡ô";
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	next;
 	mes "- I don't understand him. -";
 	close;
@@ -477,8 +478,8 @@ dic_in01,51,270,6	script	Supply Dept. 1 Manager#	449,{
 		mes "- The Sapha keeps a distance from you even when you try to talk.";
 		mes "It looks like he is calling for a Galten. Time to go. -";
 		close; }
-	mes "¡õ¢£¡ô";
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	next;
 	mes "- I don't understand him. -";
 	close;
@@ -527,8 +528,8 @@ dic_in01,48,273,1	script	Supply Dept. 2 Manager#	449,{
 		mes "- The Sapha keeps a distance from you even when you try to talk.";
 		mes "It looks like he is calling for a Galten. Time to go. -";
 		close; }
-	mes "¡õ¢£¡ô";
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	next;
 	mes "- I don't understand him. -";
 	close;
@@ -581,8 +582,8 @@ dic_in01,43,273,1	script	Transport Dept. 1 Mgr.#	449,{
 		mes "- The Sapha keeps a distance from you even when you try to talk.";
 		mes "It looks like he is calling for a Galten. Time to go. -";
 		close; }
-	mes "¡õ¢£¡ô";
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	next;
 	mes "- I don't understand him. -";
 	close;
@@ -631,8 +632,8 @@ dic_in01,40,270,3	script	Transport Dept. 2 Mgr.#	449,{
 		mes "- The Sapha keeps a distance from you even when you try to talk.";
 		mes "It looks like he is calling for a Galten. Time to go. -";
 		close; }
-	mes "¡õ¢£¡ô";
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	next;
 	mes "- I don't understand him. -";
 	close;
@@ -719,8 +720,8 @@ dic_in01,40,193,0	script	Papyrus#0001	453,{
 			}
 		mes "- Sapha keeps a distance from you even when you try to talk. Looks like he called on Guard Galten. Time to go... -";
 		close; }
-	mes "¡õ¡ú¡ô";
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	next;
 	mes "- I don't feel confident in talking since you wouldn't understand anything. -";
 	close;
@@ -820,7 +821,7 @@ dic_in01,31,192,0	script	Document Package#0001	844,{
 		}
 		mes "- When you try to open and read a document, a Sapha manager motions to call Guard Galten. Let's get out of here quickly. -";
 		close; }
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	close;
 }
 
@@ -937,9 +938,9 @@ dic_in01,137,225,5	script	Diel Guard#ep133_19	450,{
 		mes "Only those with permission are allowed in.";
 		mes "Please go back.";
 		close; }
-	mes "¡ô¡ó¡ö ¡÷ ¡þ¡ù¡ó?";
-	mes "¢¤¡ö¡ø ¢³ ¡÷¢£¡ü ¡ø ¡Ð¡õ¡û...";
-	mes "¡ð¡ú¢± ¡ô ¡ò¡õ¡ú ¡õ..!";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ð¡ï¿½ï¿½ï¿½...";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½..!";
 	next;
 	mes "- Cannot communicate with him. -";
 	close;
@@ -1861,9 +1862,9 @@ dic_in01,158,188,3	script	Jarute HesLanta#ep133_2	451,{
 		end; }
 	cutin "ep13_heslanta",2;
 	mes "[Jarute HesLanta]";
-	mes "¡ô¡ó¡ö ¡÷ ¡þ¡ù¡ó?";
-	mes "¢¤¡ö¡ø ¢³ ¡÷¢£¡ü ¡ø ¡Ð¡õ¡û...";
-	mes "¡ð¡ú¢± ¡ô ¡ò¡õ¡ú ¡õ..!";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ð¡ï¿½ï¿½ï¿½...";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½..!";
 	next;
 	mes "- Cannot communicate with him. -";
 	mes "The Sapha minister looking hopeless gestures with an expression of abandonment.";
@@ -2026,8 +2027,8 @@ dicastes01,223,190,1	script	Calyon#pa8029	453,{
 		mes "- The Sapha keeps a distance from you even when you try to talk.";
 		mes "It looks like he is calling for a Galten. Time to go. -";
 		close; }
-	mes "¡õ¢£¡ô";
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	next;
 	mes "- I can't understand him... -";
 	close;
@@ -2163,8 +2164,8 @@ dicastes01,211,178,1	script	Moltuka#pa8029	453,{
 		mes "- The Sapha keeps a distance from you even when you try to talk.";
 		mes "It looks like he is calling for a Galten. Time to go. -";
 		close; }
-	mes "¡õ¢£¡ô";
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	next;
 	mes "- I can't understand him... -";
 	close;
@@ -2265,8 +2266,8 @@ dicastes01,175,217,5	script	Kalipo#pa8029	453,{
 		mes "- The Sapha keeps a distance from you even when you try to talk.";
 		mes "It looks like he is calling for a Galten. Time to go. -";
 		close; }
-	mes "¡õ¢£¡ô";
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	next;
 	mes "- I can't understand him... -";
 	close;
@@ -2397,8 +2398,8 @@ dicastes01,187,230,5	script	Laponte#pa8029	453,{
 		mes "- The Sapha keeps a distance from you even when you try to talk.";
 		mes "It looks like he is calling for a Galten. Time to go. -";
 		close; }
-	mes "¡õ¢£¡ô";
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	next;
 	mes "- I can't understand him... -";
 	close;
@@ -2539,8 +2540,8 @@ dicastes01,181,224,5	script	Pura#pa8029	453,{
 		mes "- The Sapha keeps a distance from you even when you try to talk.";
 		mes "It looks like he is calling for a Galten. Time to go. -";
 		close; }
-	mes "¡õ¢£¡ô";
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	next;
 	mes "- I can't understand him... -";
 	close;
@@ -2667,8 +2668,8 @@ dicastes01,217,184,1	script	Tragis#pa8029	453,{
 		mes "- The Sapha keeps a distance from you even when you try to talk.";
 		mes "It looks like he is calling for a Galten. Time to go. -";
 		close; }
-	mes "¡õ¢£¡ô";
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	next;
 	mes "- I can't understand him... -";
 	close;
@@ -3615,8 +3616,8 @@ dicastes01,207,210,5	script	Walking Knit#ep13_3_15	449,{
 		mes "It's a difficult issue..";
 		close; }
 	mes "[Moltuka]";
-	mes "¡õ¢£¡ô";
-	mes "¡ö¡ø¡ó ¢£ ¡ö¡ñ¡ï ¡ù ¡ð¢²¢£";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢²¢ï¿½";
 	next;
 	mes "- Cannot communicate with him. -";
 	close;
@@ -3685,9 +3686,9 @@ dicastes01,112,248,5	script	Resting Piom#ep133_16	491,{
 		mes "The last thing I did was mine and refine Bradium and I loved it!";
 		mes "And to think that my work keeps everyone healthy is rewarding.";
 		close; }
-	mes "¡ñ¡÷¢¤ ¡ö ¢±¡ñ¡ú?";
-	mes "¡ò¢³~!";
-	mes "¡Ð¢²¢¤ ¢± ¡ü¡ñ¡õ ¢³ ¡ð !!!";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?";
+	mes "ï¿½ï¿½ï¿½ï¿½~!";
+	mes "ï¿½Ð¢ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ !!!";
 	next;
 	mes "- Cannot communicate with him. -";
 	close;
@@ -3751,8 +3752,8 @@ dicastes01,252,144,0	script	Training Galten#e	450,{
 		mes "I will get great results";
 		mes "If I do my best, right?";
 		close; }
-	mes "¡ø¡ô¡ü ¡ø ¡ø¡ô¡ü";
-	mes "¡ø¡ô¡ü";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 	next;
 	mes "- I can't understand what he's trying to say. -";
 	close;
@@ -4251,8 +4252,8 @@ dicastes01,117,262,0	script	Frede#ep133_	491,{
 			warp "dic_in01",165,101;
 			end; }
 		close; }
-	mes "¢£¡ô¡ñ ¡û"; 
-	mes "¡ú¡ö¡ø ¢£ ¡ô";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½"; 
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½";
 	close;
 }
 
@@ -4492,8 +4493,8 @@ dic_in01,165,104,1	script	Frede#13_3_in	454,{
 		mes "Zzz...Zzz...";
 		close; }
 	mes "[Frede]";
-	mes "¢¤¡ô¡ø ¢³ ¡÷¡û¡;
-	mes "¡û¡ö ¡õ";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½";
 	close;
 }
 
@@ -4589,9 +4590,9 @@ dic_dun01,205,43,5	script	Brian#ep13_3_	490,{
 		mes "[Brian]";
 		mes "Not only is creating things important, but regular maintenance is also very important.";
 		close; }
-	mes "¡ô¡õ¡ó ¡ø ¡ð¢±¡û ¡ö ¡ð";
-	mes "¡ð¡þ¡þ ¡ù ¡Ð¡ñ¡ï ¢¤";
-	mes "¡ô¡ò¢² ¡ø";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢±¡ï¿½ ï¿½ï¿½ ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ð¡ï¿½ï¿½ï¿½ ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½";
 	close;
 }
 
@@ -4703,8 +4704,8 @@ dic_dun01,153,107,4	script	Tyler#ep13_3_	489,{
 		mes "Labor is rewarding at the end!";
 		mes "Hahahahaha!!!!!";
 		close; }
-	mes "¡ó¡ø¢± ¡÷";
-	mes "¡ö¡ñ¡Ð ¡ò ¡õ";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½";
 	close;
 }
 
@@ -4791,8 +4792,8 @@ dic_dun01,64,107,0	script	Bain#ep13_3_	490,{
 		mes "To fix the erected lumber, you need to use wedges to keep it in place.";
 		mes "Simple, isn't it?";
 		close; }
-	mes "¡ó¡ø¢± ¡÷";
-	mes "¡ö¡ñ¡Ð ¡ò ¡õ";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½";
 	close;
 }
 
@@ -4854,8 +4855,8 @@ dic_dun01,335,187,0	script	John#ep13_3_	454,{
 			mes "- *whiz, *clink -";
 			setquest 11160; }
 		close; }
-	mes "¡ù¡õ¡Ð ¢³ ¡ó";
-	mes "¡ï¡ï¡ò ¡÷ ¡þ¡ð¡ö ¢£...";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½...";
 	close;
 }
 
@@ -4934,11 +4935,11 @@ dic_dun01,61,226,4	script	Lash#ep13_3_	491,{
 			mes "Ha ha ha ha ha!";
 			setquest 11164; }
 		close; }
-	mes "¡ô¡õ¡ó ¡ø ¡ð¢±¡û ¡ö ¡ð";
-	mes "¡ð¡þ¡þ ¡ù ¡Ð¡ñ¡ï ¢¤";
-	mes "¡ô¡ò¢² ¡ø";
-	mes "¡÷";
-	mes "¡õ¢³¡ñ ¡õ ¡ñ";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¢±¡ï¿½ ï¿½ï¿½ ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ð¡ï¿½ï¿½ï¿½ ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½";
+	mes "ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½";
 	close;
 }
 
@@ -5029,9 +5030,9 @@ dic_dun02,110,127,5	script	Rose#13_3	489,{
 			setquest 11162;
 			close; }
 		close; }
-	mes "¡ù¡ó¡ð ¢² ¡ð";
-	mes "¡û¡ö¡÷ ¡ù ¢³";
-	mes "¢£¡ó¢²";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 	close;
 }
 
@@ -5137,9 +5138,9 @@ dic_in01,349,129,5	script	Bouy#13_3	449,{
 		mes "Outsiders are prohibited here.";
 		mes "If you have come here by mistake, please find your way out now.";
 		close; }
-	mes "¡ø¡ö¡þ ¡ù ¡ú¡ð¡ï ¡ø"; 
-	mes "¡ï¡ú¡ö ¡ù";
-	mes "¡õ¡ï¡õ ¡ò";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½"; 
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½";
 	close;
 }
 
@@ -5705,9 +5706,9 @@ mid_campin,168,128,3	script	Sapha from Manuk	451,{
 		}
 	}
 	mes "[Sapha]";
-	mes "¢¤¡ð¡ú? ¢£ ¡ù¡ð...";
-	mes "¡ï¡ò¡Ð ¢¤ ?";
-	mes "¡ñ¡ï..?";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½...";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ?";
+	mes "ï¿½ï¿½ï¿½ï¿½..?";
 	next;
 	callfunc "eldicastes_c",4;
 }
@@ -5791,9 +5792,9 @@ man_in01,315,52,3	script	Guard Captain Avalanche	450,{
 			close; 
 		}
 	}
-	mes "¢¤¡ð¡ú? ¢£ ¡ù¡ð...";
-	mes "¡ï¡ò¡Ð ¢¤ ?";
-	mes "¡ñ¡ï..?";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½...";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ?";
+	mes "ï¿½ï¿½ï¿½ï¿½..?";
 	close;	
 }
 
@@ -5974,8 +5975,8 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133_	453,{
 				mes "Please feel free to ask questions when you need help.";
 				close;
 		}
-	mes "¡ð¡ñ¡ô ¡õ ¡ü¢±¢³ ¡ö ¡ò...?";
-	mes "¢¤¡ö¡ø ... ¢³ ¡÷¢£¡ü ¡ø ¡Ð¡õ¡û...";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½...?";
+	mes "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ... ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ð¡ï¿½ï¿½ï¿½...";
 	next;
 	mes "- Cannot communicate with him. -";
 	close;
