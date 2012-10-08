@@ -4,8 +4,9 @@
 //= EREMES THE CANIVALIZER (Aegis)Translated by yoshiki (Aegis)
 //= Converted by kobra_k88
 //= Further bugfixed and tested by Lupus
+//= Reestruturado npc por SoulBlaker
 //===== Versão Atual: ======================================== 
-//= 3.5
+//= 3.5b
 //===== Compatível com: ====================================== 
 //= Cronus SVN
 //===== Descrição: =========================================== 
@@ -55,6 +56,7 @@
 //= 3.4c Mais correções (bugreport: 15)  [Asus]
 //= 3.4d Correções na tradução dos nomes dos npcs, relacionado com eventos. (bugreport: 000407) [SoulBlaker]
 //= 3.5 Otimização do script. [SoulBlaker]
+//= 3.5b Mais otmizações e implementado sistema de quest no script. [SoulBlaker]
 //============================================================
 
 // Nóticia na Antiga Guilda dos Caçadores
@@ -214,6 +216,7 @@ hu_in01,386,373,4	script	Caçadora#hnt	727,{
 			mes "Parabéns! Você está";
 			mes "ótimo no visual de Caçador!!";
 			set .@joblvl,joblevel;
+			completequest 4013;
 			callfunc "Job_Change",Job_Hunter;
 			callfunc "F_ClearJobVar";		// Limpa todas as variáveis de classe do jogador
 			next;
@@ -226,10 +229,23 @@ hu_in01,386,373,4	script	Caçadora#hnt	727,{
 			close;
 		}
 		else
-		if( JobLevel > 39 && HNTR_Q == 0 )
+		if( JobLevel > 39 && (HNTR_Q == 0 || HNTR_Q == 1) )
 		{
-			mes "[Dejiko, a Caçadora]";
-			mes "Oh, você é um Arqueiro! Parece que você tem treinou bastante como um Arqueiro... Você veio aqui para torna-se um Caçador, correto?";
+			if( HNTR_Q == 0 )
+			{
+				mes "[Dejiko, a Caçadora]";
+				mes "Oh, você é um Arqueiro! Parece que você tem treinou bastante como um Arqueiro... Você veio aqui para torna-se um Caçador, correto?";
+			}
+			else
+			{
+				mes "[Dejiko, a Caçadora]";
+				mes "Bem vindo novamente...!";
+				mes "Bem, vamos começar com a entrevista. Desta vez, pense cuidadosamente sobre as respostas para cada pergunta.";
+				next;
+				mes "[Dejiko, a Caçadora]";
+				mes "Pois bem,";
+				mes "Vamos começar.";
+			}
 			next;
 			switch( select("Sim, por isso estou aqui.:Quero saber os requerimentos:...Não quero mudar ainda.") )
 			{
@@ -255,6 +271,9 @@ hu_in01,386,373,4	script	Caçadora#hnt	727,{
 					next;
 					if( select("Sim~ Vamos começar agora.:Não, voltarei depois.") == 1 )
 					{
+						if(checkquest(4000) == -1) {
+							setquest 4000;
+						}
 						mes "[Dejiko, a Caçadora]";
 						mes "Preste atenção cuidadosamente nos senários que eu descreverei. Quando eu fizer uma pergunta, opte por uma resposta. Bastante simples, não acha?";
 						next;
@@ -371,6 +390,7 @@ hu_in01,386,373,4	script	Caçadora#hnt	727,{
 						if( .@hunter_t == 100 )
 						{
 							set HNTR_Q,2;
+							changequest 4000,4001;
 							mes "[Dejiko, a Caçadora]";
 							mes "Perfeito! Suas respostas mostram que você tem uma visão correta sobre a vida. Você certamente tem o boas qualidades para se tornar um Caçador ~";
 							next;
@@ -382,6 +402,7 @@ hu_in01,386,373,4	script	Caçadora#hnt	727,{
 						if (.@hunter_t == 90)
 						{
 							set HNTR_Q,2;
+							changequest 4000,4001;
 							mes "[Dejiko, a Caçadora]";
 							mes "Bem, eu estou olhando suas respostas e sua pontuação não é perfeita. Mas eu vou deixar você passar de qualquer maneira. Eu não sei o que o nosso Guildmaster vai pensar, no entanto.";
 							next;
@@ -431,152 +452,6 @@ hu_in01,386,373,4	script	Caçadora#hnt	727,{
 					mes "Vejo você na próxima~";
 					close;
 			}
-		}
-		else
-		if( JobLevel > 39 && HNTR_Q == 1 )
-		{
-			mes "[Dejiko, a Caçadora]";
-			mes "Bem vindo novamente...!";
-			mes "Bem, vamos começar com a entrevista. Desta vez, pense cuidadosamente sobre as respostas para cada pergunta.";
-			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "Pois bem,";
-			mes "Vamos começar.";
-			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "Você é um Arqueiro, e não sabe onde deve ir à caça. O que você faz?";
-			next;
-			if( select("Grito por ajuda até me cansar.:Me informo com outras pessoas:Vou procurar por mim mesmo") != 1 )
-			{
-				set .@hunter_t,.@hunter_t+10;
-			}
-			mes "[Dejiko, a Caçadora]";
-			mes "Então você decidiu um lugar para caçar. Você está indo caçar os monstros conhecidos como Hodes no Deserto de Sograt.";
-			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "Mas você está em Payon!!";
-			mes "Como fazer para ir ao deserto?";
-			next;
-			if( select("Peço um portal de graça.:Uso teleporte da Kafra.:Ando até lá com um amigo.") != 1 )
-			{
-				set .@hunter_t,.@hunter_t+10;
-			}
-			mes "[Dejiko, a Caçadora]";
-			mes "Lá não tem um Sarcedote para pedir um Portal, e está sem um amigo parar andar com você. Você deve usar os serviços da Kafra, mas está sem Zenys!";
-			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "Como é que vai";
-			mes "fazer o Zeny";
-			mes "que você precisa?";
-			next;
-			if( select("Eu peço esmola:Vendo coisas inúteis:Mato monstros e vendo os itens.") != 1 )
-			{
-				set .@hunter_t,.@hunter_t+10;
-			}
-			mes "[Dejiko, a Caçadora]";
-			mes "Então finalmente você chegou ao Deserto de Sograt, que está cheio de Hodes. Porém você está exausto e sem muito HP.";
-			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "Qual é a sua";
-			mes "solução para esta";
-			mes "situação?";
-			next;
-			if( select("Você atira neles de cima de uma colina:Senta e descança:Você ataca um Hode que já está sendo atacado") == 2 )
-			{
-				set .@hunter_t,.@hunter_t+10;
-			}
-			mes "[Dejiko, a Caçadora]";
-			mes "Vamos dizer que você estava tendo muita dificuldade para caçar Hodes e retornou à cidade. Agora você está sem HP e um sacerdote está por perto. Como você iria pedir uma Cura?";
-			next;
-			if( select("Por favor, me cure:Me Cure:Me Cure agora") == 1 )
-			{
-				set .@hunter_t,.@hunter_t+10;
-			}
-			mes "[Dejiko, a Caçadora]";
-			mes "Desta vez, você encontrou um raro item enquanto estava observando seu inventário. Você sai para vender o item, e há muitas pessoas com lojas abertas e Salas de Bate-Papo.";
-			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "Qual é a";
-			mes "melhor mandeira de";
-			mes "vender seu item?";
-			next;
-			if( select("Anuncio ele aos berros.:Abro um chat anunciando-o e espero:Procuro uma pessoa que queria comprá-lo") )
-			{
-				set .@hunter_t,.@hunter_t+10;
-			}
-			mes "[Dejiko, a Caçadora]";
-			mes "Enquanto você está esperando, alguém está implorando por itens e Zeny. O que você deve fazer?";
-			next;
-			if( select("Dou alguns itens e Zeny.:Ignoro-o:Mostro pra ele monstros que ele pode matar.") == 1 )
-			{
-				set .@hunter_t,.@hunter_t+10;
-			}
-			mes "[Dejiko, a Caçadora]";
-			mes "Por agora, você decide ir ao labirinto sozinho.";
-			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "Mas em seu caminho, você corre";
-			mes "dentro de lá, alguém está perdido.";
-			mes "O que você deve fazer?";
-			next;
-			if( select("Diga a ele que caminho a percorrer.:Guiá-lo para seu destino:Ignorá-lo.") != 3 )
-			{
-				set .@hunter_t,.@hunter_t+10;
-			}
-			mes "[Dejiko, a Caçadora]";
-			mes "Depois de ajudar a pessoa perdida, você decide voltar a caçar. Então, você encontra alguém atacando um monstro Chefe!";
-			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "O que você deve fazer";
-			next;
-			if(  select("Fico olhando e ajudo se for preciso.:Ataco o Chefão:Vou embora") == 1  )
-			{
-				set .@hunter_t,.@hunter_t+10;
-			}
-			mes "[Dejiko, a Caçadora]";
-			mes "Você está muito exausto após o dia da caça. Está na hora de voltar para à cidade.";
-			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "Mas o que é isto! Você encontrou um item caro no chão! O que você deve fazer com ele?";
-			next;
-			if( select("Pego e fico com ele.:Tento achar dono.:Deixo ele no chão.") != 1 )
-			{
-				set .@hunter_t,.@hunter_t+10;
-			}
-			mes "[Dejiko, a Caçadora]";
-			mes "Tudo bem, este é o final do teste.";
-			next;
-			if( .@hunter_t == 100 )
-			{
-				set HNTR_Q,2;
-				mes "[Dejiko, a Caçadora]";
-				mes "Perfeito! Suas respostas mostram que você tem uma visão correta sobre a vida. Você certamente tem o boas qualidades para se tornar um Caçador ~";
-				next;
-				mes "[Dejiko, a Caçadora]";
-				mes "Estou feliz em dizer que você passou na entrevista ~ Agora, vá para a pessoa no canto e confirme o que é necessário para mudar o sua profissão ~";
-				close;
-			}
-			else
-			if (.@hunter_t == 90)
-			{
-				set HNTR_Q,2;
-				mes "[Dejiko, a Caçadora]";
-				mes "Bem, eu estou olhando suas respostas e sua pontuação não é perfeita. Mas eu vou deixar você passar de qualquer maneira. Eu não sei o que o nosso Guildmaster vai pensar, no entanto.";
-				next;
-				mes "[Dejiko, a Caçadora]";
-				mes "Basta lembrar-se de manter sempre em mente a base ética. Tente severamente seguir o que disse nos testes e me faça feliz, ok?";
-				close;
-			}
-			set HNTR_Q,1;
-			mes "[Dejiko, a Caçadora]";
-			mes "Humm ... Eu não acho que isto vai funcionar. Você não pode se tornar um caçador sem saber a base ética.";
-			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "Pense em como você responde às perguntas mais uma vez. De forma a valorizar a natureza, valorizar a sua relação com os outros primeiro.";
-			next;
-			mes "[Dejiko, a Caçadora]";
-			mes "Então, você vai estar mais em sintonia com a natureza e com outras pessoas. É este tipo de harmonia que torna o melhor dos Caçadores.";
-			close;
 		}
 		else
 		if( HNTR_Q > 2 && HNTR_Q < 10 )
@@ -655,30 +530,37 @@ hu_in01,382,382,4	script	Recepcionista#hnt	732,{
 			//Claw_Of_Desert_Wolf, Wooden_Block, White_Herb
 			case 1:
 				setarray .@items[0], 7030,5, 1019,5, 509,3, 3;
+				changequest 4001,4002;
 				break;
 			//Bill_Of_Birds, Skel_Bonem Green_Herb
 			case 2:
 				setarray .@items[0], 925,3, 932,5, 511,3, 4;
+				changequest 4001,4003;
 				break;
 			//Posionous_Canine, Animal's_Skin, Red_Herb
 			case 3:
 				setarray .@items[0], 937,3, 919,3, 507,5, 5;
+				changequest 4001,4004;
 				break;
 			//Dokkaebi_Horn, Piece_Of_Egg_Shell, Fluff
 			case 4:
 				setarray .@items[0], 1021,3, 7032,3, 914,10, 6;
+				changequest 4001,4005;
 				break;
 			//Shell, Worm_Peelings, Yellow_Herb
 			case 5:
 				setarray .@items[0], 935,9, 955,9, 508,9, 7;
+				changequest 4001,4006;
 				break;
 			//Tooth_Of_Bat, Sticky_Mucus, Bear's_Foot
 			case 6:
 				setarray .@items[0], 913,3, 938,1, 948,1, 8;
+				changequest 4001,4007;
 				break;
 			//Porcupine_Spike, Yoyo_Tailm Acorn
 			case 7:
 				setarray .@items[0], 1027,2, 942,1, 1026,1, 9;
+				changequest 4001,4008;
 				break;
 		}
 		mes "[Demônio Caçador]";
@@ -732,6 +614,39 @@ hu_in01,382,382,4	script	Recepcionista#hnt	732,{
 			mes "[Demônio Caçador]";
 			mes "Você trouxe todos os materiais necessários... Você pode pegar direções para a área de testes com o nosso Líder que está no Palácio central de Payon.";
 			set HNTR_Q,.@items[6];
+			if( checkquest(4002) != -1 )
+			{
+				changequest 4002,4009;
+			}
+			else
+			if( checkquest(4003) != -1 )
+			{
+				changequest 4003,4009;
+			}
+			else
+			if( checkquest(4004) != -1 )
+			{
+				changequest 4004,4009;
+			}
+			else
+			if( checkquest(4005) != -1 )
+			{
+				changequest 4005,4009;
+			}
+			else
+			if( checkquest(4006) != -1 )
+			{
+				changequest 4006,4010;
+			}
+			else
+			if( checkquest(4007) != -1 )
+			{
+				changequest 4007,4010;
+			}
+			else
+			{
+				changequest 4008,4010;
+			}
 			delitem .@items[0],.@items[1];
 			delitem .@items[2],.@items[3];
 			delitem .@items[4],.@items[5];
@@ -751,15 +666,14 @@ hu_in01,382,382,4	script	Recepcionista#hnt	732,{
 		close;
 	}
 	else
-	if (HNTR_Q > 9 && HNTR_Q < 17)
+	if( HNTR_Q > 9 && HNTR_Q < 17 )
 	{
 		mes "[Demônio Caçador]";
 		mes "Hmm? Você não foi até o Líder no Palácio Central de Payon ou na Guilda dos Arqueiros? Ele deve estar em um desses dois lugares, então vá procurar por ele.";
 		close;
 	}
 	else
-	if (HNTR_Q == 17)
-
+	if( HNTR_Q == 17 )
 	{
 		mes "[Demônio Caçador]";
 		mes "Ooh. Você passou no teste. Parabéns~ Você deve falar com Dejiko agora.";
@@ -774,7 +688,7 @@ hu_in01,382,382,4	script	Recepcionista#hnt	732,{
 }
 
 payon_in03,131,7,3	script	Caçador#htnGM	59,{
-	if (HNTR_Q == 10)
+	if( HNTR_Q == 10 )
 	{
 		mes "[Líder da Guilda dos Caçadores]";
 		mes "Hmpf. Você deve estar aqui para o teste de Caçador. Deixe-me lhe dizer sobre os procedimentos do teste. O que você gostaria de saber?";
@@ -814,6 +728,7 @@ payon_in03,131,7,3	script	Caçador#htnGM	59,{
 		mes "[Líder da Guilda dos Caçadores]";
 		mes "Bem, suas flexas provavelmente ainda estão a ser feitas, assim você pode usar para ter no meu teste.";
 		set HNTR_Q,12;
+		changequest 4009,4011;
 		getitem 1751,200; //Silver_Arrow
 		close2;
 		warp "job_hunte",176,22;
@@ -910,6 +825,7 @@ payon_in03,131,7,3	script	Caçador#htnGM	59,{
 		set HNTR_Q,17;
 		savepoint "payon",104,99;
 		getitem 1007,1; //Colar da Sabedoria
+		changequest 4012,4013;
 		next;
 		mes "[Líder da Guilda dos Caçadores]";
 		mes "Ok, aqui está. Agora, volte para o Guilda dos Caçadores. Tenho mais alguns negócios para terminar aqui, mas eu espero que você possa se tornar um caçador em breve.";
@@ -986,6 +902,7 @@ payon_in02,21,31,1	script	Caçador#htnGM2	59,{
 		mes "[Caçador]";
 		mes "Boa sorte.";
 		set HNTR_Q,12;
+		changequest 4010,4011;
 		warp "job_hunte",176,22;
 		cutin "job_huntermaster",255;
 		end;
@@ -1442,6 +1359,7 @@ OnTouch:
 	donpcevent "Gerente#hnt::OnReset";
 	donpcevent "Sala de Espera#hnt::OnStart";
 	set HNTR_Q,16;
+	changequest 4011,4012;
 	savepoint "payon",104,99;
  
 	if( rand(1) )

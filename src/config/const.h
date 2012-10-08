@@ -5,7 +5,7 @@
 
 /**
  * rAthena configuration file (http://rathena.org)
- * For detailed guidance on these check http://rathena.org/wiki/SRC/map/config/
+ * For detailed guidance on these check http://rathena.org/wiki/SRC/config/
  **/
 
 /**
@@ -15,7 +15,6 @@
 /**
  * "Sane Checks" to save you from compiling with cool bugs 
  **/
-
 #if SECURE_NPCTIMEOUT_INTERVAL <= 0
 	#error SECURE_NPCTIMEOUT_INTERVAL should be at least 1 (1s)
 #endif
@@ -25,7 +24,7 @@
 
 /**
  * Path within the /db folder to (non-)renewal specific db files
- **/ 
+ **/
 #ifdef RENEWAL
 	#define DBPATH "re/"
 #else
@@ -54,11 +53,11 @@
 
 /* ATCMD_FUNC(mobinfo) HIT and FLEE calculations */
 #ifdef RENEWAL
-	#define MOB_FLEE(mob) ( mob->lv + mob->status.dex + mob->status.luk/3 + 175 )
-	#define MOB_HIT(mob)  ( mob->lv + mob->status.agi + mob->status.luk/5 + 100 )
+	#define MOB_FLEE(mob) ( mob->lv + mob->status.agi + mob->status.luk/5 + 100 )
+	#define MOB_HIT(mob)  ( mob->lv + mob->status.dex + mob->status.luk/3 + 175 )
 #else
-	#define MOB_FLEE(mob) ( mob->lv + mob->status.dex )
-	#define MOB_HIT(mob)  ( mob->lv + mob->status.agi )
+	#define MOB_FLEE(mob) ( mob->lv + mob->status.agi )
+	#define MOB_HIT(mob)  ( mob->lv + mob->status.dex )
 #endif
 
 /* Renewal's dmg level modifier, used as a macro for a easy way to turn off. */
@@ -94,7 +93,6 @@
 			time = time * (1 - (float)min(val, 100) / 100); \
 	}
 #endif
-
 /**
  * End of File
  **/

@@ -10018,19 +10018,10 @@ void clif_parse_WisMessage(int fd, struct map_session_data* sd)
 
 			return;
 		}
-	}
-	
-	// Main chat [LuzZza]
-	if(strcmpi(target, main_chat_nick) == 0)
-	{
+		} else if(strcmpi(target, main_chat_nick) == 0) { // Main chat [LuzZza]
 		if(!sd->state.mainchat)
 			clif_displaymessage(fd, msg_txt(388)); // You should enable main chat with "@main on" command.
 		else {
-			if ( battle_config.min_chat_delay ) {
-				if( DIFF_TICK(sd->cantalk_tick, gettick()) > 0 )
-					return;
-				sd->cantalk_tick = gettick() + battle_config.min_chat_delay;
-			}
 			// send the main message using inter-server system
 			intif_main_message( sd, message );
 		}
@@ -10061,13 +10052,6 @@ void clif_parse_WisMessage(int fd, struct map_session_data* sd)
 			clif_wis_end(fd, 3); // 3: everyone ignored by target
 		return;
 	}
-	// if player ignores the source character
-	ARR_FIND(0, MAX_IGNORE_LIST, i, dstsd->ignore[i].name[0] == '\0' || strcmp(dstsd->ignore[i].name, sd->status.name) == 0);
-	if(i < MAX_IGNORE_LIST && dstsd->ignore[i].name[0] != '\0')
-	{	// source char present in ignore list
-		clif_wis_end(fd, 2); // 2: ignored by target
-		return;
-	}
 	
 	// if player is autotrading
 	if( dstsd->state.autotrade == 1 )
@@ -10078,6 +10062,13 @@ void clif_parse_WisMessage(int fd, struct map_session_data* sd)
 		return;
 	}
 	
+	// if player ignores the source character
+	ARR_FIND(0, MAX_IGNORE_LIST, i, dstsd->ignore[i].name[0] == '\0' || strcmp(dstsd->ignore[i].name, sd->status.name) == 0);
+	if(i < MAX_IGNORE_LIST && dstsd->ignore[i].name[0] != '\0') { // source char present in ignore list
+			clif_wis_end(fd, 2); // 2: ignored by target
+			return;
+	}
+
 	// notify sender of success
 	clif_wis_end(fd, 0); // 0: success to send wisper
 
