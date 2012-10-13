@@ -1,4 +1,4 @@
--- Fusão de scritpts cronus
+﻿-- Fusão de scritpts cronus
 
 @scripts_classes.conf
 ++npc/classes/ ->
@@ -39,4 +39,3 @@
 		Professor.txt
 	2-2e/ ->
 		Espiritualista.txt
-	
