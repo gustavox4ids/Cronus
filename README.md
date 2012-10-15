@@ -32,15 +32,14 @@ Equipe
 ### Desenvolvedores Core
 - Sicks 		- Bruno Sgambato
 - Joao Pedro	- João Pedro
-- Axl			  - José Góis
+- Axl			- José Góis
 - MaminhA		- Marcelo Liberato
 
 ### Desenvolvedores Script/DB
-- Schrwaizer 	- Thiago Schrwaizer
+- SBK			- Romulo
 - Wolf			- João Victor
 
 ### Desenvolvedores em Teste
 - GM Cold		- Marcio Montenegro
 - socramjunio	- Marcos
 - sileNtcry		- Rafael
-- renashenko	- Renato César
