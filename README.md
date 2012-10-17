@@ -34,10 +34,12 @@ Equipe
 - Joao Pedro	- João Pedro
 - Axl			- José Góis
 - MaminhA		- Marcelo Liberato
+- Snails     - Humberto Machado
 
 ### Desenvolvedores Script/DB
 - SBK			- Romulo
 - Wolf			- João Victor
+- NightWolf   - Gabriel
 
 ### Desenvolvedores em Teste
 - GM Cold		- Marcio Montenegro
