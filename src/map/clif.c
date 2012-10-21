@@ -11970,7 +11970,7 @@ void clif_parse_GuildRequestInfo(int fd, struct map_session_data *sd)
 /// 0161 <packet len>.W { <position id>.L <mode>.L <ranking>.L <pay rate>.L <name>.24B }*
 void clif_parse_GuildChangePositionInfo(int fd, struct map_session_data *sd)
 {
-	const unsigned int blocksize = 40;
+	const unsigned int blocksize = 42;
 	unsigned int packet_len, count, i;
 	char name[NAME_LENGTH];
 	struct s_packet_db* info = &packet_db[sd->packet_ver][RFIFOW(fd,0)];
@@ -11993,7 +11993,16 @@ void clif_parse_GuildChangePositionInfo(int fd, struct map_session_data *sd)
 		safestrncpy(name, (const char*)RFIFOP(fd,info->pos[1]+i*blocksize+16), sizeof(name));
 
 		guild_change_position(sd->status.guild_id, RFIFOL(fd,info->pos[1]+i*blocksize), RFIFOL(fd,info->pos[1]+i*blocksize+4), RFIFOL(fd,info->pos[1]+i*blocksize+12), name);
-	}
+	} 
+
+	/* int i;
+
+	if(!sd->state.gmaster_flag)
+		return;
+
+	for(i = 4; i < RFIFOW(fd,2); i += 40 ){
+		guild_change_position(sd->status.guild_id, RFIFOL(fd,i), RFIFOL(fd,i+4), RFIFOL(fd,i+12), (char*)RFIFOP(fd,i+16));
+	} */
 }
 
 

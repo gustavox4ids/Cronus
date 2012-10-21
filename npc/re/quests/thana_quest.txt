@@ -1,4 +1,4 @@
-ï»¿//===== rAthena Script =======================================
+//===== rAthena Script =======================================
 //= Thanatos Tower Quest
 //===== By: ==================================================
 //= [Ishizu-chan]
@@ -32,86 +32,86 @@
 //= 2.7 Traduzido para pt_BR [Soraya]
 //============================================================
  
-hu_fild01,140,163,5 script Tower Keeper 852,3,3,{
+hu_fild01,140,163,5	script	Tower Keeper	852,3,3,{
  
  mes "[Gatei]";
- mes "SaudaÃ§Ãµes, aventureiro.";
- mes "Meu nome Ã© Gatei Knumm, sou guardiÃ£o";
+ mes "Saudações, aventureiro.";
+ mes "Meu nome é Gatei Knumm, sou guardião";
  mes "da Torre de Thanatos.";
  mes "Em que posso ajudar?";
  next;
  switch (select("Thanatos Tower?:Taxa de entrada?:Entrar na torre:Cancelar")) {
  case 1:
   mes "[Gatei]";
-  mes "Sim, a torre Ã  sua frente";
-  mes "era uma ruÃ­na antiga";
+  mes "Sim, a torre à sua frente";
+  mes "era uma ruína antiga";
   mes "que recebeu seu nome de uma palavra";
   mes "talhada em uma placa de pedra encontrada";
   mes "em seu interior. Hoje em dia este lugar";
-  mes "Ã© uma popular atraÃ§Ã£o turÃ­stica.";
+  mes "é uma popular atração turística.";
   next;
   mes "[Gatei]";
   mes "A torre ganhou mais popularidade";
   mes "entre os aventureiros quando a";
-  mes "CorporaÃ§Ã£o Rekenber comeÃ§ou";
-  mes "sua reconstruÃ§Ã£o.";
-  mes "O primeiro e o segundo andar estÃ£o agora";
+  mes "Corporação Rekenber começou";
+  mes "sua reconstrução.";
+  mes "O primeiro e o segundo andar estão agora";
   mes "reparados e sem monstros.";
   next;
   mes "[Gatei]";
-  mes "Mas a reconstruÃ§Ã£o do";
-  mes "terceiro andar ainda estÃ¡";
+  mes "Mas a reconstrução do";
+  mes "terceiro andar ainda está";
   mes "incompleta. Este andar ainda";
-  mes "estÃ¡ cheio de monstros, portanto estamos contratando trabalhadores temporÃ¡rios";
+  mes "está cheio de monstros, portanto estamos contratando trabalhadores temporários";
   mes "para exterminarem todas estas criaturas.";
   next;
   mes "[Gatei]";
-  mes "VocÃª estaria interessado em";
-  mes "um trabalho temporÃ¡rio,";
+  mes "Você estaria interessado em";
+  mes "um trabalho temporário,";
   mes "ou gostaria de saber mais sobre";
   mes "este lugar, por favor";
-  mes "pergunte a algum guia lÃ¡ dentro sobre alguma destas coisas.";
+  mes "pergunte a algum guia lá dentro sobre alguma destas coisas.";
   mes "Obrigado e aproveite bem sua visita!";
   close;
  case 2:
   mes "[Gatei]";
-  mes "Todos sÃ£o bem-vindos";
+  mes "Todos são bem-vindos";
   mes "na Torre de Thanatos.";
   mes "Apenas o primeiro e o segundo andar";
-  mes "estÃ£o abertos ao pÃºblico";
+  mes "estão abertos ao público";
   mes "por enquanto. A taxa de entrada";
-  mes "Ã© de 5000 zenys por pessoa.";
+  mes "é de 5000 zenys por pessoa.";
   next;
   mes "[Gatei]";
-  mes "5000 zenys parece ser um preÃ§o um pouco salgado";
-  mes "para uma atraÃ§Ã£o turÃ­stica,";
-  mes "mas confie em mim, esta torre lhe darÃ¡ uma experiÃªncia Ãºnica na vida,";
-  mes "Inclusive, nossos clientes e trabalhadores contratados tÃªm um desconto especial!";
+  mes "5000 zenys parece ser um preço um pouco salgado";
+  mes "para uma atração turística,";
+  mes "mas confie em mim, esta torre lhe dará uma experiência única na vida,";
+  mes "Inclusive, nossos clientes e trabalhadores contratados têm um desconto especial!";
   close;
  case 3:
   mes "[Gatei]";
   mes "Gostaria de";
   mes "entrar na Torre de Thanatos?";
-  mes "A taxa de entrada Ã© de ^FF00005,000 zeny^000000.";
+  mes "A taxa de entrada é de ^FF00005,000 zeny^000000.";
   next;
-  switch (select("Entrar:Quem sabe da prÃ³xima vez.")) {
+  switch (select("Entrar:Quem sabe da próxima vez.")) {
   case 1:
    if (thana_tower > 0) {
     mes "[Gatei]";
     mes "Oh, "+strcharinfo(0)+"!";
-    mes "Bem-vindo de volta! Como vocÃª jÃ¡";
+    mes "Bem-vindo de volta! Como você já";
     mes "pegou sua vaga como";
-    mes "trabalhador temporÃ¡rio, sua taxa";
-    mes "de entrada Ã© de 3000 zenys.";
+    mes "trabalhador temporário, sua taxa";
+    mes "de entrada é de 3000 zenys.";
     next;
-    switch (select("Enter:NÃ£o, obrigado.")) {
+    switch (select("Enter:Não, obrigado.")) {
     case 1:
      if (Zeny > 2999) {
       mes "[Gatei]";
       mes "Obrigado, e";
       mes "continue com o";
-      mes "bom trabalho. E nÃ£o";
-      mes "se esqueÃ§a: seguranÃ§a em primeiro lugar quando";
+      mes "bom trabalho. E não";
+      mes "se esqueça: segurança em primeiro lugar quando";
       mes "estiver lutando com aqueles monstros!";
       set Zeny, Zeny - 3000;
       close2;
@@ -120,15 +120,15 @@ hu_fild01,140,163,5 script Tower Keeper 852,3,3,{
      }
      mes "[Gatei]";
      mes "Oh, desculpe...";
-     mes "Parece que vocÃª nÃ£o";
+     mes "Parece que você não";
      mes "tem zenys suficientes. Bem,";
      mes "volte mais tarde!";
      close;
     case 2:
      mes "[Gatei]";
-     mes "VocÃª deve estar ocupado entÃ£o.";
-     mes "Bem, nÃ£o se preocupe, nÃ³s";
-     mes "estaremos sempre por aqui. AtÃ© breve!";
+     mes "Você deve estar ocupado então.";
+     mes "Bem, não se preocupe, nós";
+     mes "estaremos sempre por aqui. Até breve!";
      close;
     }
    }
@@ -138,7 +138,7 @@ hu_fild01,140,163,5 script Tower Keeper 852,3,3,{
     mes "taxa de entrada. Muito";
     mes "obrigado. Bem, espero que";
     mes "tenha aproveitado sua visita";
-    mes "Ã  Torre de Thanatos!";
+    mes "à Torre de Thanatos!";
     set Zeny, Zeny - 5000;
     close2;
     warp "tha_scene01",131,220;
@@ -147,7 +147,7 @@ hu_fild01,140,163,5 script Tower Keeper 852,3,3,{
    mes "[Gatei]";
    mes "Bem...";
    mes "Hmm. Sinto muito, mas";
-   mes "vocÃª nÃ£o tem";
+   mes "você não tem";
    mes "zeny suficiente para pagar a entrada.";
    mes "Por favor, volte mais tarde...";
    close;
@@ -161,108 +161,108 @@ hu_fild01,140,163,5 script Tower Keeper 852,3,3,{
  case 4:
   mes "[Gatei]";
   mes "Hmm? Muito bem.";
-  mes "Se vocÃª quer visitar a";
+  mes "Se você quer visitar a";
   mes "Torre de Thanatos, por favor";
-  mes "nÃ£o hesite em falar comigo.";
+  mes "não hesite em falar comigo.";
   mes "Obrigada, e tenha um bom dia!.";
   close;
  }
  
 OnTouch:
  mes "[Tower Keeper]";
- mes "Desculpe-me, mas vocÃª nÃ£o pode";
- mes "entrar. Este lugar estÃ¡ sob";
- mes "a administraÃ§Ã£o da CorporaÃ§Ã£o Rekenber";
- mes "e esta Ã¡rea";
- mes "estÃ¡ restrita a todos aqueles";
- mes "sem autorizaÃ§Ã£o.";
+ mes "Desculpe-me, mas você não pode";
+ mes "entrar. Este lugar está sob";
+ mes "a administração da Corporação Rekenber";
+ mes "e esta área";
+ mes "está restrita a todos aqueles";
+ mes "sem autorização.";
  close;
 }
  
-tha_t01,149,78,4 script Guide 90,{
+tha_t01,149,78,4	script	Guide	90,{
  
  if (thana_tower == 0) {
   mes "[Ditze]";
-  mes "Bem-vindo Ã  Torre de Thanatos.";
-  mes "A reconstruÃ§Ã£o da torre Ã©";
-  mes "um projeto da CorporaÃ§Ã£o Rekenber,";
+  mes "Bem-vindo à Torre de Thanatos.";
+  mes "A reconstrução da torre é";
+  mes "um projeto da Corporação Rekenber,";
   mes "e apenas o primeiro e segundo andar";
-  mes "estÃ£o abertos para o pÃºblico. EntÃ£o";
+  mes "estão abertos para o público. Então";
   mes "como posso lhe ajudar hoje?";
   next;
-  switch (select("InformaÃ§Ã£o sobre a torre:Contrato de trabalho temporÃ¡rio:Cancelar")) {
+  switch (select("Informação sobre a torre:Contrato de trabalho temporário:Cancelar")) {
   case 1:
    mes "[Ditze]";
-   mes "Quando essa torre foi construÃ­da,";
-   mes "quem a construiu, e seu propÃ³sito";
-   mes "eram um mistÃ©rio. Existem";
+   mes "Quando essa torre foi construída,";
+   mes "quem a construiu, e seu propósito";
+   mes "eram um mistério. Existem";
    mes "muitos rumores sobre a torre ser um";
-   mes "LaboratÃ³rio, um monumento a herÃ³is,";
-   mes "ou um forte de demÃ´nios...";
+   mes "Laboratório, um monumento a heróis,";
+   mes "ou um forte de demônios...";
    next;
    mes "[Ditze]";
-   mes "A CorporaÃ§Ã£o Rekenber vem";
+   mes "A Corporação Rekenber vem";
    mes "pesquisando a origem desta";
-   mes "torre, mas por enquanto ainda nÃ£o acho nenhuma pista que realmente confirmasse algo. Mesmo";
-   mes "tendo perdido muitas pesquisas para os monstros da torre, nÃ³s nÃ£o desistiremos!";
+   mes "torre, mas por enquanto ainda não acho nenhuma pista que realmente confirmasse algo. Mesmo";
+   mes "tendo perdido muitas pesquisas para os monstros da torre, nós não desistiremos!";
    next;
    mes "[Ditze]";
-   mes "A Rekenber estÃ¡ convencida de que esta";
+   mes "A Rekenber está convencida de que esta";
    mes "torre guarda muitos segredos, e";
-   mes "estÃ¡, com sucesso, reconstruindo";
+   mes "está, com sucesso, reconstruindo";
    mes "os primeiros 2 andares em busca de mais";
    mes "e mais conhecimento.";
    next;
    mes "[Ditze]";
    mes "No momento, estamos concentrados na";
-   mes "reconstruÃ§Ã£o do terceiro e";
+   mes "reconstrução do terceiro e";
    mes "quarto andar da torre. Com sorte, muitos";
-   mes "aventureiros estÃ£o exterminando";
-   mes "diversos monstros nesses andares, trabalhando como funcionÃ¡rios temporÃ¡rios.";
+   mes "aventureiros estão exterminando";
+   mes "diversos monstros nesses andares, trabalhando como funcionários temporários.";
    next;
    mes "[Ditze]";
    mes "Estamos esperando";
-   mes "que a reconstruÃ§Ã£o completa";
+   mes "que a reconstrução completa";
    mes "do terceiro e quarto andar esteja pronta";
-   mes "em um futuro prÃ³ximo, nos trazendo";
-   mes "mais perto de nosso objetivo de abrir para visitaÃ§Ã£o todos os 12 andares da Torre de Thanatos.";
+   mes "em um futuro próximo, nos trazendo";
+   mes "mais perto de nosso objetivo de abrir para visitação todos os 12 andares da Torre de Thanatos.";
    next;
-   switch (select("Monstros da torre?:Contrato temporÃ¡rio de trabalho?:......")) {
+   switch (select("Monstros da torre?:Contrato temporário de trabalho?:......")) {
     case 1:
      mes "[Ditze]";
-     mes "Sim, quando nÃ³s comeÃ§amos";
-     mes "a reconstruÃ§Ã£o da";
+     mes "Sim, quando nós começamos";
+     mes "a reconstrução da";
      mes "Torre de Thanatos, estes";
      mes "monstros que se pareciam com anjos";
      mes "apareceram do nada";
      mes "para atacar a todos os trabalhadores.";
      next;
      mes "[Ditze]";
-     mes "O que primeiro veio em nossas cabeÃ§as";
+     mes "O que primeiro veio em nossas cabeças";
      mes "era que estes monstros talvez fossem";
-     mes "vocÃª sabe... anjos de verdade.";
+     mes "você sabe... anjos de verdade.";
      mes "Mas se eles realmente fossem, por que estariam";
      mes "nos atacando sem motivo algum?";
      next;
      mes "[Ditze]";
-     mes "Pedimos Ã  Academia ";
-     mes "de SÃ¡bios de Juno para investigar";
-     mes "e eles confirmaram que;
-     mes "estas criaturas angelicais eram monstros de verdade; a aparÃªncia deles lembrar";
-     mes "anjos era apenas uma coincidÃªncia.";
+     mes "Pedimos à Academia ";
+     mes "de Sábios de Juno para investigar";
+     mes "e eles confirmaram que";
+     mes "estas criaturas angelicais eram monstros de verdade; a aparência deles lembrar";
+     mes "anjos era apenas uma coincidência.";
      close;
     case 2:
      mes "[Ditze]";
-     mes "VocÃª pode jÃ¡ ter ouvido falar";
+     mes "Você pode já ter ouvido falar";
      mes "da Torre de Thanatos, mas";
      mes "estamos contratando aventureiros para exterminar os monstros da torre";
      mes "do terceiro andar em diante";
-     mes "com trabalhadores temporÃ¡rios.";
+     mes "com trabalhadores temporários.";
      next;
      mes "[Ditze]";
      mes "Eu estou encarregada de contratar";
-     mes "estes trabalhadores temporÃ¡rios, entÃ£o";
-     mes "fale comigo se estiver interessado. Apenas os funcionÃ¡rios temporÃ¡rios podem";
+     mes "estes trabalhadores temporários, então";
+     mes "fale comigo se estiver interessado. Apenas os funcionários temporários podem";
      mes "ter acesso aos outros andares";
      mes "aqui na Torre de Thanatos.";
      next;
@@ -270,71 +270,71 @@ tha_t01,149,78,4 script Guide 90,{
     case 3:
      mes "[Ditze]";
      mes "Para liberar os andares acima";
-     mes "do segundo, nÃ³s estamos contratando";
-     mes "o mÃ¡ximo de trabalhadores temporÃ¡rios";
+     mes "do segundo, nós estamos contratando";
+     mes "o máximo de trabalhadores temporários";
      mes "que conseguirmos. Por que";
-     mes "vocÃª nÃ£o considera a possibilidade";
-     mes "de trabalhar para nÃ³s?";
+     mes "você não considera a possibilidade";
+     mes "de trabalhar para nós?";
      close;
    }
    switch (select("Maybe next time:Sure, I'd like to work for you.")) {
    case 1:
     mes "[Ditze]";
-    mes "Bem, estÃ¡ certo.";
-    mes "EntÃ£o venha falar comigo";
-    mes "assim que vocÃª se decidir";
+    mes "Bem, está certo.";
+    mes "Então venha falar comigo";
+    mes "assim que você se decidir";
     mes "se deseja nos ajudar com";
-    mes "a reconstrucÃ£o da torre,";
+    mes "a reconstrucão da torre,";
     mes "trabalhando para a Rekenber.";
     close;
    case 2:
     mes "[Ditze]";
-    mes "Isso Ã© Ã³timo!";
-    mes "VocÃª poderia, por favor, preencher";
-    mes "este formulÃ¡rio de";
-    mes "contrataÃ§Ã£o antes? Vamos";
-    mes "ver. Seu nome Ã©...";
+    mes "Isso é ótimo!";
+    mes "Você poderia, por favor, preencher";
+    mes "este formulário de";
+    mes "contratação antes? Vamos";
+    mes "ver. Seu nome é...";
     mes ""+strcharinfo(0)+", right?";
     next;
     menu "Sim",-;
     mes "[Ditze]";
     mes "Certo, por favor leia";
-    mes "o contrato com muita atenÃ§Ã£o.";
-    mes "Se vocÃª concordar com todas as";
-    mes "condiÃ§Ãµes, vÃ¡ em frente";
+    mes "o contrato com muita atenção.";
+    mes "Se você concordar com todas as";
+    mes "condições, vá em frente";
     mes "e assine embaixo.";
     next;
-    mes "^3355FFDitze entregarÃ¡";
+    mes "^3355FFDitze entregará";
     mes "o Contrato de Trabalho";
-    mes "para vocÃª dar uma lida.^000000";
+    mes "para você dar uma lida.^000000";
     next;
     mes "- Contrato de Trabalho -";
     mes " ";
     mes "1. O Contrato de Trabalho";
-    mes "Ã© efetivado entre a CorporaÃ§Ã£o";
-    mes "Rekenber (''Contratador'') e "+strcharinfo(0)+"(''FuncinÃ¡rio'').";
+    mes "é efetivado entre a Corporação";
+    mes "Rekenber (''Contratador'') e "+strcharinfo(0)+"(''Funcinário'').";
     mes "1-1. Este contrato de trabalho";
-    mes "Ã© classificado como uma Troca";
+    mes "é classificado como uma Troca";
     mes "de Interesses entre os dois lados.";
     mes "2. Os termos deste contrato";
-    mes "tÃªm efeito imediatamente";
+    mes "têm efeito imediatamente";
     mes "quando assinado por ambas as partes";
     mes "(Contratador e Empregado).";
     mes "3. Quando o Empregado executa";
-    mes "uma missÃ£o, ele serÃ¡ avaliado";
-    mes "com um teste fÃ­sico que serÃ¡";
+    mes "uma missão, ele será avaliado";
+    mes "com um teste físico que será";
     mes "apresentado pelo Contratador.";
-    mes "3-1. Por favor, verifique a seÃ§Ã£o";
+    mes "3-1. Por favor, verifique a seção";
     mes "7A para exemplos de testes";
-    mes "de extermÃ­nio de monstros.";
+    mes "de extermínio de monstros.";
     mes "3-2. O teste disponibilizado";
-    mes "pelo Contratador serÃ¡ definido e";
+    mes "pelo Contratador será definido e";
     mes "rdeterminado pelo mesmo.";
-    mes "4. O contratador darÃ¡ recompensas";
-    mes "ao empregado apÃ³s receber";
-    mes "o certificado de extermÃ­nio.";
-    mes "4-1. PossÃ­veis recompensas para";
-    mes "o extermÃ­nio de monstros podem";
+    mes "4. O contratador dará recompensas";
+    mes "ao empregado após receber";
+    mes "o certificado de extermínio.";
+    mes "4-1. Possíveis recompensas para";
+    mes "o extermínio de monstros podem";
     mes "ser uma das listadas abaixo.";
     mes ".................................................";
     mes ".................................................";
@@ -344,7 +344,7 @@ tha_t01,149,78,4 script Guide 90,{
     mes "13. Os termos deste contrato se";
     mes "aplicam apenas ao que envolver a";
     mes "Torre de Thanatos.";
-    mes "14. Empregados receberÃ£o um";
+    mes "14. Empregados receberão um";
     mes "desconto na taxa de entrada";
     mes "para a Torre de Thanatos.";
     mes " ";
@@ -353,119 +353,119 @@ tha_t01,149,78,4 script Guide 90,{
     mes "Assinatura do Contratador____________";
     mes "Assinatura do Empregado____________";
     next;
-    switch (select("Assinar:NÃ£o assinar")) {
+    switch (select("Assinar:Não assinar")) {
     case 1:
-     mes "^3355FFYou VocÃª assinou as duas cÃ³pias do";
+     mes "^3355FFYou Você assinou as duas cópias do";
      mes "Contrato de Trabalho.^000000";
      next;
      mes "[Ditze]";
-     mes "TObrigado. Agora vocÃª;
-     mes "Ã© um empregado oficial da;
-     mes "CorporaÃ§Ã£o Rekenber! Bem,";
+     mes "Obrigado. Agora você";
+     mes "é um empregado oficial da";
+     mes "Corporação Rekenber! Bem,";
      mes "dentro dos limites da torre";
-     mes "obviamente. Este contrato nÃ£o se";
-     mes "aplica a nada que nÃ£o aconteÃ§a na regiÃ£o da torre.";
+     mes "obviamente. Este contrato não se";
+     mes "aplica a nada que não aconteça na região da torre.";
      next;
      mes "[Ditze]";
-     mes "De agora e diante, vocÃª pode falar";
-     mes "com o Guia do 2Âº Andar para";
-     mes "entrar no 3Âº Andar. Se tiver";
-     mes "alguma questÃ£o sobre recompensa de alguma";
-     mes "missÃ£o, por favor, fale com ^3355FFLiei^000000.";
+     mes "De agora e diante, você pode falar";
+     mes "com o Guia do 2º Andar para";
+     mes "entrar no 3º Andar. Se tiver";
+     mes "alguma questão sobre recompensa de alguma";
+     mes "missão, por favor, fale com ^3355FFLiei^000000.";
      next;
      mes "[Ditze]";
-     mes "Se vocÃª quiser obter";
-     mes "mais informaÃ§Ãµes sobre";
+     mes "Se você quiser obter";
+     mes "mais informações sobre";
      mes "seu trabalho, por favor";
-     mes "fale com o Guia do 2Âº Andar.";
+     mes "fale com o Guia do 2º Andar.";
      mes "Obrigado, e bem-vindo";
-     mes "Ã  CorporaÃ§Ã£o Rekenber!";
+     mes "à Corporação Rekenber!";
      set thana_tower,1;
      close;
     case 2:
      mes "[Ditze]";
-     mes "Oh?! Existe uma clÃ¡usula";
-     mes "no contrato com a qual vocÃª";
-     mes "nÃ£o concorda? Humm. Tudo,";
-     mes "bem. Mas, se vocÃª muda";
-     mes "de idÃ©ia, por favor volte";
+     mes "Oh?! Existe uma cláusula";
+     mes "no contrato com a qual você";
+     mes "não concorda? Humm. Tudo,";
+     mes "bem. Mas, se você muda";
+     mes "de idéia, por favor volte";
      mes "e fale comigo. Obrigado!";
      close;
     }
    }
   case 2:
    mes "[Ditze]";
-   mes "VocÃª pode jÃ¡ ter ouvido falar";
+   mes "Você pode já ter ouvido falar";
    mes "do Vigia da Torre, mas";
-   mes "nÃ³s estamos contratando aventureiros para exterminar os monstros dela";
+   mes "nós estamos contratando aventureiros para exterminar os monstros dela";
    mes "do terceiro andar em diante";
-   mes "com trabalhadores temporÃ¡rios.";
+   mes "com trabalhadores temporários.";
    next;
    mes "[Ditze]";
    mes "Eu estou encarregada de contratar";
-   mes "estes trabalhadores temporÃ¡rios, entÃ£o";
-   mes "fale comigo se estiver interessado. Apenas os funcionÃ¡rios temporÃ¡rios podem";
+   mes "estes trabalhadores temporários, então";
+   mes "fale comigo se estiver interessado. Apenas os funcionários temporários podem";
    mes "ter acesso aos outros andares";
    mes "aqui na Torre de Thanatos.";
    next;
-   switch (select("Quem sabe da prÃ³xima vez:Claro, eu gostaria de trabalhar para vocÃªs.")) {
+   switch (select("Quem sabe da próxima vez:Claro, eu gostaria de trabalhar para vocês.")) {
    case 1:
     mes "[Ditze]";
-    mes "Bem, EstÃ¡ certo.";
+    mes "Bem, Está certo.";
     mes "Mas venha falar comigo";
-    mes "assim que vocÃª se decidir";
+    mes "assim que você se decidir";
     mes "se deseja nos ajudar com";
-    mes "a reconstruÃ§Ã£o da torre";
+    mes "a reconstrução da torre";
     mes "trabalhando para a Rekenber.";
     close;
    case 2:
     mes "[Ditze]";
-    mes "Isso Ã© Ã³timo!";
-    mes "VocÃª poderia, por favor, preencher";
-    mes "este formulÃ¡rio de";
-    mes "contrataÃ§Ã£o antes? Vamos";
-    mes "ver. Seu nome Ã©...";
+    mes "Isso é ótimo!";
+    mes "Você poderia, por favor, preencher";
+    mes "este formulário de";
+    mes "contratação antes? Vamos";
+    mes "ver. Seu nome é...";
     mes ""+strcharinfo(0)+", right?";
     next;
     menu "Sim",-;
     mes "[Ditze]";
     mes "Certo, por favor leia";
-    mes "o contrato com muita atenÃ§Ã£o.";
-    mes "Se vocÃª concordar com todas as";
-    mes "condiÃ§Ãµes, vÃ¡ em frente";
+    mes "o contrato com muita atenção.";
+    mes "Se você concordar com todas as";
+    mes "condições, vá em frente";
     mes "e assine embaixo.";
     next;
-    mes "^3355FFDitze lhe entregarÃ¡";
-    mes "o Contrato TemporÃ¡rio";
-    mes "para vocÃª dar uma lida.^000000";
+    mes "^3355FFDitze lhe entregará";
+    mes "o Contrato Temporário";
+    mes "para você dar uma lida.^000000";
     next;
     mes "- Contrato de Trabalho -";
     mes " ";
     mes "1. Este contrato de trabalho";
-    mes "Ã© efetivado entre a CorporaÃ§Ã£o";
-    mes "Rekenber (''Contratadora'') e  "+strcharinfo(0)+"(''FuncinÃ¡rio'').";
+    mes "é efetivado entre a Corporação";
+    mes "Rekenber (''Contratadora'') e  "+strcharinfo(0)+"(''Funcinário'').";
     mes "1-1. Este contrato de trabalho";
-    mes "Ã© classificado como uma Troca";
+    mes "é classificado como uma Troca";
     mes "de Interesses entre os dois lados.";
     mes "2. Os termos deste contrato";
     mes "tem efeito imediatamente";
     mes "quando assinado por ambas as partes";
     mes "(Contratador e Empregado).";
     mes "3. Quando o Empregado executa";
-    mes "uma missÃ£o, o resultado da mesma";
-    mes "com um teste fÃ­sico que serÃ¡";
+    mes "uma missão, o resultado da mesma";
+    mes "com um teste físico que será";
     mes "apresentado ao Contratador.";
-    mes "3-1. Por favor, verifique a seÃ§Ã£o";
+    mes "3-1. Por favor, verifique a seção";
     mes "7A para exemplos de testes";
-    mes "de extermÃ­nio de monstros.";
-    mes "3-2. O teste disponibilizado;
-    mes "pelo Contratador serÃ¡ definido e";
+    mes "de extermínio de monstros.";
+    mes "3-2. O teste disponibilizado";
+    mes "pelo Contratador será definido e";
     mes "determinado pelo mesmo.";
-    mes "4. O contratador darÃ¡ recompensas";
-    mes "ao empregado apÃ³s receber";
-    mes "o certificado de extermÃ­nio.";
-    mes "4-1. PossÃ­veis recompensas para";
-    mes "o extermÃ­nio de monstros podem";
+    mes "4. O contratador dará recompensas";
+    mes "ao empregado após receber";
+    mes "o certificado de extermínio.";
+    mes "4-1. Possíveis recompensas para";
+    mes "o extermínio de monstros podem";
     mes "ser uma das listadas abaixo. ";
     mes ".................................................";
     mes ".................................................";
@@ -475,7 +475,7 @@ tha_t01,149,78,4 script Guide 90,{
     mes "13. Os termos deste contrato se";
     mes "aplicam apenas no que envolver a";
     mes "Torre de Thanatos.";
-    mes "14. Empregados receberÃ£o um";
+    mes "14. Empregados receberão um";
     mes "desconto na taxa de entrada";
     mes "para a Torre de Thanatos!";
     mes " ";
@@ -484,79 +484,79 @@ tha_t01,149,78,4 script Guide 90,{
     mes "Assinatura do Contratador_____________";
     mes "Assinatura do Empregado____________";
     next;
-    switch (select("Assinar:NÃ£o assinar")) {
+    switch (select("Assinar:Não assinar")) {
     case 1:
-     mes "^3355FFVocÃª assinou as duas cÃ³pias do";
+     mes "^3355FFVocê assinou as duas cópias do";
      mes "Contrato de Trabalho.^000000";
      next;
      mes "[Ditze]";
-     mes "Obrigado. Agora vocÃª";
-     mes "Ã© um empregado oficial da";
-     mes "CorporaÃ§Ã£o Rekenber! Tudo,";
+     mes "Obrigado. Agora você";
+     mes "é um empregado oficial da";
+     mes "Corporação Rekenber! Tudo,";
      mes "dentro dos limites da torre";
-     mes "obviamente. Este contrato nÃ£o se";
-     mes "aplica a nada que nÃ£o aconteÃ§a na regiÃ£o da torre.";
+     mes "obviamente. Este contrato não se";
+     mes "aplica a nada que não aconteça na região da torre.";
      next;
      mes "[Ditze]";
-     mes "De agora e diante, vocÃª pode falar";
-     mes "com o Guia do 2Âº Andar para";
-     mes "entrar no 3Âº Andar. Se tiver";
-     mes "alguma questÃ£o sobre recompensa de alguma";
-     mes "missÃ£o, por favor, fale com ^3355FFLiei^000000.";
+     mes "De agora e diante, você pode falar";
+     mes "com o Guia do 2º Andar para";
+     mes "entrar no 3º Andar. Se tiver";
+     mes "alguma questão sobre recompensa de alguma";
+     mes "missão, por favor, fale com ^3355FFLiei^000000.";
      next;
      mes "[Ditze]";
-     mes "Se vocÃª quiser obter";
-     mes "mais informaÃ§Ãµes sobre";
+     mes "Se você quiser obter";
+     mes "mais informações sobre";
      mes "seu trabalho, por favor";
-     mes "fale com o Guia do 2Âº Andar.";
+     mes "fale com o Guia do 2º Andar.";
      mes "Obrigado, e bem-vindo";
-     mes "Ã  CorporaÃ§Ã£o Rekenber!";
+     mes "à Corporação Rekenber!";
      set thana_tower,1;
      close;
     case 2:
      mes "[Ditze]";
-     mes "Oh!? Existe uma clÃ¡usula";
-     mes "no contrato com a qual vocÃª";
-     mes "nÃ£o concorda? Humm. Tudo";
-     mes "bem. Mas, se vocÃª mudar";
-     mes "de idÃ©ia, por favor volte";
+     mes "Oh!? Existe uma cláusula";
+     mes "no contrato com a qual você";
+     mes "não concorda? Humm. Tudo";
+     mes "bem. Mas, se você mudar";
+     mes "de idéia, por favor volte";
      mes "e fale comigo. Obrigado!";
      close;
     }
    }
   case 3:
    mes "[Ditze]";
-   mes "Bem, se vocÃª tiver alguma";
-   mes "questÃ£o, fique Ã  vontade para";
-   mes "perguntar para mim. Meu nome Ã©";
+   mes "Bem, se você tiver alguma";
+   mes "questão, fique à vontade para";
+   mes "perguntar para mim. Meu nome é";
    mes "Ditze Lappa. Tenha um bom dia!";
    close;
   }
  }
  mes "[Ditze]";
- mes "Para informaÃ§Ãµes mais detalhadas";
- mes "sobre o extermÃ­nio de monstros,";
- mes "por favor, pergunte ao Guia do 2Âº andar";
+ mes "Para informações mais detalhadas";
+ mes "sobre o extermínio de monstros,";
+ mes "por favor, pergunte ao Guia do 2º andar";
  mes "e ao Guia ao meu lado. Bom,";
- mes "esperamos que vocÃª aproveite sua experiÃªncia trabalhando para a CorporaÃ§Ã£o Rekenber!";
+ mes "esperamos que você aproveite sua experiência trabalhando para a Corporação Rekenber!";
  close;
 }
  
-tha_t01,140,78,4 script Guide#reward 831,{
+tha_t01,140,78,4	script	Guide#reward	831,{
  
- mes "[Liei]";
- if (thana_tower == 0) {
-  mes "Bom dia, meu nome Ã©";
-  mes "Liei Kuniziet do";
-  mes "Departamento de";
-  mes "Recompensas dos Empregados";
-  mes "da Torre de Thanatos.";
+	mes "[Liei]";
+	if (thana_tower == 0) {
+		mes "Bom dia, meu nome é";
+		mes "Liei Kuniziet do";
+		mes "Departamento de";
+		mes "Recompensas dos Empregados";
+		mes "da Torre de Thanatos.";
   next;
   switch (select("Recompensa dos empregados?:Continue com o bom trabalho.")) {
   case 1:
    mes "[Liei]";
-   mes "Atualmente, a CorporaÃ§Ã£o Rekenber";
-   mes "estÃ¡ contratando trabalhadores temporÃ¡rios";
+   mes "Atualmente, a Corporação Rekenber";
+   mes "está contratando trabalhadores temporários";
    mes "para liberar o acesso a todos os andares";
    mes "da Torre de Thanatos. Se quiser";
    mes "se inscrever, por favor pergunte ao";
@@ -564,39 +564,39 @@ tha_t01,140,78,4 script Guide#reward 831,{
    close;
   case 2:
    mes "[Liei]";
-   mes "Obrigada. Espero que vocÃª";
+   mes "Obrigada. Espero que você";
    mes "aproveite sua visita";
    mes "na Torre de Thanatos.";
    close;
   }
  }
- mes "Ah, olÃ¡!";
+ mes "Ah, olá!";
  mes "Em que posso ajudar?";
  next;
  if(select("Recompensa:Nada")==2) {
   mes "[Liei]";
-  mes "Tudo bem, entÃ£o.";
-  mes "Por favor, faÃ§a o seu melhor";
+  mes "Tudo bem, então.";
+  mes "Por favor, faça o seu melhor";
   mes "exterminar os";
   mes "monstros que infestam";
   mes "os andares mais altos da";
   mes "Torre de Thanatos!";
   close; }
  mes "[Liei]";
- mes "Seu nome Ã© "+strcharinfo(0)+", certo?";
+ mes "Seu nome é "+strcharinfo(0)+", certo?";
  mes "Deixe-me checar seus dados";
- mes "de trabalhador temporÃ¡rio...";
- mes "Ah! Aqui estÃ¡. Certo, vocÃª";
+ mes "de trabalhador temporário...";
+ mes "Ah! Aqui está. Certo, você";
  mes "pode, por favor, me contar qual";
- mes "o tipo de item que vocÃª trouxe?";
+ mes "o tipo de item que você trouxe?";
  next;
  setarray .@Items[1],7435,7440,7441,7442;
- set .@i, select("Ornamento Dourado:Pena Vermelha:Pena Azul:Selo AmaldiÃ§oado");
+ set .@i, select("Ornamento Dourado:Pena Vermelha:Pena Azul:Selo Amaldiçoado");
  mes "[Liei]";
  if (!countitem(.@Items[.@i])) {
-  mes "Oh, desculpe, mas vocÃª";
-  mes "nÃ£o tem nenhum "+getitemname(.@Items[.@i])+"s.";
-  mes "Por favor, verifique o seu inventÃ¡rio";
+  mes "Oh, desculpe, mas você";
+  mes "não tem nenhum "+getitemname(.@Items[.@i])+"s.";
+  mes "Por favor, verifique o seu inventário";
   mes "mais uma vez, e depois volte";
   mes "a falar comigo para resgatar seus itens";
   mes "e receber a recompensa, tudo bem?";
@@ -611,22 +611,22 @@ tha_t01,140,78,4 script Guide#reward 831,{
  set .@zeny_tt,(countitem(.@Items[.@i]) * 1000);
  set .@exp_tt,(countitem(.@Items[.@i]) * 2000);
  mes "[Liei]";
- mes "Se vocÃª me entregar";
+ mes "Se você me entregar";
  mes countitem(.@Items[.@i])+" "+getitemname(.@Items[.@i])+"s, then";
- mes "vocÃª receberÃ¡ um total de...";
+ mes "você receberá um total de...";
  mes " ";
  mes ""+.@zeny_tt+" zeny";
  mes ""+.@exp_tt+" EXP";
  next;
  mes "[Liei]";
- mes "VocÃª gostaria de trocar";
+ mes "Você gostaria de trocar";
  mes "todo os seus "+getitemname(.@Items[.@i])+"s";
  mes "pela sua recompensa agora?";
  next;
- switch(select("Sim:NÃ£o")) {
+ switch(select("Sim:Não")) {
   case 1:
    mes "[Liei]";
-   mes "Ã“timo! Aqui estÃ£o seus";
+   mes "Ótimo! Aqui estão seus";
    mes ""+.@zeny_tt+" zeny and";
    mes ""+.@exp_tt+" EXP. Obrigado,";
    mes "e por favor, continue";
@@ -646,21 +646,21 @@ tha_t01,140,78,4 script Guide#reward 831,{
  }
 }
  
-tha_t02,231,161,5 script Entrance Guide 874,{
+tha_t02,231,161,5	script	Entrance Guide	874,{
  
  mes "[Burled]";
  if (thana_tower == 0) {
-  mes "VocÃª estÃ¡ frente Ã  entrada para o 3Âº Andar. Apenas empregados";
-  mes "contratados estÃ£o autorizados";
-  mes "a entrar nesta Ã¡rea. Para informaÃ§Ãµes sobre contrato com a CorporaÃ§Ã£o Rekenber, por favor";
-  mes "fale com o Guia do 2Âº Andar.";
+  mes "Você está frente à entrada para o 3º Andar. Apenas empregados";
+  mes "contratados estão autorizados";
+  mes "a entrar nesta área. Para informações sobre contrato com a Corporação Rekenber, por favor";
+  mes "fale com o Guia do 2º Andar.";
   close;
  }
  mes "......";
  mes ".........";
  mes "............";
  next;
- switch (select("Com licenÃ§a...:.........")) {
+ switch (select("Com licença...:.........")) {
  case 1:
   mes "[Burled]";
   mes "Oh...";
@@ -668,211 +668,211 @@ tha_t02,231,161,5 script Entrance Guide 874,{
   mes "posso lhe ajudar?";
   next;
   if (thana_tower < 2) {
-   switch (select("Entrar no 3Âº Andar:PortÃ£o de InformaÃ§Ãµes")) {
+   switch (select("Entrar no 3º Andar:Portão de Informações")) {
    case 1:
     mes "[Burled]";
     mes "Ah, certo. Deixe-me checar";
-    mes "se vocÃª estÃ¡ na nossa";
+    mes "se você está na nossa";
     mes "lista de empregados. Hummm...";
-    mes "Ah, seu nome Ã© "+strcharinfo(0)+", right?";
+    mes "Ah, seu nome é "+strcharinfo(0)+", right?";
     next;
     if (getareausers("tha_t02",226,156,236,166) < 5) {
      mes "[Burled]";
      mes "Primeiro, precisamos esperar pelo menos";
      mes "5 empregados se reunirem aqui";
      mes "para formar um grupo de trabalho. Certo";
-     mes "atÃ© o momento temos um total de";
+     mes "até o momento temos um total de";
      mes "" +getareausers("tha_t02",226,156,236,166)+ " empregados esperando";
-     mes "para entrar no 3Âº Andar.";
+     mes "para entrar no 3º Andar.";
      next;
      mes "[Burled]";
-     mes "Se vocÃª puder, junte";
+     mes "Se você puder, junte";
      mes "seus amigos perto de mim";
      mes "para eles te ajudarem. Por favor";
      mes "entenda que precisamos esperar";
      mes "que se formem estes grupos de trabalho para";
-     mes "preencher diversas regras de seguranÃ§a.";
+     mes "preencher diversas regras de segurança.";
      close2;
     }
     mes "[Burled]";
-    mes "Ã“timo, vocÃª chegou";
+    mes "Ótimo, você chegou";
     mes "bem na hora. Acabo de atingir";
-    mes "o mÃ­nimo de 5 empregados";
-    mes "para formar um grupo, entÃ£o vou abrir";
-    mes "os portÃµes para o 3Âº Andar em diante.";
+    mes "o mínimo de 5 empregados";
+    mes "para formar um grupo, então vou abrir";
+    mes "os portões para o 3º Andar em diante.";
     next;
     mes "[Burled]";
-    mes "Os portÃµes para o 3Âº Andar";
-    mes "se fecharÃ£o em breve, entre";
-    mes "o mais rÃ¡pido que puder. NÃ³s temos que";
-    mes "fechÃ¡-los rÃ¡pido por causa";
-    mes "dos monstros, eles nÃ£o podem invadir";
-    mes "os 1Âº e 2Âº andares...";
+    mes "Os portões para o 3º Andar";
+    mes "se fecharão em breve, entre";
+    mes "o mais rápido que puder. Nós temos que";
+    mes "fechá-los rápido por causa";
+    mes "dos monstros, eles não podem invadir";
+    mes "os 1º e 2º andares...";
     close2;
     donpcevent "3rdf_warp#tt::OnEnable";
     end;
    case 2:
     mes "[Burled]";
-    mes "Este portÃ£o Ã© a Ãºnica passagem";
-    mes "que nos conecta ao 3Âº andar.";
-    mes "Depois do 4Âº andar, as passagens";
-    mes "entre os andares Ã© de apenas uma";
-    mes "direÃ§Ã£o, ou seja, vocÃª nÃ£o poderÃ¡ sair pelo";
+    mes "Este portão é a única passagem";
+    mes "que nos conecta ao 3º andar.";
+    mes "Depois do 4º andar, as passagens";
+    mes "entre os andares é de apenas uma";
+    mes "direção, ou seja, você não poderá sair pelo";
     mes "mesmo caminho que entrou.";
     next;
     mes "[Burled]";
-    mes "VocÃª pode perceber que existe uma energia";
-    mes "estranha que afeta do 5Âº";
+    mes "Você pode perceber que existe uma energia";
+    mes "estranha que afeta do 5º";
     mes "andar em diante e,";
-    mes "que nÃ£o permite que as pessoas";
+    mes "que não permite que as pessoas";
     mes "voltem pela passagem pela qual entraram.";
     next;
     mes "[Burled]";
-    mes "Se vocÃª passar do";
-    mes "4Âº Andar, tenha cuidado";
+    mes "Se você passar do";
+    mes "4º Andar, tenha cuidado";
     mes "e tenha certeza de que vai achar";
-    mes "o caminho de volta. AlÃ©m disso os";
-    mes "monstros sÃ£o cada vez";
-    mes "mais fortes conforme vocÃª vai subindo a torre...";
+    mes "o caminho de volta. Além disso os";
+    mes "monstros são cada vez";
+    mes "mais fortes conforme você vai subindo a torre...";
     next;
     mes "[Burled]";
     mes "Por motivo dos andares mais altos";
-    mes "serem muito perigosos, nÃ³s apenas";
-    mes "abrimos os portÃµes para o 3Âº Andar quando";
+    mes "serem muito perigosos, nós apenas";
+    mes "abrimos os portões para o 3º Andar quando";
     mes "juntamos 5 empregados aqui. Portanto,";
-    mes "vocÃª precisa esperar se";
-    mes "nÃ£o houver nÃºmero suficiente de empregados.";
+    mes "você precisa esperar se";
+    mes "não houver número suficiente de empregados.";
     close;
    }
   }
-  switch (select("Entrar no 3Âº Andar:PortÃ£o de InformaÃ§Ãµes:Sobre Satan Morroc...")) {
+  switch (select("Entrar no 3º Andar:Portão de Informações:Sobre Satan Morroc...")) {
   case 1:
    mes "[Burled]";
    mes "Ah, certo. Deixe-me checar";
-   mes "se vocÃª estÃ¡ na nossa";
+   mes "se você está na nossa";
    mes "lista de empregados. Hummm...";
-   mes "Ah, seu nome Ã© "+strcharinfo(0)+", right?";
+   mes "Ah, seu nome é "+strcharinfo(0)+", right?";
    next;
    if (getareausers("tha_t02",226,156,236,166) < 5) {
     mes "[Burled]";
     mes "Primeiro, precisamos esperar pelo menos";
     mes "5 empregados se reunirem aqui";
     mes "para formar um grupo de trabalho. Certo";
-    mes "atÃ© o momento temos um total de";
+    mes "até o momento temos um total de";
     mes ""+getareausers("tha_t02",226,156,236,166)+" empregados esperando";
-    mes "para entrar no 3Âº Andar.";
+    mes "para entrar no 3º Andar.";
     next;
     mes "[Burled]";
-    mes "Se vocÃª puder, junte";
+    mes "Se você puder, junte";
     mes "seus amigos perto de mim";
     mes "para eles te ajudarem. Por favor";
     mes "entenda que precisamos esperar";
     mes "que se formem estes grupos de trabalho para";
-    mes "preencher diversas regras de seguranÃ§a.";
+    mes "preencher diversas regras de segurança.";
     close;
    }
    mes "[Burled]";
-   mes "Ã“timo, vocÃª chegou";
+   mes "Ótimo, você chegou";
    mes "bem na hora. Acabo de atingir";
-   mes "o mÃ­nimo de 5 empregados";
-   mes "para formar um grupo, entÃ£o vou abrir";
-   mes "os portÃµes para o 3Âº Andar em diante.";
+   mes "o mínimo de 5 empregados";
+   mes "para formar um grupo, então vou abrir";
+   mes "os portões para o 3º Andar em diante.";
    next;
    mes "[Burled]";
-   mes "Os portÃµes para o 3Âº Andar";
-   mes "se fecharÃ£o em breve, entre";
-   mes "o mais rÃ¡pido que puder. NÃ³s temos que";
-   mes "fechÃ¡-los rÃ¡pido por causa";
-   mes "dos monstros, eles nÃ£o podem invadir";
-   mes "os 1Âº e 2Âº andares...";
+   mes "Os portões para o 3º Andar";
+   mes "se fecharão em breve, entre";
+   mes "o mais rápido que puder. Nós temos que";
+   mes "fechá-los rápido por causa";
+   mes "dos monstros, eles não podem invadir";
+   mes "os 1º e 2º andares...";
    close2;
    donpcevent "3rdf_warp#tt::OnEnable";
    end;
   case 2:
    mes "[Burled]";
-   mes "Este portÃ£o Ã© a Ãºnica passagem";
-   mes "que nos conecta ao 3Âº andar.";
-   mes "Depois do 4Âº andar, as passagens";
-   mes "entre os andares Ã© de apenas uma";
-   mes "direÃ§Ã£o, ou seja, vocÃª nÃ£o poderÃ¡ sair pelo";
+   mes "Este portão é a única passagem";
+   mes "que nos conecta ao 3º andar.";
+   mes "Depois do 4º andar, as passagens";
+   mes "entre os andares é de apenas uma";
+   mes "direção, ou seja, você não poderá sair pelo";
    mes "mesmo caminho que entrou.";
    next;
    mes "[Burled]";
-   mes "VocÃª pode perceber que existe uma energia";
-   mes "estranha que afeta do 5Âº";
+   mes "Você pode perceber que existe uma energia";
+   mes "estranha que afeta do 5º";
    mes "andar em diante e,";
-   mes "que nÃ£o permite que as pessoas";
+   mes "que não permite que as pessoas";
    mes "voltem pela passagem pela qual entraram.";
    next;
    mes "[Burled]";
-   mes "Se vocÃª passar do";
-   mes "4Âº Andar, tenha cuidado";
+   mes "Se você passar do";
+   mes "4º Andar, tenha cuidado";
    mes "e tenha certeza de que vai achar";
-   mes "o caminho de volta. AlÃ©m disso os";
-   mes "monstros sÃ£o cada vez";
-   mes "mais fortes conforme vocÃª vai subindo a torre...";
+   mes "o caminho de volta. Além disso os";
+   mes "monstros são cada vez";
+   mes "mais fortes conforme você vai subindo a torre...";
    next;
    mes "[Burled]";
    mes "Por motivo dos andares mais altos";
-   mes "serem muito perigosos, nÃ³s apenas";
-   mes "abrimos os portÃµes para o 3Âº Andar quando";
+   mes "serem muito perigosos, nós apenas";
+   mes "abrimos os portões para o 3º Andar quando";
    mes "juntamos 5 empregados aqui. Portanto,";
-   mes "vocÃª precisa esperar se";
-   mes "nÃ£o houver nÃºmero suficiente de empregados.";
+   mes "você precisa esperar se";
+   mes "não houver número suficiente de empregados.";
    close;
   case 3:
    mes "[Burled]";
    mes "Satan Morroc...?";
-   mes "Humm.... VocÃª nÃ£o estÃ¡ falando";
+   mes "Humm.... Você não está falando";
    mes "sobre aquele pequeno tabu?";
    mes "Digo, as pessoas ficam nervosas ou";
-   mes "com medo sÃ³ de ouvir";
-   mes "este nome, vocÃª sabia?";
+   mes "com medo só de ouvir";
+   mes "este nome, você sabia?";
    next;
-   switch (select("Ã‰ importante saber mais.:Desculpe-me, eu nÃ£o sei...")) {
+   switch (select("É importante saber mais.:Desculpe-me, eu não sei...")) {
    case 1:
     mes "[Burled]";
-    mes "Quando a CorporaÃ§Ã£o Rekenber";
-    mes "comeÃ§ou a reconstruÃ§Ã£o da";
-    mes "Torre de Thanatos, a CorporaÃ§Ã£o";
-    mes "Eventos IncrÃ­veis era a maior";
-    mes "nos negÃ³cios relacionados ao";
-    mes "projeto de reconstruÃ§Ã£o da torre.";
+    mes "Quando a Corporação Rekenber";
+    mes "começou a reconstrução da";
+    mes "Torre de Thanatos, a Corporação";
+    mes "Eventos Incríveis era a maior";
+    mes "nos negócios relacionados ao";
+    mes "projeto de reconstrução da torre.";
     next;
     mes "[Burled]";
-    mes "Sim, eu lembro que a CorporaÃ§Ã£o";
-    mes "Eventos IncrÃ­veis investiu uma";
-    mes "grande quantidade de zenys e mÃ£o de obra";
+    mes "Sim, eu lembro que a Corporação";
+    mes "Eventos Incríveis investiu uma";
+    mes "grande quantidade de zenys e mão de obra";
     mes "para reconstruir aquela torre, e expandir";
-    mes "suas relaÃ§Ãµes de negÃ³cios";
-    mes "com a CorporaÃ§Ã£o Rekenber...";
+    mes "suas relações de negócios";
+    mes "com a Corporação Rekenber...";
     next;
     mes "[Burled]";
-    mes "Mas entÃ£o houve um";
+    mes "Mas então houve um";
     mes "tipo de acidente. Aconteceu uma";
-    mes "explosÃ£o nos andares de cima";
+    mes "explosão nos andares de cima";
     mes "da Torre de Thanatos. Alguns dizem";
-    mes "que deve ter sido Satan Morroc, mas eu nÃ£o sei ao certo.";
+    mes "que deve ter sido Satan Morroc, mas eu não sei ao certo.";
     next;
     mes "[Burled]";
-    mes "Por causa dessa explosÃ£o,";
-    mes "a CorporaÃ§Ã£o Eventos IncrÃ­veis parou";
+    mes "Por causa dessa explosão,";
+    mes "a Corporação Eventos Incríveis parou";
     mes "com todos seus investimentos na torre";
-    mes "assim como o seu projeto de reconstruÃ§Ã£o. Eles";
-    mes "basicamente abandonaram a CorporaÃ§Ã£o Rekenber em relaÃ§Ã£o Ã  torre.";
+    mes "assim como o seu projeto de reconstrução. Eles";
+    mes "basicamente abandonaram a Corporação Rekenber em relação à torre.";
     next;
     mes "[Burled]";
     mes "Mas enfim...";
     mes "Logo depois desse aconteciment,";
-    mes "a CorporaÃ§Ã£o Rekenber tomou o comando";
-    mes "da CorporaÃ§Ã£o Eventos IncrÃ­veis. Quero dizer,";
-    mes "ela continua com o nome, mas faz parte da CorporaÃ§Ã£o Rekenber agora.";
+    mes "a Corporação Rekenber tomou o comando";
+    mes "da Corporação Eventos Incríveis. Quero dizer,";
+    mes "ela continua com o nome, mas faz parte da Corporação Rekenber agora.";
     next;
     mes "[Burled]";
     mes "Eu sei, eu sei...";
     mes "Tudo isso soa muito";
-    mes "sombrio. Por favor, faÃ§a-me um favor";
-    mes "e nÃ£o conte a mais ninguÃ©m";
+    mes "sombrio. Por favor, faça-me um favor";
+    mes "e não conte a mais ninguém";
     mes "que eu lhe contei estes rumores, ok?";
     close;
    case 2:
@@ -886,7 +886,7 @@ tha_t02,231,161,5 script Entrance Guide 874,{
  }
 }
  
-tha_t02,227,163,0 script 3rdf_warp#tt 45,1,1,{
+tha_t02,227,163,0	script	3rdf_warp#tt	45,1,1,{
  end;
  
 OnInit:
@@ -909,126 +909,126 @@ OnTimer30000:
  end;
 }
  
-tha_t03,67,70,0 script Machine Device#tt1 111,{
+tha_t03,67,70,0	script	Machine Device#tt1	111,{
  
  if ((countitem(7421) == 0) && (countitem(7426) == 0)) {
   mes "^3355FFUm misterioso campo de";
   mes "energia parece cercar";
   mes "este mecanismo";
   mes "impedindo que";
-  mes "vocÃª se aproxime dele.^000000";
+  mes "você se aproxime dele.^000000";
   next;
   switch (select("Quebrar o Campo de Energia:Recuar")) {
   case 1:
    if (getequipweaponlv(4) == 4){
     mes "^3355FFUsando "+getequipname(4)+" em";
-    mes "mÃ£os, vocÃª destrÃ³i o campo";
-    mes "de energia com toda sua forÃ§a. Depois de absorver o impacto, o";
+    mes "mãos, você destrói o campo";
+    mes "de energia com toda sua força. Depois de absorver o impacto, o";
     mes "campo desaparece com um simples,";
     mes "som de ''pzzzzzh'' sound.^000000";
     next;
     switch (select("Investigar o Mecanismo:Recuar")) {
     case 1:
-     mes "^3355FFEnquanto vocÃª investiga o";
-     mes "mecanismo, vocÃª acidentalmente";
-     mes "pressiona um botÃ£o, resultando";
+     mes "^3355FFEnquanto você investiga o";
+     mes "mecanismo, você acidentalmente";
+     mes "pressiona um botão, resultando";
      mes "em um longo bipe";
-     mes "e na ativaÃ§Ã£o";
+     mes "e na ativação";
      mes "da tela do monitor.^000000";
      next;
      switch (select("Ler a tela:Ignorar a tela")) {
      case 1:
       mes "^426F42Eu usei uma tecnologia";
-      mes "para selar o portÃ£o";
+      mes "para selar o portão";
       mes "e as pedras encantadas. Embora";
       mes "os selos estejam nos seus devidos lugares, eu";
-      mes "nÃ£o consigo parar de me preocupar se";
-      mes "eles vÃ£o se quebrar no futuro.^000000";
+      mes "não consigo parar de me preocupar se";
+      mes "eles vão se quebrar no futuro.^000000";
       next;
-      mes "^426F42NÃ£o posso descansar enquanto, digamos";
+      mes "^426F42Não posso descansar enquanto, digamos";
       mes "um certo grupo desejar as";
       mes "pedras e puder facilmente";
       mes "quebrar o selo. Para deter esse grupo,";
-      mes "eu mudei o destino do portÃ£o apÃ³s tÃª-lo selado.^000000";
+      mes "eu mudei o destino do portão após tê-lo selado.^000000";
       next;
-      mes "^426F42Eu nÃ£o chequei as";
+      mes "^426F42Eu não chequei as";
       mes "coordenadas exatas";
-      mes "para Ã s quais mudei o destino do portÃ£o,";
-      mes "mas seja lÃ¡ quais forem";
-      mes "me dÃ¡ uma sensaÃ§Ã£o boa e reconfortante,";
-      mes "entÃ£o, definitivamente nÃ£o Ã© o inferno.^000000";
+      mes "para às quais mudei o destino do portão,";
+      mes "mas seja lá quais forem";
+      mes "me dá uma sensação boa e reconfortante,";
+      mes "então, definitivamente não é o inferno.^000000";
       next;
-      mes "^3355FFVocÃª leu todo";
+      mes "^3355FFVocê leu todo";
       mes "o texto mostrado na";
       mes "tela. Julgando pelo";
-      mes "conteÃºdo, provavelmente existe";
+      mes "conteúdo, provavelmente existe";
       mes "mais texto escrito antes e depois";
       mes "do que foi mostrado.^000000";
       next;
-      switch (select("Investigar melhor o mecanismo:Finalizar a investigaÃ§Ã£o")) {
+      switch (select("Investigar melhor o mecanismo:Finalizar a investigação")) {
       case 1:
-       mes "^3355FFVocÃª achou";
+       mes "^3355FFVocê achou";
        mes "uma pequena chave no";
        mes "canto do mecanismo.";
-       mes "SÃ³ de tocar nesta chave";
-       mes "jÃ¡ lhe dÃ¡ uma estranha sensaÃ§Ã£o.^000000";
+       mes "Só de tocar nesta chave";
+       mes "já lhe dá uma estranha sensação.^000000";
        getitem 7421,1; //Key_Red
        close;
       case 2:
        close;
       }
      case 2:
-      mes "^3355FFVocÃª decide ignorar";
+      mes "^3355FFVocê decide ignorar";
       mes "o texto mostrado na tela,";
       mes "e imediatamente repara";
       mes "numa pequena chave no canto";
-      mes "do mecanismo. SÃ³ de tocar";
-      mes "na chave jÃ¡ lhe dÃ¡ uma estranha sensaÃ§Ã£o.^000000";
+      mes "do mecanismo. Só de tocar";
+      mes "na chave já lhe dá uma estranha sensação.^000000";
       getitem 7421,1; //Key_Red
       close;
      }
     case 2:
-     mes "^3355FFVocÃª decide deixar";
+     mes "^3355FFVocê decide deixar";
      mes "o mecanismo de lado.^000000";
      close;
     }
    }
-   mes "^3355FFVocÃª atingiu o campo";
+   mes "^3355FFVocê atingiu o campo";
    mes "de energia com sua arma";
-   mes "usando toda sua forÃ§a,";
-   mes "mas vocÃª nÃ£o conseguiu";
+   mes "usando toda sua força,";
+   mes "mas você não conseguiu";
    mes "quebrar a barreira.";
-   mes "VocÃª provavelmente irÃ¡ precisar de";
+   mes "Você provavelmente irá precisar de";
    mes "uma arma mais poderosa...^000000";
    close;
   case 2:
-   mes "^3355FFVocÃª decide deixar";
+   mes "^3355FFVocê decide deixar";
    mes "o mecanismo de lado.^000000";
    close;
   }
  }
- mes "^3355FFÃ‰ uma mÃ¡quina estranha";
+ mes "^3355FFÉ uma máquina estranha";
  mes "que emite um zunido";
  mes "estranho. Olhando mais de perto,";
- mes "vocÃª percebe uma";
+ mes "você percebe uma";
  mes "barreira de energia em volta";
  mes "do mecanismo.^000000";
  close;
 }
  
-tha_t04,195,195,0 script Machine Device#tt2 111,{
+tha_t04,195,195,0	script	Machine Device#tt2	111,{
  
  if ((countitem(7422) == 0) && (countitem(7427) == 0)) {
-  mes "^3355FFFFVocÃª encontrou um teclado numÃ©rico";
+  mes "^3355FFFFVocê encontrou um teclado numérico";
   mes "abaixo do monitor.";
-  mes "Assim que vocÃª aperta uma";
-  mes "das teclas, vocÃª ouve";
-  mes "um bipe e vÃª o monitor ativar.^000000";
+  mes "Assim que você aperta uma";
+  mes "das teclas, você ouve";
+  mes "um bipe e vê o monitor ativar.^000000";
   next;
   mes "[Tela]";
-  mes "Por favor, digite um nÃºmero";
-  mes "de 3 dÃ­gitos. NÃ£o digite";
-  mes "o mesmo dÃ­gito mais de uma";
+  mes "Por favor, digite um número";
+  mes "de 3 dígitos. Não digite";
+  mes "o mesmo dígito mais de uma";
   mes "vez nem use o 0.";
   set @retry,0;
   next;
@@ -1047,11 +1047,11 @@ L_Retry:
     input @input;
     if (@input < 100 || @input > 999) {
      mes "[Tela]";
-     mes "O nÃºmero digitado";
-     mes "nÃ£o preenche";
-     mes "os requisitos necessÃ¡rios.";
+     mes "O número digitado";
+     mes "não preenche";
+     mes "os requisitos necessários.";
      mes "Por favor digite um";
-     mes "nÃºmero de 3 dÃ­gitos.";
+     mes "número de 3 dígitos.";
      close;
     }
     set @input100,@input / 100;
@@ -1061,17 +1061,17 @@ L_Retry:
       break;
      }
      mes "[Tela]";
-     mes "ViolaÃ§Ã£o do";
-     mes "padrÃ£o numÃ©rico";
-     mes "nÃºmero 0 foi usado,";
-     mes "ou um mesmo nÃºmero foi";
+     mes "Violação do";
+     mes "padrão numérico";
+     mes "número 0 foi usado,";
+     mes "ou um mesmo número foi";
      mes "usado mais de uma vez.";
      next;
     }
    }
    set @retry,@retry+1;
    mes "[Tela]";
-   mes "VocÃª digitou o nÃºmero...";
+   mes "Você digitou o número...";
    mes "^0000ff"+@input100+"^000000, ^0000ff"+@input10+"^000000, ^0000ff"+(@input % 10)+"^000000";
    mes " ";
    mes "Calculando resultado...";
@@ -1087,51 +1087,51 @@ L_Retry:
    if ((@yagu1 == @input100) || (@yagu1 == @input10)) set @ball,@ball+1;
    if (@strike == 3) {
     mes "[Tela]";
-    mes "CÃ³digo aceito.";
+    mes "Código aceito.";
     mes "Acesso autorizado.";
     next;
     mes "^3355FFDepois que a tela mostrar";
-    mes "a autorizaÃ§Ã£o de acesso";
-    mes "outras informaÃ§Ãµes";
-    mes "serÃ£o mostradas na tela,";
+    mes "a autorização de acesso";
+    mes "outras informações";
+    mes "serão mostradas na tela,";
     mes "e uma unidade de armazenamento";
-    mes "irÃ¡ abrir embaixo do monitor.^000000";
+    mes "irá abrir embaixo do monitor.^000000";
     next;
-    switch (select("Ler o texto na tela:Investigar o espaÃ§o de armazenagem:Cancelar")) {
+    switch (select("Ler o texto na tela:Investigar o espaço de armazenagem:Cancelar")) {
     case 1:
      mes "[Entrada de Log]";
      mes "^426F42Isso apenas poderia dizer que ela";
      mes "veio aqui pelo Satan Morroc.";
-     mes "Depois que eu investiguei a Ã¡rea,";
+     mes "Depois que eu investiguei a área,";
      mes "encontrei rastros de batalha";
-     mes "envolvendo vÃ¡rias criaturas com o tamanho de um humano, e uma outra, gigante.^000000";
+     mes "envolvendo várias criaturas com o tamanho de um humano, e uma outra, gigante.^000000";
      next;
      mes "[Entrada de Log]";
      mes "^426F42Eu acredito que o grupo dela";
      mes "lutou contra o Satan Morroc";
-     mes "e conseguiu ferÃ­-lo";
+     mes "e conseguiu ferí-lo";
      mes "gravemente. Parece que o Satan";
      mes "Morroc recuou para o sul";
      mes "e o grupo o seguiu.^000000";
      next;
      mes "[Entrada de Log]";
-     mes "^426F42Estranhamente, eu nÃ£o notei";
-     mes "nenhum rastro dela, o que Ã©";
+     mes "^426F42Estranhamente, eu não notei";
+     mes "nenhum rastro dela, o que é";
      mes "realmente suspeito a partir do momento que";
-     mes "outras evidÃªncias permaneceram";
-     mes "lÃ¡ por centenas de anos.";
-     mes "Mas nÃ£o sei dizer o porquÃª...^000000";
+     mes "outras evidências permaneceram";
+     mes "lá por centenas de anos.";
+     mes "Mas não sei dizer o porquê...^000000";
      next;
-     mes "^3355FFVocÃª terminou";
+     mes "^3355FFVocê terminou";
      mes "de ler os arquivos da Entrada de Log.^000000";
      next;
-     switch (select("Investigar o espaÃ§o de armazenagem:Cancelar")) {
+     switch (select("Investigar o espaço de armazenagem:Cancelar")) {
      case 1:
-      mes "^3355FFVocÃª encontrou uma pequena e brilhante";
+      mes "^3355FFVocê encontrou uma pequena e brilhante";
       mes "chave em um canto vazio do";
-      mes "gabinete do EspaÃ§o de Armazenagem.";
-      mes "SÃ³ de segurar a chave";
-      mes "vocÃª sente uma sensaÃ§Ã£o estranha.^000000";
+      mes "gabinete do Espaço de Armazenagem.";
+      mes "Só de segurar a chave";
+      mes "você sente uma sensação estranha.^000000";
       if (thana_tower == 1) set thana_tower,2;
       getitem 7422,1; //Key_Yellow
       close;
@@ -1139,18 +1139,18 @@ L_Retry:
       close;
      }
     case 2:
-     mes "^3355FFVocÃª encontrou uma pequena e brilhante";
+     mes "^3355FFVocê encontrou uma pequena e brilhante";
      mes "chave em um canto vazio do";
-     mes "gabinete do EspaÃ§o de Armazenagem.";
-     mes "SÃ³ de segurar a chave";
-     mes "vocÃª sente uma sensaÃ§Ã£o estranha.^000000";
+     mes "gabinete do Espaço de Armazenagem.";
+     mes "Só de segurar a chave";
+     mes "você sente uma sensação estranha.^000000";
      getitem 7422,1; //Key_Yellow
      close;
     case 3:
      mes "^3355FFDepois de algum tempo,";
-     mes "vocÃª ouve um bipe";
+     mes "você ouve um bipe";
      mes "bem baixo. O texto na tela";
-     mes "desaparece, e o espaÃ§o de";
+     mes "desaparece, e o espaço de";
      mes "armazenagem embaixo do gabinete do monitor";
      mes "se fecha.^000000";
      close;
@@ -1159,109 +1159,109 @@ L_Retry:
    if ((@retry > 0) && (@retry < 5)) {
     mes "[Tela]";
     mes "*Beeeeep*";
-    mes "SequÃªncia";
-    mes "numÃ©rica nÃ£o autorizada.";
+    mes "Sequência";
+    mes "numérica não autorizada.";
     next;
     mes "[Tela]";
-    mes "NÃºmero correto";
+    mes "Número correto";
     mes "no local correto";
-    mes "em uma sequÃªncia total de: ^FF0000"+@strike+"^000000";
+    mes "em uma sequência total de: ^FF0000"+@strike+"^000000";
     mes " ";
-    mes "Total do nÃºmero correto: ^FF0000"+@ball+"^000000";
+    mes "Total do número correto: ^FF0000"+@ball+"^000000";
     goto L_Retry;
    }
    mes "[Tela]";
    mes "*Beeeeep*";
-   mes "SequÃªncia";
-   mes "numÃ©rica nÃ£o autorizada.";
+   mes "Sequência";
+   mes "numérica não autorizada.";
    next;
    mes "[Tela]";
-   mes "NÃºmero correto";
+   mes "Número correto";
    mes "no local correto";
-   mes "em uma sequÃªncia total de: ^FF0000"+@strike+"^000000";
+   mes "em uma sequência total de: ^FF0000"+@strike+"^000000";
    mes " ";
-   mes "Total do nÃºmero correto: ^FF0000"+@ball+"^000000";
+   mes "Total do número correto: ^FF0000"+@ball+"^000000";
    next;
    mes "[Tela]";
-   mes "NÃºmero correto";
+   mes "Número correto";
    mes "no local correto";
-   mes "na sequÃªncia foi...";
+   mes "na sequência foi...";
    mes "^ff0000"+@yagu100+"^000000, ^ff0000"+@yagu10+"^000000, ^ff0000"+@yagu1+"^000000";
-   mes "O nÃºmero de autorizaÃ§Ã£o";
-   mes "vai mudar apÃ³s nova tentativa.";
+   mes "O número de autorização";
+   mes "vai mudar após nova tentativa.";
    close;
   }
  }
- mes "^3355FFEste dispositivo estÃ¡";
+ mes "^3355FFEste dispositivo está";
  mes "inativo ou fora de";
- mes "operaÃ§Ã£o. PorÃ©m, vocÃª";
+ mes "operação. Porém, você";
  mes "pode achar um bom uso para ele mais tarde...^000000";
  close;
 }
  
-tha_t05,101,37,0 script Machine Device#tt3 111,{
+tha_t05,101,37,0	script	Machine Device#tt3	111,{
  
  if ((countitem(7423) == 0) && (countitem(7428) == 0)) {
   if (getareausers("tha_t05",98,34,104,40) < 4) {
-   mes "^3355FFVocÃª Ã© inexplicavelmente atraÃ­do";
+   mes "^3355FFVocê é inexplicavelmente atraído";
    mes "para este mecanismo.";
-   mes "AlÃ©m da tela verde";
-   mes "no meio, nÃ£o hÃ¡";
-   mes "botÃµes nem alavancas.^000000";
+   mes "Além da tela verde";
+   mes "no meio, não há";
+   mes "botões nem alavancas.^000000";
    if (rand(1,3) == 2) {
     next;
-    mes "^3355FFVocÃª percebe um pequeno texto no";
+    mes "^3355FFVocê percebe um pequeno texto no";
     mes "canto inferior da tela verde";
-    mes "onde estÃ¡ escrito: â€œA operaÃ§Ã£o";
-    mes "deste mecanismo requer a presenÃ§a de";
+    mes "onde está escrito: “A operação";
+    mes "deste mecanismo requer a presença de";
     mes "quatro ou mais pessoas detectadas";
     mes "pelo sistema.''^000000";
     close;
    }
    close;
   }
-  mes "^3355FFQuando vocÃª se aproxima do dispositivo, o";
-  mes "chÃ£o comeÃ§a a brilhar.";
+  mes "^3355FFQuando você se aproxima do dispositivo, o";
+  mes "chão começa a brilhar.";
   mes "Um texto aparece na tela do";
   mes "dispositivo e um recipiente de armazenagem se abre abaixo do monitor.^000000";
   next;
-  switch (select("Ler o texto da tela:Investigar o espaÃ§o de armazenagem:Cancelar")) {
+  switch (select("Ler o texto da tela:Investigar o espaço de armazenagem:Cancelar")) {
   case 1:
    mes "[Entrada de Log]";
    mes "^426F42Depois da tentativa,";
    mes "eu decido partir. Mas";
    mes "antes que eu pudesse fazer isso,";
-   mes "preciso selar o portÃ£o";
-   mes "que levava Ã quele lugar.^000000";
+   mes "preciso selar o portão";
+   mes "que levava àquele lugar.^000000";
    next;
    mes "[Entrada de Log]";
-   mes "^426F42Se alguÃ©m viesse procurar";
-   mes "esta torre e usasse o portÃ£o";
-   mes "para algum fim malÃ©fico, o mundo seria amaldiÃ§oado com o caos.";
-   mes "Claro que eles teriam me parado se soubessem que eu estava selando o portÃ£o...^000000";
+   mes "^426F42Se alguém viesse procurar";
+   mes "esta torre e usasse o portão";
+   mes "para algum fim maléfico, o mundo seria amaldiçoado com o caos.";
+   mes "Claro que eles teriam me parado se soubessem que eu estava selando o portão...^000000";
    next;
    mes "[Entrada de Log]";
    mes "^426F42Levou muito tempo,";
-   mes "mas eu consegui selar o portÃ£o";
+   mes "mas eu consegui selar o portão";
    mes "secretamente. Mas antes";
-   mes "de comeÃ§ar a selar,";
+   mes "de começar a selar,";
    mes "eu decidi examinar melhor";
-   mes "para ter mais seguranÃ§a do que estava fazendo.^000000";
+   mes "para ter mais segurança do que estava fazendo.^000000";
    next;
    mes "[Entrada de Log]";
-   mes "^426F42Em meus estudos sobre o portÃ£o,";
+   mes "^426F42Em meus estudos sobre o portão,";
    mes "eu descobri que seu poder derivava";
    mes "das Pedras";
-   mes "Encantadas. Para prevenir que alguÃ©m";
+   mes "Encantadas. Para prevenir que alguém";
    mes "usasse seus poderes de forma inapropriada, eu selei as pedras separadamente...^000000";
    next;
-   mes "^3355FFVocÃª terminou";
+   mes "^3355FFVocê terminou";
    mes "de ler o texto";
    mes "que foi exibido";
    mes "na tela.^000000";
    close;
   case 2:
-   mes "^3355FFVocÃª encontrou uma pequena";
+   mes "^3355FFVocê encontrou uma pequena";
    mes "e brilhante chave dentro";
    mes "do recipiente de armazenagem";
    mes "abaixo do gabinete do monitor.^000000";
@@ -1271,36 +1271,36 @@ tha_t05,101,37,0 script Machine Device#tt3 111,{
    close;
   }
  }
- mes "^3355FFVocÃª nÃ£o encontrou nada aqui,";
- mes "fora os padrÃµes";
- mes "apagados que marcavam o chÃ£o.^000000";
+ mes "^3355FFVocê não encontrou nada aqui,";
+ mes "fora os padrões";
+ mes "apagados que marcavam o chão.^000000";
  close;
 }
  
-tha_t06,43,152,0 script Machine Devicett4 111,{
+tha_t06,43,152,0	script	Machine Device#tt4	111,{
  
  if ((countitem(7424) == 0) && (countitem(7429) == 0)) {
-  mes "^3355FFVocÃª encontrou um mecanismo";
+  mes "^3355FFVocê encontrou um mecanismo";
   mes "que tem muitas";
   mes "rodas. Uma tela negra";
-  mes "estÃ¡ montada ao lado";
-  mes "da mÃ¡quina.^000000";
+  mes "está montada ao lado";
+  mes "da máquina.^000000";
   next;
   switch (select("Investigar:Cancelar")) {
   case 1:
    if ((countitem(7421) >= 1) || (countitem(7422) >= 1) || (countitem(7423) >= 1)) {
-    mes "^3355FFQuando vocÃª examina as";
-    mes "rodas, vocÃª repara que elas correspondem";
-    mes "Ã  chave que estÃ¡ no seu inventÃ¡rio";
+    mes "^3355FFQuando você examina as";
+    mes "rodas, você repara que elas correspondem";
+    mes "à chave que está no seu inventário";
     mes "emitindo luz e um estranho";
-    mes "ruÃ­do. Depois de algum tempo, eles";
+    mes "ruído. Depois de algum tempo, eles";
     mes "param e fica tudo silencioso.^000000";
     next;
-    switch (select("Investigar o Chassi da MÃ¡quina:Investigar as Rodas:Cancelar")) {
+    switch (select("Investigar o Chassi da Máquina:Investigar as Rodas:Cancelar")) {
     case 1:
-     mes "^3355FFA chave em seu inventÃ¡rio";
-     mes "nÃ£o parece ser afetada";
-     mes "pelo chassi da mÃ¡quina. A";
+     mes "^3355FFA chave em seu inventário";
+     mes "não parece ser afetada";
+     mes "pelo chassi da máquina. A";
      mes "tela montada ao lado";
      mes "continua em branco e desativada.^000000";
      close;
@@ -1310,30 +1310,30 @@ tha_t06,43,152,0 script Machine Devicett4 111,{
      set @big_1,0;
      set @big_2,0;
      set @big_3,0;
-     mes "^3355FFFFVocÃª toca as rodas e";
-     mes "descobre que elas estÃ£o";
-     mes "se movimentando lentamente. VocÃª repara que";
+     mes "^3355FFFFVocê toca as rodas e";
+     mes "descobre que elas estão";
+     mes "se movimentando lentamente. Você repara que";
      mes "existem 2 rodas pequenas";
      mes "e 3 maiores, num total";
-     mes "de 5 rodas, nesta mÃ¡quina.^000000";
+     mes "de 5 rodas, nesta máquina.^000000";
      next;
-     mes "^3355FFAs rodas grandes estÃ£o se movendo";
+     mes "^3355FFAs rodas grandes estão se movendo";
      mes "verticalmente, para cima e para baixo";
      mes "pressionando as menores";
      mes "fazendo com que elas girem.^000000";
      next;
-     mes "^3355FJulgando pelo quanto a mÃ¡quina";
-     mes "estÃ¡ chacoalhando, as";
+     mes "^3355FJulgando pelo quanto a máquina";
+     mes "está chacoalhando, as";
      mes "rodas podem estar desalinhadas.";
-     mes "Talvez vocÃª consiga";
-     mes "fazer a mÃ¡quina funcionar corretamente";
+     mes "Talvez você consiga";
+     mes "fazer a máquina funcionar corretamente";
      mes "alinhando-as.^000000";
      while (1) {
       next;
-      mes "^3355FFQual roda vocÃª gostaria";
+      mes "^3355FFQual roda você gostaria";
       mes "de trocar?^000000";
       next;
-      switch (select("1Âª Roda Pequena:2Âª Roda Pequena:1Âª Roda Grande:2Âª Roda Grande:3Âª Roda Grande:Checar a configuraÃ§Ã£o atual das rodas:Voltar Ã  organizaÃ§Ã£o original das rodas")) {
+      switch (select("1ª Roda Pequena:2ª Roda Pequena:1ª Roda Grande:2ª Roda Grande:3ª Roda Grande:Checar a configuração atual das rodas:Voltar à organização original das rodas")) {
       case 1:
        switch (select("Levantar a Roda:Abaixar a Roda:Pressionar a Roda")) {
        case 1:
@@ -1431,57 +1431,57 @@ tha_t06,43,152,0 script Machine Devicett4 111,{
        break;
       case 6:
        mes "---Wheel Position---";
-       if (@small_1 == 0) mes "1Âº Roda Pequena: Sem mudanÃ§as";
-       else if (@small_1 == 1) mes "1Âº Roda Pequena: Para Baixo";
-       else if (@small_1 == 2) mes "1Âº Roda Pequena: Para Cima";
-       else mes "1Âº Roda Pequena: Pressionada";
+       if (@small_1 == 0) mes "1º Roda Pequena: Sem mudanças";
+       else if (@small_1 == 1) mes "1º Roda Pequena: Para Baixo";
+       else if (@small_1 == 2) mes "1º Roda Pequena: Para Cima";
+       else mes "1º Roda Pequena: Pressionada";
  
-       if (@small_2 == 0) mes "2Âº Roda Pequena: Sem mudanÃ§as";
-       else if (@small_2 == 1) mes "2Âº Roda Pequena: Pressionada";
-       else if (@small_2 == 2) mes "2Âº Roda Pequena: Para Baixo";
-       else mes "2Âº Roda Pequena: Para Cima";
+       if (@small_2 == 0) mes "2º Roda Pequena: Sem mudanças";
+       else if (@small_2 == 1) mes "2º Roda Pequena: Pressionada";
+       else if (@small_2 == 2) mes "2º Roda Pequena: Para Baixo";
+       else mes "2º Roda Pequena: Para Cima";
  
-       if (@big_1 == 0) mes "1Âº Roda Grande: Sem mudanÃ§as";
-       else if (@big_1 == 1) mes "1Âº Roda Grande: Para Cima";
-       else if (@big_1 == 2) mes "1Âº Roda Grande: Movida";
-       else mes "1Âº Roda Grande: Para Baixo";
+       if (@big_1 == 0) mes "1º Roda Grande: Sem mudanças";
+       else if (@big_1 == 1) mes "1º Roda Grande: Para Cima";
+       else if (@big_1 == 2) mes "1º Roda Grande: Movida";
+       else mes "1º Roda Grande: Para Baixo";
  
-       if (@big_2 == 0) mes "2Âº Roda Grande: Sem mudanÃ§as";
-       else if (@big_2 == 1) mes "2Âº Roda Grande: Movida";
-       else if (@big_2 == 2) mes "2Âº Roda Grande: Para Cima";
-       else mes "2Âº Roda Grande: Para Baixo";
+       if (@big_2 == 0) mes "2º Roda Grande: Sem mudanças";
+       else if (@big_2 == 1) mes "2º Roda Grande: Movida";
+       else if (@big_2 == 2) mes "2º Roda Grande: Para Cima";
+       else mes "2º Roda Grande: Para Baixo";
  
-       if (@big_3 == 0) mes "3Âª Roda Grande: Sem mudanÃ§as";
-       else if (@big_3 == 1) mes "3Âª Roda Grande: Para Baixo";
-       else if (@big_3 == 2) mes "3Âª Roda Grande: Para Cima";
-       else mes "3Âª Roda Grande: Movida";
+       if (@big_3 == 0) mes "3ª Roda Grande: Sem mudanças";
+       else if (@big_3 == 1) mes "3ª Roda Grande: Para Baixo";
+       else if (@big_3 == 2) mes "3ª Roda Grande: Para Cima";
+       else mes "3ª Roda Grande: Movida";
  
        next;
        mes "---Som da Roda---";
-       if (@small_1 == 0) mes "1Âª Roda pequena: *Br-brak!*";
-       else if (@small_1 == 1) mes "1Âª Roda pequena: *Sneeeep*";
-       else if (@small_1 == 2) mes "1Âª Roda pequena: *Choom*";
-       else mes "1Âª Roda pequena: *Mrreeem*";
+       if (@small_1 == 0) mes "1ª Roda pequena: *Br-brak!*";
+       else if (@small_1 == 1) mes "1ª Roda pequena: *Sneeeep*";
+       else if (@small_1 == 2) mes "1ª Roda pequena: *Choom*";
+       else mes "1ª Roda pequena: *Mrreeem*";
  
-       if (@small_2 == 0) mes "2Âª Roda pequena: *Br-brak!*";
-       else if (@small_2 == 1) mes "2Âª Roda pequena: *Sneeeep*";
-       else if (@small_2 == 2) mes "2Âª Roda pequena: *Choom*";
-       else mes "2Âª Roda pequena: *Mrreeem*";
+       if (@small_2 == 0) mes "2ª Roda pequena: *Br-brak!*";
+       else if (@small_2 == 1) mes "2ª Roda pequena: *Sneeeep*";
+       else if (@small_2 == 2) mes "2ª Roda pequena: *Choom*";
+       else mes "2ª Roda pequena: *Mrreeem*";
  
-       if (@big_1 == 0) mes "1Âª Roda grande: *Br-brak!*";
-       else if (@big_1 == 1) mes "1Âª Roda grande: *Sneeeep*";
-       else if (@big_1 == 2) mes "1Âª Roda grande: *Choom*";
-       else mes "1Âª Roda grande: *Mrreeem*";
+       if (@big_1 == 0) mes "1ª Roda grande: *Br-brak!*";
+       else if (@big_1 == 1) mes "1ª Roda grande: *Sneeeep*";
+       else if (@big_1 == 2) mes "1ª Roda grande: *Choom*";
+       else mes "1ª Roda grande: *Mrreeem*";
  
-       if (@big_2 == 0) mes "2Âª Roda grande: *Br-brak!*";
-       else if (@big_2 == 1) mes "2Âª Roda grande: *Sneeeep*";
-       else if (@big_2 == 2) mes "2Âª Roda grande: *Choom*";
-       else mes "2Âª Roda grande: *Mrreeem*";
+       if (@big_2 == 0) mes "2ª Roda grande: *Br-brak!*";
+       else if (@big_2 == 1) mes "2ª Roda grande: *Sneeeep*";
+       else if (@big_2 == 2) mes "2ª Roda grande: *Choom*";
+       else mes "2ª Roda grande: *Mrreeem*";
  
-       if (@big_3 == 0) mes "3Âª Roda grande: *Br-brak!*";
-       else if (@big_3 == 1) mes "3Âª Roda grande: *Sneeeep*";
-       else if (@big_3 == 2) mes "3Âª Roda grande: *Choom*";
-       else mes "3Âª Roda grande: *Mrreeem*";
+       if (@big_3 == 0) mes "3ª Roda grande: *Br-brak!*";
+       else if (@big_3 == 1) mes "3ª Roda grande: *Sneeeep*";
+       else if (@big_3 == 2) mes "3ª Roda grande: *Choom*";
+       else mes "3ª Roda grande: *Mrreeem*";
  
        continue;
       case 7:
@@ -1494,36 +1494,36 @@ tha_t06,43,152,0 script Machine Devicett4 111,{
       }
       break;
      }
-     mes "^3355FFQuando vocÃª estÃ¡ ajustando as rodas,";
+     mes "^3355FFQuando você está ajustando as rodas,";
      mes "elas param de repente";
-     mes "com um ruÃ­do seco. EntÃ£o a tela do mecanismo se ativa e mostra";
+     mes "com um ruído seco. Então a tela do mecanismo se ativa e mostra";
      mes "um texto enquanto o compartimento";
      mes "de armazenagem abaixo do";
      mes "monitor se abre.^000000";
      next;
-     switch (select("Ler o texto na tela:Investigar o espaÃ§o de armazenagem:Cancelar")) {
+     switch (select("Ler o texto na tela:Investigar o espaço de armazenagem:Cancelar")) {
      case 1:
       mes "[Entrada de Log]";
-      mes "^426F42NÃ£o foram os humanos";
-      mes "nem os deuses que construÃ­ram esta";
-      mes "torre: foram os demÃ´nios.";
-      mes "Intrigado com esta informaÃ§Ã£o,";
-      mes "eu decidi tentar entender por que eles construÃ­ram a Torre de Thanatos.^000000";
+      mes "^426F42Não foram os humanos";
+      mes "nem os deuses que construíram esta";
+      mes "torre: foram os demônios.";
+      mes "Intrigado com esta informação,";
+      mes "eu decidi tentar entender por que eles construíram a Torre de Thanatos.^000000";
       next;
       mes "[Entrada de Log]";
       mes "^426F42Em minha pesquisa, aprendi";
       mes "que esta torre era usada";
-      mes "como um portal para invocar demÃ´nios do inferno durante anos de guerra,";
+      mes "como um portal para invocar demônios do inferno durante anos de guerra,";
       mes "e o infame Satan Morroc foi um destes invocados aqui.^000000";
       next;
       mes "[Entrada de Log]";
       mes "^426F42Satan Morroc... Eu admito";
       mes "que estou interessado em aprender";
-      mes "mais sobre sua aparÃªncia a partir do";
+      mes "mais sobre sua aparência a partir do";
       mes "momento que ele estava aqui na Torre de Thanatos";
       mes "ao mesmo tempo que ela...^000000";
       next;
-      mes "^3355FFVocÃª terminou";
+      mes "^3355FFVocê terminou";
       mes "de ler o texto";
       mes "que estava na";
       mes "tela do monitor.^000000";
@@ -1531,7 +1531,7 @@ tha_t06,43,152,0 script Machine Devicett4 111,{
      case 2:
       mes "^3355FFDentro do compartimento de";
       mes "armazenagem abaixo do monitor,";
-      mes "vocÃª encontra uma pequena e";
+      mes "você encontra uma pequena e";
       mes "brilhante chave.^000000";
       getitem 7424,1; //Key_Green
       close;
@@ -1547,43 +1547,43 @@ tha_t06,43,152,0 script Machine Devicett4 111,{
    mes "rodas se movendo e brilhando.^000000";
    close;
   case 2:
-   mes "^3355FFVocÃª nÃ£o precisa";
-   mes "investigar se nÃ£o lhe parecer";
+   mes "^3355FFVocê não precisa";
+   mes "investigar se não lhe parecer";
    mes "peculiar ou fora de lugar...^000000";
    close;
   }
  }
- mes "^3355FFVocÃª encontrou um mecanismo";
+ mes "^3355FFVocê encontrou um mecanismo";
  mes "desativado com uma";
- mes "interessante sÃ©rie de rodas.^000000";
+ mes "interessante série de rodas.^000000";
  close;
 }
  
-tha_t09,19,158,0 script Machine Device#tt5 111,{
+tha_t09,19,158,0	script	Machine Device#tt5	111,{
  
  if ((countitem(7425) == 0) && (countitem(7430) == 0)) {
   if (((countitem(7421) >= 1) || (countitem(7426) >= 1)) && ((countitem(7422) >= 1) || (countitem(7427) >= 1)) && ((countitem(7423) >= 1) || (countitem(7428) >= 1)) && ((countitem(7424) >= 1) || (countitem(7429) >= 1))) {
-   mes "^3355FFVocÃª encontra uma mÃ¡quina que";
+   mes "^3355FFVocê encontra uma máquina que";
    mes "emite uma luz suave e um fraco";
-   mes "ruÃ­do. HÃ¡ tambÃ©m um monitor";
+   mes "ruído. Há também um monitor";
    mes "com diferentes e coloridas";
    mes "fechaduras debaixo dele, em";
-   mes "frente Ã  mÃ¡quina.^000000";
+   mes "frente à máquina.^000000";
    next;
-   mes "^3355FFVocÃª tambÃ©m nota que existem ali";
+   mes "^3355FFVocê também nota que existem ali";
    mes "muitas fendas que parecem ser";
    mes "do tamanho perfeito pra";
    mes "suas chaves e Pedras Encantadas.";
    next;
    input .@inputstr$;
    if (.@inputstr$ == "Chave" || .@inputstr$ == "Pedra Encantada") {
-    mes "^3355FFVocÃª coloca as chaves nas";
+    mes "^3355FFVocê coloca as chaves nas";
     mes "fechaduras, combinando-as pela";
     mes "cor correspondente, e coloca";
-    mes "as Pedras Encantadas nas fendas da mÃ¡quina. As pedras comeÃ§am a brilhar,";
-    mes "textos aparecem na tela e o espaÃ§o de armazenagem abaixo do monitor se abre.^000000";
+    mes "as Pedras Encantadas nas fendas da máquina. As pedras começam a brilhar,";
+    mes "textos aparecem na tela e o espaço de armazenagem abaixo do monitor se abre.^000000";
     next;
-    switch (select("Ler o texto na tela:Investigar o espaÃ§o de armazenagem:Cancelar")) {
+    switch (select("Ler o texto na tela:Investigar o espaço de armazenagem:Cancelar")) {
     case 1:
      mes "[Entrada de Log]";
      mes "^426F42Como segui sua trilha para";
@@ -1594,314 +1594,314 @@ tha_t09,19,158,0 script Machine Device#tt5 111,{
      mes "que rejeita a entrada de humanos.^000000";
      next;
      mes "[Entrada de Log]";
-     mes "^426F42InstantÃ¢neamente eu entendi que ela";
+     mes "^426F42Instantâneamente eu entendi que ela";
      mes "devia ter ido para a torre.";
-     mes "Eu segui para lÃ¡ e quando";
-     mes "cheguei, entrei em choque: era grotesco e nÃ£o me lembrava em nada";
-     mes "uma construÃ§Ã£o feita por humanos.^000000";
+     mes "Eu segui para lá e quando";
+     mes "cheguei, entrei em choque: era grotesco e não me lembrava em nada";
+     mes "uma construção feita por humanos.^000000";
      next;
-     mes "^426F42Eu tambÃ©m fiquei surpreso--";
-     mes "pela tecnologia avanÃ§ada que";
-     mes "provavelmente foi necessÃ¡ria para construir a confusa estrutura da torre.";
-     mes "TambÃ©m descobri um fato interessante enquanto estava pesquisando a torre...^000000";
+     mes "^426F42Eu também fiquei surpreso--";
+     mes "pela tecnologia avançada que";
+     mes "provavelmente foi necessária para construir a confusa estrutura da torre.";
+     mes "Também descobri um fato interessante enquanto estava pesquisando a torre...^000000";
      next;
-     mes "^3355FFVocÃª terminou";
+     mes "^3355FFVocê terminou";
      mes "de ler o texto";
      mes "que estava na";
      mes "tela do monitor.^000000";
      close;
     case 2:
-     mes "^3355FFVocÃª pesquisa o compartimento";
+     mes "^3355FFVocê pesquisa o compartimento";
      mes "de armazenagem abaixo da";
      mes "tela e encontra uma chave";
-     mes "estranha. Assim que vocÃª a pega,";
-     mes "a atividade da mÃ¡quina Ã© interrompida.";
-     mes "VocÃª pega suas chaves";
+     mes "estranha. Assim que você a pega,";
+     mes "a atividade da máquina é interrompida.";
+     mes "Você pega suas chaves";
      mes "e as Pedras Encantadas.^000000";
      getitem 7425,1; //Key_Black
      close;
     case 3:
-     mes "^3355FFVocÃª retira suas chaves";
+     mes "^3355FFVocê retira suas chaves";
      mes "e as Pedras Encantadas que";
-     mes "havia colocado na mÃ¡quina.^000000";
+     mes "havia colocado na máquina.^000000";
      close;
     }
    }
-   mes "VocÃª tentou com";
+   mes "Você tentou com";
    mes .@inputstr$+",";
    mes "mas nada aconteceu.";
    close;
   }
-  mes "^3355FFVocÃª encontra uma mÃ¡quina que";
+  mes "^3355FFVocê encontra uma máquina que";
   mes "emite uma luz suave e um fraco";
-  mes "ruÃ­do. HÃ¡ tambÃ©m um monitor";
+  mes "ruído. Há também um monitor";
   mes "com diferentes e coloridas";
   mes "fechaduras debaixo dele, em";
-  mes "frente Ã  mÃ¡quina.^000000";
+  mes "frente à máquina.^000000";
   close;
  }
- mes "^3355FFVocÃª encontra um estranho";
- mes "mecanismo que nÃ£o";
- mes "estÃ¡ mais em funcionamento.^000000";
+ mes "^3355FFVocê encontra um estranho";
+ mes "mecanismo que não";
+ mes "está mais em funcionamento.^000000";
  close;
 }
  
-tha_t04,150,44,0 script Seal#tt1 111,{
+tha_t04,150,44,0	script	Seal#tt1	111,{
  
  if (countitem(7423) >= 1) {
-  mes "^3355FFEsta Ã¡rea Ã© protegida por";
+  mes "^3355FFEsta área é protegida por";
   mes "algum poder misterioso.";
-  mes "VocÃª tenta tocar o selo,";
-  mes "mas ele faz um ruÃ­do muito alto";
-  mes "e afasta sua mÃ£o.";
+  mes "Você tenta tocar o selo,";
+  mes "mas ele faz um ruído muito alto";
+  mes "e afasta sua mão.";
   mes "com uma rajada de luz azul.^000000";
   next;
-  switch (select("Investigar:NÃ£o hÃ¡ como quebrar este selo!")) {
+  switch (select("Investigar:Não há como quebrar este selo!")) {
   case 1:
    input .@inputstr$;
    if (.@inputstr$ == "Chave Azul") {
-    mes "^3355FFVocÃª cuidadosamente segura a chave";
-    mes "azul e a leva atÃ©";
+    mes "^3355FFVocê cuidadosamente segura a chave";
+    mes "azul e a leva até";
     mes "o selo. Estranhamente sua";
-    mes "mÃ£o nÃ£o Ã© afastada";
-    mes "desta vez, e o selo comeÃ§a a";
+    mes "mão não é afastada";
+    mes "desta vez, e o selo começa a";
     mes "emitir uma luz misteriosa.^000000";
     next;
-    mes "^3355FFVocÃª encontrou uma pequena fechadura";
+    mes "^3355FFVocê encontrou uma pequena fechadura";
     mes "no selo, inseriu a chave";
     mes "azul, e vagarosamente a girou. A";
     mes "luz do selo se apaga, revelando a";
-    mes "Pedra Encantada. Assim que vocÃª segura";
-    mes "a pedra, as memÃ³rias de";
-    mes "alguÃ©m sÃ£o projetadas em sua mente.^000000";
+    mes "Pedra Encantada. Assim que você segura";
+    mes "a pedra, as memórias de";
+    mes "alguém são projetadas em sua mente.^000000";
     next;
     mes "^333333Thanatos! Temos uma";
     mes "mensagem da guilda.";
-    mes "Eles querem que nÃ³s paremos o que";
+    mes "Eles querem que nós paremos o que";
     mes "estamos fazendo e retornemos agora!^000000";
     mes " ";
-    mes "^333333Ã‰ m-melhor nÃ³s nos apressarmos...^000000";
+    mes "^333333É m-melhor nós nos apressarmos...^000000";
     next;
     mes "......";
     mes ".........";
     mes "............";
     next;
     mes "^3355FFA imagem desaparece de";
-    mes "sua mente tÃ£o rÃ¡pido quanto";
+    mes "sua mente tão rápido quanto";
     mes "apareceu. O que poderia";
     mes "ter acontecido no passado?^000000";
     delitem 7423,1; //Key_Blue
     getitem 7428,1; //Magic_Gem_Blue
     close;
    }
-   mes "^3355FFVocÃª vai ter que";
+   mes "^3355FFVocê vai ter que";
    mes "tentar algo a mais para";
    mes "tentar quebrar este";
    mes "selo. O que poderia";
    mes "ser preciso para isto?^000000";
    close;
   case 2:
-   mes "^3355FFVocÃª se afasta do";
+   mes "^3355FFVocê se afasta do";
    mes "selo com o poder que o";
-   mes "mantÃ©m longe";
+   mes "mantém longe";
    mes "do mesmo.^000000";
    close;
   }
  }
- mes "^3355FFEsta Ã¡rea Ã© protegida por";
+ mes "^3355FFEsta área é protegida por";
  mes "algum poder misterioso.";
- mes "VocÃª tenta tocar o selo,";
- mes "mas ele faz um ruÃ­do muito alto";
- mes "e afasta sua mÃ£o.^000000";
+ mes "Você tenta tocar o selo,";
+ mes "mas ele faz um ruído muito alto";
+ mes "e afasta sua mão.^000000";
  percentheal -10,0;
  close;
 }
  
-tha_t05,218,116,0 script Seal#tt2 111,{
+tha_t05,218,116,0	script	Seal#tt2	111,{
  
  if (countitem(7421) >= 1) {
-  mes "^3355FFEsta Ã¡rea Ã© protegida por";
+  mes "^3355FFEsta área é protegida por";
   mes "algum poder misterioso.";
-  mes "VocÃª tenta tocar o selo,";
-  mes "mas ele faz um ruÃ­do muito alto";
-  mes "e afasta sua mÃ£o.";
+  mes "Você tenta tocar o selo,";
+  mes "mas ele faz um ruído muito alto";
+  mes "e afasta sua mão.";
   mes "com uma rajada de luz vermelha.^000000";
   next;
-  switch (select("Investigar:NÃ£o hÃ¡ como quebrar este selo!")) {
+  switch (select("Investigar:Não há como quebrar este selo!")) {
   case 1:
    input .@inputstr$;
    if (.@inputstr$ == "Red Key") {
-    mes "^3355FFVocÃª cuidadosamente segura a chave";
-    mes "vermelha e a leva atÃ©";
+    mes "^3355FFVocê cuidadosamente segura a chave";
+    mes "vermelha e a leva até";
     mes "o selo. Estranhamente sua";
-    mes "mÃ£o nÃ£o Ã© afastada";
-    mes "desta vez, e o selo comeÃ§a a";
+    mes "mão não é afastada";
+    mes "desta vez, e o selo começa a";
     mes "emitir uma luz misteriosa.^000000";
     next;
-    mes "^3355FFVocÃª encontrou uma pequena fechadura";
+    mes "^3355FFVocê encontrou uma pequena fechadura";
     mes "no selo, inseriu a chave";
     mes "vermelha, e vagarosamente a girou. A";
     mes "luz do selo se apaga, revelando a";
-    mes "Pedra Encantada. Assim que vocÃª segura";
-    mes "a pedra, as memÃ³rias de";
-    mes "alguÃ©m sÃ£o projetadas em sua mente.^000000";
+    mes "Pedra Encantada. Assim que você segura";
+    mes "a pedra, as memórias de";
+    mes "alguém são projetadas em sua mente.^000000";
     next;
-    mes "...EntÃ£o nÃ³s decidimos";
+    mes "...Então nós decidimos";
     mes "encarregar alguns Assassinos";
     mes "para matar o Satan Morroc.";
     mes "Mas honestamente, as chances de";
-    mes "sucesso sÃ£o de praticamente 1%.";
-    mes "Ã‰ melhor do que nada, mas... Isso estÃ¡ enfurecendo o Satan Morroc...^000000";
+    mes "sucesso são de praticamente 1%.";
+    mes "É melhor do que nada, mas... Isso está enfurecendo o Satan Morroc...^000000";
     next;
     mes "......";
     mes ".........";
     mes "............";
     next;
     mes "^3355FFA imagem desaparece de";
-    mes "sua mente tÃ£o rÃ¡pido quanto";
+    mes "sua mente tão rápido quanto";
     mes "apareceu. O que poderia";
     mes "ter acontecido no passado?^000000";
     delitem 7421,1; //Key_Red
     getitem 7426,1; //Magic_Gem_Red
     close;
    }
-   mes "^3355FFVocÃª vai ter que";
+   mes "^3355FFVocê vai ter que";
    mes "tentar algo mais para";
    mes "tentar quebrar este";
    mes "selo. O que poderia";
    mes "ser preciso para isto?^000000";
    close;
   case 2:
-   mes "^3355FFVocÃª se afasta do";
+   mes "^3355FFVocê se afasta do";
    mes "selo, se recusando a lidar";
    mes "com o poder que";
-   mes "impede seu avanÃ§o.^000000";
+   mes "impede seu avanço.^000000";
    close;
   }
  }
- mes "^3355FFEsta Ã¡rea Ã© protegida por";
+ mes "^3355FFEsta área é protegida por";
  mes "algum poder misterioso.";
- mes "VocÃª tenta tocar o selo,";
- mes "mas ele faz um ruÃ­do muito alto";
- mes "e afasta sua mÃ£o.^000000";
+ mes "Você tenta tocar o selo,";
+ mes "mas ele faz um ruído muito alto";
+ mes "e afasta sua mão.^000000";
  percentheal -10,0;
  close;
 }
  
-tha_t06,226,230,0 script Seal#tt3 111,{
+tha_t06,226,230,0	script	Seal#tt3	111,{
  
  if (countitem(7425) >= 1) {
-  mes "^3355FFEsta Ã¡rea Ã© protegida por";
+  mes "^3355FFEsta área é protegida por";
   mes "algum poder misterioso.";
-  mes "VocÃª tenta tocar o selo,";
-  mes "mas ele faz um ruÃ­do muito alto";
-  mes "e afasta sua mÃ£o";
+  mes "Você tenta tocar o selo,";
+  mes "mas ele faz um ruído muito alto";
+  mes "e afasta sua mão";
   mes "com uma rajada de luz negra.^000000";
   next;
-  switch (select("Investigar:NÃ£o hÃ¡ como quebrar este selo!")) {
+  switch (select("Investigar:Não há como quebrar este selo!")) {
   case 1:
    input .@inputstr$;
    if (.@inputstr$ == "Chave Preta") {
-    mes "^3355FFVocÃª cuidadosamente segura a chave";
-    mes "negra e a leva atÃ©";
+    mes "^3355FFVocê cuidadosamente segura a chave";
+    mes "negra e a leva até";
     mes "o selo. Estranhamente sua";
-    mes "mÃ£o nÃ£o Ã© afastada";
-    mes "desta vez, e o selo comeÃ§a a";
+    mes "mão não é afastada";
+    mes "desta vez, e o selo começa a";
     mes "emitir uma luz misteriosa.^000000";
     next;
-    mes "^3355FFVocÃª encontrou uma pequena fechadura";
+    mes "^3355FFVocê encontrou uma pequena fechadura";
     mes "no selo, inseriu a chave";
     mes "negra, e vagarosamente a girou. A";
     mes "luz do selo se apaga, revelando a";
-    mes "Pedra Encantada. Assim que vocÃª segura";
-    mes "a pedra, as memÃ³rias de";
-    mes "alguÃ©m sÃ£o projetadas em sua mente.^000000";
+    mes "Pedra Encantada. Assim que você segura";
+    mes "a pedra, as memórias de";
+    mes "alguém são projetadas em sua mente.^000000";
     next;
-    mes "^333333NÃ³s encontramos! Esta deve";
+    mes "^333333Nós encontramos! Esta deve";
     mes "ser a torre onde o";
-    mes "Satan Morroc estÃ¡ reunindo";
+    mes "Satan Morroc está reunindo";
     mes "seus lacaios... Meu deus,";
     mes "existem... Existem milhares";
-    mes "deles... Existe alguma esperanÃ§a";
-    mes "para todos nÃ³s? Para a humanidade?^000000";
+    mes "deles... Existe alguma esperança";
+    mes "para todos nós? Para a humanidade?^000000";
     next;
     mes "......";
     mes ".........";
     mes "............";
     next;
     mes "^3355FFA imagem desaparece de";
-    mes "sua mente tÃ£o rÃ¡pido quanto";
+    mes "sua mente tão rápido quanto";
     mes "apareceu. O que poderia";
     mes "ter acontecido no passado?^000000";
     delitem 7425,1; //Key_Black
     getitem 7430,1; //Magic_Gem_Black
     close;
    }
-   mes "^3355FFVocÃª vai ter que";
+   mes "^3355FFVocê vai ter que";
    mes "tentar algo mais para";
    mes "tentar quebrar este";
    mes "selo. O que poderia";
    mes "ser preciso para isto?^000000";
    close;
   case 2:
-   mes "^3355FFVocÃª se afasta do";
+   mes "^3355FFVocê se afasta do";
    mes "selo, se recusando a lidar";
    mes "com o poder que";
-   mes "impede seu avanÃ§o.^000000";
+   mes "impede seu avanço.^000000";
    close;
   }
  }
- mes "^3355FFEsta Ã¡rea Ã© protegida por";
+ mes "^3355FFEsta área é protegida por";
  mes "algum poder misterioso.";
- mes "VocÃª tenta tocar o selo,";
- mes "mas ele faz um ruÃ­do muito alto";
- mes "e afasta sua mÃ£o.^000000";
+ mes "Você tenta tocar o selo,";
+ mes "mas ele faz um ruído muito alto";
+ mes "e afasta sua mão.^000000";
  percentheal -10,0;
  close;
 }
  
-tha_t07,113,129,0 script Seal#tt4 111,{
+tha_t07,113,129,0	script	Seal#tt4	111,{
  
  if (countitem(7422) >= 1) {
-  mes "^3355FFEsta Ã¡rea Ã© protegida por";
+  mes "^3355FFEsta área é protegida por";
   mes "algum poder misterioso.";
-  mes "VocÃª tenta tocar o selo,";
-  mes "mas ele faz um ruÃ­do muito alto";
-  mes "e afasta sua mÃ£o";
+  mes "Você tenta tocar o selo,";
+  mes "mas ele faz um ruído muito alto";
+  mes "e afasta sua mão";
   mes "com uma rajada de luz amarela.^000000";
   next;
-  switch (select("Investigar:NÃ£o hÃ¡ como quebrar este selo!")) {
+  switch (select("Investigar:Não há como quebrar este selo!")) {
   case 1:
    input .@inputstr$;
    if (.@inputstr$ == "Chave Amarela") {
-    mes "^3355FFVocÃª cuidadosamente segura a chave";
-    mes "amarela e a leva atÃ©";
+    mes "^3355FFVocê cuidadosamente segura a chave";
+    mes "amarela e a leva até";
     mes "o selo. Estranhamente sua";
-    mes "mÃ£o nÃ£o Ã© afastada";
-    mes "desta vez, e o selo comeÃ§a a";
+    mes "mão não é afastada";
+    mes "desta vez, e o selo começa a";
     mes "emitir uma luz misteriosa.^000000";
     next;
-    mes "^3355FFVocÃª encontrou uma pequena fechadura";
+    mes "^3355FFVocê encontrou uma pequena fechadura";
     mes "no selo, inseriu a chave";
     mes "amarela, e vagarosamente a girou. A";
     mes "luz do selo se apaga, revelando a";
-    mes "Pedra Encantada. Assim que vocÃª segura";
-    mes "a pedra, as memÃ³rias de";
-    mes "alguÃ©m sÃ£o projetadas em sua mente.^000000";
+    mes "Pedra Encantada. Assim que você segura";
+    mes "a pedra, as memórias de";
+    mes "alguém são projetadas em sua mente.^000000";
     next;
     mes "^333333Oi, eu sou Lucil. Desculpe-me,";
     mes "estou atrasada, mas eu estava";
-    mes "longe, em outra missÃ£o...^000000";
+    mes "longe, em outra missão...^000000";
     mes " ";
     mes "^333333Eu sou Thanatos...^000000";
     next;
     mes "^333333Porque ela faz eu";
-    mes "me sentir tÃ£o estranho?";
+    mes "me sentir tão estranho?";
     mes "Eu sinto que tudo";
     mes "era vazio antes, tudo o que";
     mes "eu quero ou desejo";
     mes "ser, ela me traz, ela";
-    mes "me completa. Que... engraÃ§ado...^000000";
+    mes "me completa. Que... engraçado...^000000";
     mes "'Ela me faz sentir estranho... como se eu tivesse encontrado minha outra metade...'";
     next;
     mes "......";
@@ -1909,75 +1909,75 @@ tha_t07,113,129,0 script Seal#tt4 111,{
     mes "............";
     next;
     mes "^3355FFA imagem desaparece de";
-    mes "sua mente tÃ£o rÃ¡pido quanto";
+    mes "sua mente tão rápido quanto";
     mes "apareceu. O que poderia";
     mes "ter acontecido no passado?^000000";
     delitem 7422,1; //Key_Yellow
     getitem 7427,1; //Magic_Gem_Yellow
     close;
    }
-   mes "^3355FFVocÃª vai ter que";
+   mes "^3355FFVocê vai ter que";
    mes "tentar algo mais, para";
    mes "tentar quebrar este";
    mes "selo. O que poderia";
    mes "ser preciso para isto?^000000";
    close;
   case 2:
-   mes "^3355FFVocÃª se afasta do";
+   mes "^3355FFVocê se afasta do";
    mes "selo, se recusando a lidar";
    mes "com o poder que";
-   mes "impede seu avanÃ§o.^000000";
+   mes "impede seu avanço.^000000";
    close;
   }
  }
- mes "^3355FFEsta Ã¡rea Ã© protegida por";
+ mes "^3355FFEsta área é protegida por";
  mes "algum poder misterioso.";
- mes "VocÃª tenta tocar o selo,";
- mes "mas ele faz um ruÃ­do muito alto";
- mes "e afasta sua mÃ£o.^000000";
+ mes "Você tenta tocar o selo,";
+ mes "mas ele faz um ruído muito alto";
+ mes "e afasta sua mão.^000000";
  percentheal -10,0;
  close;
 }
  
-tha_t10,129,159,0 script Seal#tt5 111,{
+tha_t10,129,159,0	script	Seal#tt5	111,{
  
  if (countitem(7424) >= 1) {
-  mes "^3355FFEsta Ã¡rea Ã© protegida por";
+  mes "^3355FFEsta área é protegida por";
   mes "algum poder misterioso.";
-  mes "VocÃª tenta tocar no selo,";
-  mes "mas ele faz um ruÃ­do muito alto";
-  mes "e afasta sua mÃ£o";
+  mes "Você tenta tocar no selo,";
+  mes "mas ele faz um ruído muito alto";
+  mes "e afasta sua mão";
   mes "com uma rajada de luz verde.^000000";
   next;
-  switch (select("Investigar:NÃ£o hÃ¡ como quebrar este selo!")) {
+  switch (select("Investigar:Não há como quebrar este selo!")) {
   case 1:
    input .@inputstr$;
    if (.@inputstr$ == "Chave Verde") {
-    mes "^3355FFVocÃª cuidadosamente segura a chave";
-    mes "verde e a leva atÃ©";
+    mes "^3355FFVocê cuidadosamente segura a chave";
+    mes "verde e a leva até";
     mes "o selo. Estranhamente sua";
-    mes "mÃ£o nÃ£o Ã© afastada";
-    mes "desta vez, e o selo comeÃ§a a";
+    mes "mão não é afastada";
+    mes "desta vez, e o selo começa a";
     mes "emitir uma luz misteriosa.^000000";
     next;
-    mes "^3355FFVocÃª encontrou uma pequena fechadura";
+    mes "^3355FFVocê encontrou uma pequena fechadura";
     mes "no selo, inseriu a chave";
     mes "verde, e vagarosamente a girou. A";
     mes "luz do selo se apaga, revelando a";
-    mes "Pedra Encantada. Assim que vocÃª segura";
-    mes "a pedra, as memÃ³rias de";
-    mes "alguÃ©m sÃ£o projetadas em sua mente.^000000";
+    mes "Pedra Encantada. Assim que você segura";
+    mes "a pedra, as memórias de";
+    mes "alguém são projetadas em sua mente.^000000";
     next;
-    mes "^333333Esta batalha irÃ¡ determinar";
-    mes "o destino da humanidade. NÃ³s devemos";
-    mes "derrotar o Satan Morroc. NÃ£o hÃ¡ outra";
-    mes "alternativa. Quem estÃ¡ comigo?! ";
-    mes "^333333*Cof Cof* O demÃ´nio";
-    mes "Ã© muito forte! N-nÃ³s nÃ£o podemos...^000000";
+    mes "^333333Esta batalha irá determinar";
+    mes "o destino da humanidade. Nós devemos";
+    mes "derrotar o Satan Morroc. Não há outra";
+    mes "alternativa. Quem está comigo?! ";
+    mes "^333333*Cof Cof* O demônio";
+    mes "é muito forte! N-nós não podemos...^000000";
     next;
     mes "^333333Humanos imbecis.";
-    mes "VocÃªs deveriam saber.";
-    mes "...Isso nÃ£o Ã© possÃ­vel! Isso nÃ£o Ã©--? ";
+    mes "Vocês deveriam saber.";
+    mes "...Isso não é possível! Isso não é--? ";
     mes "^333333GGGRRRRAH! C-COMO OUSAM";
     mes "HUMANOS! COMO OUSAAAAAAAAAAAM....! ";
     next;
@@ -1986,55 +1986,55 @@ tha_t10,129,159,0 script Seal#tt5 111,{
     mes "............";
     next;
     mes "^3355FFA imagem desaparece de";
-    mes "sua mente tÃ£o rÃ¡pido quanto";
+    mes "sua mente tão rápido quanto";
     mes "apareceu. O que poderia";
     mes "ter acontecido no passado?^000000";
     delitem 7424,1; //Key_Green
     getitem 7429,1; //Magic_Gem_Green
     close;
    }
-   mes "^3355FFVocÃª vai ter que";
+   mes "^3355FFVocê vai ter que";
    mes "tentar algo mais para";
    mes "tentar quebrar este";
    mes "selo. O que poderia";
    mes "ser preciso para isto?^000000";
    close;
   case 2:
-   mes "^3355FFVocÃª se afasta do";
+   mes "^3355FFVocê se afasta do";
    mes "selo, se recusando a lidar";
    mes "com o poder que";
-   mes "impede seu avanÃ§o.^000000";
+   mes "impede seu avanço.^000000";
    close;
   }
  }
- mes "^3355FFEsta Ã¡rea Ã© protegida por";
+ mes "^3355FFEsta área é protegida por";
  mes "algum poder misterioso.";
- mes "VocÃª tenta tocar o selo,";
- mes "mas ele faz um ruÃ­do muito alto";
- mes "e afasta sua mÃ£o.^000000";
+ mes "Você tenta tocar o selo,";
+ mes "mas ele faz um ruído muito alto";
+ mes "e afasta sua mão.^000000";
  percentheal -10,0;
  close;
 }
  
-tha_t12,96,58,0 script Stone Statue#1 111,{
+tha_t12,96,58,0	script	Stone Statue#1	111,{
  
  if (!$@thana_summon) {
-  mes "^3355FFVocÃª encontrou uma";
-  mes "estÃ¡tua de pedra com";
+  mes "^3355FFVocê encontrou uma";
+  mes "estátua de pedra com";
   mes "um buraco na";
-  mes "regiÃ£o do peitora.^000000";
+  mes "região do peitora.^000000";
   if ((countitem(7426) >= 1) && (countitem(7427) >= 1) && (countitem(7428) >= 1) && (countitem(7429) >= 1) && (countitem(7430) >= 1)) {
    next;
-   mes "^3355FFQuando vocÃª se aproxima da estÃ¡tua,";
+   mes "^3355FFQuando você se aproxima da estátua,";
    mes "sua Pedra Encantada Vermelha e";
-   mes "a estÃ¡tua comeÃ§am a brilhar com";
+   mes "a estátua começam a brilhar com";
    mes "uma luz avermelhada.^000000";
    next;
-   switch (select("Inserir a Pedra Encantada na EstÃ¡tua:Cancelar")) {
+   switch (select("Inserir a Pedra Encantada na Estátua:Cancelar")) {
    case 1:
-    mes "^3355FFAssim que vocÃª insere";
+    mes "^3355FFAssim que você insere";
     mes "a Pedra Encantada Vermelha, a";
-    mes "estÃ¡tua brilha cada vez mais";
+    mes "estátua brilha cada vez mais";
     mes "com uma luz misteriosa.^000000";
     delitem 7426,1; //Magic_Gem_Red
     specialeffect EF_BEGINSPELL3;
@@ -2042,55 +2042,55 @@ tha_t12,96,58,0 script Stone Statue#1 111,{
     donpcevent "tt_effect2::OnEnable";
     close;
    case 2:
-    mes "^3355FFVocÃª decidiu nÃ£o";
+    mes "^3355FFVocê decidiu não";
     mes "inserir a Pedra Encantada,";
     mes "optando por investigar a";
-    mes "Ã¡rea um pouco melhor.^000000";
+    mes "área um pouco melhor.^000000";
     close;
    }
   }
   else if ((countitem(7426) >= 1) || (countitem(7427) >= 1) || (countitem(7428) >= 1) || (countitem(7429) >= 1) || (countitem(7430) >= 1)) {
-   mes "^3355FFConforme vocÃª se aproxima da estÃ¡tua, uma^FFFFFF ^3355FF de suas Pedras Encantadas comeÃ§a a";
-   mes "brilhar. Mas mesmo assim, a estÃ¡tua em nÃ£o estÃ¡ respondendo. VocÃª provavelmente";
+   mes "^3355FFConforme você se aproxima da estátua, uma^FFFFFF ^3355FF de suas Pedras Encantadas começa a";
+   mes "brilhar. Mas mesmo assim, a estátua em não está respondendo. Você provavelmente";
    mes "precisa colocar em ordem todas";
-   mes "as suas Pedras Encantadas para ativÃ¡-la.^000000";
+   mes "as suas Pedras Encantadas para ativá-la.^000000";
    close;
   }
   close;
  }
  else if ($@thana_summon == 6) {
-  mes "^3355FFA estÃ¡tua estÃ¡ emanando uma";
-  mes "luz intensa, tÃ£o quente que";
-  mes "vocÃª nÃ£o consegue nem se aproximar.^000000";
+  mes "^3355FFA estátua está emanando uma";
+  mes "luz intensa, tão quente que";
+  mes "você não consegue nem se aproximar.^000000";
   close;
  }
- mes "^3355FFEsta estÃ¡tua estÃ¡ brilhando";
+ mes "^3355FFEsta estátua está brilhando";
  mes "com uma luz misteriosa.";
- mes "Alguma forÃ§a estranha mantÃ©m vocÃª";
+ mes "Alguma força estranha mantém você";
  mes "longe dela.^000000";
  close;
 }
  
-tha_t12,104,18,0 script Stone Statue#tt2 111,{
+tha_t12,104,18,0	script	Stone Statue#tt2	111,{
  
  if ($@thana_summon == 2) {
-  mes "^3355FFVocÃª encontrou uma";
-  mes "estÃ¡tua de pedra com";
+  mes "^3355FFVocê encontrou uma";
+  mes "estátua de pedra com";
   mes "um buraco na";
-  mes "regiÃ£o do peitoral.^000000";
+  mes "região do peitoral.^000000";
   if (countitem(7428) >= 1) {
    next;
-   mes "^3355FFQuando vocÃª se aproxima da estÃ¡tua,";
-   mes "sua Pedra encantada Azul comeÃ§a";
+   mes "^3355FFQuando você se aproxima da estátua,";
+   mes "sua Pedra encantada Azul começa";
    mes "a brilhar, emanando uma luz";
-   mes "azul, e a estÃ¡tua responde";
+   mes "azul, e a estátua responde";
    mes "com uma luz avermelhada.^000000";
    next;
-   switch (select("Inserir a Pedra Encantada na EstÃ¡tua:Cancelar")) {
+   switch (select("Inserir a Pedra Encantada na Estátua:Cancelar")) {
    case 1:
-    mes "^3355FFAssim que vocÃª insere";
+    mes "^3355FFAssim que você insere";
     mes "a Pedra Encantada Azul, a";
-    mes "estÃ¡tua brilha cada vez mais";
+    mes "estátua brilha cada vez mais";
     mes "com uma luz misteriosa.^000000";
     delitem 7428,1; //Magic_Gem_Blue
     specialeffect EF_BEGINSPELL2;
@@ -2098,47 +2098,47 @@ tha_t12,104,18,0 script Stone Statue#tt2 111,{
     set $@thana_summon,3;
     close;
    case 2:
-    mes "^3355FFVocÃª decide nÃ£o";
+    mes "^3355FFVocê decide não";
     mes "inserir a Pedra Encantada,";
     mes "decidino investigar a";
-    mes "Ã¡rea um pouco melhor.^000000";
+    mes "área um pouco melhor.^000000";
     close;
    }
   }
   close;
  }
  else if ($@thana_summon == 6) {
-  mes "^3355FFA estÃ¡tua estÃ¡ emanando uma";
-  mes "luz intensa, tÃ£o quente que";
-  mes "vocÃª nÃ£o consegue nem se aproximar.^000000";
+  mes "^3355FFA estátua está emanando uma";
+  mes "luz intensa, tão quente que";
+  mes "você não consegue nem se aproximar.^000000";
   close;
  }
- mes "^3355FFEsta estÃ¡tua estÃ¡ brilhando";
+ mes "^3355FFEsta estátua está brilhando";
  mes "com uma luz misteriosa.";
- mes "Alguma forÃ§a estranha mantÃ©m vocÃª";
+ mes "Alguma força estranha mantém você";
  mes "longe dela.^000000";
  close;
 }
  
-tha_t12,128,86,0 script Stone Statue#3 111,{
+tha_t12,128,86,0	script	Stone Statue#3	111,{
  
  if ($@thana_summon == 3) {
-  mes "^3355FFVocÃª encontrou uma";
-  mes "estÃ¡tua de pedra com";
+  mes "^3355FFVocê encontrou uma";
+  mes "estátua de pedra com";
   mes "um buraco na";
-  mes "regiÃ£o do peitoral.^000000";
+  mes "região do peitoral.^000000";
   if (countitem(7430) >= 1) {
    next;
-   mes "^3355FFQuando vocÃª se aproxima da estÃ¡tua,";
-   mes "sua Pedra Encantada Negra comeÃ§a";
+   mes "^3355FFQuando você se aproxima da estátua,";
+   mes "sua Pedra Encantada Negra começa";
    mes "a emanar uma luz negra.";
-   mes "Em resposta, a estÃ¡tua comeÃ§a a emanar uma sinistra luz avermelhada.^000000";
+   mes "Em resposta, a estátua começa a emanar uma sinistra luz avermelhada.^000000";
    next;
-   switch (select("Inserir a Pedra Encantada na EstÃ¡tua:Cancelar")) {
+   switch (select("Inserir a Pedra Encantada na Estátua:Cancelar")) {
    case 1:
-    mes "^3355FFAssim que vocÃª insere";
+    mes "^3355FFAssim que você insere";
     mes "a Pedra Encantada Negra, a";
-    mes "estÃ¡tua brilha cada vez mais";
+    mes "estátua brilha cada vez mais";
     mes "com uma luz misteriosa.^000000";
     delitem 7430,1; //Magic_Gem_Black
     specialeffect EF_BEGINSPELL7;
@@ -2146,48 +2146,48 @@ tha_t12,128,86,0 script Stone Statue#3 111,{
     set $@thana_summon,4;
     close;
    case 2:
-    mes "^3355FFVocÃª decide nÃ£o";
+    mes "^3355FFVocê decide não";
     mes "inserir a Pedra Encantada,";
     mes "optando por investigar a";
-    mes "Ã¡rea um pouco melhor.^000000";
+    mes "área um pouco melhor.^000000";
     close;
    }
   }
   close;
  }
  else if ($@thana_summon == 6) {
-  mes "^3355FFA estÃ¡tua estÃ¡ emanando uma";
-  mes "luz intensa, tÃ£o quente que";
-  mes "vocÃª nÃ£o consegue nem se aproximar.^000000";
+  mes "^3355FFA estátua está emanando uma";
+  mes "luz intensa, tão quente que";
+  mes "você não consegue nem se aproximar.^000000";
   close;
  }
- mes "^3355FFEsta estÃ¡tua estÃ¡ brilhando";
+ mes "^3355FFEsta estátua está brilhando";
  mes "com uma luz misteriosa.";
- mes "Alguma forÃ§a estranha mantÃ©m vocÃª";
+ mes "Alguma força estranha mantém você";
  mes "longe dela.^000000";
  close;
 }
  
-tha_t12,161,58,0 script Stone Statue#tt4 111,{
+tha_t12,161,58,0	script	Stone Statue#tt4	111,{
  
  if ($@thana_summon == 1) {
-  mes "^3355FFVocÃª encontrou uma";
-  mes "uma estÃ¡tua de pedra com";
+  mes "^3355FFVocê encontrou uma";
+  mes "uma estátua de pedra com";
   mes "um buraco na";
-  mes "regiÃ£o do peitoral.^000000";
+  mes "região do peitoral.^000000";
   if (countitem(7427) >= 1) {
    next;
-   mes "^3355FFQuando vocÃª se aproxima da estÃ¡tua,";
+   mes "^3355FFQuando você se aproxima da estátua,";
    mes "sua Pedra Encantada Amarela";
-   mes "comeÃ§a a emanar uma luz";
-   mes "amarelada, e a estÃ¡tua responde";
+   mes "começa a emanar uma luz";
+   mes "amarelada, e a estátua responde";
    mes "com uma luz avermelhada.^000000";
    next;
-   switch (select("Inserir a Pedra Encantada na EstÃ¡tua:Cancelar")) {
+   switch (select("Inserir a Pedra Encantada na Estátua:Cancelar")) {
    case 1:
-    mes "^3355FFAssim que vocÃª insere";
+    mes "^3355FFAssim que você insere";
     mes "a Pedra Encantada Amarela, a";
-    mes "estÃ¡tua brilha cada vez mais";
+    mes "estátua brilha cada vez mais";
     mes "com uma luz misteriosa.^000000";
     delitem 7427,1; //Magic_Gem_Yellow
     specialeffect EF_BEGINSPELL5;
@@ -2195,55 +2195,55 @@ tha_t12,161,58,0 script Stone Statue#tt4 111,{
     set $@thana_summon,2;
     close;
    case 2:
-    mes "^3355FFVocÃª decide nÃ£o";
+    mes "^3355FFVocê decide não";
     mes "inserir a Pedra Encantada,";
     mes "optando por investigar a";
-    mes "Ã¡rea um pouco melhor.^000000";
+    mes "área um pouco melhor.^000000";
     close;
    }
   }
   close;
  }
  else if ($@thana_summon == 6) {
-  mes "^3355FFA estÃ¡tua estÃ¡ emanando uma";
-  mes "luz intensa, tÃ£o quente que";
-  mes "vocÃª nÃ£o consegue nem se aproximar.^000000";
+  mes "^3355FFA estátua está emanando uma";
+  mes "luz intensa, tão quente que";
+  mes "você não consegue nem se aproximar.^000000";
   close;
  }
- mes "^3355FFEsta estÃ¡tua estÃ¡ brilhando";
+ mes "^3355FFEsta estátua está brilhando";
  mes "com uma luz misteriosa.";
- mes "Alguma forÃ§a estranha mantÃ©m vocÃª";
+ mes "Alguma força estranha mantém você";
  mes "longe dela.^000000";
  close;
 }
  
-tha_t12,154,18,0 script Stone Statue#tt5 111,{
+tha_t12,154,18,0	script	Stone Statue#tt5	111,{
  
  if ($@thana_summon == 4) {
-  mes "^3355FFVocÃª encontrou uma";
-  mes "estÃ¡tua de pedra com";
+  mes "^3355FFVocê encontrou uma";
+  mes "estátua de pedra com";
   mes "um buraco na";
-  mes "regiÃ£o do peitoral.^000000";
+  mes "região do peitoral.^000000";
   if (countitem(7429) >= 1) {
    next;
-   mes "^3355FFQuando vocÃª se aproxima da estÃ¡tua,";
-   mes "sua Pedra Encantada Verde comeÃ§a a";
+   mes "^3355FFQuando você se aproxima da estátua,";
+   mes "sua Pedra Encantada Verde começa a";
    mes "emanar uma leve luz verde, e";
-   mes "a estÃ¡tua comeÃ§a a brilhar";
+   mes "a estátua começa a brilhar";
    mes "com uma forte luz avermelhada.^000000";
    next;
-   switch (select("Inserir a Pedra Encantada na EstÃ¡tua:Cancelar")) {
+   switch (select("Inserir a Pedra Encantada na Estátua:Cancelar")) {
    case 1:
-    mes "^3355FFAssim que vocÃª insere";
+    mes "^3355FFAssim que você insere";
     mes "a Pedra Encantada Verde, a";
-    mes "estÃ¡tua brilha cada vez mais";
+    mes "estátua brilha cada vez mais";
     mes "com uma luz misteriosa.^000000";
     specialeffect EF_BEGINSPELL4;
     next;
-    mes "^3355FFO emblema no chÃ£o";
+    mes "^3355FFO emblema no chão";
     mes "cercado por cinco";
-    mes "estÃ¡tuas brilhantes que agora";
-    mes "foram ativadas, estÃ¡ emitindo";
+    mes "estátuas brilhantes que agora";
+    mes "foram ativadas, está emitindo";
     mes "uma apavorante e poderosa energia.^000000";
     delitem 7429,1; //Magic_Gem_Green
     set $@thana_summon2,0;
@@ -2252,29 +2252,29 @@ tha_t12,154,18,0 script Stone Statue#tt5 111,{
     enablenpc "to_the_boss_room_tt";
     close;
    case 2:
-    mes "^3355FFVocÃª decide nÃ£o";
+    mes "^3355FFVocê decide não";
     mes "inserir a Pedra Encantada,";
     mes "optando por investigar a";
-    mes "Ã¡rea um pouco melhor.^000000";
+    mes "área um pouco melhor.^000000";
     close;
    }
   }
   close;
  }
  else if ($@thana_summon == 6) {
-  mes "^3355FFA estÃ¡tua estÃ¡ emanando uma";
-  mes "luz intensa, tÃ£o quente que";
-  mes "vocÃª nÃ£o consegue nem se aproximar.^000000";
+  mes "^3355FFA estátua está emanando uma";
+  mes "luz intensa, tão quente que";
+  mes "você não consegue nem se aproximar.^000000";
   close;
  }
- mes "^3355FFEsta estÃ¡tua estÃ¡ brilhando";
+ mes "^3355FFEsta estátua está brilhando";
  mes "com uma luz misteriosa.";
- mes "Alguma forÃ§a estranha mantÃ©m vocÃª";
+ mes "Alguma força estranha mantém você";
  mes "longe dela.^000000";
  close;
 }
  
-tha_t12,129,56,0 script tt_effect1 139,{
+tha_t12,129,56,0	script	tt_effect1	139,{
  end;
  
 OnEnable:
@@ -2300,7 +2300,7 @@ OnDisable:
  end;
 }
  
-tha_t12,125,52,0 script tt_effect2 139,{
+tha_t12,125,52,0	script	tt_effect2	139,{
  end;
  
 OnEnable:
@@ -2326,7 +2326,7 @@ OnDisable:
  end;
 }
  
-tha_t12,134,52,0 script tt_effect3 139,{
+tha_t12,134,52,0	script	tt_effect3	139,{
  end;
 OnEnable:
  initnpctimer;
@@ -2351,7 +2351,7 @@ OnDisable:
  end;
 }
  
-tha_t12,132,47,0 script tt_effect4 139,{
+tha_t12,132,47,0	script	tt_effect4	139,{
  end;
  
 OnEnable:
@@ -2377,7 +2377,7 @@ OnDisable:
  end;
 }
  
-tha_t12,127,47,0 script tt_effect5 139,{
+tha_t12,127,47,0	script	tt_effect5	139,{
  end;
  
 OnEnable:
@@ -2403,7 +2403,7 @@ OnDisable:
  end;
 }
  
-tha_t12,130,52,0 script to_the_boss_room_tt 45,1,1,{
+tha_t12,130,52,0	script	to_the_boss_room_tt	45,1,1,{
  end;
  
 OnInit:
@@ -2423,30 +2423,30 @@ OnTouch:
  end;
 }
  
-thana_boss,217,167,0 script Crest#tt1 111,3,3,{
+thana_boss,217,167,0	script	Crest#tt1	111,3,3,{
  end;
  
 OnTouch:
  if ($@thana_summon2 == 6 || $@thana_summon != 5) {
-  mes "^3355FFVocÃª nÃ£o pode se aproximar";
+  mes "^3355FFVocê não pode se aproximar";
   mes "do emblema por ele estar";
   mes "emanando um calor intenso.^000000";
   close;
  }
- mes "^3355FFHÃ¡ um estranho";
+ mes "^3355FFHá um estranho";
  mes "buraco no meio";
- mes "do emblema pÃºrpura.^000000";
+ mes "do emblema púrpura.^000000";
  if (countitem(7437) > 0) {
   mes "^3355FFParece que um Fragmento";
-  mes "de MisÃ©ria iria se encaixar perfeitamente";
+  mes "de Miséria iria se encaixar perfeitamente";
   mes "se colocado dentro.^000000";
  }
  next;
  input .@inputstr$;
  if (countitem(7437) > 0) {
-  if (.@inputstr$ == "Fragmento de MisÃ©ria") {
-   mes "^3355FFVocÃª inseriu o";
-   mes "Fragmento de MisÃ©ria";
+  if (.@inputstr$ == "Fragmento de Miséria") {
+   mes "^3355FFVocê inseriu o";
+   mes "Fragmento de Miséria";
    mes "no emblema, causando";
    mes "um forte brilho.^000000";
    delitem 7437,1; //Piece_Of_Memory_Purple
@@ -2455,14 +2455,14 @@ OnTouch:
    disablenpc "Crest#tt1";
    end;
   }
-  mes "^3355FFEsta aÃ§Ã£o nÃ£o surtiu";
-  mes "efeito. VocÃª terÃ¡ que";
+  mes "^3355FFEsta ação não surtiu";
+  mes "efeito. Você terá que";
   mes "tentar outra coisa.^000000";
   close;
  }
-  mes "^3355FFEsta aÃ§Ã£o nÃ£o surtiu";
-  mes "efeito. VocÃª terÃ¡ que";
-  me s "tentar outra coisa.^000000";
+  mes "^3355FFEsta ação não surtiu";
+  mes "efeito. Você terá que";
+  mes "tentar outra coisa.^000000";
  close2;
  end;
  
@@ -2471,17 +2471,17 @@ OnMyMobDead:
  end;
 }
  
-thana_boss,202,75,0 script Crest#tt2 111,3,3,{
+thana_boss,202,75,0	script	Crest#tt2	111,3,3,{
  end;
  
 OnTouch:
  if (($@thana_summon2 == 6) || ($@thana_summon != 5)) {
-  mes "^3355FFVocÃª nÃ£o pode se aproximar";
+  mes "^3355FFVocê não pode se aproximar";
   mes "do emblema por ele estar";
   mes "emanando um calor intenso.^000000";
   close;
  }
- mes "^3355FFHÃ¡ um estranho";
+ mes "^3355FFHá um estranho";
  mes "buraco no meio";
  mes "do emblema verde.^000000";
  if (countitem(7436) > 0) {
@@ -2493,7 +2493,7 @@ OnTouch:
  input .@inputstr$;
  if (countitem(7436) > 0) {
   if (.@inputstr$ == "Fragmento de Agonia") {
-   mes "^3355FFVocÃª inseriu o";
+   mes "^3355FFVocê inseriu o";
    mes "Fragmento de Agonia";
    mes "no emblema, causando";
    mes "um forte brilho.^000000";
@@ -2503,13 +2503,13 @@ OnTouch:
    disablenpc "Crest#tt2";
    end;
   }
-  mes "^3355FFEsta aÃ§Ã£o nÃ£o surtiu";
-  mes "efeito. VocÃª terÃ¡ que";
+  mes "^3355FFEsta ação não surtiu";
+  mes "efeito. Você terá que";
   mes "tentar outra coisa.^000000";
   close;
  }
- mes "^3355FFEsta aÃ§Ã£o nÃ£o surtiu";
- mes "efeito. VocÃª terÃ¡ que";
+ mes "^3355FFEsta ação não surtiu";
+ mes "efeito. Você terá que";
   mes "tentar outra coisa.^000000";
  close2;
  end;
@@ -2519,30 +2519,30 @@ OnMyMobDead:
  end;
 }
  
-thana_boss,80,76,0 script Crest#tt3 111,3,3,{
+thana_boss,80,76,0	script	Crest#tt3	111,3,3,{
  end;
  
 OnTouch:
  if (($@thana_summon2 == 6) || ($@thana_summon != 5)) {
-  mes "^3355FFVocÃª nÃ£o pode se aproximar";
+  mes "^3355FFVocê não pode se aproximar";
   mes "do emblema por ele estar";
   mes "emanando um calor intenso.^000000";
   close;
  }
- mes "^3355FFHÃ¡ um estranho";
+ mes "^3355FFHá um estranho";
  mes "buraco no meio";
  mes "do emblema azul.^000000";
  if (countitem(7438) > 0) {
   mes "^3355FFParece um Fragmento";
-  mes "do Ã“dio que iria se encaixar perfeitamente";
+  mes "do Ódio que iria se encaixar perfeitamente";
   mes "se colocado dentro.^000000";
  }
  next;
  input .@inputstr$;
  if (countitem(7438) > 0) {
-  if (.@inputstr$ == "Fragmento do Ã“dio") {
-   mes "^3355FFVocÃª inseriu o";
-   mes "Fragmento do Ã“dio;
+  if (.@inputstr$ == "Fragmento do Ódio") {
+   mes "^3355FFVocê inseriu o";
+   mes "Fragmento do Ódio";
    mes "no emblema, causando";
    mes "um forte brilho.^000000";
    delitem 7438,1; //Piece_Of_Memory_Blue
@@ -2551,13 +2551,13 @@ OnTouch:
    disablenpc "Crest#tt3";
    end;
   }
-  mes "^3355FFEsta aÃ§Ã£o nÃ£o surtiu";
-  mes "efeito. VocÃª terÃ¡ que";
+  mes "^3355FFEsta ação não surtiu";
+  mes "efeito. Você terá que";
   mes "tentar outra coisa.^000000";
   close;
  }
-  mes "^3355FFEsta aÃ§Ã£o nÃ£o surtiu";
-  mes "efeito. VocÃª terÃ¡ que";
+  mes "^3355FFEsta ação não surtiu";
+  mes "efeito. Você terá que";
   mes "tentar outra coisa.^000000";
  close2;
  end;
@@ -2567,17 +2567,17 @@ OnMyMobDead:
  end;
 }
  
-thana_boss,62,171,0 script Crest#tt4 111,3,3,{
+thana_boss,62,171,0	script	Crest#tt4	111,3,3,{
  end;
  
 OnTouch:
  if (($@thana_summon2 == 6) || ($@thana_summon != 5)) {
-  mes "^3355FFVocÃª nÃ£o pode se aproximar";
+  mes "^3355FFVocê não pode se aproximar";
   mes "do emblema por ele estar";
   mes "emanando um calor intenso.^000000";
   close;
  }
- mes "^3355FFHÃ¡ um estranho";
+ mes "^3355FFHá um estranho";
  mes "buraco no meio";
  mes "do emblema vermelho.^000000";
  if (countitem(7439) > 0) {
@@ -2589,7 +2589,7 @@ OnTouch:
  input .@inputstr$;
  if (countitem(7439) > 0) {
   if (.@inputstr$ == "Fragmento do Desespero") {
-   mes "^3355FFVocÃª inseriu o";
+   mes "^3355FFVocê inseriu o";
    mes "Fragmento do Desespero";
    mes "no emblema, causando";
    mes "um forte brilho.^000000";
@@ -2599,13 +2599,13 @@ OnTouch:
    disablenpc "Crest#tt4";
    end;
   }
-  mes "^3355FFEsta aÃ§Ã£o nÃ£o surtiu";
-  mes "efeito. VocÃª terÃ¡ que";
+  mes "^3355FFEsta ação não surtiu";
+  mes "efeito. Você terá que";
   mes "tentar outra coisa.^000000";
   close;
  }
-  mes "^3355FFEsta aÃ§Ã£o nÃ£o surtiu";
-  mes "efeito. VocÃª terÃ¡ que";
+  mes "^3355FFEsta ação não surtiu";
+  mes "efeito. Você terá que";
   mes "tentar outra coisa.^000000";
  close2;
  end;
@@ -2615,14 +2615,14 @@ OnMyMobDead:
  end;
 }
  
-thana_boss,141,218,0 script Crest#tt5 111,3,3,{
+thana_boss,141,218,0	script	Crest#tt5	111,3,3,{
  end;
  
 OnTouch:
  if ($@thana_summon2 == 4) {
-  mes "^3355FFEnquanto vocÃª se aproxima";
-  mes "do emblema, ele comeÃ§a a brilhar";
-  mes "mais e mais atÃ© que";
+  mes "^3355FFEnquanto você se aproxima";
+  mes "do emblema, ele começa a brilhar";
+  mes "mais e mais até que";
   mes "se torna ofuscante.^000000";
   close2;
   monster "thana_boss",140,217,"Despair",1710,1,"Crest#tt5::OnMyMobDead";
@@ -2636,9 +2636,9 @@ OnTouch:
   mapwarp "thana_boss","tha_t12",130,47;
   end;
  }
- mes "^3355FFVocÃª encontra um estranho";
+ mes "^3355FFVocê encontra um estranho";
  mes "emblema encravado";
- mes "no chÃ£o.^000000";
+ mes "no chão.^000000";
  next;
  input .@inputstr$;
  mes "^3355FFNada aconteceu.^000000";
@@ -2654,7 +2654,7 @@ OnMyMobDead:
  end;
 }
  
-thana_boss,5,5,0 script boss_summon#tt 139,{
+thana_boss,5,5,0	script	boss_summon#tt	139,{
  end;
  
 OnEnable:
@@ -2668,7 +2668,7 @@ OnTimer1000:
  end;
  
 OnTimer3000:
- mapannounce "thana_boss","Thanatos : Eu vivo novamente para cumprir minha ambiÃ§Ã£o!",bc_map,"0x00CC00"; //FW_NORMAL 12 0 0
+ mapannounce "thana_boss","Thanatos : Eu vivo novamente para cumprir minha ambição!",bc_map,"0x00CC00"; //FW_NORMAL 12 0 0
  end;
  
 OnTimer30000:
@@ -2694,7 +2694,7 @@ OnMyMobDead:
  end;
 }
  
-thana_boss,3,3,0 script #timer_t 139,{
+thana_boss,3,3,0	script	#timer_t	139,{
  end;
  
 OnInit:
@@ -2748,7 +2748,7 @@ OnTimer7200000:
  end;
 }
  
-tha_t06,119,120,0 script to the 7th floor 45,1,1,{
+tha_t06,119,120,0	script	to the 7th floor	45,1,1,{
  end;
  
 OnTouch:
@@ -2760,8 +2760,8 @@ OnTouch:
   warp "thana_step",69,369;
   end;
  }
- mes "^3355FFFUma forÃ§a esmagadora";
- mes "age contra vocÃª, lhe prevenindo";
+ mes "^3355FFFUma força esmagadora";
+ mes "age contra você, lhe prevenindo";
  mes "de proceder por este caminho...^000000";
  close;
 }
