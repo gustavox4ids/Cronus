@@ -22,7 +22,7 @@ Special thanks to all rAthena and eAthena team for the development of the emulat
 Equipe
 ------
 ### Administradores
-- Cainho		- Caio Mateus
+- Roberto		- Roberto
 - GreenBox	- Jonathan Lima
 
 ### Coordenadores
@@ -30,18 +30,11 @@ Equipe
 - Devliz		- Fernando
 
 ### Desenvolvedores Core
-- Sicks 		- Bruno Sgambato
-- Joao Pedro	- João Pedro
 - Axl			- José Góis
 - MaminhA		- Marcelo Liberato
 - Snails     - Humberto Machado
 
 ### Desenvolvedores Script/DB
 - SBK			- Romulo
-- Wolf			- João Victor
 - NightWolf   - Gabriel
-
-### Desenvolvedores em Teste
-- GM Cold		- Marcio Montenegro
 - socramjunio	- Marcos
-- sileNtcry		- Rafael
