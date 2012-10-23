@@ -23,18 +23,16 @@ Equipe
 ------
 ### Administradores
 - Roberto		- Roberto
-- GreenBox	- Jonathan Lima
+- GreenBox		- Jonathan Lima
 
 ### Coordenadores
 - Raizen		- Carlos
 - Devliz		- Fernando
 
-### Desenvolvedores Core
+### Desenvolvedores
 - Axl			- José Góis
 - MaminhA		- Marcelo Liberato
-- Snails     - Humberto Machado
-
-### Desenvolvedores Script/DB
+- Snails		- Humberto Machado
 - SBK			- Romulo
-- NightWolf   - Gabriel
+- NightWolf		- Gabriel
 - socramjunio	- Marcos
