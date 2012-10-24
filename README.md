@@ -22,7 +22,7 @@ Special thanks to all rAthena and eAthena team for the development of the emulat
 Equipe
 ------
 ### Administradores
-- Roberto		- Roberto
+- Roberto		- Roberto Lima
 - GreenBox		- Jonathan Lima
 
 ### Coordenadores
@@ -36,3 +36,5 @@ Equipe
 - SBK			- Romulo
 - NightWolf		- Gabriel
 - socramjunio	- Marcos
+- Matheus     - Matheus Silva
+- Holdur      - José
