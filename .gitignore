@@ -15,7 +15,11 @@
 *.exe
 *.ilk
 *.pdb
+*.sln.docstates
 *.suo
+*.user
+*.psess
+*.vsp
 /ipch
 /vcproj-10/map-server_sql
 /vcproj-10/char-server_sql
@@ -23,7 +27,28 @@
 /vcproj-10/mapcache
 *.opensdf
 *.sdf
-/_ReSharper.Cronus-10
+_ReSharper.*
+[Dd]ebug/
+[Rr]elease/
+*_i.c
+*_p.c
+*.ilk
+*.aps
+*.ncb
+*.meta
+*.obj
+*.pch
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.vspscc
+.builds
+*.dotCover
 
 # Linux
 char-server_sql
@@ -35,3 +60,9 @@ Makefile
 
 #Mac OS X
 *.DS_Store
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
