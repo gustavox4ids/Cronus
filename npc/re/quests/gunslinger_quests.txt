@@ -125,7 +125,7 @@ que_ng,182,85,3	script	Garrison	109,{
 			}
 
 		case 1:
-			if((countitem(999) < 10) || (countitem(7317) < 10) || (countitem(1011) < 10) || (countitem(1003) < 30) || (countitem(985) < 1));
+			if((countitem(999) < 10) || (countitem(7317) < 10) || (countitem(1011) < 10) || (countitem(1003) < 30) || (countitem(985) < 1))
 			{
 				mes "[Garrison]";
 				mes "10 Aços, 1 Elunium, 10 Emveretarcon, 30 Carvões, e 10 Parafusos Enferrujados.";
