@@ -125,7 +125,7 @@ que_ng,182,85,3	script	Garrison	109,{
 			}
 
 		case 1:
-			if((countitem(999) < 10) || (countitem(7317) < 10) || (countitem(1011) < 10) || (countitem(1003) < 30) || (countitem(985) < 1))
+			if((countitem(999) < 10) || (countitem(7317) < 10) || (countitem(1011) < 10) || (countitem(1003) < 30) || (countitem(985) < 1));
 			{
 				mes "[Garrison]";
 				mes "10 Aços, 1 Elunium, 10 Emveretarcon, 30 Carvões, e 10 Parafusos Enferrujados.";
@@ -138,7 +138,7 @@ que_ng,182,85,3	script	Garrison	109,{
 			mes "Oh.. há um outro favor eu preciso que me faça. Err...";
 			next;
 			mes "[Garrison]";
-			mes "Preciso entregar as peças de reposição, que fiz para outra pessoa, mas tenho muito trabalho a fazer por aqui".;.";
+			mes "Preciso entregar as peças de reposição, que fiz para outra pessoa, mas tenho muito trabalho a fazer por aqui";
 			next;
 			mes "[Garrison]";
 			mes "Desculpe pedir, eu estava esperando que você pudesse entregar estes materiais para a seguinte pessoa.";
@@ -450,8 +450,7 @@ que_ng,187,163,3	script	Ingrid	744,{
 			mes "Faz bem pouco tempo";
 			mes "que comecei a trabalhar,";
 			mes "mas eu vou tentar dar o meu melhor para";
-			mes "lhe ajudar
-			,.";
+			mes "lhe ajudar.";	
 			next;
 			mes "[Ingrid]";
 			mes "Ahh ... Eu me sinto tão ansiosa.";
