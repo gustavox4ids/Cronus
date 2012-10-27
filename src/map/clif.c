@@ -107,18 +107,15 @@ static inline void RBUFPOS(const uint8* p, unsigned short pos, short* x, short* 
 {
 	p += pos;
 
-	if( x )
-	{
+	if( x ) {
 		x[0] = ( ( p[0] & 0xff ) << 2 ) | ( p[1] >> 6 );
 	}
 
-	if( y )
-	{
+	if( y ) {
 		y[0] = ( ( p[1] & 0x3f ) << 4 ) | ( p[2] >> 4 );
 	}
 
-	if( dir )
-	{
+	if( dir ) {
 		dir[0] = ( p[2] & 0x0f );
 	}
 }
@@ -128,33 +125,27 @@ static inline void RBUFPOS2(const uint8* p, unsigned short pos, short* x0, short
 {
 	p += pos;
 
-	if( x0 )
-	{
+	if( x0 ) {
 		x0[0] = ( ( p[0] & 0xff ) << 2 ) | ( p[1] >> 6 );
 	}
 
-	if( y0 )
-	{
+	if( y0 ) {
 		y0[0] = ( ( p[1] & 0x3f ) << 4 ) | ( p[2] >> 4 );
 	}
 
-	if( x1 )
-	{
+	if( x1 ) {
 		x1[0] = ( ( p[2] & 0x0f ) << 6 ) | ( p[3] >> 2 );
 	}
 
-	if( y1 )
-	{
+	if( y1 ) {
 		y1[0] = ( ( p[3] & 0x03 ) << 8 ) | ( p[4] >> 0 );
 	}
 
-	if( sx0 )
-	{
+	if( sx0 ) {
 		sx0[0] = ( p[5] & 0xf0 ) >> 4;
 	}
 
-	if( sy0 )
-	{
+	if( sy0 ) {
 		sy0[0] = ( p[5] & 0x0f ) >> 0;
 	}
 }
@@ -212,7 +203,7 @@ int clif_setip(const char* ip)
 	}
 
 	strncpy(map_ip_str, ip, sizeof(map_ip_str));
-	ShowInfo("Endereço IP do map-server: '"CL_WHITE"%s"CL_RESET"' -> '"CL_WHITE"%s"CL_RESET"'.\n", ip, ip2str(map_ip, ip_str));
+	ShowInfo("Map Server IP Address : '"CL_WHITE"%s"CL_RESET"' -> '"CL_WHITE"%s"CL_RESET"'.\n", ip, ip2str(map_ip, ip_str));
 	return 1;
 }
 
@@ -221,7 +212,7 @@ void clif_setbindip(const char* ip)
 	char ip_str[16];
 	bind_ip = host2ip(ip);
 	if (bind_ip) {
-		ShowInfo("Endereço IP do bind do map-server: '"CL_WHITE"%s"CL_RESET"' -> '"CL_WHITE"%s"CL_RESET"'.\n", ip, ip2str(bind_ip, ip_str));
+		ShowInfo("Map Server Bind IP Address : '"CL_WHITE"%s"CL_RESET"' -> '"CL_WHITE"%s"CL_RESET"'.\n", ip, ip2str(bind_ip, ip_str));
 	} else {
 		ShowWarning("Failed to Resolve Map Server Address! (%s)\n", ip);
 	}
@@ -945,7 +936,9 @@ static int clif_set_unit_idle(struct block_list* bl, unsigned char* buffer, bool
 #if PACKETVER < 20091103
 	bool type = !pcdb_checkid(vd->class_);
 #endif
+#if PACKETVER >= 7
 	unsigned short offset = 0;
+#endif
 #if PACKETVER >= 20091103
 	const char *name;
 #endif
@@ -2082,7 +2075,7 @@ void clif_viewpoint(struct map_session_data *sd, int npc_id, int type, int x, in
 void clif_cutin(struct map_session_data* sd, const char* image, int type)
 {
 	int fd;	
-
+	
 	nullpo_retv(sd);
 
 	fd=sd->fd;
@@ -5154,6 +5147,7 @@ void clif_skill_warppoint(struct map_session_data* sd, short skill_num, short sk
 		sd->menuskill_val = skill_lv;
 }
 
+
 /// Memo message (ZC_ACK_REMEMBER_WARPPOINT).
 /// 011e <type>.B
 /// type:
@@ -5176,6 +5170,7 @@ void clif_skill_memomessage(struct map_session_data* sd, int type)
 	WFIFOSET(fd,packet_len(0x11e));
 }
 
+
 /// Teleport message (ZC_NOTIFY_MAPINFO).
 /// 0189 <type>.W
 /// type:
@@ -5196,6 +5191,7 @@ void clif_skill_teleportmessage(struct map_session_data *sd, int type)
 	WFIFOW(fd,2)=type;
 	WFIFOSET(fd,packet_len(0x189));
 }
+
 
 /// Displays Sense (WZ_ESTIMATION) information window (ZC_MONSTER_INFO).
 /// 018c <class>.W <level>.W <size>.W <hp>.L <def>.W <race>.W <mdef>.W <element>.W
@@ -5232,6 +5228,7 @@ void clif_skill_estimation(struct map_session_data *sd,struct block_list *dst)
 
 	clif_send(buf,packet_len(0x18c),&sd->bl,sd->status.party_id>0?PARTY_SAMEMAP:SELF);
 }
+
 
 /// Presents a textual list of producable items (ZC_MAKABLEITEMLIST).
 /// 018d <packet len>.W { <name id>.W { <material id>.W }*3 }*
@@ -5273,6 +5270,7 @@ void clif_skill_produce_mix_list(struct map_session_data *sd, int skillid , int 
 		return;
 	}
 }
+
 
 /// Present a list of producable items (ZC_MAKINGITEM_LIST).
 /// 025a <packet len>.W <mk type>.W { <name id>.W }*
@@ -5335,6 +5333,7 @@ void clif_cooking_list(struct map_session_data *sd, int trigger, int skill_id, i
 		}
 	}
 }
+
 
 /// Notifies clients of a status change.
 /// 0196 <index>.W <id>.L <state>.B (ZC_MSG_STATE_CHANGE) [used for ending status changes and starting them on non-pc units (when needed)]
@@ -6232,49 +6231,40 @@ void clif_party_created(struct map_session_data *sd,int result)
 }
 
 
-
 /// Adds new member to a party.
-/// Other behaviours:
-/// updates item share options without a message
-/// replaces member if the charname matches
-/// ignores position fields // TODO check on different clients [flaviojs]
 /// 0104 <account id>.L <role>.L <x>.W <y>.W <state>.B <party name>.24B <char name>.24B <map name>.16B (ZC_ADD_MEMBER_TO_GROUP)
 /// 01e9 <account id>.L <role>.L <x>.W <y>.W <state>.B <party name>.24B <char name>.24B <map name>.16B <item pickup rule>.B <item share rule>.B (ZC_ADD_MEMBER_TO_GROUP2)
 /// role:
-/// 0 = leader
-/// 1 = normal
+///     0 = leader
+///     1 = normal
 /// state:
-/// 0 = connected
-/// 1 = disconnected
-void clif_party_member_info(struct party_data *p, int member_id, send_target type)
+///     0 = connected
+///     1 = disconnected
+void clif_party_member_info(struct party_data *p, struct map_session_data *sd)
 {
 	unsigned char buf[81];
-	struct map_session_data* sd;
-	struct party_member* m;
+	int i;
 
-	nullpo_retv(p);
-
-	if( member_id < 0 || member_id >= MAX_PARTY )
-		return;// out of range
-	m = &p->party.member[member_id];
-	sd = p->data[member_id].sd;
-	if( sd == NULL && type != SELF )
-		sd = party_getavailablesd(p);// can use any party member
-	if( sd == NULL )
-		return;// not online
+	if (!sd) { //Pick any party member (this call is used when changing item share rules)
+		ARR_FIND( 0, MAX_PARTY, i, p->data[i].sd != 0 );
+	} else {
+		ARR_FIND( 0, MAX_PARTY, i, p->data[i].sd == sd );
+	}
+	if (i >= MAX_PARTY) return; //Should never happen...
+	sd = p->data[i].sd;
 
 	WBUFW(buf, 0) = 0x1e9;
-	WBUFL(buf, 2) = m->account_id;
-	WBUFL(buf, 6) = ( m->leader ) ? 0 : 1;// role: 0-leader 1-member
-	WBUFW(buf,10) = p->data[member_id].x;
-	WBUFW(buf,12) = p->data[member_id].y;
-	WBUFB(buf,14) = ( m->online ) ? 0 : 1;// state: 0-online 1-offline
+	WBUFL(buf, 2) = sd->status.account_id;
+	WBUFL(buf, 6) = (p->party.member[i].leader)?0:1;
+	WBUFW(buf,10) = sd->bl.x;
+	WBUFW(buf,12) = sd->bl.y;
+	WBUFB(buf,14) = (p->party.member[i].online)?0:1;
 	memcpy(WBUFP(buf,15), p->party.name, NAME_LENGTH);
-	memcpy(WBUFP(buf,39), m->name, NAME_LENGTH);
-	mapindex_getmapname_ext(mapindex_id2name(m->map), (char*)WBUFP(buf,63));
+	memcpy(WBUFP(buf,39), sd->status.name, NAME_LENGTH);
+	mapindex_getmapname_ext(map[sd->bl.m].name, (char*)WBUFP(buf,63));
 	WBUFB(buf,79) = (p->party.item&1)?1:0;
 	WBUFB(buf,80) = (p->party.item&2)?1:0;
-	clif_send(buf,packet_len(0x1e9),&sd->bl,type);
+	clif_send(buf,packet_len(0x1e9),&sd->bl,PARTY);
 }
 
 
@@ -6409,64 +6399,44 @@ void clif_party_inviteack(struct map_session_data* sd, const char* nick, int res
 
 
 /// Updates party settings.
-/// Other behaviour:
-/// notifies the user about the current options
 /// 0101 <exp option>.L (ZC_GROUPINFO_CHANGE)
 /// 07d8 <exp option>.L <item pick rule>.B <item share rule>.B (ZC_REQ_GROUPINFO_CHANGE_V2)
 /// exp option:
-/// 0 = exp sharing disabled
-/// 1 = exp sharing enabled
-/// 2 = cannot change exp sharing
-void clif_party_option(struct party_data* p, int member_id, send_target type)
+///     0 = exp sharing disabled
+///     1 = exp sharing enabled
+///     2 = cannot change exp sharing
+///
+/// flag:
+///     0 = send to party
+///     1 = send to sd
+void clif_party_option(struct party_data *p,struct map_session_data *sd,int flag)
 {
-	struct map_session_data* sd;
 	unsigned char buf[16];
-	#if PACKETVER < 20090603
-		const int cmd = 0x101;
-	#else
-		const int cmd = 0x7d8;
-	#endif
+#if PACKETVER < 20090603
+	const int cmd = 0x101;
+#else
+	const int cmd = 0x7d8;
+#endif
 
 	nullpo_retv(p);
 
-	if( member_id == PARTY_MEMBER_NOTFOUND && type != SELF )
-		member_id = party_getanymemberid(p);// can use any party member
-	if( member_id < 0 || member_id >= MAX_PARTY )
-		return;// out of range
-	sd = p->data[member_id].sd;
-	if( sd == NULL )
-		return;// not online
-
+	if(!sd && flag==0){
+		int i;
+		for(i=0;i<MAX_PARTY && !p->data[i].sd;i++);
+		if (i < MAX_PARTY)
+			sd = p->data[i].sd;
+	}
+	if(!sd) return;
 	WBUFW(buf,0)=cmd;
-	WBUFL(buf,2)=p->party.exp;
-	#if PACKETVER >= 20090603
-		WBUFB(buf,6)=(p->party.item&1)?1:0;
-		WBUFB(buf,7)=(p->party.item&2)?1:0;
-	#else
-		// item changes are not notified in older clients
-		clif_party_member_info(p, member_id, type);
-	#endif
-	clif_send(buf,packet_len(cmd),&sd->bl,type);
-}
-
-
-/// Notify the user that it cannot change exp sharing.
-/// 0101 <exp option>.L (ZC_GROUPINFO_CHANGE)
-/// exp option:
-/// 0 = exp sharing disabled
-/// 1 = exp sharing enabled
-/// 2 = cannot change exp sharing
-void clif_party_option_failexp(struct map_session_data* sd)
-{
-	unsigned char buf[16];
-
-	if( sd == NULL )
-		return;
-
-	WBUFW(buf,0) = 0x101;
-	WBUFL(buf,2) = 2;// cannot change exp sharing
-
-	clif_send(buf,packet_len(0x101),&sd->bl,SELF);
+	WBUFL(buf,2)=((flag&0x01)?2:p->party.exp);
+#if PACKETVER >= 20090603
+	WBUFB(buf,6)=(p->party.item&1)?1:0;
+	WBUFB(buf,7)=(p->party.item&2)?1:0;
+#endif
+	if(flag==0)
+		clif_send(buf,packet_len(cmd),&sd->bl,PARTY);
+	else
+		clif_send(buf,packet_len(cmd),&sd->bl,SELF);
 }
 
 
@@ -9958,14 +9928,13 @@ void clif_parse_WisMessage(int fd, struct map_session_data* sd)
 	if( !clif_process_message(sd, 1, &target, &namelen, &message, &messagelen) )
 		return;
 
-	if (is_atcommand(fd, sd, message, 1)  )
+	if ( is_atcommand(fd, sd, message, 1) )
 		return;
 
 	if (sd->sc.data[SC_BERSERK] || (sd->sc.data[SC_NOCHAT] && sd->sc.data[SC_NOCHAT]->val1&MANNER_NOCHAT))
 		return;
 
-	if (battle_config.min_chat_delay)
-	{	//[Skotlex]
+	if (battle_config.min_chat_delay) { //[Skotlex]
 		if (DIFF_TICK(sd->cantalk_tick, gettick()) > 0) {
 			return;
 		}
@@ -9982,8 +9951,7 @@ void clif_parse_WisMessage(int fd, struct map_session_data* sd)
 	{
 		char* str = target+4; //Skip the NPC: string part.
 		struct npc_data* npc;
-		if ((npc = npc_name2id(str)))
-		{
+		if ((npc = npc_name2id(str))) {
 			char split_data[NUM_WHISPER_VAR][CHAT_SIZE_MAX];
 			char *split;
 			char output[256];
@@ -9992,11 +9960,9 @@ void clif_parse_WisMessage(int fd, struct map_session_data* sd)
 			// skip codepage indicator, if detected
 			if( str[0] == '|' && strlen(str) >= 4 )
 				str += 3;
-			for( i = 0; i < NUM_WHISPER_VAR; ++i )
-			{// Splits the message using '#' as separators
+			for( i = 0; i < NUM_WHISPER_VAR; ++i ) {// Splits the message using '#' as separators
 				split = strchr(str,'#');
-				if( split == NULL )
-				{	// use the remaining string
+				if( split == NULL ) { // use the remaining string
 					safestrncpy(split_data[i], str, ARRAYLENGTH(split_data[i]));
 					for( ++i; i < NUM_WHISPER_VAR; ++i )
 						split_data[i][0] = '\0';
@@ -10007,8 +9973,7 @@ void clif_parse_WisMessage(int fd, struct map_session_data* sd)
 				str = split+1;
 			}
 			
-			for( i = 0; i < NUM_WHISPER_VAR; ++i )
-			{
+			for( i = 0; i < NUM_WHISPER_VAR; ++i ) {
 				sprintf(output, "@whispervar%d$", i);
 				set_var(sd,output,(char *) split_data[i]);
 			}
@@ -10018,7 +9983,7 @@ void clif_parse_WisMessage(int fd, struct map_session_data* sd)
 
 			return;
 		}
-		} else if(strcmpi(target, main_chat_nick) == 0) { // Main chat [LuzZza]
+	} else if(strcmpi(target, main_chat_nick) == 0) { // Main chat [LuzZza]
 		if(!sd->state.mainchat)
 			clif_displaymessage(fd, msg_txt(388)); // You should enable main chat with "@main on" command.
 		else {
@@ -10032,8 +9997,7 @@ void clif_parse_WisMessage(int fd, struct map_session_data* sd)
 	// searching destination character
 	dstsd = map_nick2sd(target);
 
-	if (dstsd == NULL || strcmp(dstsd->status.name, target) != 0)
-	{
+	if (dstsd == NULL || strcmp(dstsd->status.name, target) != 0) {
 		// player is not on this map-server
 		// At this point, don't send wisp/page if it's not exactly the same name, because (example)
 		// if there are 'Test' player on an other map-server and 'test' player on this map-server,
@@ -10044,8 +10008,7 @@ void clif_parse_WisMessage(int fd, struct map_session_data* sd)
 	}
 	
 	// if player ignores everyone
-	if (dstsd->state.ignoreAll)
-	{
+	if (dstsd->state.ignoreAll) {
 		if (dstsd->sc.option & OPTION_INVISIBLE && pc_get_group_level(sd) < pc_get_group_level(dstsd))
 			clif_wis_end(fd, 1); // 1: target character is not loged in
 		else
@@ -10054,8 +10017,7 @@ void clif_parse_WisMessage(int fd, struct map_session_data* sd)
 	}
 	
 	// if player is autotrading
-	if( dstsd->state.autotrade == 1 )
-	{
+	if( dstsd->state.autotrade == 1 ) {
 		char output[256];
 		sprintf(output, "%s is in autotrade mode and cannot receive whispered messages.", dstsd->status.name);
 		clif_wis_message(fd, wisp_server_name, output, strlen(output) + 1);
@@ -10065,10 +10027,10 @@ void clif_parse_WisMessage(int fd, struct map_session_data* sd)
 	// if player ignores the source character
 	ARR_FIND(0, MAX_IGNORE_LIST, i, dstsd->ignore[i].name[0] == '\0' || strcmp(dstsd->ignore[i].name, sd->status.name) == 0);
 	if(i < MAX_IGNORE_LIST && dstsd->ignore[i].name[0] != '\0') { // source char present in ignore list
-			clif_wis_end(fd, 2); // 2: ignored by target
-			return;
+		clif_wis_end(fd, 2); // 2: ignored by target
+		return;
 	}
-
+		
 	// notify sender of success
 	clif_wis_end(fd, 0); // 0: success to send wisper
 
@@ -10510,8 +10472,6 @@ void clif_parse_TradeRequest(int fd,struct map_session_data *sd)
 ///     4 = rejected
 void clif_parse_TradeAck(int fd,struct map_session_data *sd)
 {
-	if( !sd->state.can_tradeack )
-		return; // client isn't supposed to send this
 	trade_tradeack(sd,RFIFOB(fd,2));
 }
 
@@ -11968,27 +11928,32 @@ void clif_parse_GuildRequestInfo(int fd, struct map_session_data *sd)
 
 /// Request to update guild positions (CZ_REG_CHANGE_GUILD_POSITIONINFO).
 /// 0161 <packet len>.W { <position id>.L <mode>.L <ranking>.L <pay rate>.L <name>.24B }*
-void clif_parse_GuildChangePositionInfo(int fd, struct map_session_data *sd) {
+void clif_parse_GuildChangePositionInfo(int fd, struct map_session_data *sd)
+{
 	int i;
 
 	if(!sd->state.gmaster_flag)
 		return;
 
-	for(i = 4; i < RFIFOW(fd,2); i += 40 )
+	for(i = 4; i < RFIFOW(fd,2); i += 40 ){
 		guild_change_position(sd->status.guild_id, RFIFOL(fd,i), RFIFOL(fd,i+4), RFIFOL(fd,i+12), (char*)RFIFOP(fd,i+16));
+	}
 }
 
 
 /// Request to update the position of guild members (CZ_REQ_CHANGE_MEMBERPOS).
 /// 0155 <packet len>.W { <account id>.L <char id>.L <position id>.L }*
-void clif_parse_GuildChangeMemberPosition(int fd, struct map_session_data *sd) {
+void clif_parse_GuildChangeMemberPosition(int fd, struct map_session_data *sd)
+{
 	int i;
 	
 	if(!sd->state.gmaster_flag)
 		return;
 
-	for(i=4;i<RFIFOW(fd,2);i+=12)
-		guild_change_memberposition(sd->status.guild_id, RFIFOL(fd,i),RFIFOL(fd,i+4),RFIFOL(fd,i+8));
+	for(i=4;i<RFIFOW(fd,2);i+=12){
+		guild_change_memberposition(sd->status.guild_id,
+			RFIFOL(fd,i),RFIFOL(fd,i+4),RFIFOL(fd,i+8));
+	}
 }
 
 
@@ -16212,19 +16177,19 @@ void clif_parse_MoveItem(int fd, struct map_session_data *sd) {
 	if(pc_isdead(sd)) {
 		return;
 	}
-
+	
 	index = RFIFOW(fd,2)-2;
 	
 	if (index < 0 || index >= MAX_INVENTORY)
 		return;
-
+	
 	if ( sd->status.inventory[index].favorite && RFIFOB(fd, 4) == 1 )
 		sd->status.inventory[index].favorite = 0;
 	else if( RFIFOB(fd, 4) == 0 )
 		sd->status.inventory[index].favorite = 1;
 	else
-		return; //do nothing
-
+		return;/* nothing to do. */
+	
 	clif_favorite_item(sd, index);
 #endif
 }
@@ -16254,7 +16219,7 @@ void clif_snap( struct block_list *bl, short x, short y ) {
 }
 
 void clif_monster_hp_bar( struct mob_data* md, int fd ) {
-#if PACKETVER >= 20120404
+#if PACKETVER >= 20120404	
 	WFIFOHEAD(fd,packet_len(0x977));
 	
 	WFIFOW(fd,0)  = 0x977;
@@ -16265,6 +16230,7 @@ void clif_monster_hp_bar( struct mob_data* md, int fd ) {
 	WFIFOSET(fd,packet_len(0x977));
 #endif
 }
+
 /*==========================================
  * Main client packet processing function
  *------------------------------------------*/
@@ -17010,7 +16976,7 @@ static int packetdb_readdb(void)
 		
 		clif_config.packet_db_ver = j?j:MAX_PACKET_VER;
 	}
-	ShowStatus("Finalizada leitura do banco de pacotes em '"CL_WHITE"%s"CL_RESET"'. Usando versão de pacotes: "CL_WHITE"%d"CL_RESET".\n", "packet_db.txt", clif_config.packet_db_ver);
+	ShowStatus("Done reading packet database from '"CL_WHITE"%s"CL_RESET"'. Using default packet version: "CL_WHITE"%d"CL_RESET".\n", "packet_db.txt", clif_config.packet_db_ver);
 	return 0;
 }
 
@@ -17045,10 +17011,10 @@ int do_init_clif(void) {
 	add_timer_func_list(clif_delayquit, "clif_delayquit");
 
 	delay_clearunit_ers = ers_new(sizeof(struct block_list),"clif.c::delay_clearunit_ers",ERS_OPT_CLEAR);
-
+	
 	return 0;
 }
 
-void do_final_clif(void)	{
+void do_final_clif(void) {
 	ers_destroy(delay_clearunit_ers);
 }

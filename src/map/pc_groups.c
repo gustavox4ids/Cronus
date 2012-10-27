@@ -39,7 +39,7 @@ static DBMap* pc_group_db; // id -> GroupSettings
 static DBMap* pc_groupname_db; // name -> GroupSettings
 
 /**
- * @retval NULL if not found	
+ * @retval NULL if not found
  * @private
  */
 static inline GroupSettings* id2group(int group_id)
@@ -272,7 +272,7 @@ static void read_config(void)
 		dbi_destroy(iter);
 	}
 
-	ShowStatus("Finalizada leitura de '"CL_WHITE"%d"CL_RESET"' grupos em '"CL_WHITE"%s"CL_RESET"'.\n", group_count, config_filename);
+	ShowStatus("Done reading '"CL_WHITE"%d"CL_RESET"' groups in '"CL_WHITE"%s"CL_RESET"'.\n", group_count, config_filename);
 
 	
 	if( ( pc_group_max = group_count ) ) {

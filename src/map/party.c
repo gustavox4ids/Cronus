@@ -53,30 +53,18 @@ static void party_fill_member(struct party_member* member, struct map_session_da
 
 
 /// Get the member_id of a party member.
-/// Return PARTY_MEMBER_NOTFOUND if not in party.
+/// Return -1 if not in party.
 int party_getmemberid(struct party_data* p, struct map_session_data* sd)
 {
 	int member_id;
-	nullpo_retr(PARTY_MEMBER_NOTFOUND, p);
+	nullpo_retr(-1, p);
 	if( sd == NULL )
-		return PARTY_MEMBER_NOTFOUND;// no player
+		return -1;// no player
 	ARR_FIND(0, MAX_PARTY, member_id,
 		p->party.member[member_id].account_id == sd->status.account_id &&
 		p->party.member[member_id].char_id == sd->status.char_id);
 	if( member_id == MAX_PARTY )
-		return PARTY_MEMBER_NOTFOUND;// not found
-	return member_id;
-}
-
-/// Get the member_id of any player that is attached to the party.
-/// Return PARTY_MEMBER_NOTFOUND if no one is attached.
-int party_getanymemberid(struct party_data* p)
-{
-	int member_id;
-	nullpo_retr(PARTY_MEMBER_NOTFOUND, p);
-	ARR_FIND(0, MAX_PARTY, member_id, p->data[member_id].sd != NULL);
-	if( member_id == MAX_PARTY )
-		return PARTY_MEMBER_NOTFOUND;// not found
+		return -1;// not found
 	return member_id;
 }
 
@@ -155,9 +143,7 @@ struct party_data* party_searchname(const char* str)
 	return p;
 }
 
-/// Request the creation of a party.
-/// Returns true if the request was sent.
-bool party_create(struct map_session_data* sd, const char* name, int item, int item2)
+int party_create(struct map_session_data *sd,char *name,int item,int item2)
 {
 	struct party_member leader;
 	char tname[NAME_LENGTH];
@@ -167,23 +153,25 @@ bool party_create(struct map_session_data* sd, const char* name, int item, int i
 
 	if( !tname[0] )
 	{// empty name
-		return false;
+		return 0;
 	}
 
 	if( sd->status.party_id > 0 || sd->party_joining || sd->party_creating )
 	{// already associated with a party
 		clif_party_created(sd,2);
-		return false;
+		return 0;
 	}
+
+	sd->party_creating = true;
 
 	party_fill_member(&leader, sd, 1);
 
-	sd->party_creating = intif_create_party(&leader,name,item,item2);
-	return sd->party_creating;
+	intif_create_party(&leader,name,item,item2);
+	return 0;
 }
 
-/// Party creation notification.
-void party_created(int account_id, int char_id, int fail, int party_id, const char* name)
+
+void party_created(int account_id,int char_id,int fail,int party_id,char *name)
 {
 	struct map_session_data *sd;
 	sd=map_id2sd(account_id);
@@ -328,8 +316,8 @@ int party_recv_info(struct party* sp, int char_id)
 		if( sd == NULL )
 			continue;// not online
 		clif_charnameupdate(sd); //Update other people's display. [Skotlex]
-		clif_party_member_info(p, member_id, PARTY);
-		clif_party_option(p, member_id, SELF);
+		clif_party_member_info(p,sd);
+		clif_party_option(p,sd,0x100);
 		clif_party_info(p,NULL);
 		if( p->instance_id != 0 )
 			clif_instance_join(sd->fd, p->instance_id);
@@ -337,7 +325,7 @@ int party_recv_info(struct party* sp, int char_id)
 	if( char_id != 0 )// requester
 	{
 		sd = map_charid2sd(char_id);
-		if( sd && sd->status.party_id == sp->party_id && party_getmemberid(p,sd) == PARTY_MEMBER_NOTFOUND )
+		if( sd && sd->status.party_id == sp->party_id && party_getmemberid(p,sd) == -1 )
 			sd->status.party_id = 0;// was not in the party
 	}
 	return 0;
@@ -492,8 +480,8 @@ int party_member_added(int party_id,int account_id,int char_id, int flag)
 
 	sd->status.party_id = party_id;
 
-	clif_party_member_info(p, party_getmemberid(p,sd), PARTY);
-	clif_party_option(p, party_getmemberid(p,sd), SELF);
+	clif_party_member_info(p,sd);
+	clif_party_option(p,sd,0x100);
 	clif_party_info(p,sd);
 
 	if( sd2 != NULL )
@@ -619,7 +607,6 @@ int party_broken(int party_id)
 	return 0;
 }
 
-/// Request the charserver to change party options.
 int party_changeoption(struct map_session_data *sd,int exp,int item)
 {
 	nullpo_ret(sd);
@@ -630,25 +617,22 @@ int party_changeoption(struct map_session_data *sd,int exp,int item)
 	return 0;
 }
 
-/// Reply from charserver about changed party options.
-/// flag bitfield:
-/// &0x01 - exp change denied
-/// &0x10 - item change denied
-void party_optionchanged(int party_id, int account_id, int exp, int item, int flag)
+int party_optionchanged(int party_id,int account_id,int exp,int item,int flag)
 {
 	struct party_data *p;
 	struct map_session_data *sd=map_id2sd(account_id);
 	if( (p=party_search(party_id))==NULL)
-		return;
+		return 0;
 
 	//Flag&1: Exp change denied. Flag&2: Item change denied.
 	if(!(flag&0x01) && p->party.exp != exp)
 		p->party.exp=exp;
-	if(!(flag&0x10) && p->party.item != item)
+	if(!(flag&0x10) && p->party.item != item) {
 		p->party.item=item;
-	if( (flag&0x01) )
-		clif_party_option_failexp(sd);
-	clif_party_option(p, party_getmemberid(p,sd), PARTY);
+	}
+
+	clif_party_option(p,sd,flag);
+	return 0;
 }
 
 bool party_changeleader(struct map_session_data *sd, struct map_session_data *tsd)
@@ -749,9 +733,9 @@ void party_send_movemap(struct map_session_data *sd)
 
 	if(sd->state.connect_new) {
 		//Note that this works because this function is invoked before connect_new is cleared.
-		clif_party_option(p, party_getmemberid(p,sd), SELF);
+		clif_party_option(p,sd,0x100);
 		clif_party_info(p,sd);
-		clif_party_member_info(p, party_getmemberid(p,sd), PARTY);
+		clif_party_member_info(p,sd);
 	}
 
 	if (sd->fd) { // synchronize minimap positions with the rest of the party
