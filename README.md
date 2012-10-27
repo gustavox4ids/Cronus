@@ -38,3 +38,5 @@ Equipe
 - socramjunio	- Marcos
 - Matheus     - Matheus Silva
 - Holdur      - José
+- Rafael      - Rafael
+- Schrwaizer  - Thiago
