@@ -48,12 +48,19 @@ ECHO %2 deu erro!
 GOTO RESTART_NT
 
 :DIRETO
+ECHO.
 ECHO Não inicie este arquivo diretamente. Ele é usado pelo logserv-sql.bat,
 ECHO charserv-sql.bat e mapserv-sql.bat.
+ECHO.
 GOTO END
 
 :NOTFOUND
-ECHO %1 não foi encontrado. Tenha certeza que %2 foi compilado.
+ECHO.
+ECHO O %2 não foi encontrado.
+ECHO Muito provavelmente, você esqueceu de compilar o emulador.
+ECHO Por favor, leia na seção Guias e Tutoriais do Cronus para
+ECHO saber como compilar.
+ECHO.
 GOTO END
 
 :END
