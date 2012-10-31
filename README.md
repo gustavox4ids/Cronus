@@ -23,11 +23,11 @@ Equipe
 ------
 ### Administradores
 - Roberto		- Roberto Lima
-- GreenBox		- Jonathan Lima
 
 ### Coordenadores
 - Raizen		- Carlos
 - Devliz		- Fernando
+- GreenBox		- Jonathan Lima
 
 ### Desenvolvedores
 - Axl			- José Góis
@@ -40,3 +40,4 @@ Equipe
 - Holdur      - José
 - Rafael      - Rafael
 - Schrwaizer  - Thiago
+- Merakk      - Renan
