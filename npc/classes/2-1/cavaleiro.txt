@@ -2537,7 +2537,6 @@ L_AskQuestions:
 			next;
 			if (.@knight_t == 0) {
 				set KNIGHT_Q,14;
-				changequest 9011,9012;
 				mes "[Senhor Gray]";
 				mes "Eu gostei de conversar com você. Você me lembra de como eu era quando era um jovem recruta. Nós devemos falar com o capitão e decidir";
 				mes "a sua mudança de classe?";
@@ -2551,7 +2550,6 @@ L_AskQuestions:
 			}
 			else if (.@knight_t == 5) {
 				set KNIGHT_Q,14;
-				changequest 9011,9012;
 				mes "[Senhor Gray]";
 				mes "Eu gostei de conversar com você. Você pode pensar sobre os princípios dos Cavaleiros uma vez que você se tornar um Cavaleiro.";
 				next;
