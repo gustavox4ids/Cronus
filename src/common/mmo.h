@@ -544,14 +544,14 @@ struct fame_list {
 };
 
 enum {
-	GBI_EXP	=1,		// ギルドのEXP
-	GBI_GUILDLV,		// ギルドのLv
-	GBI_SKILLPOINT,		// ギルドのスキルポイント
-	GBI_SKILLLV,		// ギルドスキルLv
+	GBI_EXP=1,
+	GBI_GUILDLV,
+	GBI_SKILLPOINT,
+	GBI_SKILLLV,
 };
 
 enum {
-	GMI_POSITION	=0,		// メンバーの役職変更
+	GMI_POSITION=0,
 	GMI_EXP,
 	GMI_HAIR,
 	GMI_HAIR_COLOR,

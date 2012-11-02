@@ -190,8 +190,8 @@ int map_fd;
 
 static int clif_parse (int fd);
 
-/*==========================================
- * map鯖のip設定
+/*========================================== 
+ * Ip setting of map-server 
  *------------------------------------------*/
 int clif_setip(const char* ip)
 {
@@ -1357,9 +1357,9 @@ int clif_spawn(struct block_list *bl)
 			int i;
 			if (sd->spiritball > 0)
 				clif_spiritball(sd);
-			if(sd->state.size==2) // tiny/big players [Valaris]
+			if(sd->state.size==SZ_BIG) // tiny/big players [Valaris]
 				clif_specialeffect(bl,423,AREA);
-			else if(sd->state.size==1)
+			else if(sd->state.size==SZ_MEDIUM)
 				clif_specialeffect(bl,421,AREA);
 			if( sd->bg_id && map[sd->bl.m].flag.battleground )
 				clif_sendbgemblem_area(sd);
@@ -1384,9 +1384,9 @@ int clif_spawn(struct block_list *bl)
 	case BL_MOB:
 		{
 			TBL_MOB *md = ((TBL_MOB*)bl);
-			if(md->special_state.size==2) // tiny/big mobs [Valaris]
+			if(md->special_state.size==SZ_BIG) // tiny/big mobs [Valaris]
 				clif_specialeffect(&md->bl,423,AREA);
-			else if(md->special_state.size==1)
+			else if(md->special_state.size==SZ_MEDIUM)
 				clif_specialeffect(&md->bl,421,AREA);
 		}
 		break;
@@ -1587,9 +1587,9 @@ static void clif_move2(struct block_list *bl, struct view_data *vd, struct unit_
 		{
 			TBL_PC *sd = ((TBL_PC*)bl);
 //			clif_movepc(sd);
-			if(sd->state.size==2) // tiny/big players [Valaris]
+			if(sd->state.size==SZ_BIG) // tiny/big players [Valaris]
 				clif_specialeffect(&sd->bl,423,AREA);
-			else if(sd->state.size==1)
+			else if(sd->state.size==SZ_MEDIUM)
 				clif_specialeffect(&sd->bl,421,AREA);
 		}
 		break;
@@ -3211,7 +3211,7 @@ void clif_arrowequip(struct map_session_data *sd,int val)
 	fd=sd->fd;
 	WFIFOHEAD(fd, packet_len(0x013c));
 	WFIFOW(fd,0)=0x013c;
-	WFIFOW(fd,2)=val+2;//矢のアイテムID
+	WFIFOW(fd,2)=val+2; // Item ID of the arrow
 	WFIFOSET(fd,packet_len(0x013c));
 }
 
@@ -4101,9 +4101,9 @@ void clif_getareachar_unit(struct map_session_data* sd,struct block_list *bl)
 		{
 			TBL_PC* tsd = (TBL_PC*)bl;
 			clif_getareachar_pc(sd, tsd);
-			if(tsd->state.size==2) // tiny/big players [Valaris]
+			if(tsd->state.size==SZ_BIG) // tiny/big players [Valaris]
 				clif_specialeffect_single(bl,423,sd->fd);
-			else if(tsd->state.size==1)
+			else if(tsd->state.size==SZ_MEDIUM)
 				clif_specialeffect_single(bl,421,sd->fd);
 			if( tsd->bg_id && map[tsd->bl.m].flag.battleground )
 				clif_sendbgemblem_single(sd->fd,tsd);
@@ -11901,22 +11901,22 @@ void clif_parse_GuildRequestInfo(int fd, struct map_session_data *sd)
 
 	switch( RFIFOL(fd,2) )
 	{
-	case 0:	// ギルド基本情報、同盟敵対情報
+	case 0:	// ?M???h??{???A?????G????
 		clif_guild_basicinfo(sd);
 		clif_guild_allianceinfo(sd);
 		break;
-	case 1:	// メンバーリスト、役職名リスト
+	case 1:	// ?????o?[???X?g?A??E?????X?g
 		clif_guild_positionnamelist(sd);
 		clif_guild_memberlist(sd);
 		break;
-	case 2:	// 役職名リスト、役職情報リスト
+	case 2:	// ??E?????X?g?A??E????X?g
 		clif_guild_positionnamelist(sd);
 		clif_guild_positioninfolist(sd);
 		break;
-	case 3:	// スキルリスト
+	case 3:	// ?X?L?????X?g
 		clif_guild_skillinfo(sd);
 		break;
-	case 4:	// 追放リスト
+	case 4:	// ?U?X?g
 		clif_guild_expulsionlist(sd);
 		break;
 	default:
@@ -12072,7 +12072,7 @@ void clif_parse_GuildLeave(int fd,struct map_session_data *sd)
 	}
 	if( sd->bg_id )
 	{
-		clif_displaymessage(fd, "You can't leave battleground guilds.");
+		clif_displaymessage(fd, msg_txt(670));
 		return;
 	}
 
@@ -12889,7 +12889,7 @@ void clif_parse_FriendsListAdd(int fd, struct map_session_data *sd)
 	// Friend already exists
 	for (i = 0; i < MAX_FRIENDS && sd->status.friends[i].char_id != 0; i++) {
 		if (sd->status.friends[i].char_id == f_sd->status.char_id) {
-			clif_displaymessage(fd, "Friend already exists.");
+			clif_displaymessage(fd, msg_txt(672));
 			return;
 		}
 	}
@@ -13017,7 +13017,7 @@ void clif_parse_FriendsListRemove(int fd, struct map_session_data *sd)
 
 	} else { //friend not online -- ask char server to delete from his friendlist
 		if(chrif_removefriend(char_id,sd->status.char_id)) { // char-server offline, abort
-			clif_displaymessage(fd, "This action can't be performed at the moment. Please try again later.");
+			clif_displaymessage(fd, msg_txt(673));
 			return;
 		}
 	}
@@ -13030,7 +13030,7 @@ void clif_parse_FriendsListRemove(int fd, struct map_session_data *sd)
 		memcpy(&sd->status.friends[j-1], &sd->status.friends[j], sizeof(sd->status.friends[0]));
 
 	memset(&sd->status.friends[MAX_FRIENDS-1], 0, sizeof(sd->status.friends[MAX_FRIENDS-1]));
-	clif_displaymessage(fd, "Friend removed");
+	clif_displaymessage(fd, msg_txt(674));
 
 	WFIFOHEAD(fd,packet_len(0x20a));
 	WFIFOW(fd,0) = 0x20a;
@@ -13840,7 +13840,7 @@ void clif_parse_Mail_send(int fd, struct map_session_data *sd)
 
 	if( DIFF_TICK(sd->cansendmail_tick, gettick()) > 0 )
 	{
-		clif_displaymessage(sd->fd,"Cannot send mails too fast!!.");
+		clif_displaymessage(sd->fd, msg_txt(675));
 		clif_Mail_send(fd, true); // fail
 		return;
 	}
@@ -16042,7 +16042,7 @@ int clif_autoshadowspell_list(struct map_session_data *sd) {
 		sd->menuskill_id = SC_AUTOSHADOWSPELL;
 		sd->menuskill_val = c;
 	} else {
-		status_change_end(&sd->bl,SC_STOP,-1);
+		status_change_end(&sd->bl,SC_STOP,INVALID_TIMER);
 		clif_skill_fail(sd,SC_AUTOSHADOWSPELL,USESKILL_FAIL_IMITATION_SKILL_NONE,0);
 	}
 
@@ -16416,7 +16416,7 @@ static int packetdb_readdb(void)
 #endif
 #if PACKETVER < 2
 	    3, 28, 19, 11,  3, -1,  9,  5, 52, 51, 56, 58, 41,  2,  6,  6,
-#elif PACKETVER < 20071106	// 78-7b 亀島以降 lv99エフェクト用
+#elif PACKETVER < 20071106	// ?T????~ lv99?G?t?F?N?g?p
 	    3, 28, 19, 11,  3, -1,  9,  5, 54, 53, 58, 60, 41,  2,  6,  6,
 #elif PACKETVER <= 20081217 // change in 0x78 and 0x7c
 	    3, 28, 19, 11,  3, -1,  9,  5, 55, 53, 58, 60, 42,  2,  6,  6,
@@ -16451,7 +16451,7 @@ static int packetdb_readdb(void)
 	    6,  3,106, 10, 10, 34,  0,  6,  8,  4,  4,  4, 29, -1, 10,  6,
 #if PACKETVER < 1
 	   90, 86, 24,  6, 30,102,  8,  4,  8,  4, 14, 10, -1,  6,  2,  6,
-#else	// 196 comodo以降 状態表示アイコン用
+#else	// 196 comodo??~ ???\???A?C?R???p
 	   90, 86, 24,  6, 30,102,  9,  4,  8,  4, 14, 10, -1,  6,  2,  6,
 #endif
 #if PACKETVER < 20081126

@@ -29,7 +29,7 @@
 
 
 #define WISDATA_TTL (60*1000)	// Survival time of Wis data (60 seconds)
-#define WISDELLIST_MAX 256			// Wis's number of elements on the data delete list
+#define WISDELLIST_MAX 256		// Wis's number of elements on the data delete list
 
 
 Sql* sql_handle = NULL;

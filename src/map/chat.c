@@ -372,7 +372,7 @@ int chat_deletenpcchat(struct npc_data* nd)
 }
 
 /*==========================================
- * 規定人数以上でイベントが定義されてるなら実行
+ * Trigger npc event when we enter the chatroom
  *------------------------------------------*/
 int chat_triggerevent(struct chat_data *cd)
 {

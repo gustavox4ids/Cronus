@@ -39,12 +39,12 @@ struct eventlist {
 	struct eventlist *next;
 };
 
-// ギルドのEXPキャッシュのフラッシュに関連する定数
-#define GUILD_SEND_XY_INVERVAL	5000	// 座標やＨＰ送信の間隔
-#define GUILD_PAYEXP_INVERVAL 10000	// 間隔(キャッシュの最大生存時間、ミリ秒)
-#define GUILD_PAYEXP_LIST 8192	// キャッシュの最大数
+// Constant related to the flash of the Guild EXP cache
+#define GUILD_SEND_XY_INVERVAL	5000	// 巧nterval of sending coordinates and HP
+#define GUILD_PAYEXP_INVERVAL 10000	// Interval (maximum survival time of the cache, in milliseconds)
+#define GUILD_PAYEXP_LIST 8192	// The maximum number of cache
 
-// ギルドのEXPキャッシュ
+// Guild EXP cache
 struct guild_expcache {
 	int guild_id, account_id, char_id;
 	uint64 exp;
@@ -91,10 +91,10 @@ int guild_skill_get_max (int id)
 	return guild_skill_tree[id-GD_SKILLBASE].max;
 }
 
-// ギルドスキルがあるか確認
-int guild_checkskill(struct guild *g,int id)
-{
-	int idx = id-GD_SKILLBASE;
+// Retrive skilllv learned by guild
+int guild_checkskill(struct guild *g,int id) {
+
+	int idx = id - GD_SKILLBASE;
 	if (idx < 0 || idx >= MAX_GUILDSKILL)
 		return 0;
 	return g->skill[idx].lv;
@@ -261,7 +261,7 @@ int guild_getposition(struct guild* g, struct map_session_data* sd)
 	return( i < g->max_member ) ? g->member[i].position : -1;
 }
 
-// メンバー情報の作成
+// Creation of member information
 void guild_makemember(struct guild_member *m,struct map_session_data *sd)
 {
 	nullpo_retv(sd);
@@ -283,7 +283,7 @@ void guild_makemember(struct guild_member *m,struct map_session_data *sd)
 }
 
 /**
- *  ギルドのEXPキャッシュをinter鯖にフラッシュする
+ * Server cache to be flushed to inter the Guild EXP
  * @see DBApply
  */
 int guild_payexp_timer_sub(DBKey key, DBData *data, va_list ap) {
@@ -392,7 +392,7 @@ int guild_create(struct map_session_data *sd, const char *name)
 	return 1;
 }
 
-// 作成可否
+// Whether or not to create guilde
 int guild_created(int account_id,int guild_id)
 {
 	struct map_session_data *sd=map_id2sd(account_id);
@@ -400,24 +400,24 @@ int guild_created(int account_id,int guild_id)
 	if(sd==NULL)
 		return 0;
 	if(!guild_id) {
-		clif_guild_created(sd,2);	// 作成失敗（同名ギルド存在）
+		clif_guild_created(sd,2); // Creation failure (presence of the same name Guild)
 		return 0;
 	}
 	//struct guild *g;
 	sd->status.guild_id=guild_id;
 	clif_guild_created(sd,0);
 	if(battle_config.guild_emperium_check)
-		pc_delitem(sd,pc_search_inventory(sd,714),1,0,0,LOG_TYPE_CONSUME);	// エンペリウム消耗
+		pc_delitem(sd,pc_search_inventory(sd,714),1,0,0,LOG_TYPE_CONSUME);	// ?G???y???E??????
 	return 0;
 }
 
-// 情報要求
+// Information request
 int guild_request_info(int guild_id)
 {
 	return intif_guild_request_info(guild_id);
 }
 
-// イベント付き情報要求
+//Information request with event
 int guild_npc_request_info(int guild_id,const char *event)
 {
 	if( guild_search(guild_id) )
@@ -442,7 +442,7 @@ int guild_npc_request_info(int guild_id,const char *event)
 	return guild_request_info(guild_id);
 }
 
-// 所属キャラの確認
+//Confirmation of the character belongs to guild
 int guild_check_member(struct guild *g)
 {
 	int i;
@@ -469,7 +469,7 @@ int guild_check_member(struct guild *g)
 	return 0;
 }
 
-// 情報所得失敗（そのIDのキャラを全部未所属にする）
+//Delete association with guild_id for all characters
 int guild_recv_noinfo(int guild_id)
 {
 	struct map_session_data *sd;
@@ -486,7 +486,7 @@ int guild_recv_noinfo(int guild_id)
 	return 0;
 }
 
-// 情報所得
+//Get and display information for all member
 int guild_recv_info(struct guild *sg)
 {
 	struct guild *g,before;
@@ -504,7 +504,7 @@ int guild_recv_info(struct guild *sg)
 		idb_put(guild_db,sg->guild_id,g);
 		before=*sg;
 
-		// 最初のロードなのでユーザーのチェックを行う
+		// Perform the check on the user because the first load
 		guild_check_member(sg);
 		if ((sd = map_nick2sd(sg->master)) != NULL)
 		{
@@ -539,7 +539,7 @@ int guild_recv_info(struct guild *sg)
 			bm++;
 	}
 
-	for(i=0;i<g->max_member;i++){	// 情報の送信
+	for(i=0;i<g->max_member;i++){ // Transmission of information at all members
 		sd = g->member[i].sd;
 		if( sd==NULL )
 			continue;
@@ -579,10 +579,11 @@ int guild_recv_info(struct guild *sg)
 	return 0;
 }
 
-
-// ギルドへの勧誘
-int guild_invite(struct map_session_data *sd,struct map_session_data *tsd)
-{
+/*=============================================
+* Player sd send a guild invatation to player tsd to join his guild
+*--------------------------------------------*/
+int guild_invite(struct map_session_data *sd,struct map_session_data *tsd) {
+	
 	struct guild *g;
 	int i;
 

@@ -126,7 +126,7 @@ struct char_session_data {
 	int found_char[MAX_CHARS]; // ids of chars on this account
 	char email[40]; // e-mail (default: a@a.com) by [Yor]
 	time_t expiration_time; // # of seconds 1/1/1970 (timestamp): Validity limit of the account (0 = unlimited)
-	int group_id;
+	int group_id; // Permissão
 	uint32 version;
 	uint8 clienttype;
 	char new_name[NAME_LENGTH];
@@ -3338,7 +3338,7 @@ int search_mapserver(unsigned short map, uint32 ip, uint16 port)
 	return -1;
 }
 
-// char_mapif‚Ì‰Šú‰»ˆ—iŒ»İ‚Íinter_mapif‰Šú‰»‚Ì‚İj
+// Initialization process (currently only initialization inter_mapif)
 static int char_mapif_init(int fd)
 {
 	return inter_mapif_init(fd);
@@ -4739,10 +4739,10 @@ int do_init(int argc, char **argv)
 	add_timer_func_list(broadcast_user_count, "broadcast_user_count");
 	add_timer_interval(gettick() + 1000, broadcast_user_count, 0, 0, 5 * 1000);
 
-	// ???
+	// Timer to clear (online_char_db)
 	add_timer_func_list(chardb_waiting_disconnect, "chardb_waiting_disconnect");
 
-	// ???
+	// Online Data timers (checking if char still connected)
 	add_timer_func_list(online_data_cleanup, "online_data_cleanup");
 	add_timer_interval(gettick() + 1000, online_data_cleanup, 0, 0, 600 * 1000);
 
