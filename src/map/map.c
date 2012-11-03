@@ -82,7 +82,7 @@ Sql* logmysql_handle;
 
 // This param using for sending mainchat
 // messages like whispers to this nick. [LuzZza]
-char main_chat_nick[16] = "Main";
+char main_chat_nick[16] = "Principal";
 
 char *INTER_CONF_NAME;
 char *LOG_CONF_NAME;
@@ -93,7 +93,7 @@ char *SCRIPT_CONF_NAME;
 char *MSG_CONF_NAME;
 char *GRF_PATH_FILENAME;
 
-// 極力 staticでロ?カルに?める
+// DBMap declaartion
 static DBMap* id_db=NULL; // int id -> struct block_list*
 static DBMap* pc_db=NULL; // int id -> struct map_session_data*
 static DBMap* mobid_db=NULL; // int id -> struct mob_data*
@@ -183,12 +183,11 @@ int map_usercount(void)
 }
 
 //
-// block削除の安全性確保?理
+// block???ｨ??S???m?????
 //
 
 /*==========================================
- * blockをfreeするときfreeの?わりに呼ぶ
- * ロックされているときはバッファにためる
+ * Attempt to free a map blocklist
  *------------------------------------------*/
 int map_freeblock (struct block_list *bl)
 {
@@ -205,7 +204,7 @@ int map_freeblock (struct block_list *bl)
 	return block_free_lock;
 }
 /*==========================================
- * blockのfreeを一市Iに禁止する
+ * block??free????sI???~????
  *------------------------------------------*/
 int map_freeblock_lock (void)
 {
@@ -991,7 +990,7 @@ int map_foreachinmovearea(int (*func)(struct block_list*,va_list), struct block_
 	if(bl_list_count>=BL_LIST_MAX)
 		ShowWarning("map_foreachinmovearea: block count too many!\n");
 
-	map_freeblock_lock();	// メモリからの解放を禁止する
+	map_freeblock_lock();	// Prohibit the release from memory
 
 	for(i=blockcount;i<bl_list_count;i++)
 		if(bl_list[i]->prev)
@@ -1002,7 +1001,7 @@ int map_foreachinmovearea(int (*func)(struct block_list*,va_list), struct block_
 			va_end(ap);
 		}
 
-	map_freeblock_unlock();	// 解放を許可する
+	map_freeblock_unlock();	// Allow Free
 
 	bl_list_count = blockcount;
 	return returnCount;
@@ -1469,10 +1468,13 @@ int map_search_freecell(struct block_list *src, int m, short *x,short *y, int rx
 }
 
 /*==========================================
- * (m,x,y)を中心に3x3以?に床アイテム設置
- *
- * item_dataはamount以外をcopyする
- * type flag: &1 MVP item. &2 do stacking check.
+ * Add an item to location (m,x,y)
+ * Parameters
+ * 	@item_data item attributes
+ * 	@amount quantity
+ * 	@m, @x, @y mapid,x,y
+ * 	@first_charid, @second_charid, @third_charid, looting priority
+ * 	@flag: &1 MVP item. &2 do stacking check.
  *------------------------------------------*/
 int map_addflooritem(struct item *item_data,int amount,int m,int x,int y,int first_charid,int second_charid,int third_charid,int flags)
 {
@@ -2497,7 +2499,7 @@ static int map_cell2gat(struct mapcell cell)
 }
 
 /*==========================================
- * (m,x,y)の状態を調べる
+ * Confirm if celltype in (m,x,y) match the one given in cellchk
  *------------------------------------------*/
 int map_getcell(int m,int x,int y,cell_chk cellchk)
 {
@@ -3978,7 +3980,7 @@ int do_init(int argc, char *argv[])
 	do_init_battleground();
 	do_init_duel();
 	
-	npc_event_do_oninit();	// npcのOnInitイベント?行
+	npc_event_do_oninit();	// Init npcs (OnInit)
 
 	if( console )
 	{

@@ -47,7 +47,7 @@
 #include <time.h>
 
 
-#define PVP_CALCRANK_INTERVAL 1000	// PVP‡ˆÊŒvZ‚ÌŠÔŠu
+#define PVP_CALCRANK_INTERVAL 1000	// PVP calculation interval
 static unsigned int exp_table[CLASS_COUNT][2][MAX_LEVEL];
 static unsigned int max_level[CLASS_COUNT][2];
 static unsigned int statp[MAX_LEVEL+1];
@@ -275,6 +275,7 @@ static int pc_check_banding( struct block_list *bl, va_list ap ) {
 
 	return 0;
 }
+
 int pc_banding(struct map_session_data *sd, short skill_lv) {
 	int c;
 	int b_sd[MAX_PARTY]; // In case of a full Royal Guard party.
@@ -559,7 +560,7 @@ int pc_makesavestatus(struct map_session_data *sd)
 }
 
 /*==========================================
- * Ú?bÌ‰Šú‰?
+ * Off init ? Connection?
  *------------------------------------------*/
 int pc_setnewpc(struct map_session_data *sd, int account_id, int char_id, int login_id1, unsigned int client_tick, int sex, int fd)
 {
@@ -833,10 +834,15 @@ bool pc_adoption(struct map_session_data *p1_sd, struct map_session_data *p2_sd,
 	return false; // Job Change Fail
 }
 
+/*================================================= 
+ * Can the player equip the item at index n in inventory 
+ * return 
+ *      0 = no 
+ *      1 = yes 
+ *------------------------------------------------*/
 int pc_isequip(struct map_session_data *sd,int n)
 {
 	struct item_data *item;
-	//?¶‚â—{q‚Ìê‡‚ÌŒ³‚ÌE‹Æ‚ğZo‚·‚é
 
 	nullpo_ret(sd);
 
@@ -917,8 +923,8 @@ int pc_isequip(struct map_session_data *sd,int n)
 }
 
 /*==========================================
- * session id‚É–â‘è–³‚µ
- * charI‚©‚ç‘—‚ç‚ê‚Ä‚«‚½ƒXƒe?ƒ^ƒX‚ğİ’è
+ * No problem with the session id 
+ * set the status that has been sent from char server
  *------------------------------------------*/
 bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_time, int group_id, struct mmo_charstatus *st, bool changing_mapservers)
 {
@@ -1037,7 +1043,7 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 	for( i = 0; i < 3; i++ )
 		sd->hate_mob[i] = -1;
 
-	// ˆÊ’u‚Ìİ’è
+	// warp player
 	if ((i=pc_setpos(sd,sd->status.last_point.map, sd->status.last_point.x, sd->status.last_point.y, CLR_OUTSIGHT)) != 0) {
 		ShowError ("Last_point_map %s - id %d not found (error code %d)\n", mapindex_id2name(sd->status.last_point.map), sd->status.last_point.map, i);
 
@@ -1278,7 +1284,7 @@ static int pc_calc_skillpoint(struct map_session_data* sd)
 
 
 /*==========================================
- * ?‚¦‚ç‚ê‚éƒXƒLƒ‹‚ÌŒvZ
+ * Calculation of Skills lvls
  *------------------------------------------*/
 int pc_calc_skilltree(struct map_session_data *sd)
 {
@@ -3444,7 +3450,7 @@ int pc_skill(TBL_PC* sd, int id, int level, int flag)
 	return 1;
 }
 /*==========================================
- * ƒJ?ƒh?“ü
+ * Append a card to an item ?
  *------------------------------------------*/
 int pc_insert_card(struct map_session_data* sd, int idx_card, int idx_equip)
 {
@@ -3499,18 +3505,18 @@ int pc_insert_card(struct map_session_data* sd, int idx_card, int idx_equip)
 }
 
 //
-// ƒAƒCƒeƒ€•¨
+// Items
 //
 
 /*==========================================
- * ƒXƒLƒ‹‚É‚æ‚é”ƒ‚¢’lC³
+ * Update buying value by skills
  *------------------------------------------*/
 int pc_modifybuyvalue(struct map_session_data *sd,int orig_value)
 {
 	int skill,val = orig_value,rate1 = 0,rate2 = 0;
-	if((skill=pc_checkskill(sd,MC_DISCOUNT))>0)	// ƒfƒBƒXƒJƒEƒ“ƒg
+	if((skill=pc_checkskill(sd,MC_DISCOUNT))>0)	// merchant discount
 		rate1 = 5+skill*2-((skill==10)? 1:0);
-	if((skill=pc_checkskill(sd,RG_COMPULSION))>0)	// ƒRƒ€ƒpƒ‹ƒVƒ‡ƒ“ƒfƒBƒXƒJƒEƒ“ƒg
+	if((skill=pc_checkskill(sd,RG_COMPULSION))>0)	// rogue discount
 		rate2 = 5+skill*4;
 	if(rate1 < rate2) rate1 = rate2;
 	if(rate1)
@@ -3522,12 +3528,12 @@ int pc_modifybuyvalue(struct map_session_data *sd,int orig_value)
 }
 
 /*==========================================
- * ƒXƒLƒ‹‚É‚æ‚é?‚è’lC³
+ * Update selling value by skills
  *------------------------------------------*/
 int pc_modifysellvalue(struct map_session_data *sd,int orig_value)
 {
 	int skill,val = orig_value,rate = 0;
-	if((skill=pc_checkskill(sd,MC_OVERCHARGE))>0)	// ƒI?ƒo?ƒ`ƒƒ?ƒW
+	if((skill=pc_checkskill(sd,MC_OVERCHARGE))>0)	// OverCharge
 		rate = 5+skill*2-((skill==10)? 1:0);
 	if(rate)
 		val = (int)((double)orig_value*(double)(100+rate)/100.);
@@ -3538,8 +3544,8 @@ int pc_modifysellvalue(struct map_session_data *sd,int orig_value)
 }
 
 /*==========================================
- * ƒAƒCƒeƒ€‚ğ”ƒ‚Á‚½bÉAV‚µ‚¢ƒAƒCƒeƒ€—“‚ğg‚¤‚©A
- * 3–œŒÂ§ŒÀ‚É‚©‚©‚é‚©Šm”F
+ * Checking if we have enough place on inventory for new item 
+ * Make sure to take 30k as limit (for client I guess)
  *------------------------------------------*/
 int pc_checkadditem(struct map_session_data *sd,int nameid,int amount)
 {
@@ -3572,7 +3578,8 @@ int pc_checkadditem(struct map_session_data *sd,int nameid,int amount)
 }
 
 /*==========================================
- * ‹ó‚«ƒAƒCƒeƒ€—“‚ÌŒÂ?
+ * Return number of available place in inventory 
+ * Each non stackable item will reduce place by 1
  *------------------------------------------*/
 int pc_inventoryblank(struct map_session_data *sd)
 {
@@ -3732,7 +3739,7 @@ int pc_getzeny(struct map_session_data *sd,int zeny)
 }
 
 /*==========================================
- * ƒAƒCƒeƒ€‚ğ’T‚µ‚ÄAƒCƒ“ƒfƒbƒNƒX‚ğ•Ô‚·
+ * Searching a specified itemid in inventory and return his stored index
  *------------------------------------------*/
 int pc_search_inventory(struct map_session_data *sd,int item_id)
 {
@@ -3744,7 +3751,16 @@ int pc_search_inventory(struct map_session_data *sd,int item_id)
 }
 
 /*==========================================
- * ƒAƒCƒeƒ€’Ç‰ÁBŒÂ?‚Ì‚İitem\‘¢?‚Ì?š‚ğ–³‹
+ * Attempt tp add a new item in inventory 
+ * return 
+	0 = success 
+	1 = invalid itemid not found or negative amount
+	2 = overweight 
+		3 = ? 
+	4 = no free place found 
+	5 = max amount reached 
+		6 = ? 
+	7 = stack limitation
  *------------------------------------------*/
 int pc_additem(struct map_session_data *sd,struct item *item_data,int amount,e_log_pick_type log_type)
 {
@@ -3827,7 +3843,10 @@ int pc_additem(struct map_session_data *sd,struct item *item_data,int amount,e_l
 }
 
 /*==========================================
- * ƒAƒCƒeƒ€‚ğŒ¸‚ç‚·
+ * Remove an item at index n from inventory by amount 
+ * return 
+ *      0 = succes 
+ *      1 = invalid itemid or negative amount
  *------------------------------------------*/
 int pc_delitem(struct map_session_data *sd,int n,int amount,int type, short reason, e_log_pick_type log_type)
 {
@@ -3855,7 +3874,10 @@ int pc_delitem(struct map_session_data *sd,int n,int amount,int type, short reas
 }
 
 /*==========================================
- * ƒAƒCƒeƒ€‚ğ—‚·
+ * Attempt to drop an item 
+ * return 
+ *      0 = fail 
+ *      1 = success
  *------------------------------------------*/
 int pc_dropitem(struct map_session_data *sd,int n,int amount)
 {
@@ -3896,7 +3918,10 @@ int pc_dropitem(struct map_session_data *sd,int n,int amount)
 }
 
 /*==========================================
- * ƒAƒCƒeƒ€‚ğE‚¤
+ * Attempt to pickup an item 
+ * return 
+ *      0 = fail 
+ *      1 = success
  *------------------------------------------*/
 int pc_takeitem(struct map_session_data *sd,struct flooritem_data *fitem)
 {
@@ -3909,7 +3934,7 @@ int pc_takeitem(struct map_session_data *sd,struct flooritem_data *fitem)
 	nullpo_ret(fitem);
 
 	if(!check_distance_bl(&fitem->bl, &sd->bl, 2) && sd->ud.skillid!=BS_GREED)
-		return 0;	// ‹——£‚ª‰“‚¢
+		return 0;	// Distance is too far
 
 	if (sd->status.party_id)
 		p = party_search(sd->status.party_id);
@@ -3963,6 +3988,12 @@ int pc_takeitem(struct map_session_data *sd,struct flooritem_data *fitem)
 	return 1;
 }
 
+/*========================================== 
+ * Can we use the item  ? 
+ * Return 
+ *      0 = no 
+ *      1 = yes 
+*------------------------------------------*/
 int pc_isUseitem(struct map_session_data *sd,int n)
 {
 	struct item_data *item;
@@ -4123,7 +4154,10 @@ int pc_isUseitem(struct map_session_data *sd,int n)
 }
 
 /*==========================================
- * ƒAƒCƒeƒ€‚ğg‚¤
+ * Last checks et use item 
+ * return 
+ *      0 = fail 
+ *      1 = success
  *------------------------------------------*/
 int pc_useitem(struct map_session_data *sd,int n)
 {
@@ -4246,7 +4280,10 @@ int pc_useitem(struct map_session_data *sd,int n)
 }
 
 /*==========================================
- * ƒJ?ƒgƒAƒCƒeƒ€’Ç‰ÁBŒÂ?‚Ì‚İitem\‘¢?‚Ì?š‚ğ–³‹
+ * Add item on cart for given index 
+ * return 
+ *      0 = success 
+ *      1 = fail
  *------------------------------------------*/
 int pc_cart_additem(struct map_session_data *sd,struct item *item_data,int amount,e_log_pick_type log_type)
 {
@@ -4312,7 +4349,10 @@ int pc_cart_additem(struct map_session_data *sd,struct item *item_data,int amoun
 }
 
 /*==========================================
- * ƒJ?ƒgƒAƒCƒeƒ€‚ğŒ¸‚ç‚·
+ * Delete item on cart for given index 
+ * return 
+ *      0 = success 
+ *      1 = fail
  *------------------------------------------*/
 int pc_cart_delitem(struct map_session_data *sd,int n,int amount,int type,e_log_pick_type log_type)
 {
@@ -4339,7 +4379,10 @@ int pc_cart_delitem(struct map_session_data *sd,int n,int amount,int type,e_log_
 }
 
 /*==========================================
- * ƒJ?ƒg‚ÖƒAƒCƒeƒ€ˆÚ“®
+ * Transfert item from inventory to cart 
+ * return 
+ *      0 = fail 
+ *      1 = succes
  *------------------------------------------*/
 int pc_putitemtocart(struct map_session_data *sd,int idx,int amount)
 {
@@ -4362,7 +4405,10 @@ int pc_putitemtocart(struct map_session_data *sd,int idx,int amount)
 }
 
 /*==========================================
- * ƒJ?ƒg?‚ÌƒAƒCƒeƒ€?Šm”F(ŒÂ?‚Ì·•ª‚ğ•Ô‚·)
+ * Get number of item on cart 
+ * return 
+        -1 = itemid not found or no amount found 
+        x = remaining itemid on cart after get
  *------------------------------------------*/
 int pc_cartitem_amount(struct map_session_data* sd, int idx, int amount)
 {
@@ -4378,7 +4424,10 @@ int pc_cartitem_amount(struct map_session_data* sd, int idx, int amount)
 }
 
 /*==========================================
- * ƒJ?ƒg‚©‚çƒAƒCƒeƒ€ˆÚ“®
+ * Retrieve an item at index idx from cart 
+ * return 
+ *      0 = player not found or (FIXME) succes (from pc_cart_delitem) 
+ *      1 = failure
  *------------------------------------------*/
 int pc_getitemfromcart(struct map_session_data *sd,int idx,int amount)
 {
@@ -4402,7 +4451,7 @@ int pc_getitemfromcart(struct map_session_data *sd,int idx,int amount)
 }
 
 /*==========================================
- * ƒXƒeƒBƒ‹•iŒöŠJ
+ * Display item stolen msg to player sd
  *------------------------------------------*/
 int pc_show_steal(struct block_list *bl,va_list ap)
 {
@@ -4424,7 +4473,10 @@ int pc_show_steal(struct block_list *bl,va_list ap)
 	return 0;
 }
 /*==========================================
- *
+ * Stole an item from bl (mob) 
+ * return 
+ *      0 = fail 
+ *      1 = succes
  *------------------------------------------*/
 int pc_steal_item(struct map_session_data *sd,struct block_list *bl, int lv)
 {
@@ -4505,7 +4557,10 @@ int pc_steal_item(struct map_session_data *sd,struct block_list *bl, int lv)
 }
 
 /*==========================================
- *
+ * Stole zeny from bl (mob) 
+ * return 
+ *      0 = fail 
+ *      1 = success
  *------------------------------------------*/
 int pc_steal_coin(struct map_session_data *sd,struct block_list *target)
 {
@@ -4705,7 +4760,11 @@ int pc_setpos(struct map_session_data* sd, unsigned short mapindex, int x, int y
 }
 
 /*==========================================
- * PC‚Ìƒ‰ƒ“ƒ_ƒ€ƒ?ƒv
+ * Warp player sd to random location on current map 
+ * may fail if no Cell walkable found (1000 attempt) 
+ * return 
+ *      0 = fail or FIXME succes (from pc_setpos) 
+ *  x(1|2) = fail
  *------------------------------------------*/
 int pc_randomwarp(struct map_session_data *sd, clr_type type)
 {
@@ -4716,7 +4775,7 @@ int pc_randomwarp(struct map_session_data *sd, clr_type type)
 
 	m=sd->bl.m;
 
-	if (map[sd->bl.m].flag.noteleport)	// ƒeƒŒƒ|?ƒg‹Ö~
+	if (map[sd->bl.m].flag.noteleport)	// Teleport forbiden
 		return 0;
 
 	do{
@@ -4780,10 +4839,11 @@ int pc_memo(struct map_session_data* sd, int pos)
 }
 
 //
-// •Ší??
+// Skills
 //
+
 /*==========================================
- * ƒXƒLƒ‹‚Ì?õ Š—L‚µ‚Ä‚¢‚½ê‡Lv‚ª•Ô‚é
+ * Return player sd skilllv learned for given skill
  *------------------------------------------*/
 int pc_checkskill(struct map_session_data *sd,int skill_id)
 {
@@ -4865,7 +4925,8 @@ int pc_checkallowskill(struct map_session_data *sd)
 }
 
 /*==========================================
- * ? ”õ•i‚Ìƒ`ƒFƒbƒN
+ * Return equiped itemid? on player sd at pos 
+ * if -1 mean nothing equiped
  *------------------------------------------*/
 int pc_checkequip(struct map_session_data *sd,int pos)
 {
@@ -5568,7 +5629,7 @@ static void pc_calcexp(struct map_session_data *sd, unsigned int *base_exp, unsi
 	return;
 }
 /*==========================================
- * ??’læ“¾
+ * Give x exp at sd player and calculate remaining exp for next lvl
  *------------------------------------------*/
 int pc_gainexp(struct map_session_data *sd, struct block_list *src, unsigned int base_exp,unsigned int job_exp,bool quest)
 {
@@ -5661,7 +5722,7 @@ unsigned int pc_maxjoblv(struct map_session_data *sd)
 }
 
 /*==========================================
- * base level‘¤•K—v??’lŒvZ
+ * base level exp lookup.
  *------------------------------------------*/
 unsigned int pc_nextbaseexp(struct map_session_data *sd)
 {
@@ -5673,6 +5734,7 @@ unsigned int pc_nextbaseexp(struct map_session_data *sd)
 	return exp_table[pc_class2idx(sd->status.class_)][0][sd->status.base_level-1];
 }
 
+///How much bexp do player need for this level
 unsigned int pc_thisbaseexp(struct map_session_data *sd)
 {
 	if(sd->status.base_level>pc_maxbaselv(sd) || sd->status.base_level<=1)
@@ -5683,8 +5745,13 @@ unsigned int pc_thisbaseexp(struct map_session_data *sd)
 
 
 /*==========================================
- * job level‘¤•K—v??’lŒvZ
+ * job level exp lookup 
+ * return 
+ *      0 = not found 
+ *      x = exp for level
  *------------------------------------------*/
+ 
+///How much jexp do player need for next level
 unsigned int pc_nextjobexp(struct map_session_data *sd)
 {
 	nullpo_ret(sd);
@@ -5694,6 +5761,7 @@ unsigned int pc_nextjobexp(struct map_session_data *sd)
 	return exp_table[pc_class2idx(sd->status.class_)][1][sd->status.job_level-1];
 }
 
+///How much jexp do player need for next level
 unsigned int pc_thisjobexp(struct map_session_data *sd)
 {
 	if(sd->status.job_level>pc_maxjoblv(sd) || sd->status.job_level<=1)
@@ -5863,7 +5931,8 @@ int pc_statusup2(struct map_session_data* sd, int type, int val)
 }
 
 /*==========================================
- * ƒXƒLƒ‹ƒ|ƒCƒ“ƒgŠ„‚èU‚è
+ * Update skilllv for player sd 
+ * Skill point allocation
  *------------------------------------------*/
 int pc_skillup(struct map_session_data *sd,int skill_num)
 {
@@ -6359,6 +6428,9 @@ void pc_damage(struct map_session_data *sd,struct block_list *src,unsigned int h
 	sd->canlog_tick = gettick();
 }
 
+/*========================================== 
+* Invoked when a player have negative current hp 
+*------------------------------------------*/
 int pc_dead(struct map_session_data *sd,struct block_list *src)
 {
 	int i=0,j=0,k=0;
@@ -6690,10 +6762,13 @@ void pc_revive(struct map_session_data *sd,unsigned int hp, unsigned int sp) {
 		guild_guildaura_refresh(sd,GD_HAWKEYES,guild_checkskill(sd->state.gmaster_flag,GD_HAWKEYES));
 	}
 }
-// script? ˜A
+
 //
+// script
+//
+
 /*==========================================
- * script—pPCƒXƒe?ƒ^ƒX?‚İo‚µ
+ * script reading pc status registry
  *------------------------------------------*/
 int pc_readparam(struct map_session_data* sd,int type)
 {
@@ -6739,7 +6814,7 @@ int pc_readparam(struct map_session_data* sd,int type)
 }
 
 /*==========================================
- * script—pPCƒXƒe?ƒ^ƒXİ’è
+ * script set pc status registry
  *------------------------------------------*/
 int pc_setparam(struct map_session_data *sd,int type,int val)
 {
@@ -6907,7 +6982,9 @@ void pc_heal(struct map_session_data *sd,unsigned int hp,unsigned int sp, int ty
 }
 
 /*==========================================
- * HP/SP‰ñ•œ
+ * HP/SP Recovery 
+ * Heal player hp nad/or sp linearly 
+ * Calculate bonus by status
  *------------------------------------------*/
 int pc_itemheal(struct map_session_data *sd,int itemid, int hp,int sp)
 {
@@ -6973,7 +7050,8 @@ int pc_itemheal(struct map_session_data *sd,int itemid, int hp,int sp)
 }
 
 /*==========================================
- * HP/SP‰ñ•œ
+ * HP/SP Recovery 
+ * Heal player hp nad/or sp by rate
  *------------------------------------------*/
 int pc_percentheal(struct map_session_data *sd,int hp,int sp)
 {
@@ -7011,9 +7089,7 @@ int pc_percentheal(struct map_session_data *sd,int hp,int sp)
 }
 
 /*==========================================
- * E?X
- * ˆø?	job E‹Æ 0`23
- *		upper ’Êí 0, ?¶ 1, —{q 2, ‚»‚Ì‚Ü‚Ü -1
+ * Called when player changing job
  * Rewrote to make it tidider [Celest]
  *------------------------------------------*/
 int pc_jobchange(struct map_session_data *sd,int job, int upper)
@@ -7105,7 +7181,7 @@ int pc_jobchange(struct map_session_data *sd,int job, int upper)
 	for(i=0;i<EQI_MAX;i++) {
 		if(sd->equip_index[i] >= 0)
 			if(!pc_isequip(sd,sd->equip_index[i]))
-				pc_unequipitem(sd,sd->equip_index[i],2);	// ?”õŠO‚µ
+				pc_unequipitem(sd,sd->equip_index[i],2);	// unequip invalid item for class
 	}
 
 	//Change look, if disguised, you need to undisguise 
@@ -7176,7 +7252,7 @@ int pc_jobchange(struct map_session_data *sd,int job, int upper)
 }
 
 /*==========================================
- * Œ©‚½–Ú?X
+ * Tell client player sd has change equipement
  *------------------------------------------*/
 int pc_equiplookall(struct map_session_data *sd)
 {
@@ -7193,7 +7269,7 @@ int pc_equiplookall(struct map_session_data *sd)
 }
 
 /*==========================================
- * Œ©‚½–Ú?X
+ * Tell client player sd has change look (hair,equip...)
  *------------------------------------------*/
 int pc_changelook(struct map_session_data *sd,int type,int val)
 {
@@ -7253,7 +7329,7 @@ int pc_changelook(struct map_session_data *sd,int type,int val)
 }
 
 /*==========================================
- * •t?•i(‘é,ƒyƒR,ƒJ?ƒg)İ’è
+ * Give an option (type) to player (sd) and display it to client
  *------------------------------------------*/
 int pc_setoption(struct map_session_data *sd,int type)
 {
@@ -7370,7 +7446,7 @@ int pc_setoption(struct map_session_data *sd,int type)
 }
 
 /*==========================================
- * ƒJ?ƒgİ’è
+ * Give player a cart
  *------------------------------------------*/
 int pc_setcart(struct map_session_data *sd,int type) {
 #ifndef NEW_CARTS
@@ -7420,7 +7496,7 @@ int pc_setcart(struct map_session_data *sd,int type) {
 }
 
 /*==========================================
- * ‘éİ’è
+ * Give player a falcon
  *------------------------------------------*/
 int pc_setfalcon(TBL_PC* sd, int flag)
 {
@@ -7435,7 +7511,7 @@ int pc_setfalcon(TBL_PC* sd, int flag)
 }
 
 /*==========================================
- * ƒyƒRƒyƒRİ’è
+ * Set player riding
  *------------------------------------------*/
 int pc_setriding(TBL_PC* sd, int flag)
 {
@@ -7450,7 +7526,7 @@ int pc_setriding(TBL_PC* sd, int flag)
 }
 
 /*==========================================
- * 
+ * Give player a mado
  *------------------------------------------*/
 int pc_setmadogear(TBL_PC* sd, int flag)
 {
@@ -7465,7 +7541,7 @@ int pc_setmadogear(TBL_PC* sd, int flag)
 }
 
 /*==========================================
- * ƒAƒCƒeƒ€ƒhƒƒbƒv‰Â•s‰Â”»’è
+ * Check if player can drop an item
  *------------------------------------------*/
 int pc_candrop(struct map_session_data *sd, struct item *item)
 {
@@ -7477,7 +7553,8 @@ int pc_candrop(struct map_session_data *sd, struct item *item)
 }
 
 /*==========================================
- * script—p??‚Ì’l‚ğ?‚Ş
+ * Read ram register for player sd 
+ * get val (int) from reg for player sd
  *------------------------------------------*/
 int pc_readreg(struct map_session_data* sd, int reg)
 {
@@ -7489,7 +7566,8 @@ int pc_readreg(struct map_session_data* sd, int reg)
 	return ( i < sd->reg_num ) ? sd->reg[i].data : 0;
 }
 /*==========================================
- * script—p??‚Ì’l‚ğİ’è
+ * Set ram register for player sd 
+ * memo val(int) at reg for player sd
  *------------------------------------------*/
 int pc_setreg(struct map_session_data* sd, int reg, int val)
 {
@@ -7517,7 +7595,8 @@ int pc_setreg(struct map_session_data* sd, int reg, int val)
 }
 
 /*==========================================
- * script—p•¶š—ñ??‚Ì’l‚ğ?‚Ş
+ * Read ram register for player sd 
+ * get val (str) from reg for player sd
  *------------------------------------------*/
 char* pc_readregstr(struct map_session_data* sd, int reg)
 {
@@ -7529,7 +7608,8 @@ char* pc_readregstr(struct map_session_data* sd, int reg)
 	return ( i < sd->regstr_num ) ? sd->regstr[i].data : NULL;
 }
 /*==========================================
- * script—p•¶š—ñ??‚Ì’l‚ğİ’è
+ * Set ram register for player sd 
+ * memo val(str) at reg for player sd
  *------------------------------------------*/
 int pc_setregstr(struct map_session_data* sd, int reg, const char* str)
 {
@@ -7809,7 +7889,7 @@ int pc_setregistry_str(struct map_session_data *sd,const char *reg,const char *v
 }
 
 /*==========================================
- * ƒCƒxƒ“ƒgƒ^ƒCƒ}??—
+ * Exec eventtimer for player sd (retrieved from map_session (id))
  *------------------------------------------*/
 static int pc_eventtimer(int tid, unsigned int tick, int id, intptr_t data)
 {
@@ -7834,7 +7914,7 @@ static int pc_eventtimer(int tid, unsigned int tick, int id, intptr_t data)
 }
 
 /*==========================================
- * ƒCƒxƒ“ƒgƒ^ƒCƒ}?’Ç‰Á
+ * Add eventtimer for player sd ?
  *------------------------------------------*/
 int pc_addeventtimer(struct map_session_data *sd,int tick,const char *name)
 {
@@ -7852,7 +7932,7 @@ int pc_addeventtimer(struct map_session_data *sd,int tick,const char *name)
 }
 
 /*==========================================
- * ƒCƒxƒ“ƒgƒ^ƒCƒ}?íœ
+ * Del eventtimer for player sd ?
  *------------------------------------------*/
 int pc_deleventtimer(struct map_session_data *sd,const char *name)
 {
@@ -7882,7 +7962,7 @@ int pc_deleventtimer(struct map_session_data *sd,const char *name)
 }
 
 /*==========================================
- * ƒCƒxƒ“ƒgƒ^ƒCƒ}?ƒJƒEƒ“ƒg’l’Ç‰Á
+ * Update eventtimer count for player sd
  *------------------------------------------*/
 int pc_addeventtimercount(struct map_session_data *sd,const char *name,int tick)
 {
@@ -7901,7 +7981,7 @@ int pc_addeventtimercount(struct map_session_data *sd,const char *name,int tick)
 }
 
 /*==========================================
- * ƒCƒxƒ“ƒgƒ^ƒCƒ}?‘Síœ
+ * Remove all eventtimer for player sd
  *------------------------------------------*/
 int pc_cleareventtimer(struct map_session_data *sd)
 {
@@ -8074,7 +8154,7 @@ int pc_load_combo(struct map_session_data *sd) {
 	return ret;
 }
 /*==========================================
- * Attempt to equip item in inventory index 'n' in the EQP_ 'req_pos'
+ * Equip item on player sd at req_pos from inventory index n
  *------------------------------------------*/
 int pc_equipitem(struct map_session_data *sd,int n,int req_pos)
 {
@@ -8275,7 +8355,7 @@ int pc_equipitem(struct map_session_data *sd,int n,int req_pos)
 }
 
 /*==========================================
- * ? ”õ‚µ‚½•¨‚ğŠO‚·
+ * Called when attemting to unequip an item from player
  * type:
  * 0 - only unequip
  * 1 - calculate status after unequipping
@@ -8438,8 +8518,8 @@ int pc_unequipitem(struct map_session_data *sd,int n,int flag) {
 }
 
 /*==========================================
- * ƒAƒCƒeƒ€‚Ìindex”Ô?‚ğ‹l‚ß‚½‚è
- * ? ”õ•i‚Ì?”õ‰Â”\ƒ`ƒFƒbƒN‚ğs‚È‚¤
+ * Checking if player (sd) have unauthorize, invalide item 
+ * on inventory, cart, equiped for the map (item_noequip) 
  *------------------------------------------*/
 int pc_checkitem(struct map_session_data *sd)
 {
@@ -8519,7 +8599,7 @@ int pc_checkitem(struct map_session_data *sd)
 }
 
 /*==========================================
- * PVP‡ˆÊŒvZ—p(foreachinarea)
+ * Update PVP rank for sd1 in cmp to sd2
  *------------------------------------------*/
 int pc_calc_pvprank_sub(struct block_list *bl,va_list ap)
 {
@@ -8538,7 +8618,8 @@ int pc_calc_pvprank_sub(struct block_list *bl,va_list ap)
 	return 0;
 }
 /*==========================================
- * PVP‡ˆÊŒvZ
+ * Calculate new rank beetween all present players (map_foreachinarea) 
+ * and display result
  *------------------------------------------*/
 int pc_calc_pvprank(struct map_session_data *sd)
 {
@@ -8553,7 +8634,7 @@ int pc_calc_pvprank(struct map_session_data *sd)
 	return sd->pvp_rank;
 }
 /*==========================================
- * PVP‡ˆÊŒvZ(timer)
+ * Calculate next sd ranking calculation from config
  *------------------------------------------*/
 int pc_calc_pvprank_timer(int tid, unsigned int tick, int id, intptr_t data)
 {
@@ -8575,7 +8656,10 @@ int pc_calc_pvprank_timer(int tid, unsigned int tick, int id, intptr_t data)
 }
 
 /*==========================================
- * sd‚ÍŒ‹¥‚µ‚Ä‚¢‚é‚©(?¥‚Ìê‡‚Í‘Š•û‚Ìchar_id‚ğ•Ô‚·)
+ * Checking if sd is married 
+ * Return 
+ *      partner_id = yes, 
+ *      0 = no 
  *------------------------------------------*/
 int pc_ismarried(struct map_session_data *sd)
 {
@@ -8587,7 +8671,10 @@ int pc_ismarried(struct map_session_data *sd)
 		return 0;
 }
 /*==========================================
- * sd‚ªdstsd‚ÆŒ‹¥(dstsd¨sd‚ÌŒ‹¥?—‚à“¯bÉs‚¤)
+ * Marry player sd to player dstsd 
+ * return 
+ *      -1 = fail 
+ *      0 = success
  *------------------------------------------*/
 int pc_marriage(struct map_session_data *sd,struct map_session_data *dstsd)
 {
@@ -8602,6 +8689,9 @@ int pc_marriage(struct map_session_data *sd,struct map_session_data *dstsd)
 
 /*==========================================
  * Divorce sd from its partner
+ * return 
+ *      -1 = fail 
+ *      0 = success
  *------------------------------------------*/
 int pc_divorce(struct map_session_data *sd)
 {
@@ -8640,7 +8730,7 @@ int pc_divorce(struct map_session_data *sd)
 }
 
 /*==========================================
- * sd‚Ì‘Š•û‚Ìmap_session_data‚ğ•Ô‚·
+ * Get sd partner charid. (Married partner)
  *------------------------------------------*/
 struct map_session_data *pc_get_partner(struct map_session_data *sd)
 {
@@ -8651,6 +8741,9 @@ struct map_session_data *pc_get_partner(struct map_session_data *sd)
 	return NULL;
 }
 
+/*========================================== 
+* Get sd father charid. (Need to be baby) 
+*------------------------------------------*/
 struct map_session_data *pc_get_father (struct map_session_data *sd)
 {
 	if (sd && sd->class_&JOBL_BABY && sd->status.father > 0)
@@ -8660,6 +8753,9 @@ struct map_session_data *pc_get_father (struct map_session_data *sd)
 	return NULL;
 }
 
+/*========================================== 
+ * Get sd mother charid. (Need to be baby) 
+ *------------------------------------------*/
 struct map_session_data *pc_get_mother (struct map_session_data *sd)
 {
 	if (sd && sd->class_&JOBL_BABY && sd->status.mother > 0)
@@ -8669,6 +8765,9 @@ struct map_session_data *pc_get_mother (struct map_session_data *sd)
 	return NULL;
 }
 
+/*========================================== 
+ * Get sd children charid. (Need to be married) 
+ *------------------------------------------*/ 
 struct map_session_data *pc_get_child (struct map_session_data *sd)
 {
 	if (sd && pc_ismarried(sd) && sd->status.child > 0)
@@ -8678,6 +8777,9 @@ struct map_session_data *pc_get_child (struct map_session_data *sd)
 	return NULL;
 }
 
+/*========================================== 
+ * Set player sd to bleed. (losing hp and/or sp each diff_tick) 
+ *------------------------------------------*/
 void pc_bleeding (struct map_session_data *sd, unsigned int diff_tick)
 {
 	int hp = 0, sp = 0;
@@ -8739,7 +8841,7 @@ void pc_regen (struct map_session_data *sd, unsigned int diff_tick)
 }
 
 /*==========================================
- * ƒZ?ƒuƒ|ƒCƒ“ƒg‚Ì•Û‘¶
+ * Memo player sd savepoint. (map,x,y)
  *------------------------------------------*/
 int pc_setsavepoint(struct map_session_data *sd, short mapindex,int x,int y)
 {
@@ -8753,7 +8855,7 @@ int pc_setsavepoint(struct map_session_data *sd, short mapindex,int x,int y)
 }
 
 /*==========================================
- * ©“®ƒZ?ƒu (timer??)
+ * Save 1 player data  at autosave intervalle
  *------------------------------------------*/
 int pc_autosave(int tid, unsigned int tick, int id, intptr_t data)
 {
@@ -8870,7 +8972,7 @@ void pc_overheat(struct map_session_data *sd, int val) {
 	skill = cap_value(pc_checkskill(sd,NC_MAINFRAME),0,4);
 	if( sd->sc.data[SC_OVERHEAT_LIMITPOINT] ) {
 		heat += sd->sc.data[SC_OVERHEAT_LIMITPOINT]->val1;
-		status_change_end(&sd->bl,SC_OVERHEAT_LIMITPOINT,-1);
+		status_change_end(&sd->bl,SC_OVERHEAT_LIMITPOINT,INVALID_TIMER);
 	}
 
 	heat = max(0,heat); // Avoid negative HEAT
@@ -9073,11 +9175,8 @@ int pc_split_atoui(char* str, unsigned int* val, char sep, int max)
 }
 
 /*==========================================
- * DB reading.
- * exp.txt        - required experience values
- * skill_tree.txt - skill tree for every class
- * attr_fix.txt   - elemental adjustment table
- * statpoint.txt  - status points per base level
+ * sub DB reading. 
+ * fonction used to read  skill_tree.txt
  *------------------------------------------*/
 static bool pc_readdb_skilltree(char* fields[], int columns, int current)
 {
@@ -9127,13 +9226,19 @@ static bool pc_readdb_skilltree(char* fields[], int columns, int current)
 	return true;
 }
 
+/*========================================== 
+* pc DB reading. 
+* exp.txt        - required experience values 
+* skill_tree.txt - skill tree for every class 
+* attr_fix.txt   - elemental adjustment table 
+*------------------------------------------*/
 int pc_readdb(void)
 {
 	int i,j,k;
 	FILE *fp;
 	char line[24000],*p;
 
-	// •K—v??’l?‚İ?‚İ
+	// reset 
 	memset(exp_table,0,sizeof(exp_table));
 	memset(max_level,0,sizeof(max_level));
 
@@ -9218,12 +9323,11 @@ int pc_readdb(void)
 	}
 	ShowStatus("Finalizada leitura de '"CL_WHITE"%s"CL_RESET"'.\n","exp.txt");
 
-	// ƒXƒLƒ‹ƒcƒŠ?
+	// Reset and read skilltree
 	memset(skill_tree,0,sizeof(skill_tree));
-
 	sv_readdb(db_path, DBPATH"skill_tree.txt", ',', 3+MAX_PC_SKILL_REQUIRE*2, 4+MAX_PC_SKILL_REQUIRE*2, -1, &pc_readdb_skilltree);
 
-	// ?«C³ƒe?ƒuƒ‹
+	// Reset then read attr_fix
 	for(i=0;i<4;i++)
 		for(j=0;j<ELE_MAX;j++)
 			for(k=0;k<ELE_MAX;k++)
@@ -9275,7 +9379,7 @@ int pc_readdb(void)
 	fclose(fp);
 	ShowStatus("Finalizada leitura de '"CL_WHITE"%s"CL_RESET"'.\n","attr_fix.txt");
 
-	// ƒXƒLƒ‹ƒcƒŠ?
+	// reset then read statspoint
 	memset(statp,0,sizeof(statp));
 	i=1;
 
@@ -9406,7 +9510,7 @@ void pc_itemcd_do(struct map_session_data *sd, bool load) {
 	return;
 }
 /*==========================================
- * pc? ŒW‰Šú‰»
+ *  Init/Terminate
  *------------------------------------------*/
 void do_final_pc(void) {
 

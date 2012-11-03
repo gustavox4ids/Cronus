@@ -5962,7 +5962,9 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, in
 				break;
 			}
 			if(!battle_config.duel_allow_teleport && sd->duel_group && skilllv <= 2) { // duel restriction [LuzZza]
-				clif_displaymessage(sd->fd, "Duel: Can't use teleport in duel.");
+				char output[128]; 
+				sprintf(output, msg_txt(365), skill_get_name(AL_WARP));
+				clif_displaymessage(sd->fd, output); //"Duel: Can't use %s in duel."
 				break;
 			}
 
@@ -7865,7 +7867,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, in
 
 	case RA_WUGDASH:
 		if( tsce ) {
-			clif_skill_nodamage(src,bl,skillid,skilllv,status_change_end(bl, type, -1));
+			clif_skill_nodamage(src,bl,skillid,skilllv,status_change_end(bl, type, INVALID_TIMER));
 			map_freeblock_unlock();
 			return 0;
 		}
@@ -12218,7 +12220,9 @@ int skill_check_condition_castbegin(struct map_session_data* sd, short skill, sh
 			break;
 		case AL_WARP:
 			if(!battle_config.duel_allow_teleport && sd->duel_group) { // duel restriction [LuzZza]
-				clif_displaymessage(sd->fd, "Duel: Can't use warp in duel.");
+				char output[128]; 
+				sprintf(output, msg_txt(365), skill_get_name(AL_WARP));
+				clif_displaymessage(sd->fd, output); //"Duel: Can't use %s in duel."
 				return 0;
 			}
 			break;
@@ -13413,12 +13417,12 @@ int skill_castfix_sc (struct block_list *bl, int time)
 			time += time * sc->data[SC_SLOWCAST]->val2 / 100;
 		if (sc->data[SC_SUFFRAGIUM]) {
 			time -= time * sc->data[SC_SUFFRAGIUM]->val2 / 100;
-			status_change_end(bl, SC_SUFFRAGIUM, -1);
+			status_change_end(bl, SC_SUFFRAGIUM, INVALID_TIMER);
 		}
 		if (sc->data[SC_MEMORIZE]) {
 			time>>=1;
 			if ((--sc->data[SC_MEMORIZE]->val2) <= 0)
-				status_change_end(bl, SC_MEMORIZE, -1);
+				status_change_end(bl, SC_MEMORIZE, INVALID_TIMER);
 		}
 		if (sc->data[SC_POEMBRAGI])
 			time -= time * sc->data[SC_POEMBRAGI]->val2 / 100;		
