@@ -905,4 +905,8 @@ int pc_del_talisman(struct map_session_data *sd,int count,int type);
 
 void pc_baselevelchanged(struct map_session_data *sd);
 
+#if defined(RENEWAL_DROP) || defined(RENEWAL_EXP)
+	int pc_level_mod(struct map_session_data *sd, struct mob_data * md, int type);
+#endif
+
 #endif /* _PC_H_ */
