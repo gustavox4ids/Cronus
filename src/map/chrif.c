@@ -839,9 +839,9 @@ static void chrif_char_ask_name_answer(int acc, const char* player_name, uint16 
 	}
 	
 	if(type>0 && type<=5)
-		sprintf(action,msg_txt(427+type)); //block|ban|unblock|unban|change the sex of
+		snprintf(action,25,"%s",msg_txt(427+type)); //block|ban|unblock|unban|change the sex of
 	else
-		sprintf(action,"???");
+		snprintf(action,25,"???");
 	
 	switch( answer ) {
 	case 0 : sprintf(output, msg_txt(424), action, NAME_LENGTH, player_name); break;
