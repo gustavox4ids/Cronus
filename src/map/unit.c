@@ -136,7 +136,7 @@ static int unit_walktoxy_timer(int tid, unsigned int tick, int id, intptr_t data
 		return 0;
 	}
 	ud->walktimer = INVALID_TIMER;
-	if( bl->prev == NULL ) return 0; // block_list ‚©‚ç”²‚¯‚Ä‚¢‚é‚Ì‚ÅˆÚ“®’âŽ~‚·‚é
+	if (bl->prev == NULL) return 0; // Stop moved because it is missing from the block_list
 
 	if(ud->walkpath.path_pos>=ud->walkpath.path_len)
 		return 0;
@@ -1361,7 +1361,7 @@ int unit_skilluse_pos2( struct block_list *src, short skill_x, short skill_y, sh
 
 	nullpo_ret(src);
 
-	if(!src->prev) return 0; // map ã‚É‘¶Ý‚·‚é‚©
+	if (!src->prev) return 0; // not on the map
 	if(status_isdead(src)) return 0;
 
 	sd = BL_CAST(BL_PC, src);
@@ -1603,7 +1603,7 @@ bool unit_can_reach_pos(struct block_list *bl,int x,int y, int easy)
 {
 	nullpo_retr(false, bl);
 
-	if( bl->x==x && bl->y==y )	// “¯‚¶ƒ}ƒX
+	if (bl->x == x && bl->y == y) //Same place
 		return true;
 
 	return path_search(NULL,bl->m,bl->x,bl->y,x,y,easy,CELL_CHKNOREACH);

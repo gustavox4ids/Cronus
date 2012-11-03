@@ -829,7 +829,7 @@ int chrif_changesex(struct map_session_data *sd)
 static void chrif_char_ask_name_answer(int acc, const char* player_name, uint16 type, uint16 answer)
 {
 	struct map_session_data* sd;
-	const char* action;
+	char action[25];
 	char output[256];
 	
 	sd = map_id2sd(acc);
@@ -839,9 +839,9 @@ static void chrif_char_ask_name_answer(int acc, const char* player_name, uint16 
 	}
 	
 	if(type>0 && type<=5)
-		snprintf(action,25,"%s",msg_txt(427+type)); //block|ban|unblock|unban|change the sex of
+		sprintf(action,"%s",msg_txt(427+type)); //block|ban|unblock|unban|change the sex of
 	else
-		snprintf(action,25,"???");
+		sprintf(action,"???");
 	
 	switch( answer ) {
 	case 0 : sprintf(output, msg_txt(424), action, NAME_LENGTH, player_name); break;
