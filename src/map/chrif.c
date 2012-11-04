@@ -467,7 +467,7 @@ static int chrif_reconnect(DBKey key, DBData *data, va_list ap) {
 			//Re-send final save
 			chrif_save(node->sd, 1);
 			break;
-		case ST_MAPCHANGE: //Re-send map-change request.
+		case ST_MAPCHANGE: {//Re-send map-change request.
 			struct map_session_data *sd = node->sd;
 			uint32 ip;
 			uint16 port;
@@ -476,6 +476,7 @@ static int chrif_reconnect(DBKey key, DBData *data, va_list ap) {
 			else //too much lag/timeout is the closest explanation for this error.
 				clif_authfail_fd(sd->fd, 3);
 			break;
+		}
 	}
 	return 0;
 }
