@@ -796,8 +796,13 @@ int do_sockets(int next)
 			continue;
 
 		if (session[i]->rdata_tick && DIFF_TICK(last_tick, session[i]->rdata_tick) > stall_time) {
-			ShowInfo("Session #%d timed out\n", i);
-			set_eof(i);
+			if( session[i]->flag.server ) {
+				if( session[i]->flag.ping != 2)
+					session[i]->flag.ping = 1;
+			} else {
+				ShowInfo("Sessão %d finalizou.\n",i);
+				set_eof(i);
+			}
 		}
 
 		session[i]->func_parse(i);
@@ -1072,8 +1077,11 @@ int socket_config_read(const char* cfgName)
 		if(sscanf(line, "%[^:]: %[^\r\n]", w1, w2) != 2)
 			continue;
 
-		if (!strcmpi(w1, "stall_time"))
+		if (!strcmpi(w1, "stall_time")) {
 			stall_time = atoi(w2);
+			if( stall_time < 3 )
+				stall_time = 3;
+		}
 #ifndef MINICORE
 		else if (!strcmpi(w1, "enable_ip_rules")) {
 			ip_rules = config_switch(w2);

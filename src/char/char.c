@@ -199,8 +199,7 @@ int delete_char_sql(int char_id);
 /**
  * @see DBCreateData
  */
-static DBData create_online_char_data(DBKey key, va_list args)
-{
+static DBData create_online_char_data(DBKey key, va_list args) {
 	struct online_char_data* character;
 	CREATE(character, struct online_char_data, 1);
 	character->account_id = key.i;
@@ -211,8 +210,7 @@ static DBData create_online_char_data(DBKey key, va_list args)
 	return db_ptr2data(character);
 }
 
-void set_char_charselect(int account_id)
-{
+void set_char_charselect(int account_id) {
 	struct online_char_data* character;
 
 	character = (struct online_char_data*)idb_ensure(online_char_db, account_id, create_online_char_data);
@@ -239,8 +237,7 @@ void set_char_charselect(int account_id)
 
 }
 
-void set_char_online(int map_id, int char_id, int account_id)
-{
+void set_char_online(int map_id, int char_id, int account_id) {
 	struct online_char_data* character;
 	struct mmo_charstatus *cp;
 	
@@ -284,8 +281,7 @@ void set_char_online(int map_id, int char_id, int account_id)
 	}
 }
 
-void set_char_offline(int char_id, int account_id)
-{
+void set_char_offline(int char_id, int account_id) {
 	struct online_char_data* character;
 
 	if ( char_id == -1 )
@@ -337,8 +333,7 @@ void set_char_offline(int char_id, int account_id)
 /**
  * @see DBApply
  */
-static int char_db_setoffline(DBKey key, DBData *data, va_list ap)
-{
+static int char_db_setoffline(DBKey key, DBData *data, va_list ap) {
 	struct online_char_data* character = (struct online_char_data*)db_data2ptr(data);
 	int server = va_arg(ap, int);
 	if (server == -1) {
@@ -356,8 +351,7 @@ static int char_db_setoffline(DBKey key, DBData *data, va_list ap)
 /**
  * @see DBApply
  */
-static int char_db_kickoffline(DBKey key, DBData *data, va_list ap)
-{
+static int char_db_kickoffline(DBKey key, DBData *data, va_list ap) {
 	struct online_char_data* character = (struct online_char_data*)db_data2ptr(data);
 	int server_id = va_arg(ap, int);
 
@@ -375,8 +369,7 @@ static int char_db_kickoffline(DBKey key, DBData *data, va_list ap)
 	return 1;
 }
 
-void set_all_offline(int id)
-{
+void set_all_offline(int id) {
 	if (id < 0)
 		ShowNotice("Tornando offline todos os usuários.\n");
 	else
@@ -391,8 +384,7 @@ void set_all_offline(int id)
 	WFIFOSET(login_fd,2);
 }
 
-void set_all_offline_sql(void)
-{
+void set_all_offline_sql(void) {
 	//Set all players to 'OFFLINE'
 	if( SQL_ERROR == Sql_Query(sql_handle, "UPDATE `%s` SET `online` = '0'", char_db) )
 		Sql_ShowDebug(sql_handle);
@@ -405,8 +397,7 @@ void set_all_offline_sql(void)
 /**
  * @see DBCreateData
  */
-static DBData create_charstatus(DBKey key, va_list args)
-{
+static DBData create_charstatus(DBKey key, va_list args) {
 	struct mmo_charstatus *cp;
 	cp = (struct mmo_charstatus *) aCalloc(1,sizeof(struct mmo_charstatus));
 	cp->char_id = key.i;
@@ -415,8 +406,7 @@ static DBData create_charstatus(DBKey key, va_list args)
 
 int inventory_to_sql(const struct item items[], int max, int id);
 
-int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
-{
+int mmo_char_tosql(int char_id, struct mmo_charstatus* p) {
 	int i = 0;
 	int count = 0;
 	int diff = 0;
@@ -695,8 +685,7 @@ int mmo_char_tosql(int char_id, struct mmo_charstatus* p)
 }
 
 /// Saves an array of 'item' entries into the specified table.
-int memitemdata_to_sql(const struct item items[], int max, int id, int tableswitch)
-{
+int memitemdata_to_sql(const struct item items[], int max, int id, int tableswitch) {
 	StringBuf buf;
 	SqlStmt* stmt;
 	int i;
@@ -988,8 +977,7 @@ int mmo_char_tobuf(uint8* buf, struct mmo_charstatus* p);
 
 //=====================================================================================================
 // Loads the basic character rooster for the given account. Returns total buffer used.
-int mmo_chars_fromsql(struct char_session_data* sd, uint8* buf)
-{
+int mmo_chars_fromsql(struct char_session_data* sd, uint8* buf) {
 	SqlStmt* stmt;
 	struct mmo_charstatus p;
 	int j = 0, i;
@@ -1070,8 +1058,7 @@ int mmo_chars_fromsql(struct char_session_data* sd, uint8* buf)
 }
 
 //=====================================================================================================
-int mmo_char_fromsql(int char_id, struct mmo_charstatus* p, bool load_everything)
-{
+int mmo_char_fromsql(int char_id, struct mmo_charstatus* p, bool load_everything) {
 	int i,j;
 	char t_msg[128] = "";
 	struct mmo_charstatus* cp;
@@ -1334,8 +1321,7 @@ int mmo_char_fromsql(int char_id, struct mmo_charstatus* p, bool load_everything
 }
 
 //==========================================================================================================
-int mmo_char_sql_init(void)
-{
+int mmo_char_sql_init(void) {
 	ShowInfo("Iniciando.......\n");
 	char_db_= idb_alloc(DB_OPT_RELEASE_DATA);
 
@@ -1362,8 +1348,7 @@ int mmo_char_sql_init(void)
 //-----------------------------------
 // Function to change chararcter's names
 //-----------------------------------
-int rename_char_sql(struct char_session_data *sd, int char_id)
-{
+int rename_char_sql(struct char_session_data *sd, int char_id) {
 	struct mmo_charstatus char_dat;
 	char esc_name[NAME_LENGTH*2+1];
 
@@ -1410,8 +1395,7 @@ int rename_char_sql(struct char_session_data *sd, int char_id)
 	return 0;
 }
 
-int check_char_name(char * name, char * esc_name)
-{
+int check_char_name(char * name, char * esc_name) {
 	int i;
 
 	// check length of character name
@@ -1559,8 +1543,7 @@ int make_new_char_sql(struct char_session_data* sd, char* name_, int str, int ag
 /*----------------------------------------------------------------------------------------------------------*/
 /* Divorce Players */
 /*----------------------------------------------------------------------------------------------------------*/
-int divorce_char_sql(int partner_id1, int partner_id2)
-{
+int divorce_char_sql(int partner_id1, int partner_id2) {
 	unsigned char buf[64];
 
 	if( SQL_ERROR == Sql_Query(sql_handle, "UPDATE `%s` SET `partner_id`='0' WHERE `char_id`='%d' OR `char_id`='%d' LIMIT 2", char_db, partner_id1, partner_id2) )
@@ -1582,8 +1565,7 @@ int divorce_char_sql(int partner_id1, int partner_id2)
 /* Returns 0 if successful
  * Returns < 0 for error
  */
-int delete_char_sql(int char_id)
-{
+int delete_char_sql(int char_id) {
 	char name[NAME_LENGTH];
 	char esc_name[NAME_LENGTH*2+1]; //Name needs be escaped.
 	int account_id, party_id, guild_id, hom_id, base_level, partner_id, father_id, mother_id;
@@ -1734,8 +1716,7 @@ int delete_char_sql(int char_id)
 //---------------------------------------------------------------------
 // This function return the number of online players in all map-servers
 //---------------------------------------------------------------------
-int count_users(void)
-{
+int count_users(void) {
 	int i, users;
 
 	users = 0;
@@ -1751,8 +1732,7 @@ int count_users(void)
 // Used in packets 0x6b (chars info) and 0x6d (new char info)
 // Returns the size
 #define MAX_CHAR_BUF 144 //Max size (for WFIFOHEAD calls)
-int mmo_char_tobuf(uint8* buffer, struct mmo_charstatus* p)
-{
+int mmo_char_tobuf(uint8* buffer, struct mmo_charstatus* p) {
 	unsigned short offset = 0;
 	uint8* buf;
 
@@ -1831,8 +1811,7 @@ int mmo_char_tobuf(uint8* buffer, struct mmo_charstatus* p)
 //----------------------------------------
 // Function to send characters to a player
 //----------------------------------------
-int mmo_char_send006b(int fd, struct char_session_data* sd)
-{
+int mmo_char_send006b(int fd, struct char_session_data* sd) {
 	int j, offset = 0;
 #if PACKETVER >= 20100413
 	offset += 3;
@@ -1857,8 +1836,7 @@ int mmo_char_send006b(int fd, struct char_session_data* sd)
 	return 0;
 }
 
-int char_married(int pl1, int pl2)
-{
+int char_married(int pl1, int pl2) {
 	if( SQL_ERROR == Sql_Query(sql_handle, "SELECT `partner_id` FROM `%s` WHERE `char_id` = '%d'", char_db, pl1) )
 		Sql_ShowDebug(sql_handle);
 	else if( SQL_SUCCESS == Sql_NextRow(sql_handle) )
@@ -1876,8 +1854,7 @@ int char_married(int pl1, int pl2)
 	return 0;
 }
 
-int char_child(int parent_id, int child_id)
-{
+int char_child(int parent_id, int child_id) {
 	if( SQL_ERROR == Sql_Query(sql_handle, "SELECT `child` FROM `%s` WHERE `char_id` = '%d'", char_db, parent_id) )
 		Sql_ShowDebug(sql_handle);
 	else if( SQL_SUCCESS == Sql_NextRow(sql_handle) )
@@ -1895,8 +1872,7 @@ int char_child(int parent_id, int child_id)
 	return 0;
 }
 
-int char_family(int cid1, int cid2, int cid3)
-{
+int char_family(int cid1, int cid2, int cid3) {
 	if( SQL_ERROR == Sql_Query(sql_handle, "SELECT `char_id`,`partner_id`,`child` FROM `%s` WHERE `char_id` IN ('%d','%d','%d')", char_db, cid1, cid2, cid3) )
 		Sql_ShowDebug(sql_handle);
 	else while( SQL_SUCCESS == Sql_NextRow(sql_handle) )
@@ -1925,8 +1901,7 @@ int char_family(int cid1, int cid2, int cid3)
 //----------------------------------------------------------------------
 // Force disconnection of an online player (with account value) by [Yor]
 //----------------------------------------------------------------------
-void disconnect_player(int account_id)
-{
+void disconnect_player(int account_id) {
 	int i;
 	struct char_session_data* sd;
 
@@ -1936,8 +1911,7 @@ void disconnect_player(int account_id)
 		set_eof(i);
 }
 
-static void char_auth_ok(int fd, struct char_session_data *sd)
-{
+static void char_auth_ok(int fd, struct char_session_data *sd) {
 	struct online_char_data* character;
 
 	if( (character = (struct online_char_data*)idb_get(online_char_db, sd->account_id)) != NULL )
@@ -1986,8 +1960,7 @@ void mapif_server_reset(int id);
 
 
 /// Resets all the data.
-void loginif_reset(void)
-{
+void loginif_reset(void) {
 	int id;
 	// TODO kick everyone out and reset everything or wait for connect and try to reaquire locks [FlavioJS]
 	for( id = 0; id < ARRAYLENGTH(server); ++id )
@@ -2000,8 +1973,7 @@ void loginif_reset(void)
 /// Checks the conditions for the server to stop.
 /// Releases the cookie when all characters are saved.
 /// If all the conditions are met, it stops the core loop.
-void loginif_check_shutdown(void)
-{
+void loginif_check_shutdown(void) {
 	if( runflag != CHARSERVER_ST_SHUTDOWN )
 		return;
 	runflag = CORE_ST_STOP;
@@ -2009,15 +1981,13 @@ void loginif_check_shutdown(void)
 
 
 /// Called when the connection to Login Server is disconnected.
-void loginif_on_disconnect(void)
-{
+void loginif_on_disconnect(void) {
 	ShowWarning("Conexão com o login-server perdida.\n\n");
 }
 
 
 /// Called when all the connection steps are completed.
-void loginif_on_ready(void)
-{
+void loginif_on_ready(void) {
 	int i;
 
 	loginif_check_shutdown();
@@ -2032,31 +2002,38 @@ void loginif_on_ready(void)
 }
 
 
-int parse_fromlogin(int fd)
-{
+int parse_fromlogin(int fd) {
 	struct char_session_data* sd = NULL;
 	int i;
 	
 	// only process data from the login-server
-	if( fd != login_fd )
-	{
+	if( fd != login_fd ) {
 		ShowDebug("parse_fromlogin: Disconnecting invalid session #%d (is not the login-server)\n", fd);
 		do_close(fd);
 		return 0;
 	}
 
-	if( session[fd]->flag.eof )
-	{
+	if( session[fd]->flag.eof ) {
 		do_close(fd);
 		login_fd = -1;
 		loginif_on_disconnect();
 		return 0;
+	} else if ( session[fd]->flag.ping ) {/* we've reached stall time */ 
+		if( DIFF_TICK(last_tick, session[fd]->rdata_tick) > (stall_time * 2) ) {/* we can't wait any longer */ 
+				set_eof(fd); 
+				return 0; 
+		} else if( session[fd]->flag.ping != 2 ) { /* we haven't sent ping out yet */
+				WFIFOHEAD(fd,2);// sends a ping packet to login server (will receive pong 0x2718)
+				WFIFOW(fd,0) = 0x2719;
+				WFIFOSET(fd,2);
+
+				session[fd]->flag.ping = 2;
+		}
 	}
 
 	sd = (struct char_session_data*)session[fd]->session_data;
 
-	while(RFIFOREST(fd) >= 2)
-	{
+	while(RFIFOREST(fd) >= 2) {
 		uint16 command = RFIFOW(fd,0);
 
 		switch( command )
@@ -2164,6 +2141,7 @@ int parse_fromlogin(int fd)
 			if (RFIFOREST(fd) < 2)
 				return 0;
 			RFIFOSKIP(fd,2);
+			session[fd]->flag.ping = 0;
 		break;
 
 		// changesex reply
@@ -2357,26 +2335,19 @@ int parse_fromlogin(int fd)
 }
 
 int check_connect_login_server(int tid, unsigned int tick, int id, intptr_t data);
-int ping_login_server(int tid, unsigned int tick, int id, intptr_t data);
 int send_accounts_tologin(int tid, unsigned int tick, int id, intptr_t data);
 
-void do_init_loginif(void)
-{
+void do_init_loginif(void) {
 	// establish char-login connection if not present
 	add_timer_func_list(check_connect_login_server, "check_connect_login_server");
 	add_timer_interval(gettick() + 1000, check_connect_login_server, 0, 0, 10 * 1000);
-	
-	// keep the char-login connection alive
-	add_timer_func_list(ping_login_server, "ping_login_server");
-	add_timer_interval(gettick() + 1000, ping_login_server, 0, 0, ((int)stall_time-2) * 1000);
 	
 	// send a list of all online account IDs to login server
 	add_timer_func_list(send_accounts_tologin, "send_accounts_tologin");
 	add_timer_interval(gettick() + 1000, send_accounts_tologin, 0, 0, 3600 * 1000); //Sync online accounts every hour
 }
 
-void do_final_loginif(void)
-{
+void do_final_loginif(void) {
 	if( login_fd != -1 )
 	{
 		do_close(login_fd);
@@ -2384,8 +2355,7 @@ void do_final_loginif(void)
 	}
 }
 
-int request_accreg2(int account_id, int char_id)
-{
+int request_accreg2(int account_id, int char_id) {
 	if (login_fd > 0) {
 		WFIFOHEAD(login_fd,10);
 		WFIFOW(login_fd,0) = 0x272e;
@@ -2398,8 +2368,7 @@ int request_accreg2(int account_id, int char_id)
 }
 
 //Send packet forward to login-server for account saving
-int save_accreg2(unsigned char* buf, int len)
-{
+int save_accreg2(unsigned char* buf, int len) {
 	if (login_fd > 0) {
 		WFIFOHEAD(login_fd,len+4);
 		memcpy(WFIFOP(login_fd,4), buf, len);
@@ -2411,8 +2380,7 @@ int save_accreg2(unsigned char* buf, int len)
 	return 0;
 }
 
-void char_read_fame_list(void)
-{
+void char_read_fame_list(void) {
 	int i;
 	char* data;
 	size_t len;
@@ -2470,8 +2438,7 @@ void char_read_fame_list(void)
 }
 
 // Send map-servers the fame ranking lists
-int char_send_fame_list(int fd)
-{
+int char_send_fame_list(int fd) {
 	int i, len = 8;
 	unsigned char buf[32000];
 	
@@ -2506,8 +2473,7 @@ int char_send_fame_list(int fd)
 	return 0;
 }
 
-void char_update_fame_list(int type, int index, int fame)
-{
+void char_update_fame_list(int type, int index, int fame) {
 	unsigned char buf[8];
 	WBUFW(buf,0) = 0x2b22;
 	WBUFB(buf,2) = type;
@@ -2518,8 +2484,7 @@ void char_update_fame_list(int type, int index, int fame)
 
 //Loads a character's name and stores it in the buffer given (must be NAME_LENGTH in size)
 //Returns 1 on found, 0 on not found (buffer is filled with Unknown char name)
-int char_loadName(int char_id, char* name)
-{
+int char_loadName(int char_id, char* name) {
 	char* data;
 	size_t len;
 
@@ -2542,16 +2507,14 @@ int search_mapserver(unsigned short map, uint32 ip, uint16 port);
 
 
 /// Initializes a server structure.
-void mapif_server_init(int id)
-{
+void mapif_server_init(int id) {
 	memset(&server[id], 0, sizeof(server[id]));
 	server[id].fd = -1;
 }
 
 
 /// Destroys a server structure.
-void mapif_server_destroy(int id)
-{
+void mapif_server_destroy(int id) {
 	if( server[id].fd == -1 )
 	{
 		do_close(server[id].fd);
@@ -2561,8 +2524,7 @@ void mapif_server_destroy(int id)
 
 
 /// Resets all the data related to a server.
-void mapif_server_reset(int id)
-{
+void mapif_server_reset(int id) {
 	int i,j;
 	unsigned char buf[16384];
 	int fd = server[id].fd;
@@ -2587,15 +2549,13 @@ void mapif_server_reset(int id)
 
 
 /// Called when the connection to a Map Server is disconnected.
-void mapif_on_disconnect(int id)
-{
+void mapif_on_disconnect(int id) {
 	ShowStatus("Map-server #%d foi desconectado.\n", id);
 	mapif_server_reset(id);
 }
 
 
-int parse_frommap(int fd)
-{
+int parse_frommap(int fd) {
 	int i, j;
 	int id;
 
@@ -3303,15 +3263,13 @@ int parse_frommap(int fd)
 	return 0;
 }
 
-void do_init_mapif(void)
-{
+void do_init_mapif(void) {
 	int i;
 	for( i = 0; i < ARRAYLENGTH(server); ++i )
 		mapif_server_init(i);
 }
 
-void do_final_mapif(void)
-{
+void do_final_mapif(void) {
 	int i;
 	for( i = 0; i < ARRAYLENGTH(server); ++i )
 		mapif_server_destroy(i);
@@ -3319,8 +3277,7 @@ void do_final_mapif(void)
 
 // Searches for the mapserver that has a given map (and optionally ip/port, if not -1).
 // If found, returns the server's index in the 'server' array (otherwise returns -1).
-int search_mapserver(unsigned short map, uint32 ip, uint16 port)
-{
+int search_mapserver(unsigned short map, uint32 ip, uint16 port) {
 	int i, j;
 	
 	for(i = 0; i < ARRAYLENGTH(server); i++)
@@ -3339,16 +3296,14 @@ int search_mapserver(unsigned short map, uint32 ip, uint16 port)
 }
 
 // Initialization process (currently only initialization inter_mapif)
-static int char_mapif_init(int fd)
-{
+static int char_mapif_init(int fd) {
 	return inter_mapif_init(fd);
 }
 
 //--------------------------------------------
 // Test to know if an IP come from LAN or WAN.
 //--------------------------------------------
-int lan_subnetcheck(uint32 ip)
-{
+int lan_subnetcheck(uint32 ip) {
 	int i;
 	ARR_FIND( 0, subnet_count, i, (subnet[i].char_ip & subnet[i].mask) == (ip & subnet[i].mask) );
 	if( i < subnet_count ) {
@@ -3368,8 +3323,7 @@ int lan_subnetcheck(uint32 ip)
 /// 4 (0x71a): To delete a character you must withdraw from the guild.
 /// 5 (0x71b): To delete a character you must withdraw from the party.
 /// Any (0x718): An unknown error has occurred.
-void char_delete2_ack(int fd, int char_id, uint32 result, time_t delete_date)
-{// HC: <0828>.W <char id>.L <Msg:0-5>.L <deleteDate>.L
+void char_delete2_ack(int fd, int char_id, uint32 result, time_t delete_date) {// HC: <0828>.W <char id>.L <Msg:0-5>.L <deleteDate>.L
 	WFIFOHEAD(fd,14);
 	WFIFOW(fd,0) = 0x828;
 	WFIFOL(fd,2) = char_id;
@@ -3387,8 +3341,7 @@ void char_delete2_ack(int fd, int char_id, uint32 result, time_t delete_date)
 /// 4 (0x71d): Deleting not yet possible time.
 /// 5 (0x71e): Date of birth do not match.
 /// Any (0x718): An unknown error has occurred.
-void char_delete2_accept_ack(int fd, int char_id, uint32 result)
-{// HC: <082a>.W <char id>.L <Msg:0-5>.L
+void char_delete2_accept_ack(int fd, int char_id, uint32 result) {// HC: <082a>.W <char id>.L <Msg:0-5>.L
 	WFIFOHEAD(fd,10);
 	WFIFOW(fd,0) = 0x82a;
 	WFIFOL(fd,2) = char_id;
@@ -3401,8 +3354,7 @@ void char_delete2_accept_ack(int fd, int char_id, uint32 result)
 /// 1 (0x718): none/success, (if char id not in deletion process): An unknown error has occurred.
 /// 2 (0x719): A database error occurred.
 /// Any (0x718): An unknown error has occurred.
-void char_delete2_cancel_ack(int fd, int char_id, uint32 result)
-{// HC: <082c>.W <char id>.L <Msg:1-2>.L
+void char_delete2_cancel_ack(int fd, int char_id, uint32 result) {// HC: <082c>.W <char id>.L <Msg:1-2>.L
 	WFIFOHEAD(fd,10);
 	WFIFOW(fd,0) = 0x82c;
 	WFIFOL(fd,2) = char_id;
@@ -3411,8 +3363,7 @@ void char_delete2_cancel_ack(int fd, int char_id, uint32 result)
 }
 
 
-static void char_delete2_req(int fd, struct char_session_data* sd)
-{// CH: <0827>.W <char id>.L
+static void char_delete2_req(int fd, struct char_session_data* sd) {// CH: <0827>.W <char id>.L
 	int char_id, i;
 	char* data;
 	time_t delete_date;
@@ -3471,8 +3422,7 @@ static void char_delete2_req(int fd, struct char_session_data* sd)
 }
 
 
-static void char_delete2_accept(int fd, struct char_session_data* sd)
-{// CH: <0829>.W <char id>.L <birth date:YYMMDD>.6B
+static void char_delete2_accept(int fd, struct char_session_data* sd) {// CH: <0829>.W <char id>.L <birth date:YYMMDD>.6B
 	char birthdate[8+1];
 	int char_id, i, k;
 	unsigned int base_level;
@@ -3547,8 +3497,7 @@ static void char_delete2_accept(int fd, struct char_session_data* sd)
 }
 
 
-static void char_delete2_cancel(int fd, struct char_session_data* sd)
-{// CH: <082b>.W <char id>.L
+static void char_delete2_cancel(int fd, struct char_session_data* sd) {// CH: <082b>.W <char id>.L
 	int char_id, i;
 
 	char_id = RFIFOL(fd,2);
@@ -3574,8 +3523,7 @@ static void char_delete2_cancel(int fd, struct char_session_data* sd)
 }
 
 
-int parse_char(int fd)
-{
+int parse_char(int fd) {
 	int i, ch;
 	char email[40];
 	unsigned short cmd;
@@ -4104,8 +4052,7 @@ int parse_char(int fd)
 }
 
 // Console Command Parser [Wizputer]
-int parse_console(const char* command)
-{
+int parse_console(const char* command) {
 	ShowNotice("Comando de console: %s\n", command);
 
 	if( strcmpi("shutdown", command) == 0 || strcmpi("exit", command) == 0 || strcmpi("quit", command) == 0 || strcmpi("end", command) == 0 )
@@ -4123,8 +4070,7 @@ int parse_console(const char* command)
 	return 0;
 }
 
-int mapif_sendall(unsigned char *buf, unsigned int len)
-{
+int mapif_sendall(unsigned char *buf, unsigned int len) {
 	int i, c;
 
 	c = 0;
@@ -4141,8 +4087,7 @@ int mapif_sendall(unsigned char *buf, unsigned int len)
 	return c;
 }
 
-int mapif_sendallwos(int sfd, unsigned char *buf, unsigned int len)
-{
+int mapif_sendallwos(int sfd, unsigned char *buf, unsigned int len) {
 	int i, c;
 
 	c = 0;
@@ -4159,8 +4104,7 @@ int mapif_sendallwos(int sfd, unsigned char *buf, unsigned int len)
 	return c;
 }
 
-int mapif_send(int fd, unsigned char *buf, unsigned int len)
-{
+int mapif_send(int fd, unsigned char *buf, unsigned int len) {
 	if (fd >= 0) {
 		int i;
 		ARR_FIND( 0, ARRAYLENGTH(server), i, fd == server[i].fd );
@@ -4175,8 +4119,7 @@ int mapif_send(int fd, unsigned char *buf, unsigned int len)
 	return 0;
 }
 
-int broadcast_user_count(int tid, unsigned int tick, int id, intptr_t data)
-{
+int broadcast_user_count(int tid, unsigned int tick, int id, intptr_t data) {
 	uint8 buf[6];
 	int users = count_users();
 
@@ -4207,8 +4150,7 @@ int broadcast_user_count(int tid, unsigned int tick, int id, intptr_t data)
  * Load this character's account id into the 'online accounts' packet
  * @see DBApply
  */
-static int send_accounts_tologin_sub(DBKey key, DBData *data, va_list ap)
-{
+static int send_accounts_tologin_sub(DBKey key, DBData *data, va_list ap) {
 	struct online_char_data* character = db_data2ptr(data);
 	int* i = va_arg(ap, int*);
 
@@ -4221,8 +4163,7 @@ static int send_accounts_tologin_sub(DBKey key, DBData *data, va_list ap)
 	return 0;
 }
 
-int send_accounts_tologin(int tid, unsigned int tick, int id, intptr_t data)
-{
+int send_accounts_tologin(int tid, unsigned int tick, int id, intptr_t data) {
 	if (login_fd > 0 && session[login_fd])
 	{
 		// send account list to login server
@@ -4239,8 +4180,7 @@ int send_accounts_tologin(int tid, unsigned int tick, int id, intptr_t data)
 	return 0;
 }
 
-int check_connect_login_server(int tid, unsigned int tick, int id, intptr_t data)
-{
+int check_connect_login_server(int tid, unsigned int tick, int id, intptr_t data) {
 	if (login_fd > 0 && session[login_fd] != NULL)
 		return 0;
 
@@ -4271,24 +4211,11 @@ int check_connect_login_server(int tid, unsigned int tick, int id, intptr_t data
 	return 1;
 }
 
-// sends a ping packet to login server (will receive pong 0x2718)
-int ping_login_server(int tid, unsigned int tick, int id, intptr_t data)
-{
-	if (login_fd > 0 && session[login_fd] != NULL)
-	{
-		WFIFOHEAD(login_fd,2);
-		WFIFOW(login_fd,0) = 0x2719;
-		WFIFOSET(login_fd,2);
-	}
-	return 0;
-}
-
 //------------------------------------------------
 //Invoked 15 seconds after mapif_disconnectplayer in case the map server doesn't
 //replies/disconnect the player we tried to kick. [Skotlex]
 //------------------------------------------------
-static int chardb_waiting_disconnect(int tid, unsigned int tick, int id, intptr_t data)
-{
+static int chardb_waiting_disconnect(int tid, unsigned int tick, int id, intptr_t data) {
 	struct online_char_data* character;
 	if ((character = (struct online_char_data*)idb_get(online_char_db, id)) != NULL && character->waiting_disconnect == tid)
 	{	//Mark it offline due to timeout.
@@ -4301,8 +4228,7 @@ static int chardb_waiting_disconnect(int tid, unsigned int tick, int id, intptr_
 /**
  * @see DBApply
  */
-static int online_data_cleanup_sub(DBKey key, DBData *data, va_list ap)
-{
+static int online_data_cleanup_sub(DBKey key, DBData *data, va_list ap) {
 	struct online_char_data *character= db_data2ptr(data);
 	if (character->fd != -1)
 		return 0; //Character still connected
@@ -4314,8 +4240,7 @@ static int online_data_cleanup_sub(DBKey key, DBData *data, va_list ap)
 	return 0;
 }
 
-static int online_data_cleanup(int tid, unsigned int tick, int id, intptr_t data)
-{
+static int online_data_cleanup(int tid, unsigned int tick, int id, intptr_t data) {
 	online_char_db->foreach(online_char_db, online_data_cleanup_sub);
 	return 0;
 }
@@ -4324,8 +4249,7 @@ static int online_data_cleanup(int tid, unsigned int tick, int id, intptr_t data
 // Reading Lan Support configuration
 // Rewrote: Anvanced subnet check [LuzZza]
 //----------------------------------
-int char_lan_config_read(const char *lancfgName)
-{
+int char_lan_config_read(const char *lancfgName) {
 	FILE *fp;
 	int line_num = 0;
 	char line[1024], w1[64], w2[64], w3[64], w4[64];
@@ -4376,8 +4300,7 @@ int char_lan_config_read(const char *lancfgName)
 	return 0;
 }
 
-void sql_config_read(const char* cfgName)
-{
+void sql_config_read(const char* cfgName) {
 	char line[1024], w1[1024], w2[1024];
 	FILE* fp;
 
@@ -4462,8 +4385,7 @@ void sql_config_read(const char* cfgName)
 	ShowInfo("Finalizada leitura de "CL_WHITE"%s"CL_RESET".\n", cfgName);
 }
 
-int char_config_read(const char* cfgName)
-{
+int char_config_read(const char* cfgName) {
 	char line[1024], w1[1024], w2[1024];
 	FILE* fp = fopen(cfgName, "r");
 
@@ -4617,8 +4539,7 @@ int char_config_read(const char* cfgName)
 	return 0;
 }
 
-void do_final(void)
-{
+void do_final(void) {
 	ShowStatus("Finalizando...\n");
 
 	set_all_offline(-1);
@@ -4654,19 +4575,16 @@ void do_final(void)
 // Function called when the server
 // has received a crash signal.
 //------------------------------
-void do_abort(void)
-{
+void do_abort(void) {
 }
 
-void set_server_type(void)
-{
+void set_server_type(void) {
 	SERVER_TYPE = ATHENA_SERVER_CHAR;
 }
 
 
 /// Called when a terminate signal is received.
-void do_shutdown(void)
-{
+void do_shutdown(void) {
 	if( runflag != CHARSERVER_ST_SHUTDOWN )
 	{
 		int id;
@@ -4682,8 +4600,7 @@ void do_shutdown(void)
 }
 
 
-int do_init(int argc, char **argv)
-{
+int do_init(int argc, char **argv) {
 	//Read map indexes
 	mapindex_init();
 	start_point.map = mapindex_name2id("new_zone01");

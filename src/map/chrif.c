@@ -116,7 +116,7 @@ int other_mapserver_count=0; //Holds count of how many other map servers are onl
 
 
 /// Resets all the data.
-inline void chrif_reset(void) {
+void chrif_reset(void) {
 	// TODO kick everyone out and reset everything [FlavioJS]
 	exit(EXIT_FAILURE);
 }
@@ -206,17 +206,17 @@ bool chrif_auth_finished(TBL_PC* sd) {
 	return false;
 }
 // sets char-server's user id
-inline void chrif_setuserid(char *id) {
+void chrif_setuserid(char *id) {
 	memcpy(userid, id, NAME_LENGTH);
 }
 
 // sets char-server's password
-inline void chrif_setpasswd(char *pwd) {
+void chrif_setpasswd(char *pwd) {
 	memcpy(passwd, pwd, NAME_LENGTH);
 }
 
 // security check, prints warning if using default password
-inline void chrif_checkdefaultlogin(void) {
+void chrif_checkdefaultlogin(void) {
 	if( strcmp(userid, "s1") == 0 && strcmp(passwd, "p1") == 0 ) {
 		ShowWarning("O uso do login e senha padrões (s1/p1) não é recomendado.\n");
 		ShowNotice("\tEdite a tabela 'login' do seu banco de dados para criar ou modificar uma conta\n");
@@ -369,7 +369,7 @@ int chrif_removemap(int fd) {
 }
 
 // received after a character has been "final saved" on the char-server
-static inline void chrif_save_ack(int fd) {
+static void chrif_save_ack(int fd) {
 	chrif_auth_delete(RFIFOL(fd,2), RFIFOL(fd,6), ST_LOGOUT);
 	chrif_check_shutdown();
 }
@@ -1307,6 +1307,7 @@ void chrif_keepalive(int fd) {
 }
 
 void chrif_keepalive_ack(int fd) {
+	session[fd]->flag.ping = 0;
 }
 
 /*==========================================
@@ -1323,12 +1324,19 @@ int chrif_parse(int fd) {
 		return 0;
 	}
 
-	if (session[fd]->flag.eof)
-	{
+	if (session[fd]->flag.eof) {
 		do_close(fd);
 		char_fd = -1;
 		chrif_on_disconnect();
 		return 0;
+	} else if( session[fd]->flag.ping ) {
+		if( DIFF_TICK( last_tick, session[fd]->rdata_tick ) > (stall_time * 2) ) {
+			set_eof(fd);
+			return 0;
+		} else if( session[fd]->flag.ping != 2 ) {
+			chrif_keepalive(fd);
+			session[fd]->flag.ping = 2;
+		}
 	}
 
 	while (RFIFOREST(fd) >= 2)
@@ -1391,12 +1399,6 @@ int chrif_parse(int fd) {
 			RFIFOSKIP(fd, packet_len);
 	}
 
-	return 0;
-}
-
-int ping_char_server(int tid, unsigned int tick, int id, intptr_t data) {
-	chrif_check(-1);
-	chrif_keepalive(char_fd);
 	return 0;
 }
 
@@ -1530,14 +1532,10 @@ int do_init_chrif(void) {
 	auth_db_ers = ers_new(sizeof(struct auth_node),"chrif.c::auth_db_ers",ERS_OPT_NONE);
 
 	add_timer_func_list(check_connect_char_server, "check_connect_char_server");
-	add_timer_func_list(ping_char_server, "ping_char_server");
 	add_timer_func_list(auth_db_cleanup, "auth_db_cleanup");
 
 	// establish map-char connection if not present
 	add_timer_interval(gettick() + 1000, check_connect_char_server, 0, 0, 10 * 1000);
-
-	// keep the map-char connection alive
-	add_timer_interval(gettick() + 1000, ping_char_server, 0, 0, ((int)stall_time-2) * 1000);
 
 	// wipe stale data for timed-out client connection requests
 	add_timer_interval(gettick() + 1000, auth_db_cleanup, 0, 0, 30 * 1000);
