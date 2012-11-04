@@ -3366,25 +3366,23 @@ inventory for the item(s) they will be receiving.
 Like 'getitem', this function will also accept an 'english name' from the 
 database as an argument.
 
-    checkweight(502,10) // 10 apples
-
-        if (checkweight(502,10) == 0 ) goto L_OverWeight;
-        getitem 502,10;
-        close;
-    L_OverWeight:
-        mes "Sorry you cannot hold this amount of apples";
-        close;
+	if (checkweight(512,10)) {
+		getitem 512,10;
+	} else {
+		mes "Sorry you cannot hold this amount of apples";
+	}
+	close;
 
 Or to put this another way:
 
-        if (checkweight("APPLE",10)) goto L_Getapples;
-        mes "Sorry you cannot hold this amount of apples";
-        close;
-    L_Getapples:
-        getitem 502,10;
-        close;
+		if (checkweight("APPLE",10)) goto L_Getapples;
+		mes "Sorry you cannot hold this amount of apples";
+		close;
+	L_Getapples:
+		getitem 502,10;
+		close;
 
-Both these examples have the same effect.
+Both examples have the same effect.
 
 ---------------------------------------
 
