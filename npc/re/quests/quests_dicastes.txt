@@ -5975,6 +5975,7 @@ dic_in01,42,264,3	script	Adventurer Clerk#ep133_	453,{
 				mes "Please feel free to ask questions when you need help.";
 				close;
 		}
+	}
 	mes "������ �� ������ �� ��...?";
 	mes "������ ... �� ������ �� �С���...";
 	next;
