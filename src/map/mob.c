@@ -2744,7 +2744,7 @@ int mob_class_change (struct mob_data *md, int class_)
 	if (md->guardian_data)
 		return 0; //Guardians/Emperium
 
-	if( (md->class_ >= 1324 && md->class_ <= 1363) || (md->class_ >= 1938 && md->class_ <= 1946) )
+	if( mob_is_treasure(md) )
 		return 0; //Treasure Boxes
 
 	if( md->special_state.ai > 1 )
