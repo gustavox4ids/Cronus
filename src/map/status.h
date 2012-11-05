@@ -589,7 +589,7 @@ typedef enum sc_type {
 	/* Guild Aura */
 	SC_LEADERSHIP,
 	SC_GLORYWOUNDS,
-	SC_SOULCOLD, //508
+	SC_SOULCOLD, //510
 	SC_HAWKEYES,
 	/* ... */
 	SC_ODINS_POWER,

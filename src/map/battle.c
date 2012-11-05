@@ -375,7 +375,7 @@ int battle_attr_fix(struct block_list *src, struct block_list *target, int damag
 			case ELE_WIND:
 				if( tsc->data[SC_CRYSTALIZE] && target->type != BL_MOB)
 					damage += damage / 2;
-				if( tsc->data[SC_WATER_INSIGINIA] )
+				if( tsc->data[SC_WATER_INSIGNIA] )
 					damage += damage / 2;
 				break;
 			case ELE_WATER:

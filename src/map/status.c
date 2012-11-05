@@ -7376,7 +7376,7 @@ int status_change_start(struct block_list* bl,enum sc_type type,int rate,int val
 				sc_start(bl,SC_BLEEDING,100,val1,skill_get_time2(status_sc2skill(type),val1));
 			break;
 
-		case SC__BLOODYLUST
+		case SC__BLOODYLUST:
 		case SC_BERSERK:
 			if (!sc->data[SC_ENDURE] || !sc->data[SC_ENDURE]->val4)
 				sc_start4(bl, SC_ENDURE, 100,10,0,0,2, tick);
