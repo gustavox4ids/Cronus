@@ -2,35 +2,39 @@
 //= Quest do Justiceiro
 //===== Por: =================================================
 //= erKURITA & RockmanEXE
-//= Direct credits quote from RockmanExe: 
-//= "info provided by RockmanEXE cause he pwnz0rz yer arse"
-//= DON'T REMOVE THIS! (by request of him, he provided all
-//= the info regarding the quests and shops.)
-//===== Versão Atual: ========================================
-//= 2.1e
-//===== Compatível com: ====================================== 
-//= eAthena SVN
-//===== Descrição: =========================================== 
+//= CitaÃ§Ã£o direta de crÃ©ditos por RockmanExe: 
+//= "informaÃ§Ãµes fornecidas RockmanEXE porque ele owna seu traseiro"
+//= ("info provided by RockmanEXE cause he pwnz0rz yer arse")
+//= NÃƒO REMOVA ISSO! (por um pedido dele, que nos forneceu todas
+//= as informaÃ§Ãµes a respeito das quests e shops.)
+//===== VersÃ£o Atual: ========================================
+//= 2.2
+//===== CompatÃ­vel com: ====================================== 
+//= Cronus
+//===== DescriÃ§Ã£o: =========================================== 
 //= Quest da Classe Justiceiro
 //===== Additional Comments: ================================= 
-//= 1.0 Made the NPC [erKURITA]
-//= 1.5 Couple fixes to the npc, aswell as adding the missing
-//=	  3 green herbs. [erKURITA]
-//= 1.6 job number->const, commonized variable name,
-//= 	optimized [Lupus]
-//= 1.7 Now uses only ONE variable GUNS_Q [Lupus]
-//= 1.7a Grammar fixes, few spelling fixes, etc [CBMaster]
-//= 1.7b Parenthesis fixes [KarLaeda]
-//= 1.8 Fixed the reward you can get [Playtester]
-//= 1.9 Removed some 'clever' script constructs [ultramage]
-//= 2.0 Updated to official version - Thanks to Omega for
-//= his first try [SinSloth] 1.10b - removed .GATs [Lupus]
-//= 2.1 Wise Bull Horn now deletes all items. Thanks to yyCC. [L0ne_W0lf]
-//= 2.1a Corrected a Typo error ";". [Samuray22]
-//= 2.1b Corrected some typos errors. (bugreport:1549) [Samuray22]
-//= 2.1c Fixed some missing/messed up item checks. (bugreport:2693) [Kisuka]
-//= 2.1d Revisado arquivo. [Mara]
+//= 1.0 Npc construÃ­do. [erKURITA]
+//= 1.5 Alguns consertos ao npc, assim como a adiÃ§Ã£o de trÃªs
+//=	  Ervas Verdes faltando. [erKURITA]
+//= 1.6 ID de Classe->String de Classe, uma variÃ¡vel padronizada,
+//= 	para otimizaÃ§Ã£o. [Lupus]
+//= 1.7 Agora usa apenas UMA variÃ¡vel para a quest (GUNS_Q). [Lupus]
+//= 1.7a VÃ¡rios ajustes gramaticais. [CBMaster]
+//= 1.7b Ajustes nos parÃªnteses. [KarLaeda]
+//= 1.8 Conserto ao prÃªmio que se pode obter. [Playtester]
+//= 1.9 Removidas construÃ§Ãµes 'inteligentes' do Script [ultramage]
+//= 2.0 Atualizado para versÃ£o oficial - Agradecimentos ao Omega
+//=     por sua primeira tentativa [SinSloth]
+//= 1.10b - RemoÃ§Ã£o das extensÃµes .GATs [Lupus]
+//= 2.1 O 'SÃ¡bio Chifre de BÃºfalo' agora deleta todos os itens.
+//=       Agradecimentos ao yyCC. [L0ne_W0lf]
+//= 2.1a Corrigido ';' utilizado errÃ´neamente. [Samuray22]
+//= 2.1b Alguns erros de digitaÃ§Ã£o corrigidos. (bugreport:1549) [Samuray22]
+//= 2.1c Corrigidas algumas checagens de itens. (bugreport:2693) [Kisuka]
+//= 2.1d Revisado arquivo. [mkbu95]
 //= 2.1e Removido show, additem	[Yum]
+//= 2.2 Algumas otimizaÃ§Ãµes e ajustes gramaticais. [Schrwaizer]
 //============================================================ 
 
 que_ng,152,167,3	script	Mestre Miller	901,{
@@ -41,157 +45,153 @@ que_ng,152,167,3	script	Mestre Miller	901,{
 		switch(GUNS_Q)
 		{
 			case 0:
-				mes "Eu sou chefe de segurança e também";
+				mes "Eu sou chefe de seguranÃ§a e tambÃ©m";
 				mes "um Instrutor de Justiceiro, pode me chamar de";
 				mes "Mestre Miller.";
 				next;
 				mes "[Mestre Miller]";
-				mes "Eu não posso me distrair do meu dever";
+				mes "Eu nÃ£o posso me distrair do meu dever";
 				mes "nesse momento.";
-				mes "O que você quer?";
+				mes "O que vocÃª quer?";
 				next;
-				switch( select( "Nada demais.","Eu quero me tornar um Justiceiro.") )
+				if( select( "Nada demais.:Eu quero me tornar um Justiceiro.") == 1 )
 				{
-					case 1:
 						mes "[Mestre Miller]";
-						mes "Desperdiçar meu tempo é como,";
-						mes "desperdiçar ouro.";
-						mes "Saia da minha vista imediatamente.";
+						mes "DesperdiÃ§ar meu tempo Ã© como,";
+						mes "desperdiÃ§ar ouro.";
+						mes "Saia da minha vista imediatamente!";
 						close;
-
-					case 2:
+				}
 						mes "[Mestre Miller]";
 						mes "Hmm.";
-						mes "Você ainda tem uma aparência jovem";
+						mes "VocÃª ainda tem uma aparÃªncia jovem";
 						mes "mas em seu olhar...";
-						mes "Eu posso sentir uma força poderosa.";
+						mes "Eu posso sentir uma forÃ§a poderosa.";
 						next;
 						mes "[Mestre Miller]";
 						mes "Hmm...Tudo bem.";
-						mes "Primeiro, se você quer se tornar um Justiceiro";
-						mes "você precisa passar por alguns testes";
-						mes "e também por uma entrevista e sessões de treinamento.";
+						mes "Primeiro, se vocÃª quer se tornar um Justiceiro";
+						mes "vocÃª precisa passar por alguns testes";
+						mes "e tambÃ©m por uma entrevista e sessÃµes de treinamento.";
 						next;
 						mes "[Mestre Miller]";
-						mes "Você quer continuar?";
+						mes "VocÃª quer continuar?";
 						next;
-						switch (select ("Não, eu preciso de tempo para pensar.","Claro.") )
+						if(select("NÃ£o, eu preciso de tempo para pensar.:Claro.") == 1 )
 						{
-							case 1:
 								mes "[Mestre Miller]";
-								mes "Hmm.. Então é isso.";
-								mes "Bom, é muito importante...";
-								mes "Pense cuidadosamente e se você tem o espírito, ";
+								mes "Hmm... EntÃ£o Ã© isso.";
+								mes "Bom, Ã© muito importante...";
+								mes "Pense cuidadosamente e se vocÃª tem o espÃ­rito,";
 								mes "por favor, volte depois.";
 								close;
+						}
 
-							case 2:
 								mes "[Mestre Miller]";
 								mes "Hmm. Tudo Bem.";
 								mes "Primeiro";
-								mes "entregue essa carta que eu estou dando a você";
+								mes "entregue essa carta que eu estou dando a vocÃª";
 								mes "para o alquimista de Payon,";
-								mes "'O Sábio Chifre de Búfalo'";
-								mes "e entregue a carta em mãos.";
+								mes "'O SÃ¡bio Chifre de BÃºfalo'";
+								mes "e entregue a carta em mÃ£os.";
 								next;
 								mes "[Mestre Miller]";
-								mes "Ele irá julgar você e";
-								mes "nos informará se";
-								mes "você está dentro de nossos padrões.";
+								mes "Ele irÃ¡ julgar vocÃª e";
+								mes "nos informarÃ¡ se";
+								mes "vocÃª estÃ¡ dentro de nossos padrÃµes.";
 								next;
 								mes "["+ strcharinfo(0) +"]";
 								mes "Tudo bem, eu vou fazer isso.";
 								set GUNS_Q,1;
 								close;
-						}
-				}
+
 
 			case 1:	
 				mes "Se apresse, e mova-se.";
-				mes "'O Sábio Chifre de Búfalo' está";
+				mes "O \"SÃ¡bio Chifre de BÃºfalo\" estÃ¡";
 				mes "recentemente em Payon.";
 				close;
 
 			case 2:
-				mes "Eu acho que ele deu para você";
+				mes "Eu acho que ele deu para vocÃª";
 				mes "algumas tarefas para fazer.";
 				next;
 				mes "[Mestre Miller]";
-				mes "Eu acho que ele viu potencial em você.";
+				mes "Eu acho que ele viu potencial em vocÃª.";
 				mes "Boa sorte.";
 				close;
 
 			case 3:
-				mes "São muitas tarefas";
-            			mes "Eu já lhe disse, o";
-            			mes "velho é bastante exigente.";
-				mes "Faça suas tarefas bem feitas.";
+				mes "SÃ£o muitas tarefas";
+            			mes "Eu jÃ¡ lhe disse, o";
+            			mes "velho Ã© bastante exigente.";
+				mes "FaÃ§a suas tarefas bem feitas.";
 				close;
 
 			case 4:
-				mes "Hmm. Eu estarei esperando por suas notícias.";
-				mes "Eu espero que você se torne um de nós.";
-				mes "Nós seremos praticamente uma família.";
+				mes "Hmm. Eu estarei esperando por suas notÃ­cias.";
+				mes "Eu espero que vocÃª se torne um de nÃ³s.";
+				mes "NÃ³s seremos praticamente uma famÃ­lia.";
 				close;
 
 			case 5:
 				if (skillpoint > 0)	{
-					mes "Aprenda todas as suas Habilidades Básicas primeiro!!";
+					mes "Aprenda todas as suas Habilidades BÃ¡sicas primeiro!!";
 					close;
 				}
-				mes "Ohh, eu vejo que você me trouxe algo daquele velho.";
-				mes "Isso é raro.";
-				mes "Em circunstâncias normais...";
-				mes "isso não seria permitido...";
+				mes "Ohh, eu vejo que vocÃª me trouxe algo daquele velho.";
+				mes "Isso Ã© raro.";
+				mes "Em circunstÃ¢ncias normais...";
+				mes "isso nÃ£o seria permitido...";
 				mes "Bom, bom.";
 				next;
 				mes "[Mestre Miller]";
 				mes "Mm..Tudo bem.";
 				mes "O velho deu suas";
-				mes "bençãos, portanto eu não tenho nenhuma";
-				mes "razão para rejeitar sua inscrição.";
+				mes "benÃ§Ã£os, portanto eu nÃ£o tenho nenhuma";
+				mes "razÃ£o para rejeitar sua inscriÃ§Ã£o.";
 				next;
 				mes "[Mestre Miller]";
-				mes "Tudo bem, de agora em diante você será um Justiceiro.";
-				mes "De agora em diante, você é um Justiceiro.";
+				mes "Tudo bem, de agora em diante vocÃª serÃ¡ um Justiceiro.";
+				mes "De agora em diante, vocÃª Ã© um Justiceiro.";
 				mes "Depois disso, por todos os momentos de sua vida,";
-				mes "lembre-se de que você nunca pode deixar de lado";
-				mes "a sua arma. Nós devemos nos lembrar que a arma";
+				mes "lembre-se de que vocÃª nunca pode deixar de lado";
+				mes "a sua arma. NÃ³s devemos nos lembrar que a arma";
 				mes "e cada uma de suas balas";
-				mes "tem seu próprio número de fabricação,";
+				mes "tem seu prÃ³prio nÃºmero de fabricaÃ§Ã£o,";
 				mes "que pode ser checado.";
 				next;
 				mes "[Master Miller]";
-				mes "Para comprar armas e munição";
-				mes "o único lugar que poderá comprá-los";
-				mes "será nas nossas lojas do";
-				mes "clã de Justiceiros em vários lugares.";
+				mes "Para comprar armas e muniÃ§Ã£o";
+				mes "o Ãºnico lugar que poderÃ¡ comprÃ¡-los";
+				mes "serÃ¡ nas nossas lojas do";
+				mes "clÃ£ de Justiceiros em vÃ¡rios lugares.";
 				next;
 				mes "[Mestre Miller]";
-				mes "Claro, isso é entediante.";
-				mes "Mas isto tudo é para...";
-				mes "não deixar essas armas";
-				mes "cair em mãos erradas, portanto";
-				mes "nos perdoe por qualquer incômodo.";
+				mes "Claro, isso Ã© entediante.";
+				mes "Mas isto tudo Ã© para...";
+				mes "nÃ£o deixar essas armas";
+				mes "cair em mÃ£os erradas, portanto";
+				mes "nos perdoe por qualquer incÃ´modo.";
 				next;
 				mes "[Mestre Miller]";
-				mes "Também existem";
-				mes "outras razões.";
-				mes "Você irá encontrar algumas delas sem dúvida";
+				mes "TambÃ©m existem";
+				mes "outras razÃµes.";
+				mes "VocÃª irÃ¡ encontrar algumas delas sem dÃºvida";
 				mes "depois.";
-				mes "Essas são todas as instruções";
+				mes "Essas sÃ£o todas as instruÃ§Ãµes";
 				mes "da Lady Celena, nossa ";
-				mes "líder do clã.";
+				mes "lÃ­der do clÃ£.";
 				next;
 				mes "[Mestre Miller]";
 				mes "Depois de um tempo";
-				mes "nós iremos dar para você, missões.";
-				mes "Você irá entender";
+				mes "nÃ³s iremos dar para vocÃª, missÃµes.";
+				mes "VocÃª irÃ¡ entender";
 				mes "depois.";
 				next;
 				mes "[Mestre Miller]";
 				mes "Eu estou certo de que nos veremos novamente";
-				mes "Portanto aqui é um boa hora";
+				mes "Portanto aqui Ã© um boa hora";
 				mes "para trabalharmos juntos.";
 				nude;
 				callfunc "Job_Change",Job_Gunslinger;
@@ -202,104 +202,104 @@ que_ng,152,167,3	script	Mestre Miller	901,{
 				close;
 		}
 	} else if(Class == Job_Novice && JobLevel < 10) {
-		mes "Hmm, eu acho que você";
+		mes "Hmm, eu acho que vocÃª";
 		mes "tem potencial";
-		mes "mas você ainda não é forte suficiente.";
+		mes "mas vocÃª ainda nÃ£o Ã© forte suficiente.";
 		mes "Continue a se fortalecer e";
 		mes "volte depois.";
 		close;
 	} else if(Class == Job_Gunslinger) {
 		mes "Oh~ Quanto tempo...";
-		mes "Como tem sido as suas viagens ?";
+		mes "Como tem sido as suas viagens?";
 		mes "Lembre-se, sempre tome cuidado";
 		mes "com a sua arma.";
 		close;
 	} else if(Class == Job_Baby) {
 		mes "Ouch~";
-		mes "Como um bebê veio aqui~";
+		mes "Como um bebÃª veio aqui~";
 		mes "Peekaboo~";
 		next;
 		mes "[Mestre Miller]";
-		mes "Onde está sua mamãe~";
+		mes "Onde estÃ¡ sua mamÃ£e~";
 		mes "Haha~";
-		mes "É um lugar perigoso aqui.";
-		mes "Vá brincar em outro lugar.";
+		mes "Ã‰ um lugar perigoso aqui.";
+		mes "VÃ¡ brincar em outro lugar.";
 		close;
 	} else {
-		mes "Não se distraia comigo.";
+		mes "NÃ£o se distraia comigo.";
 		mes "Siga com a sua viagem.";
 		close;
 	}
 }
 
-payon,184,65,3	script	O Sábio Chifre de Búfalo	866,{
+payon,184,65,3	script	O SÃ¡bio Chifre de BÃºfalo	866,{
 
 	switch(GUNS_Q)
 	{
 		case 0:
-			mes "[O Sábio Chifre de Búfalo]";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
 			mes "Zzz...Zzz";
 			close;
 
 		case 1:
-			mes "[O Sábio Chifre de Búfalo]";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
 			mes "...Hmm... Jovem";
-			mes "O que você quer.";
+			mes "O que vocÃª quer?";
 			next;
 			mes "["+ strcharinfo(0) +"]";
 			mes "Mestre Miller me enviou aqui.";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
 			mes "Miller...";
-			mes "Mm...Hmm. Então a Raposa Negra";
-			mes "enviou você aqui...";
+			mes "Mm...Hmm. EntÃ£o a Raposa Negra";
+			mes "enviou vocÃª aqui...";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
-			mes "Ele é sábio e astuto...";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
+			mes "Ele Ã© sÃ¡bio e astuto...";
 			mes "disposto a sacrificar-se pelos seus colegas.";
-			mes "mm...Se ele enviou você..";
-			mes "Então você deve ser bem capaz...";
+			mes "Hmm... Se ele enviou vocÃª..";
+			mes "EntÃ£o vocÃª deve ser bem capaz...";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
 			mes "Espere...Se aproxime...";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "....";
+			mes "...";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
-			mes "mmm...";
-			mes "mmmmm....";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
+			mes "Hmmm...";
+			mes "Hmmmmm...!";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
-			mes "mmm...O brilho nos olhos e...";
-			mes "uma expressão séria...também...";
-			mes "uma boa atitude...um bom senso de...";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
+			mes "Hmmm...O brilho nos olhos e...";
+			mes "uma expressÃ£o sÃ©ria... tambÃ©m...";
+			mes "uma boa atitude... um bom senso de...";
 			mes "responsabilidade...";
-			mes "Mas isso não é suficiente.";
+			mes "Mas isso nÃ£o Ã© suficiente.";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
-			mes "Falta experiência...";
-			mes "E você ainda não tem a benção da terra...";
-			mes "Você irá se machucar desse jeito...";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
+			mes "Falta experiÃªncia...";
+			mes "E vocÃª ainda nÃ£o tem a benÃ§Ã£o da terra...";
+			mes "VocÃª irÃ¡ se machucar desse jeito...";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
-			mes "Muito bem, Eu irei fazer para você um presente...";
-			mes "Se você deseja seguir esse caminho...";
-			mes "Junte 3 Cascos Arco-Íris,";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
+			mes "Muito bem, Eu irei fazer para vocÃª um presente...";
+			mes "Se vocÃª deseja seguir esse caminho...";
+			mes "Junte 3 Cascos Arco-Ãris,";
 			mes "10 Cascas, 3 Plumas,";
-			mes "1 Tronco, 3 Zargônios, e 3 Ervas Verdes,";
-			mes "e então traga-os para mim.";
+			mes "1 Tronco, 3 ZargÃ´nios, e 3 Ervas Verdes,";
+			mes "e entÃ£o traga-os para mim.";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
-			mes "Se você amostrar o presente que você recebeu para";
-			mes "Raposa Negra ele definitivamente irá...";
-			mes "aceitá-lo.";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
+			mes "Se vocÃª mostrar o presente que vocÃª recebeu para";
+			mes "Raposa Negra ele definitivamente irÃ¡...";
+			mes "aceitÃ¡-lo.";
 			next;
 			mes "["+ strcharinfo(0) +"]";
 			mes "-Eu irei precisar-";
-			mes "-3 Cascos Arco-Íris-";
+			mes "-3 Cascos Arco-Ãris-";
 			mes "-10 Cascas, 3 Plumas-";
-			mes "-1 Tronco, 3 Zargônios,-";
+			mes "-1 Tronco, 3 ZargÃ´nios,-";
 			mes "-e 3 Ervas Verdes.-";
 			set GUNS_Q,2;
 			close;
@@ -309,13 +309,13 @@ payon,184,65,3	script	O Sábio Chifre de Búfalo	866,{
 			{
 				mes "["+ strcharinfo(0) +"]";
 				mes "-Eu irei precisar-";
-				mes "-3 Cascos Arco-Íris-";
+				mes "-3 Cascos Arco-Ãris-";
 				mes "-10 Cascas, 3 Plumas-";
-				mes "-1 Tronco, 3 Zargônios,-";
+				mes "-1 Tronco, 3 ZargÃ´nios,-";
 				mes "-e 3 Ervas Verdes.-";
 				close;
 			}
-			mes "[O Sábio Chifre de Búfalo]";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
 			mes "Oh...entregue para mim.";
 			mes "E preciso de tempo para ";
 			mes "fazer o presente, aguarde um momento.";
@@ -329,55 +329,55 @@ payon,184,65,3	script	O Sábio Chifre de Búfalo	866,{
 			close;
 
 		case 3:
-			mes "[O Sábio Chifre de Búfalo]";
-			mes "Mm...Você veio bem a tempo.";
-			mes "Eu terminei a preparação agora mesmo.";
-			mes "Isso é um presente simples.";
-			mes "Mas isso é porque eu não trabalhei nele por muito tempo.";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
+			mes "Mm...VocÃª veio bem a tempo.";
+			mes "Eu terminei a preparaÃ§Ã£o agora mesmo.";
+			mes "Isso Ã© um presente simples.";
+			mes "Mas isso Ã© porque eu nÃ£o trabalhei nele por muito tempo.";
 			mes "Ahh...Eu me sinto cansado agora...";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
-			mes "A última vez que eu fiz isso...";
-			mes "Foi a mais de dez anos atrás.";
-			mes "Eu também segui esse caminho uma vez...";
-			mes "e eu também batalhei...";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
+			mes "A Ãºltima vez que eu fiz isso...";
+			mes "Foi a mais de dez anos atrÃ¡s.";
+			mes "Eu tambÃ©m segui esse caminho uma vez...";
+			mes "e eu tambÃ©m batalhei...";
 			mes "por cada item.";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
 			mes "Encontrar o pai da Celena";
 			mes "me fez sentir como antigamente,";
 			mes "o tempo realmente voa.";
-			mes "Como o suave vento oeste.";
+			mes "Como o suave vento do oeste.";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
-			mes "Embora existam sempre memórias";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
+			mes "Embora existam sempre memÃ³rias";
 			mes "dolorosas...mas meus seguidores...";
 			mes "especialmente pessoas como...";
 			mes "Celena e Raposa Negra.";
 			mes "Ahh, jovens, e meus seguidores...";
-			mes "Eu agradeço a vocês...";
+			mes "Eu agradeÃ§o a vocÃªs...";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
-			mes "Contudo agora, eu já estou velho...";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
+			mes "Contudo agora, eu jÃ¡ estou velho...";
 			mes "Daqui a pouco tempo...";
-			mes "Eu irei retornar...para a terra.";
+			mes "Eu irei retornar... para a terra.";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
-			mes "Eu me sinto tão cansado...";
-			mes "Me desculpe.. mas se você pudesse...";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
+			mes "Eu me sinto tÃ£o cansado...";
+			mes "Me desculpe... mas se vocÃª pudesse...";
 			mes "Me prometer alguma coisa...";
 			mes "Prometa fazer... algo por mim.";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
 			mes "Eu derrepente senti vontade...";
 			mes "de beber uma garrafa de leite.";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
 			mes "Tome isso como um pedido... de um velho.";
 			next;
 			mes "["+ strcharinfo(0) +"]";
 			mes "-Vamos tomar uma garrafa de leite-";
-			mes "Para 'O Sábio Chifre de Búfalo'.-";
+			mes "-Para \"O SÃ¡bio Chifre de BÃºfalo\".-";
 			set GUNS_Q, 4;
 			close;
 		
@@ -386,43 +386,43 @@ payon,184,65,3	script	O Sábio Chifre de Búfalo	866,{
 			{
 				mes "["+ strcharinfo(0) +"]";
 				mes "-Vamos tomar uma garrafa de leite-";
-				mes "-para 'O Sábio Chifre de Búfalo'.-";
+				mes "-Para \"O SÃ¡bio Chifre de BÃºfalo\".-";
 				close;
 			}
-			mes "[O Sábio Chifre de Búfalo]";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
 			mes "Obrigado.";
-			mes "Você é realmente um bom rapaz.";
+			mes "VocÃª Ã© realmente um bom rapaz.";
 			mes "Agora siga o seu caminho.";
 			delitem 519,1;
 			set GUNS_Q,5;
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
 			mes "Pegue esse presente feito por mim";
 			mes "e mostre ele para a Raposa Negra";
-			mes "Você tem as minhas bençãos";
+			mes "VocÃª tem as minhas benÃ§Ã£os";
 			mes "para tornar-se um Justiceiro.";
 			next;
-			mes "[O Sábio Chifre de Búfalo]";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
 			mes "Ee~~Ye~Ee~~ Hooma~ Raa~~Nae~Eee~~";
 			mes "Ee~~Ye~Ee~~ Hooma~ Raa~~Nae~Eee~~";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "-Cantando uma canção-";
+			mes "-Cantando uma canÃ§Ã£o-";
 			mes "-estranha-";
-			mes "-'O Sábio Chifre de Búfalo'. Eu me sinto estranho.-";
+			mes "-'O SÃ¡bio Chifre de BÃºfalo'. Eu me sinto estranho.-";
 			mes "-Leve o presente-";
 			mes "-para o Mestre Miller agora.-";
 			close;
 
 		case 5:
-			mes "[O Sábio Chifre de Búfalo]";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
 			mes "Ee~~Ye~Ee~~ Hooma~ Raa~~Nae~Eee~~";
 			mes "Ee~~Ye~Ee~~ Hooma~ Raa~~Nae~Eee~~";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "-Cantando uma canção-";
+			mes "-Cantando uma canÃ§Ã£o-";
 			mes "-estranha-";
-			mes "-'O Sábio Chifre de Búfalo'.-";
+			mes "-'O SÃ¡bio Chifre de BÃºfalo'.-";
 			next;
 			mes "["+ strcharinfo(0) +"]";
 			mes "-Eu me sinto estranho.-";
@@ -431,9 +431,9 @@ payon,184,65,3	script	O Sábio Chifre de Búfalo	866,{
 			close;
 		
 		case 6:
-			mes "[O Sábio Chifre de Búfalo]";
-			mes "Mm...Já faz um tempo.";
-			mes "Espero que você se torne um Justiceiro forte.";
+			mes "[O SÃ¡bio Chifre de BÃºfalo]";
+			mes "Mm...JÃ¡ faz um tempo.";
+			mes "Espero que vocÃª se torne um Justiceiro forte.";
 			close;
 	}
 }
