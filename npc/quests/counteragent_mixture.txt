@@ -1,86 +1,86 @@
 //===== Cronus Script ======================================== 
-//= Quest dos Reagentes e AntÃ­genos (Morgenstein)
+//= Quest dos Reagentes e Antígenos (Morgenstein)
 //===== Autor: =============================================== 
 //= kobra_k88
 //= added some dialogs for Morgenstein by Komurka
-//===== VersÃ£o Atual: ======================================== 
+//===== Versão Atual: ======================================== 
 //= 2.2b
-//===== CompatÃ­vel com: ====================================== 
+//===== Compatível com: ====================================== 
 //= rAthena SVN
 //===== Description: ========================================= 
-//= [ConversÃ£o do Aegis]
-//= Reagentes e AntÃ­genos sÃ£o para fazer tinturas
+//= [Conversão do Aegis]
+//= Reagentes e Antígenos são para fazer tinturas
 //= e a quest de Alquimista.
 //===== Changelog:============================================ 
 //= 1.0 Funcionando.
-//= 1.1 AtualizaÃ§Ã£o para quest de Alquimista.
+//= 1.1 Atualização para quest de Alquimista.
 //= 1.2 Adicionada checagem para garrafa vazia. [Lupus]
-//= 1.3 Alguns erros minoritÃ¡rios corrigidos. [Darkchild]
-//= 1.4 Mais 'errinhos', comentÃ¡rios para IDs adicionados. [Lupus]
-//= 1.5 Algumas correÃ§Ãµes gramaticais. [Nexon]
+//= 1.3 Alguns erros minoritários corrigidos. [Darkchild]
+//= 1.4 Mais 'errinhos', comentários para IDs adicionados. [Lupus]
+//= 1.5 Algumas correções gramaticais. [Nexon]
 //= 1.6 Bugs relacionados a quest de Alquimista consertados. [Lupus]
 //= 1,7 Exploit eliminado. [Lupus]
-//= 1.8 VariÃ¡vel 'al_morgen' eliminada. [Lupus]
-//= 2.1 Agora utiliza MISC_QUEST & 4 ao invÃ©s de al_morgen. [Lupus]
-//= 2.2 Rescriptado para padrÃµes Aegis 10.3. [L0ne_W0lf]
-//= 2.2a Pequenas correÃ§Ãµes. (bugreport:1122) [L0ne_W0lf]
-//= 2.2b CorreÃ§Ãµes referentes ao bugreport:1122. [L0ne_W0lf]
+//= 1.8 Variável 'al_morgen' eliminada. [Lupus]
+//= 2.1 Agora utiliza MISC_QUEST & 4 ao invés de al_morgen. [Lupus]
+//= 2.2 Rescriptado para padrões Aegis 10.3. [L0ne_W0lf]
+//= 2.2a Pequenas correções. (bugreport:1122) [L0ne_W0lf]
+//= 2.2b Correções referentes ao bugreport:1122. [L0ne_W0lf]
 //= 2.3 Traduzido. [Soraya]
 //============================================================ 
 
 alberta_in,133,55,3	script	Louitz#cm	84,{
 	if (molgenstain == 2) {
 		mes "[Mercador Louitz]";
-		mes "Oh, Ã© vocÃª de novamente.";
-		mes "EntÃ£o vocÃª tentou encontrar";
+		mes "Oh, é você de novamente.";
+		mes "Então você tentou encontrar";
 		mes "aquele cientista maluco";
 		mes "que vive em Geffen?";
 		next;
 		if (select("Falar Sobre Molgenstein:Cancelar") == 1) {
 			mes "[Mercador Louitz]";
-			mes "VocÃª sabe onde ele mora";
-			mes "mas nÃ£o verificou? Hey,";
+			mes "Você sabe onde ele mora";
+			mes "mas não verificou? Hey,";
 			mes "ele pode ser maluco, mas";
-			mes "acho que a maioria dos gÃªnios sÃ£o";
-			mes "assim. No entando, eu acho que seria uma boa idÃ©ia se vocÃª fosse vÃª-lo.";
+			mes "acho que a maioria dos gênios são";
+			mes "assim. No entando, eu acho que seria uma boa idéia se você fosse vê-lo.";
 			next;
 			mes "[Mercador Louitz]";
 			mes "Quero dizer ...";
-			mes "Ã‰ apenas uma questÃ£o";
-			mes "de tempo atÃ© que um cara inteligente";
+			mes "É apenas uma questão";
+			mes "de tempo até que um cara inteligente";
 			mes "assim crie algo";
 			mes "verdadeiramente milagroso, certo?";
 			close;
 		}
 		mes "[Mercador Louitz]";
-		mes "...OlÃ¡?";
-		mes "OlÃ¡aaaa? Hey.";
+		mes "...Olá?";
+		mes "Oláaaaa? Hey.";
 		mes "Hey! Estou falando'";
-		mes "com vocÃª! Cara, eu odeio";
-		mes "quando vocÃªs aventureiros";
+		mes "com você! Cara, eu odeio";
+		mes "quando vocês aventureiros";
 		mes "vindos de fora nunca se calam...";
 		close;
 	}
 	mes "[Mercador Louitz]";
 	mes "Heya.";
-	mes "O que Ã© que hÃ¡?";
+	mes "O que é que há?";
 	next;
 	if (countitem(971) > 0 && countitem(972) > 0) {
-		switch(select("Conversar:Falar sobre as soluÃ§Ãµes.:Cancelar")) {
+		switch(select("Conversar:Falar sobre as soluções.:Cancelar")) {
 		case 1:
 			mes "[Mercador Louitz]";
 			mes "Quando eu estava em Geffen";
-			mes "Ã  procura de itens mÃ¡gicos,";
+			mes "à procura de itens mágicos,";
 			mes "realmente ouvi rumores deste";
-			mes "cara, um cientista louco. EntÃ£o, fiquei";
-			mes "curioso, perguntei por aÃ­, e";
-			mes "finalmente consegui encontrÃ¡-lo.";
+			mes "cara, um cientista louco. Então, fiquei";
+			mes "curioso, perguntei por aí, e";
+			mes "finalmente consegui encontrá-lo.";
 			next;
 			mes "[Mercador Louitz]";
 			mes "Rapaz, oh boy, esse cara era";
 			mes "disparatado. Ele nem sequer sabia";
-			mes "que eu estava lÃ¡ o tempo todo e";
-			mes "sÃ³ ficava resmungando deste Mumbo";
+			mes "que eu estava lá o tempo todo e";
+			mes "só ficava resmungando deste Mumbo";
 			mes "Jumbo, enquanto trabalhava em seus";
 			mes "experimentos. Palavras como, hum...";
 			next;
@@ -95,41 +95,41 @@ alberta_in,133,55,3	script	Louitz#cm	84,{
 			mes "Mas acontece que,";
 			mes "este Karvodailnirol";
 			mes "e Detrimindexta realmente";
-			mes "existem. Creio que eles sejam lÃ­quidos";
-			mes "especiais que nÃ£o funcionam bem";
-			mes "como quaisquer lÃ­quidos que estamos acostumados.";
+			mes "existem. Creio que eles sejam líquidos";
+			mes "especiais que não funcionam bem";
+			mes "como quaisquer líquidos que estamos acostumados.";
 			close;
 		case 2:
 			set molgenstain,1;
 			mes "[Mercador Louitz]";
-			mes "Ei, esta Ã© uma dessas";
-			mes "soluÃ§Ãµes que aquele";
+			mes "Ei, esta é uma dessas";
+			mes "soluções que aquele";
 			mes "cientista tem mencionado.";
-			mes "VocÃª foi capaz de obter um";
+			mes "Você foi capaz de obter um";
 			mes "destes? Huh. Agora, que possuo";
-			mes "nÃ£o tenho idÃ©ia do que fazer com eles... ";
+			mes "não tenho idéia do que fazer com eles... ";
 			next;
 			mes "[Mercador Louitz]";
 			mes "Ah, mas que loucura";
 			mes "cientistas deveriam saber.";
-			mes "Eu nÃ£o me lembro exatamente";
+			mes "Eu não me lembro exatamente";
 			mes "onde ele mora, mas eu sei";
-			mes "que ele estÃ¡ em Geffen e que o seu";
-			mes "nome Ã© ^0000FFMolgenstein^000000.";
+			mes "que ele está em Geffen e que o seu";
+			mes "nome é ^0000FFMolgenstein^000000.";
 			next;
 			mes "[Mercador Louitz]";
-			mes "Hmm... Ã‰ melhor que vocÃª";
-			mes "vÃ¡ visitar Geffen,";
+			mes "Hmm... É melhor que você";
+			mes "vá visitar Geffen,";
 			mes "primeiramente nos arredores. Tenho";
 			mes "que perguntar primeiro. Tenho";
-			mes "certeza de que alguÃ©m sabe";
-			mes "onde vocÃª pode encontrar Molgenstein.";
+			mes "certeza de que alguém sabe";
+			mes "onde você pode encontrar Molgenstein.";
 			close;
 		case 3:
 			mes "[Mercador Louitz]";
 			mes "Humm...";
 			mes "Foi bom conversar";
-			mes "com vocÃª amigo. Uh,";
+			mes "com você amigo. Uh,";
 			mes "Te vejo por ai.";
 			mes "Se cuida, ok?";
 			close;
@@ -140,17 +140,17 @@ alberta_in,133,55,3	script	Louitz#cm	84,{
 		case 1:
 			mes "[Mercador Louitz]";
 			mes "Quando eu estava em Geffen";
-			mes "Ã  procura de itens mÃ¡gicos,";
+			mes "à procura de itens mágicos,";
 			mes "realmente ouvi rumores deste";
-			mes "cara, um cientista louco. EntÃ£o, fiquei";
-			mes "curioso, perguntei por aÃ­, e";
-			mes "finalmente consegui encontrÃ¡-lo.";
+			mes "cara, um cientista louco. Então, fiquei";
+			mes "curioso, perguntei por aí, e";
+			mes "finalmente consegui encontrá-lo.";
 			next;
 			mes "[Mercador Louitz]";
 			mes "Rapaz, oh boy, esse cara era";
 			mes "disparatado. Ele nem sequer sabia";
-			mes "que eu estava lÃ¡ o tempo todo e";
-			mes "sÃ³ ficava resmungando deste Mumbo";
+			mes "que eu estava lá o tempo todo e";
+			mes "só ficava resmungando deste Mumbo";
 			mes "Jumbo, enquanto trabalhava em seus";
 			mes "experimentos. Palavras como, hum...";
 			next;
@@ -165,14 +165,14 @@ alberta_in,133,55,3	script	Louitz#cm	84,{
 			mes "Mas acontece que,";
 			mes "este Karvodailnirol";
 			mes "e Detrimindexta realmente";
-			mes "existem. Creio que eles sejam lÃ­quidos";
-			mes "especiais que nÃ£o funcionam bem";
-			mes "como quaisquer lÃ­quidos que estamos acostumados.";
+			mes "existem. Creio que eles sejam líquidos";
+			mes "especiais que não funcionam bem";
+			mes "como quaisquer líquidos que estamos acostumados.";
 			close;
 		case 2:
 			set molgenstain,1;
 			mes "[Mercador Louitz]";
-			mes "Oh hey, isso que Ã©";
+			mes "Oh hey, isso que é";
 			mes "Karvodailnirol, do qual";
 			mes "aquele velho cientista estava";
 			mes "falando, huh? Com certeza";
@@ -180,26 +180,26 @@ alberta_in,133,55,3	script	Louitz#cm	84,{
 			mes "deve saber o que fazer com isto...";
 			next;
 			mes "[Mercador Louitz]";
-			mes "Hey,  por que vocÃª nÃ£o vai";
+			mes "Hey,  por que você não vai";
 			mes "perguntar a ele sobre isto?";
-			mes "NÃ£o me lembro exatamente";
+			mes "Não me lembro exatamente";
 			mes "onde ele mora, mas eu sei";
-			mes "ele estÃ¡ em Geffen e que seu";
-			mes "nome Ã© ^0000FFMolgenstein^000000.";
+			mes "ele está em Geffen e que seu";
+			mes "nome é ^0000FFMolgenstein^000000.";
 			next;
 			mes "[Mercador Louitz]";
-			mes "Hmm... Ã‰ melhor que vocÃª";
-			mes "vÃ¡ visitar Geffen,";
+			mes "Hmm... É melhor que você";
+			mes "vá visitar Geffen,";
 			mes "primeiramente nos arredores. Tenho";
 			mes "que perguntar primeiro. Tenho";
-			mes "certeza de que alguÃ©m sabe";
-			mes "onde vocÃª pode encontrar Molgenstein.";
+			mes "certeza de que alguém sabe";
+			mes "onde você pode encontrar Molgenstein.";
 			close;
 		case 3:
 			mes "[Mercador Louitz]";
 			mes "Um...";
 			mes "Foi bom conversar";
-			mes "com vocÃª amigo. Uh,";
+			mes "com você amigo. Uh,";
 			mes "Te vejo por ai.";
 			mes "Se cuida, ok?";
 			close;
@@ -210,17 +210,17 @@ alberta_in,133,55,3	script	Louitz#cm	84,{
 		case 1:
 			mes "[Mercador Louitz]";
 			mes "Quando eu estava em Geffen";
-			mes "Ã  procura de itens mÃ¡gicos,";
+			mes "à procura de itens mágicos,";
 			mes "realmente ouvi rumores deste";
-			mes "cara, um cientista louco. EntÃ£o, fiquei";
-			mes "curioso, perguntei por aÃ­, e";
-			mes "finalmente consegui encontrÃ¡-lo.";
+			mes "cara, um cientista louco. Então, fiquei";
+			mes "curioso, perguntei por aí, e";
+			mes "finalmente consegui encontrá-lo.";
 			next;
 			mes "[Mercador Louitz]";
 			mes "Rapaz, oh boy, esse cara era";
 			mes "disparatado. Ele nem sequer sabia";
-			mes "que eu estava lÃ¡ o tempo todo e";
-			mes "sÃ³ ficava resmungando deste Mumbo";
+			mes "que eu estava lá o tempo todo e";
+			mes "só ficava resmungando deste Mumbo";
 			mes "Jumbo, enquanto trabalhava em seus";
 			mes "experimentos. Palavras como, hum...";
 			next;
@@ -235,14 +235,14 @@ alberta_in,133,55,3	script	Louitz#cm	84,{
 			mes "Mas acontece que,";
 			mes "este Karvodailnirol";
 			mes "e Detrimindexta realmente";
-			mes "existem. Creio que eles sejam lÃ­quidos";
-			mes "especiais que nÃ£o funcionam bem";
-			mes "como quaisquer lÃ­quidos que estamos acostumados.";
+			mes "existem. Creio que eles sejam líquidos";
+			mes "especiais que não funcionam bem";
+			mes "como quaisquer líquidos que estamos acostumados.";
 			close;
 		case 2:
 			set molgenstain,1;
 			mes "[Mercador Louitz]";
-			mes "Oh hey, isso que Ã©";
+			mes "Oh hey, isso que é";
 			mes "Detrimindexta, do qual";
 			mes "aquele velho cientista estava";
 			mes "falando, huh? Com certeza";
@@ -250,26 +250,26 @@ alberta_in,133,55,3	script	Louitz#cm	84,{
 			mes "deve saber o que fazer com isto...";
 			next;
 			mes "[Mercador Louitz]";
-			mes "Hey,  por que vocÃª nÃ£o vai";
+			mes "Hey,  por que você não vai";
 			mes "perguntar a ele sobre isto?";
-			mes "NÃ£o me lembro exatamente";
+			mes "Não me lembro exatamente";
 			mes "onde ele mora, mas eu sei";
-			mes "ele estÃ¡ em Geffen e que seu";
-			mes "nome Ã© ^0000FFMolgenstein^000000.";
+			mes "ele está em Geffen e que seu";
+			mes "nome é ^0000FFMolgenstein^000000.";
 			next;
 			mes "[Mercador Louitz]";
-			mes "Hmm... Ã‰ melhor que vocÃª";
-			mes "vÃ¡ visitar Geffen,";
+			mes "Hmm... É melhor que você";
+			mes "vá visitar Geffen,";
 			mes "primeiramente nos arredores. Tenho";
 			mes "que perguntar primeiro. Tenho";
-			mes "certeza de que alguÃ©m sabe";
-			mes "onde vocÃª pode encontrar Molgenstein.";
+			mes "certeza de que alguém sabe";
+			mes "onde você pode encontrar Molgenstein.";
 			close;
 		case 3:
 			mes "[Mercador Louitz]";
 			mes "Um...";
 			mes "Foi bom conversar";
-			mes "com vocÃª amigo. Uh,";
+			mes "com você amigo. Uh,";
 			mes "Te vejo por ai.";
 			mes "Se cuida, ok?";
 			close;
@@ -278,17 +278,17 @@ alberta_in,133,55,3	script	Louitz#cm	84,{
 	if (select("Falar:Cancelar") == 1) {
 		mes "[Mercador Louitz]";
 		mes "Quando eu estava em Geffen";
-		mes "Ã  procura de itens mÃ¡gicos,";
+		mes "à procura de itens mágicos,";
 		mes "realmente ouvi rumores deste";
-		mes "cara, um cientista louco. EntÃ£o, fiquei";
-		mes "curioso, perguntei por aÃ­, e";
-		mes "finalmente consegui encontrÃ¡-lo.";
+		mes "cara, um cientista louco. Então, fiquei";
+		mes "curioso, perguntei por aí, e";
+		mes "finalmente consegui encontrá-lo.";
 		next;
 		mes "[Mercador Louitz]";
 		mes "Meu rapaz, esse cara era";
 		mes "disparatado. Ele nem sequer sabia";
-		mes "que eu estava lÃ¡ o tempo todo e";
-		mes "sÃ³ ficava resmungando deste Mumbo";
+		mes "que eu estava lá o tempo todo e";
+		mes "só ficava resmungando deste Mumbo";
 		mes "Jumbo, enquanto trabalhava em seus";
 		mes "experimentos. Palavras como, hum...";
 		next;
@@ -303,16 +303,16 @@ alberta_in,133,55,3	script	Louitz#cm	84,{
 		mes "Mas acontece que,";
 		mes "este Karvodailnirol";
 		mes "e esta Detrimindexta realmente";
-		mes "existem. Creio que eles sejam lÃ­quidos";
-		mes "especiais que nÃ£o funcionam bem";
-		mes "como quaisquer lÃ­quidos que estamos acostumados.";
+		mes "existem. Creio que eles sejam líquidos";
+		mes "especiais que não funcionam bem";
+		mes "como quaisquer líquidos que estamos acostumados.";
 		close;
 	}
 	mes "[Mercador Louitz]";
 	mes "Um...";
 	mes "Foi bom conversar";
-	mes "com vocÃª amigo. Uh,";
-	mes "te vejo por aÃ­.";
+	mes "com você amigo. Uh,";
+	mes "te vejo por aí.";
 	mes "Se cuida, ok?";
 	close;
 }
@@ -321,96 +321,96 @@ geffen,181,114,3	script	Aure Dupon#cm	82,{
 	if (molgenstain == 2) {
 		mes "[Aure Dupon]";
 		mes "Parece que o nossos";
-		mes "caminhos estÃ£o se cruzando novamente.";
-		mes "CoincidÃªncia? Ã© mais";
-		mes "do que isso. Isso Ã© ^0000FFdestino^000000.";
+		mes "caminhos estão se cruzando novamente.";
+		mes "Coincidência? é mais";
+		mes "do que isso. Isso é ^0000FFdestino^000000.";
 		next;
 		if (select("Falar sobre Molgenstein:Cancelar") == 1) {
 			mes "[Aure Dupon]";
-			mes "VocÃª nÃ£o encontrou";
+			mes "Você não encontrou";
 			mes "Molgenstein ainda? Ele";
 			mes "vive no segundo andar";
-			mes "da Forja. Apesar de que vocÃª";
+			mes "da Forja. Apesar de que você";
 			mes "apenas o encontrou, devo avisar-lhe";
-			mes "que nÃ£o fique muito perto dele...";
+			mes "que não fique muito perto dele...";
 			close;
 		}
 		mes "[Aure Dupon]";
-		mes "VÃ¡, entÃ£o, e";
-		mes "que as marÃ©s do";
-		mes "destino possam levÃ¡-lo";
-		mes "para onde vocÃª deve ir.";
+		mes "Vá, então, e";
+		mes "que as marés do";
+		mes "destino possam levá-lo";
+		mes "para onde você deve ir.";
 		close;
 	}
 	mes "[Aure Dupon]";
 	mes "O tempo flui suavemente";
-	mes "e sutilmente, mas nÃ£o";
-	mes "hÃ¡ forÃ§a neste mundo que";
-	mes "possa eventualmente, fazÃª-lo parar.";
-	mes "A humanidade nÃ£o passa de";
-	mes "uma partÃ­cula no grande esquema.";
+	mes "e sutilmente, mas não";
+	mes "há força neste mundo que";
+	mes "possa eventualmente, fazê-lo parar.";
+	mes "A humanidade não passa de";
+	mes "uma partícula no grande esquema.";
 	next;
 	if (molgenstain > 0) {
 		switch(select("Conversar:Falar sobre Molgenstein:Cancelar")) {
 		case 1:
 			mes "[Aure Dupon]";
-			mes "Ã‰ bom ter objetivos e manter o foco";
+			mes "É bom ter objetivos e manter o foco";
 			mes "mas ser obsessivo demais";
-			mes "sobre uma Ãºnica coisa pode ser";
+			mes "sobre uma única coisa pode ser";
 			mes "bastante destrutivos. Relaxe, esvazie";
 			mes "sua mente, e deixe-se";
-			mes "realizado pela marÃ© do destino.";
+			mes "realizado pela maré do destino.";
 			close;
 		case 2:
 			set molgenstain,2;
 			mes "[Aure Dupon]";
 			mes "Molgenstein...?";
-			mes "O homem Ã© obcecado";
-			mes "em conquistar as forÃ§as";
+			mes "O homem é obcecado";
+			mes "em conquistar as forças";
 			mes "que controlam nosso mundo. Mas";
-			mes "vocÃª parece estar curioso sobre";
+			mes "você parece estar curioso sobre";
 			mes "ele por algum motivo. Hummm...";
 			next;
 			mes "[Aure Dupon]";
-			mes "Seria melhor se vocÃª";
+			mes "Seria melhor se você";
 			mes "pudesse ver Molgenstein";
-			mes "e julgar o seu carÃ¡ter por";
-			mes "si mesmo. VocÃª pode encontrÃ¡-lo no";
+			mes "e julgar o seu caráter por";
+			mes "si mesmo. Você pode encontrá-lo no";
 			mes "segundo andar Geffen";
-			mes "na Forja. VÃ¡: Ã‰ o seu destino.";
+			mes "na Forja. Vá: É o seu destino.";
 			close;
 		case 3:
 			mes "[Aure Dupon]";
-			mes "VÃ¡, entÃ£o, e";
-			mes "que as marÃ©s do";
-			mes "destino possam levÃ¡-lo";
-			mes "para onde vocÃª deve ir.";
+			mes "Vá, então, e";
+			mes "que as marés do";
+			mes "destino possam levá-lo";
+			mes "para onde você deve ir.";
 			close;
 		}
 	}
 	if (select("Conversar:Cancelar") == 1) {
 		mes "[Aure Dupon]";
-		mes "Ã‰ bom ter objetivos e manter o foco";
+		mes "É bom ter objetivos e manter o foco";
 		mes "mas ser obsessivo demais";
-		mes "sobre uma Ãºnica coisa pode ser";
+		mes "sobre uma única coisa pode ser";
 		mes "bastante destrutivos. Relaxe, esvazie";
 		mes "sua mente, e deixe-se";
-		mes "realizado pela marÃ© do destino.";
+		mes "realizado pela maré do destino.";
 		close;
 	}
 	mes "[Aure Dupon]";
-	mes "VÃ¡, entÃ£o, e";
-	mes "que as marÃ©s do";
-	mes "destino possam levÃ¡-lo";
-	mes "para onde vocÃª deve ir.";
+	mes "Vá, então, e";
+	mes "que as marés do";
+	mes "destino possam levá-lo";
+	mes "para onde você deve ir.";
 	close;
 }
 
 geffen_in,141,140,3	script	Molgenstein#cm	121,{
 	if (checkweight(1201,1) == 0) {
 		mes "- Espere um minuto !! -";
-		mes "- VocÃª estÃ¡ carregando -";
-		mes "- muitos itens com vocÃª. -";
+		mes "- Você está carregando -";
+		mes "- muitos itens com você. -";
 		mes "- Por favor, tente novamente -";
 		mes "- depois que guardar alguns itens. -";
 		close;
@@ -422,53 +422,53 @@ geffen_in,141,140,3	script	Molgenstein#cm	121,{
 		mes "Hehehehe....";
 		mes "Heeheeheeheehee....";
 		next;
-		switch(select("Pergunte sobre sua pesquisa:PeÃ§a-lhe para fazer uma nova soluÃ§Ã£o.:Cancelar")) {
+		switch(select("Pergunte sobre sua pesquisa:Peça-lhe para fazer uma nova solução.:Cancelar")) {
 		case 1:
 			mes "[Alquimista Molgenstein]";
 			mes "Heeheeheeheee...";
-			mes "VocÃª deve ter ouvido rumores sobre a minha pesquisa. Sim! Mas jÃ¡ que provavelmente vocÃª jÃ¡ sabe, eu vou te contar, sem nada esconder, quero dizer, nÃ£o hÃ¡ nada a esconder.";
+			mes "Você deve ter ouvido rumores sobre a minha pesquisa. Sim! Mas já que provavelmente você já sabe, eu vou te contar, sem nada esconder, quero dizer, não há nada a esconder.";
 			next;
 			mes "[Alquimista Molgenstein]";
-			mes "Na verdade, vocÃª pode dizer que minha pesquisa estÃ¡ completa! Nada Ã© impossÃ­vel para o meu gÃªnio! Bwahaha, Ã© apenas uma questÃ£o de tempo!";
+			mes "Na verdade, você pode dizer que minha pesquisa está completa! Nada é impossível para o meu gênio! Bwahaha, é apenas uma questão de tempo!";
 			next;
 			mes "[Alquimista Molgenstein]";
-			mes "Ainda estÃ¡ aqui? Certo, vocÃª queria saber sobre a minha pesquisa. Ã‰ realmente muito simples. SÃ³ estava tentando inventar um super lÃ­quido que pudesse derreter tudo!";
+			mes "Ainda está aqui? Certo, você queria saber sobre a minha pesquisa. É realmente muito simples. Só estava tentando inventar um super líquido que pudesse derreter tudo!";
 			next;
 			mes "[Alquimista Molgenstein]";
-			mes "NÃ£o Ã© interessante? NÃ£o importa o quÃ£o forte vocÃª seja, nÃ£o pode quebrar pedra ou aÃ§o, mas com o meu novo lÃ­quido, cnsegue derreter as coisas, tornando-as macias como um gatinho!";
+			mes "Não é interessante? Não importa o quão forte você seja, não pode quebrar pedra ou aço, mas com o meu novo líquido, cnsegue derreter as coisas, tornando-as macias como um gatinho!";
 			next;
 			mes "[Alquimista Molgenstein]";
-			mes "NÃ£o posso derreter tudo ainda, mas achei que vocÃª poderia combinar coisas que nunca poderia misturar antes com minha invenÃ§Ã£o. Heeheeheehee~!";
+			mes "Não posso derreter tudo ainda, mas achei que você poderia combinar coisas que nunca poderia misturar antes com minha invenção. Heeheeheehee~!";
 			next;
 			mes "[Alquimista Molgenstein]";
-			mes "VocÃª pode fazer um monte de coisas que nunca teria imaginado possÃ­veis! Posso fazer um monte de coisas novas que vocÃª nunca imaginaria ao usar este mÃ©todo ... contanto que vocÃª queira!!";
+			mes "Você pode fazer um monte de coisas que nunca teria imaginado possíveis! Posso fazer um monte de coisas novas que você nunca imaginaria ao usar este método ... contanto que você queira!!";
 			next;
 			mes "[Alquimista Molgenstein]";
-			mes "As endorfinas estÃ£o correndo pelo meu rosto, pelo menos 2,1 vezes mais rÃ¡pido do que a taxa normal! Ah! Estou tÃ£o animado! Eu... Eu apenas nÃ£o posso esconder isso!";
+			mes "As endorfinas estão correndo pelo meu rosto, pelo menos 2,1 vezes mais rápido do que a taxa normal! Ah! Estou tão animado! Eu... Eu apenas não posso esconder isso!";
 			close;
 		case 2:
 			mes "[Alquimista Molgenstein]";
-			mes "EntÃ£o...";
-			mes "VocÃª quer que eu faÃ§a algo totalmente novo, huh? Hehhehheh! Eu amo o seu senso de aventura cientÃ­fica!";
+			mes "Então...";
+			mes "Você quer que eu faça algo totalmente novo, huh? Hehhehheh! Eu amo o seu senso de aventura científica!";
 			next;
-			switch(select("AntÃ­geno:Mistura")) {
+			switch(select("Antígeno:Mistura")) {
 			case 1:
 				mes "[Alquimista Molgenstein]";
 				mes "Ooh...!";
-				mes "VocÃª quer fazer um AntÃ­geno? Hohohohoho, vamos ver do que precisaremos...";
+				mes "Você quer fazer um Antígeno? Hohohohoho, vamos ver do que precisaremos...";
 				next;
 				mes "[Alquimista Molgenstein]";
-				mes "Ah, eu me lembro, sim, Ã¡lcool, uma, er, Detrimindexta e uma garrafa vazia para colocar tudo dentro. Apenas estes trÃªs itens e 3,000 zeny.";
+				mes "Ah, eu me lembro, sim, álcool, uma, er, Detrimindexta e uma garrafa vazia para colocar tudo dentro. Apenas estes três itens e 3,000 zeny.";
 				next;
 				mes "[Alquimista Molgenstein]";
 				mes "Bwahahahah!";
-				mes "Oh, mal posso esperar para fazer isto! EstÃ¡ pronto para comeÃ§ar?";
+				mes "Oh, mal posso esperar para fazer isto! Está pronto para começar?";
 				next;
 				if (select("Fazer:Cancelar") == 1) {
 					if (countitem(970) == 0 || countitem(971) == 0 || countitem(713) == 0 || Zeny < 3000) {
 						mes "[Alquimista Molgenstein]";
-						mes "Heuheuheuheuh.... nÃ£o Ã© o suficiente... nÃ£o Ã© o suficiente.. Haah...Haah... VÃ¡..... traga o restante dos materiais!";
-						mes "Vamos adiar a diversÃ£o por enquanto... Heuheuheuheuheuh.";
+						mes "Heuheuheuheuh.... não é o suficiente... não é o suficiente.. Haah...Haah... Vá..... traga o restante dos materiais!";
+						mes "Vamos adiar a diversão por enquanto... Heuheuheuheuheuh.";
 						close;
 					}
 					mes "[Alquimista Molgenstein]";
@@ -477,14 +477,14 @@ geffen_in,141,140,3	script	Molgenstein#cm	121,{
 					next;
 					if (countitem(970) < 1 || countitem(971) < 1 || countitem(713) < 1) {
 						mes "[Alquimista Molgenstein]";
-						mes "Hohohoho.... nÃ£o Ã© o suficiente... nÃ£o Ã© o suficiente... haah...haah... VÃ¡..... traga o restante dos materiais!!";
+						mes "Hohohoho.... não é o suficiente... não é o suficiente... haah...haah... Vá..... traga o restante dos materiais!!";
 						close;
 					}
-					delitem 970,1; //Ãlcool
+					delitem 970,1; //Álcool
 					delitem 971,1; //Detrimindexta
 					delitem 713,1; //Garrafa Vazia
 					set zeny,zeny-3000;
-					getitem 973,1; //AntÃ­geno
+					getitem 973,1; //Antígeno
 					mes "[Alquimista Molgenstein]";
 					mes "Hee hee hee...";
 					mes "Haaaaah......";
@@ -499,20 +499,20 @@ geffen_in,141,140,3	script	Molgenstein#cm	121,{
 			case 2:
 				mes "[Alquimista Molgenstein]";
 				mes "Ooh...!";
-				mes "VocÃª quer fazer uma mistura? Hohohohoho, vamos ver do que precisaremos...";
+				mes "Você quer fazer uma mistura? Hohohohoho, vamos ver do que precisaremos...";
 				next;
 				mes "[Alquimista Molgenstein]";
-				mes "Ah, eu me lembro, sim, Ã¡lcool, um, er, Karvodailnirol e uma garrafa vazia para colocar tudo dentro. Apenas estes trÃªs itens e 4,000 zeny.";
+				mes "Ah, eu me lembro, sim, álcool, um, er, Karvodailnirol e uma garrafa vazia para colocar tudo dentro. Apenas estes três itens e 4,000 zeny.";
 				next;
 				mes "[Alquimista Molgenstein]";
 				mes "Bwahahahah!";
-				mes "Oh, mal posso esperar para fazer isto! EstÃ¡ pronto para comeÃ§ar?";
+				mes "Oh, mal posso esperar para fazer isto! Está pronto para começar?";
 				next;
 				if (select("Fazer:Cancelar") == 1) {
 					if (countitem(970) == 0 || countitem(972) == 0 || countitem(713) == 0 || Zeny < 4000) {
 						mes "[Alquimista Molgenstein]";
-						mes "Heuheuheuheuh.... nÃ£o Ã© o suficiente... nÃ£o Ã© o suficiente.. Haah...Haah... VÃ¡..... traga o restante dos materiais!!";
-						mes "Vamos adiar a diversÃ£o por enquanto... Hehehehe";
+						mes "Heuheuheuheuh.... não é o suficiente... não é o suficiente.. Haah...Haah... Vá..... traga o restante dos materiais!!";
+						mes "Vamos adiar a diversão por enquanto... Hehehehe";
 						close;
 					}
 					mes "[Alquimista Molgenstein]";
@@ -521,10 +521,10 @@ geffen_in,141,140,3	script	Molgenstein#cm	121,{
 					next;
 					if (countitem(970) < 1 || countitem(972) < 1 || countitem(713) < 1) {
 						mes "[Alquimista Molgenstein]";
-						mes "Hohohoho.... nÃ£o Ã© o suficiente... nÃ£o Ã© o suficiente... haah...haah... VÃ¡..... traga o restante dos materiais!!";
+						mes "Hohohoho.... não é o suficiente... não é o suficiente... haah...haah... Vá..... traga o restante dos materiais!!";
 						close;
 					}
-					delitem 970,1; //Ãlcool
+					delitem 970,1; //Álcool
 					delitem 972,1; //Karvodailnirol
 					delitem 713,1; //Garrafa Vazia
 					set zeny,zeny-4000;
@@ -532,7 +532,7 @@ geffen_in,141,140,3	script	Molgenstein#cm	121,{
 					mes "[Alquimista Molgenstein]";
 					mes "Hee hee hee...";
 					mes "Haaaaah......";
-					mes "Oh? JÃ¡ terminamos?!";
+					mes "Oh? Já terminamos?!";
 					close;
 				}
 				mes "[Alquimista Molgenstein]";
@@ -556,36 +556,36 @@ geffen_in,141,140,3	script	Molgenstein#cm	121,{
 		next;
 		mes "[Alquimista Molgenstein]";
 		mes "Ah...?!";
-		mes "EntÃ£o, desculpe se euestranhar vocÃª. Ã‰ sÃ³... Eu nÃ£o vejo uma pessoa hÃ¡ muito tempo. EntÃ£o, er, o que eu posso fazer por vocÃª??";
+		mes "Então, desculpe se euestranhar você. É só... Eu não vejo uma pessoa há muito tempo. Então, er, o que eu posso fazer por você??";
 		next;
 		if (select("Pergunte sobre sua pesquisa.:Cancelar.") == 1) {
 			mes "[Alquimista Molgenstein]";
 			mes "Heeheeheeheee...";
-			mes "VocÃª deve ter ouvido rumores sobre a minha pesquisa. Sim! Mas jÃ¡ que provavelmente vocÃª jÃ¡ sabe, eu vou te contar, sem nada esconder, quero dizer, nÃ£o hÃ¡ nada a esconder.";
+			mes "Você deve ter ouvido rumores sobre a minha pesquisa. Sim! Mas já que provavelmente você já sabe, eu vou te contar, sem nada esconder, quero dizer, não há nada a esconder.";
 			next;
 			mes "[Alquimista Molgenstein]";
-			mes "Na verdade, vocÃª pode dizer que minha pesquisa estÃ¡ completa! Nada Ã© impossÃ­vel para o meu gÃªnio! Bwahaha, Ã© apenas uma questÃ£o de tempo!";
+			mes "Na verdade, você pode dizer que minha pesquisa está completa! Nada é impossível para o meu gênio! Bwahaha, é apenas uma questão de tempo!";
 			next;
 			mes "[Alquimista Molgenstein]";
-			mes "Ainda estÃ¡ aqui? Certo, vocÃª queria saber sobre a minha pesquisa. Ã‰ realmente muito simples. SÃ³ estava tentando inventar um super lÃ­quido que pudesse derreter tudo!";
+			mes "Ainda está aqui? Certo, você queria saber sobre a minha pesquisa. É realmente muito simples. Só estava tentando inventar um super líquido que pudesse derreter tudo!";
 			next;
 			mes "[Alquimista Molgenstein]";
-			mes "NÃ£o Ã© interessante? NÃ£o importa o quÃ£o forte vocÃª seja, nÃ£o pode quebrar pedra ou aÃ§o, mas com o meu novo lÃ­quido, cnsegue derreter as coisas, tornando-as macias como um gatinho!";
+			mes "Não é interessante? Não importa o quão forte você seja, não pode quebrar pedra ou aço, mas com o meu novo líquido, cnsegue derreter as coisas, tornando-as macias como um gatinho!";
 			next;
 			mes "[Alquimista Molgenstein]";
-			mes "NÃ£o posso derreter tudo ainda, mas achei que vocÃª poderia combinar coisas que nunca poderia misturar antes com minha invenÃ§Ã£o.";
+			mes "Não posso derreter tudo ainda, mas achei que você poderia combinar coisas que nunca poderia misturar antes com minha invenção.";
 			next;
 			mes "[Alquimista Molgenstein]";
-			mes "Posso fazer um monte de coisas novas que vocÃª nunca imaginaria ao usar este mÃ©todo ... contanto que vocÃª queira!!";
+			mes "Posso fazer um monte de coisas novas que você nunca imaginaria ao usar este método ... contanto que você queira!!";
 			next;
 			mes "[Alquimista Molgenstein]";
-			mes "As endorfinas estÃ£o correndo pelo meu rosto, pelo menos 2,1 vezes mais rÃ¡pido do que a taxa normal! Ah! Estou tÃ£o animado! I... Eu apenas nÃ£o posso esconder isso!";
+			mes "As endorfinas estão correndo pelo meu rosto, pelo menos 2,1 vezes mais rápido do que a taxa normal! Ah! Estou tão animado! I... Eu apenas não posso esconder isso!";
 			close;
 		}
 		close;
 	}
 	mes "[Alquimista Molgenstein]";
 	mes "Heeheeheehee...";
-	mes "VocÃª nÃ£o estÃ¡ aqui pelo assunto do teste, nÃ£o Ã©? Provavelmente nÃ£o, desde que sofri meu pequeno acidente. Heeheeheeee~!";
+	mes "Você não está aqui pelo assunto do teste, não é? Provavelmente não, desde que sofri meu pequeno acidente. Heeheeheeee~!";
 	close;
 }
