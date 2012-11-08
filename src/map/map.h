@@ -39,7 +39,7 @@ enum E_MAPSERVER_ST
 #define NATURAL_HEAL_INTERVAL 500
 #define MIN_FLOORITEM 2
 #define MAX_FLOORITEM START_ACCOUNT_NUM
-#define MAX_LEVEL 150
+#define MAX_LEVEL 5000 // Máximo aceito pelo emulador, assim sendo definido em /conf/battle/client.conf [Raizen]
 #define MAX_DROP_PER_MAP 48
 #define MAX_IGNORE_LIST 20 // official is 14
 #define MAX_VENDING 12
