@@ -5,7 +5,6 @@
 #include "../common/showmsg.h"
 #include "../common/malloc.h"
 #include "../common/strlib.h"
-#include "../config/renewal.h"
 #include "mapindex.h"
 
 
@@ -20,7 +19,6 @@ struct _indexes {
 int max_index = 0;
 
 char mapindex_cfgfile[80] = "db/map_index.txt";
-
 
 #define mapindex_exists(id) (indexes[id].name[0] != '\0')
 

@@ -2,35 +2,39 @@
 //= Quest do Justiceiro
 //===== Por: =================================================
 //= erKURITA & RockmanEXE
-//= Direct credits quote from RockmanExe: 
-//= "info provided by RockmanEXE cause he pwnz0rz yer arse"
-//= DON'T REMOVE THIS! (by request of him, he provided all
-//= the info regarding the quests and shops.)
+//= Citação direta de créditos por RockmanExe: 
+//= "informações fornecidas RockmanEXE porque ele owna seu traseiro"
+//= ("info provided by RockmanEXE cause he pwnz0rz yer arse")
+//= NÃO REMOVA ISSO! (por um pedido dele, que nos forneceu todas
+//= as informações a respeito das quests e shops.)
 //===== Versão Atual: ========================================
-//= 2.1e
+//= 2.2
 //===== Compatível com: ====================================== 
-//= eAthena SVN
+//= Cronus
 //===== Descrição: =========================================== 
 //= Quest da Classe Justiceiro
 //===== Additional Comments: ================================= 
-//= 1.0 Made the NPC [erKURITA]
-//= 1.5 Couple fixes to the npc, aswell as adding the missing
-//=	  3 green herbs. [erKURITA]
-//= 1.6 job number->const, commonized variable name,
-//= 	optimized [Lupus]
-//= 1.7 Now uses only ONE variable GUNS_Q [Lupus]
-//= 1.7a Grammar fixes, few spelling fixes, etc [CBMaster]
-//= 1.7b Parenthesis fixes [KarLaeda]
-//= 1.8 Fixed the reward you can get [Playtester]
-//= 1.9 Removed some 'clever' script constructs [ultramage]
-//= 2.0 Updated to official version - Thanks to Omega for
-//= his first try [SinSloth] 1.10b - removed .GATs [Lupus]
-//= 2.1 Wise Bull Horn now deletes all items. Thanks to yyCC. [L0ne_W0lf]
-//= 2.1a Corrected a Typo error ";". [Samuray22]
-//= 2.1b Corrected some typos errors. (bugreport:1549) [Samuray22]
-//= 2.1c Fixed some missing/messed up item checks. (bugreport:2693) [Kisuka]
-//= 2.1d Revisado arquivo. [Mara]
+//= 1.0 Npc construído. [erKURITA]
+//= 1.5 Alguns consertos ao npc, assim como a adição de três
+//=	  Ervas Verdes faltando. [erKURITA]
+//= 1.6 ID de Classe->String de Classe, uma variável padronizada,
+//= 	para otimização. [Lupus]
+//= 1.7 Agora usa apenas UMA variável para a quest (GUNS_Q). [Lupus]
+//= 1.7a Vários ajustes gramaticais. [CBMaster]
+//= 1.7b Ajustes nos parênteses. [KarLaeda]
+//= 1.8 Conserto ao prêmio que se pode obter. [Playtester]
+//= 1.9 Removidas construções 'inteligentes' do Script [ultramage]
+//= 2.0 Atualizado para versão oficial - Agradecimentos ao Omega
+//=     por sua primeira tentativa [SinSloth]
+//= 1.10b - Remoção das extensões .GATs [Lupus]
+//= 2.1 O 'Sábio Chifre de Búfalo' agora deleta todos os itens.
+//=       Agradecimentos ao yyCC. [L0ne_W0lf]
+//= 2.1a Corrigido ';' utilizado errôneamente. [Samuray22]
+//= 2.1b Alguns erros de digitação corrigidos. (bugreport:1549) [Samuray22]
+//= 2.1c Corrigidas algumas checagens de itens. (bugreport:2693) [Kisuka]
+//= 2.1d Revisado arquivo. [mkbu95]
 //= 2.1e Removido show, additem	[Yum]
+//= 2.2 Algumas otimizações e ajustes gramaticais. [Schrwaizer]
 //============================================================ 
 
 que_ng,152,167,3	script	Mestre Miller	901,{
@@ -50,16 +54,14 @@ que_ng,152,167,3	script	Mestre Miller	901,{
 				mes "nesse momento.";
 				mes "O que você quer?";
 				next;
-				switch( select( "Nada demais.","Eu quero me tornar um Justiceiro.") )
+				if( select( "Nada demais.:Eu quero me tornar um Justiceiro.") == 1 )
 				{
-					case 1:
 						mes "[Mestre Miller]";
 						mes "Desperdiçar meu tempo é como,";
 						mes "desperdiçar ouro.";
-						mes "Saia da minha vista imediatamente.";
+						mes "Saia da minha vista imediatamente!";
 						close;
-
-					case 2:
+				}
 						mes "[Mestre Miller]";
 						mes "Hmm.";
 						mes "Você ainda tem uma aparência jovem";
@@ -75,17 +77,16 @@ que_ng,152,167,3	script	Mestre Miller	901,{
 						mes "[Mestre Miller]";
 						mes "Você quer continuar?";
 						next;
-						switch (select ("Não, eu preciso de tempo para pensar.","Claro.") )
+						if(select("Não, eu preciso de tempo para pensar.:Claro.") == 1 )
 						{
-							case 1:
 								mes "[Mestre Miller]";
-								mes "Hmm.. Então é isso.";
+								mes "Hmm... Então é isso.";
 								mes "Bom, é muito importante...";
-								mes "Pense cuidadosamente e se você tem o espírito, ";
+								mes "Pense cuidadosamente e se você tem o espírito,";
 								mes "por favor, volte depois.";
 								close;
+						}
 
-							case 2:
 								mes "[Mestre Miller]";
 								mes "Hmm. Tudo Bem.";
 								mes "Primeiro";
@@ -103,12 +104,11 @@ que_ng,152,167,3	script	Mestre Miller	901,{
 								mes "Tudo bem, eu vou fazer isso.";
 								set GUNS_Q,1;
 								close;
-						}
-				}
+
 
 			case 1:	
 				mes "Se apresse, e mova-se.";
-				mes "'O Sábio Chifre de Búfalo' está";
+				mes "O \"Sábio Chifre de Búfalo\" está";
 				mes "recentemente em Payon.";
 				close;
 
@@ -210,7 +210,7 @@ que_ng,152,167,3	script	Mestre Miller	901,{
 		close;
 	} else if(Class == Job_Gunslinger) {
 		mes "Oh~ Quanto tempo...";
-		mes "Como tem sido as suas viagens ?";
+		mes "Como tem sido as suas viagens?";
 		mes "Lembre-se, sempre tome cuidado";
 		mes "com a sua arma.";
 		close;
@@ -244,7 +244,7 @@ payon,184,65,3	script	O Sábio Chifre de Búfalo	866,{
 		case 1:
 			mes "[O Sábio Chifre de Búfalo]";
 			mes "...Hmm... Jovem";
-			mes "O que você quer.";
+			mes "O que você quer?";
 			next;
 			mes "["+ strcharinfo(0) +"]";
 			mes "Mestre Miller me enviou aqui.";
@@ -257,23 +257,23 @@ payon,184,65,3	script	O Sábio Chifre de Búfalo	866,{
 			mes "[O Sábio Chifre de Búfalo]";
 			mes "Ele é sábio e astuto...";
 			mes "disposto a sacrificar-se pelos seus colegas.";
-			mes "mm...Se ele enviou você..";
+			mes "Hmm... Se ele enviou você..";
 			mes "Então você deve ser bem capaz...";
 			next;
 			mes "[O Sábio Chifre de Búfalo]";
 			mes "Espere...Se aproxime...";
 			next;
 			mes "["+ strcharinfo(0) +"]";
-			mes "....";
+			mes "...";
 			next;
 			mes "[O Sábio Chifre de Búfalo]";
-			mes "mmm...";
-			mes "mmmmm....";
+			mes "Hmmm...";
+			mes "Hmmmmm...!";
 			next;
 			mes "[O Sábio Chifre de Búfalo]";
-			mes "mmm...O brilho nos olhos e...";
-			mes "uma expressão séria...também...";
-			mes "uma boa atitude...um bom senso de...";
+			mes "Hmmm...O brilho nos olhos e...";
+			mes "uma expressão séria... também...";
+			mes "uma boa atitude... um bom senso de...";
 			mes "responsabilidade...";
 			mes "Mas isso não é suficiente.";
 			next;
@@ -291,7 +291,7 @@ payon,184,65,3	script	O Sábio Chifre de Búfalo	866,{
 			mes "e então traga-os para mim.";
 			next;
 			mes "[O Sábio Chifre de Búfalo]";
-			mes "Se você amostrar o presente que você recebeu para";
+			mes "Se você mostrar o presente que você recebeu para";
 			mes "Raposa Negra ele definitivamente irá...";
 			mes "aceitá-lo.";
 			next;
@@ -347,7 +347,7 @@ payon,184,65,3	script	O Sábio Chifre de Búfalo	866,{
 			mes "Encontrar o pai da Celena";
 			mes "me fez sentir como antigamente,";
 			mes "o tempo realmente voa.";
-			mes "Como o suave vento oeste.";
+			mes "Como o suave vento do oeste.";
 			next;
 			mes "[O Sábio Chifre de Búfalo]";
 			mes "Embora existam sempre memórias";
@@ -360,11 +360,11 @@ payon,184,65,3	script	O Sábio Chifre de Búfalo	866,{
 			mes "[O Sábio Chifre de Búfalo]";
 			mes "Contudo agora, eu já estou velho...";
 			mes "Daqui a pouco tempo...";
-			mes "Eu irei retornar...para a terra.";
+			mes "Eu irei retornar... para a terra.";
 			next;
 			mes "[O Sábio Chifre de Búfalo]";
 			mes "Eu me sinto tão cansado...";
-			mes "Me desculpe.. mas se você pudesse...";
+			mes "Me desculpe... mas se você pudesse...";
 			mes "Me prometer alguma coisa...";
 			mes "Prometa fazer... algo por mim.";
 			next;
@@ -377,7 +377,7 @@ payon,184,65,3	script	O Sábio Chifre de Búfalo	866,{
 			next;
 			mes "["+ strcharinfo(0) +"]";
 			mes "-Vamos tomar uma garrafa de leite-";
-			mes "Para 'O Sábio Chifre de Búfalo'.-";
+			mes "-Para \"O Sábio Chifre de Búfalo\".-";
 			set GUNS_Q, 4;
 			close;
 		
@@ -386,7 +386,7 @@ payon,184,65,3	script	O Sábio Chifre de Búfalo	866,{
 			{
 				mes "["+ strcharinfo(0) +"]";
 				mes "-Vamos tomar uma garrafa de leite-";
-				mes "-para 'O Sábio Chifre de Búfalo'.-";
+				mes "-Para \"O Sábio Chifre de Búfalo\".-";
 				close;
 			}
 			mes "[O Sábio Chifre de Búfalo]";

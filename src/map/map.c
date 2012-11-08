@@ -148,7 +148,6 @@ struct map_cache_map_info {
 	int32 len;
 };
 
-char map_cache_file[256]="db/map_cache.dat";
 char db_path[256] = "db";
 char motd_txt[256] = "conf/motd.txt";
 char help_txt[256] = "conf/help.txt";
@@ -3053,6 +3052,7 @@ void map_removemapdb(struct map_data *m)
 	uidb_remove(map_db, (unsigned int)m->index);
 }
 
+
 /*======================================
  * Initiate maps loading stage
  *--------------------------------------*/
@@ -3066,19 +3066,19 @@ int map_readallmaps (void)
 
 	if( enable_grf )
 		ShowStatus("Carregando mapas (usando arquivos GRF)...\n");
-	else
-	{
-		ShowStatus("Carregando mapas (usando %s como map cache)...\n", map_cache_file);
-		if( (fp = fopen(map_cache_file, "rb")) == NULL )
-		{
-			ShowFatalError("Unable to open map cache file "CL_WHITE"%s"CL_RESET"\n", map_cache_file);
+	else {
+		char mapcachefilepath[254];
+		sprintf(mapcachefilepath,"%s/%s%s",db_path,DBPATH,"map_cache.dat");
+		ShowStatus("Carregando mapas (usando %s map cache)...\n", mapcachefilepath);
+		if( (fp = fopen(mapcachefilepath, "rb")) == NULL ) {
+			ShowFatalError("Impossível abrir o arquivo map cache "CL_WHITE"%s"CL_RESET"\n", mapcachefilepath);
 			exit(EXIT_FAILURE); //No use launching server if maps can't be read.
 		}
 
 		// Init mapcache data.. [Shinryo]
 		map_cache_buffer = map_init_mapcache(fp);
 		if(!map_cache_buffer) {
-			ShowFatalError("Failed to initialize mapcache data (%s)..\n", map_cache_file);
+			ShowFatalError("Falha ao inicializar os dados do mapcache (%s)..\n", mapcachefilepath);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -3111,7 +3111,7 @@ int map_readallmaps (void)
 
 		if (uidb_get(map_db,(unsigned int)map[i].index) != NULL)
 		{
-			ShowWarning("Map %s already loaded!"CL_CLL"\n", map[i].name);
+			ShowWarning("Mapa %s já carregado!"CL_CLL"\n", map[i].name);
 			if (map[i].cell) {
 				aFree(map[i].cell);
 				map[i].cell = NULL;
@@ -3147,11 +3147,11 @@ int map_readallmaps (void)
 	}
 
 	// finished map loading
-	ShowInfo("Successfully loaded '"CL_WHITE"%d"CL_RESET"' maps."CL_CLL"\n",map_num);
+	ShowInfo("Sucesso no carregamento '"CL_WHITE"%d"CL_RESET"' mapas."CL_CLL"\n",map_num);
 	instance_start = map_num; // Next Map Index will be instances
 
 	if (maps_removed)
-		ShowNotice("Maps removed: '"CL_WHITE"%d"CL_RESET"'\n",maps_removed);
+		ShowNotice("Mapas removidos: '"CL_WHITE"%d"CL_RESET"'\n",maps_removed);
 
 	return 0;
 }
@@ -3320,8 +3320,6 @@ int map_config_read(char *cfgName)
 			strcpy(help2_txt, w2);
 		else if (strcmpi(w1, "charhelp_txt") == 0)
 			strcpy(charhelp_txt, w2);
-		else if(strcmpi(w1,"map_cache_file") == 0)
-			strncpy(map_cache_file,w2,255);
 		else if(strcmpi(w1,"db_path") == 0)
 			strncpy(db_path,w2,255);
 		else if (strcmpi(w1, "console") == 0) {

@@ -15772,7 +15772,8 @@ Questlog script commands
 
 BUILDIN_FUNC(setquest)
 {
-	TBL_PC * sd = script_rid2sd(st);
+	struct map_session_data *sd = script_rid2sd(st);
+	nullpo_ret(sd);
 
 	quest_add(sd, script_getnum(st, 2));
 	return 0;
@@ -15780,7 +15781,8 @@ BUILDIN_FUNC(setquest)
 
 BUILDIN_FUNC(erasequest)
 {
-	TBL_PC * sd = script_rid2sd(st);
+	struct map_session_data *sd = script_rid2sd(st);
+	nullpo_ret(sd);
 
 	quest_delete(sd, script_getnum(st, 2));
 	return 0;
@@ -15788,7 +15790,8 @@ BUILDIN_FUNC(erasequest)
 
 BUILDIN_FUNC(completequest)
 {
-	TBL_PC * sd = script_rid2sd(st);
+	struct map_session_data *sd = script_rid2sd(st);
+	nullpo_ret(sd);
 
 	quest_update_status(sd, script_getnum(st, 2), Q_COMPLETE);
 	return 0;
@@ -15796,7 +15799,8 @@ BUILDIN_FUNC(completequest)
 
 BUILDIN_FUNC(changequest)
 {
-	TBL_PC * sd = script_rid2sd(st);
+	struct map_session_data *sd = script_rid2sd(st);
+	nullpo_ret(sd);
 
 	quest_change(sd, script_getnum(st, 2),script_getnum(st, 3));
 	return 0;
@@ -15804,8 +15808,10 @@ BUILDIN_FUNC(changequest)
 
 BUILDIN_FUNC(checkquest)
 {
-	TBL_PC * sd = script_rid2sd(st);
+	struct map_session_data *sd = script_rid2sd(st);
 	quest_check_type type = HAVEQUEST;
+
+	nullpo_ret(sd);
 
 	if( script_hasdata(st, 3) )
 		type = (quest_check_type)script_getnum(st, 3);
