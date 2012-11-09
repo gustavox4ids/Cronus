@@ -7192,6 +7192,12 @@ BUILDIN_FUNC(strnpcinfo)
 		case 4: // map name
 			name = aStrdup(map[nd->bl.m].name);
 			break;
+		case 5: // coordinate (x)
+			script_pushint(st, nd->bl.x);
+			return 0;
+		case 6: // coordinate (y)
+			script_pushint(st, nd->bl.y);
+			return 0;
 	}
 
 	if(name)
