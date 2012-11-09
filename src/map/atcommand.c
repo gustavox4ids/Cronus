@@ -2161,13 +2161,13 @@ static int atkillmonster_sub(struct block_list *bl, va_list ap)
 {
 	struct mob_data *md;
 	int flag;
-	
+
 	nullpo_ret(md=(struct mob_data *)bl);
 	flag = va_arg(ap, int);
 
 	if (md->guardian_data)
 		return 0; //Do not touch WoE mobs!
-	
+
 	if (flag)
 		status_zap(bl,md->status.hp, 0);
 	else
@@ -2175,12 +2175,11 @@ static int atkillmonster_sub(struct block_list *bl, va_list ap)
 	return 1;
 }
 
-void atcommand_killmonster_sub(const int fd, struct map_session_data* sd, const char* message, const int drop)
+ACMD_FUNC(killmonster)
 {
-	int map_id;
+	int map_id, drop_flag;
 	char map_name[MAP_NAME_LENGTH_EXT];
-
-	if (!sd) return;
+	nullpo_retr(-1, sd);
 
 	memset(map_name, '\0', sizeof(map_name));
 
@@ -2190,26 +2189,13 @@ void atcommand_killmonster_sub(const int fd, struct map_session_data* sd, const 
 		if ((map_id = map_mapname2mapid(map_name)) < 0)
 			map_id = sd->bl.m;
 	}
+	
+	drop_flag = strcmp(command+1, "killmonster2");
 
-	map_foreachinmap(atkillmonster_sub, map_id, BL_MOB, drop);
+	map_foreachinmap(atkillmonster_sub, map_id, BL_MOB, -drop_flag);
 
 	clif_displaymessage(fd, msg_txt(165)); // All monsters killed!
 
-	return;
-}
-
-ACMD_FUNC(killmonster)
-{
-	atcommand_killmonster_sub(fd, sd, message, 1);
-	return 0;
-}
-
-/*==========================================
- *
- *------------------------------------------*/
-ACMD_FUNC(killmonster2)
-{
-	atcommand_killmonster_sub(fd, sd, message, 0);
 	return 0;
 }
 
@@ -7698,7 +7684,7 @@ ACMD_FUNC(mapflag) {
 		checkflag(restricted);			checkflag(nodrop);				checkflag(novending);	checkflag(loadevent);
 		checkflag(nochat);				checkflag(partylock);			checkflag(guildlock);	checkflag(src4instance);
 		clif_displaymessage(sd->fd," ");
-		clif_displaymessage(sd->fd,msg_txt(1312)); // Usage: \"@mapflag monster_teleport 1\" (0=Off | 1=On)
+		clif_displaymessage(sd->fd,msg_txt(1312)); // Usage: \"@mapflag monster_noteleport 1\" (0=Off | 1=On)
 		clif_displaymessage(sd->fd,msg_txt(1313)); // Use: \"@mapflag available\" to list the available mapflags
 		return 1;
 	}
@@ -7718,7 +7704,7 @@ ACMD_FUNC(mapflag) {
 	setflag(nochat);			setflag(partylock);			setflag(guildlock);			setflag(src4instance);
 
 	clif_displaymessage(sd->fd,msg_txt(1314)); // Invalid flag name or flag
-	clif_displaymessage(sd->fd,msg_txt(1312)); // Usage: \"@mapflag monster_teleport 1\" (0=Off | 1=On)
+	clif_displaymessage(sd->fd,msg_txt(1312)); // Usage: \"@mapflag monster_noteleport 1\" (0=Off | 1=On)
 	clif_displaymessage(sd->fd,msg_txt(1315)); // Available Flags:
 	clif_displaymessage(sd->fd,"----------------------------------");
 	clif_displaymessage(sd->fd,"town, autotrade, allowks, nomemo, noteleport, noreturn, monster_noteleport, nosave,");
@@ -8928,7 +8914,7 @@ void atcommand_basecommands(void) {
 		ACMD_DEF2("monstersmall", monster),
 		ACMD_DEF2("monsterbig", monster),
 		ACMD_DEF(killmonster),
-		ACMD_DEF(killmonster2),
+		ACMD_DEF2("killmonster2", killmonster),
 		ACMD_DEF(refine),
 		ACMD_DEF(produce),
 		ACMD_DEF(memo),

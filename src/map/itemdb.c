@@ -1171,12 +1171,22 @@ static int itemdb_readdb(void)
 				continue;
 			}
 			str[21] = p;
-
-			p = strstr(p+1,"}");
-			if ( strchr(p,',') != NULL )
-			{
-				ShowError("itemdb_readdb: Extra columns in line %d of \"%s\" (item with id %d), skipping.\n", lines, path, atoi(str[0]));
-				continue;
+			
+			if ( str[21][strlen(str[21])-2] != '}' ) {
+				/* lets count to ensure it's not something silly e.g. a extra space at line ending */
+				int v, lcurly = 0, rcurly = 0;
+				
+				for( v = 0; v < strlen(str[21]); v++ ) {
+					if( str[21][v] == '{' )
+						lcurly++;
+					else if ( str[21][v] == '}' )
+						rcurly++;
+				}
+				
+				if( lcurly != rcurly ) {
+					ShowError("itemdb_readdb: Mismatching curly braces in line %d of \"%s\" (item with id %d), skipping.\n", lines, path, atoi(str[0]));
+					continue;
+				}
 			}
 
 			if (!itemdb_parse_dbrow(str, path, lines, 0))
@@ -1187,7 +1197,7 @@ static int itemdb_readdb(void)
 
 		fclose(fp);
 
-		ShowStatus("Finalizada leitura de '"CL_WHITE"%lu"CL_RESET"' entradas em '"CL_WHITE"%s"CL_RESET"'.\n", count, filename[fi]);
+		ShowStatus("Done reading '"CL_WHITE"%lu"CL_RESET"' entries in '"CL_WHITE"%s"CL_RESET"'.\n", count, filename[fi]);
 	}
 
 	return 0;
@@ -1197,13 +1207,14 @@ static int itemdb_readdb(void)
  * item_db table reading
  *======================================*/
 static int itemdb_read_sqldb(void) {
+
 	const char* item_db_name[] = {
-#ifdef RENEWAL
-	item_db_re_db,
-#else
-	item_db_db,
-#endif
-	item_db2_db }; 
+								#ifdef RENEWAL
+									item_db_re_db,
+								#else
+									item_db_db,
+								#endif
+									item_db2_db };
 	int fi;
 	
 	for( fi = 0; fi < ARRAYLENGTH(item_db_name); ++fi ) {
@@ -1216,7 +1227,7 @@ static int itemdb_read_sqldb(void) {
 		}
 
 		// process rows one by one
-		while( SQL_SUCCESS == Sql_NextRow(mmysql_handle) ) { // wrap the result into a TXT-compatible format
+		while( SQL_SUCCESS == Sql_NextRow(mmysql_handle) ) {// wrap the result into a TXT-compatible format
 			char* str[22];
 			char* dummy = "";
 			int i;
