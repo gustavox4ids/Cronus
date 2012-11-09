@@ -18,7 +18,7 @@
 prt_monk,55,249,4	script	Tohobu Monge Guardião	139,0,5,{
 	mes "[Tohobu]";
 	mes "Quem é você?!";
-	mes "Como você ousa entrar no salão sagrado de treinamento sem minha permissão!";
+	mes "Como ousa entrar no salão sagrado de treinamento sem minha permissão!";
 	next;
 	mes "[Tohobu]";
 	mes "Saia agora!";
