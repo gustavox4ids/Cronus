@@ -3,13 +3,14 @@
 //===== Por: =================================================
 //= DZeroX
 //===== Versão Atual: ========================================
-//= 1.6
+//= 1.7
 //===== Compatível com: ======================================
 //= Cronus GIT
 //===== Descrição: ===========================================
 //= NPCs referentes a cidade de Alberta
 //===== Comentários Adicionais: ==============================
 //= 1.6 Adicionado diálogos Oficiais do bRO. [Axl]
+//= 1.7 Pequena otimização [Axl]
 //============================================================
 
 alberta,97,51,0	script	Mercador#alb1	84,{
@@ -36,14 +37,16 @@ alberta,131,139,2	script	Velho Bêbado#alb1	54,{
 	mes "[Velho Bêbado]";
 	mes "-ic-.... Hein?.... Que que cê tá olhando? Suma!!";
 	next;
-	switch(select("Ficar.","Deixe-o sozinho.")) {
-		case 1:
+	if(select("Ficar.","Deixe-o sozinho.") == 2) {
+			mes "[Velho Bêbado]";
+			mes "Isso mesmo! Vá embora!!!";
+			close;
+	}
 			mes "[Velho Bêbado]";
 			mes "Hahahaha -ic-... Você é cara-de-pau....";
 			mes "he.. eu pareço um Zé Ninguém agora, mas eu era um Marinheiro do infâme 'Going Mary'.";
 			next;
-			switch(select("Que tipo de navio ele é?","Nossa! Legal!")) {
-				case 1:
+			if(select("Que tipo de navio ele é?","Nossa! Legal!") == 1) {
 					mes "[Velho Bêbado]";
 					mes "Como é? Nunca ouviu falar?";
 					mes "Estupido! Todos conheciam o notório navio pirata 'Going Mary'! -ic-";
@@ -59,7 +62,7 @@ alberta,131,139,2	script	Velho Bêbado#alb1	54,{
 					mes "[Velho Bêbado]";
 					mes "Nossa... snif snif.. como tenho saudades de todo mundo... Agora estou deprimido. Vá embora.";
 					close;
-				case 2:
+			}
 					mes "[Velho Bêbado]";
 					mes "O CAPITÃO!!! -IC-! Ele fazia assim com a espada..aí..AÍ,";
 					mes "Não somente o alvo mas também os inimigos ao redor dele eram anvoltos em chamas, além da habilidade do capitão, a espada devia ter alguma magia nela.";
@@ -67,12 +70,6 @@ alberta,131,139,2	script	Velho Bêbado#alb1	54,{
 					mes "[Velho Bêbado]";
 					mes "Nossa... snif snif.. como tenho saudades de todo mundo... Agora estou deprimido. Vá embora.";
 					close;
-			}
-		case 2:
-			mes "[Velho Bêbado]";
-			mes "Isso mesmo! Vá embora!!!";
-			close;
-	}
 }
 
 alberta,58,80,2	script	Mercador#alb3	99,{
@@ -170,8 +167,7 @@ alberta,189,151,5	script	Marinheiro#alb1	100,{
 alb2trea,39,50,6	script	Marinheiro#alb2	100,{
 	mes "[Marinheiro]";
 	mes "Quer voltar?";
-	if(select("Voltar para Alberta.","Sair")==1)
-		warp "alberta",192,169;
+	if(select("Voltar para Alberta.","Sair")==1) warp "alberta",192,169;
 	close;
 }
 
@@ -184,32 +180,29 @@ alberta,195,151,2	script	Poch	86,{
 	mes "Então, está pronto? Ok então por favor assine aqui.";
 	mes "Nossa! A taxa de admissão é 200 Zeny.";
 	next;
-	switch(select("Entrar","Sair")) {
-		case 1:
-			if (Zeny < 200) {
-    			mes "[Poch]";
-    			mes "Meu caro, você não tem dinheiro o suficiente. Volte quando puder pagar a taxa.";
-				close;
-			} else {
-				set Zeny,Zeny - 200;
-				warp "alb2trea",62,69;
-				close;
-			}
-		case 2:
-			mes "[Poch]";
-			mes "Volte depois.";
-			close;
+	if(select("Entrar","Sair") == 2) {
+		mes "[Poch]";
+		mes "Volte depois.";
+		close;
 	}
-}
+		if (Zeny < 200) {
+    		mes "[Poch]";
+    		mes "Meu caro, você não tem dinheiro o suficiente. Volte quando puder pagar a taxa.";
+			close;
+		} 
+		set Zeny,Zeny - 200;
+		warp "alb2trea",62,69;
+		end;
+	}
 
 alberta,190,173,4	script	Phelix	85,{
 	mes "[Phelix]";
 	if ((MaxWeight-Weight) < 10000) {
-		mes "Wait a moment!!";
-		mes "You have brought too many things!";
-		mes "You cannot accept any more items!";
-		mes "Please reduce the amount of items,";
-		mes "then come see me again.";
+		mes "Espere um momento!!";
+		mes "Você está carregando muitos itens!";
+		mes "Assim não poderá receber mais nada!";
+		mes "Por favor, reduza a quantidade de itens em seu inventario";
+		mes "e volte aqui.";
 		close;
 	}
 	if (@event_zelopy == 0) {
@@ -224,7 +217,7 @@ alberta,190,173,4	script	Phelix	85,{
     	mes "Se estiver interessado me procure depois com as coisas.";
 		set @event_zelopy,1;
 		close;
-	} else {
+	}
 		mes "Hmm.. você quer trocar jellopy por Poção Vermelha ou Batata Doce. O que quer?";
 		next;
 		switch(select("Poção Vermelha.","Batata Doce.")) {
@@ -236,9 +229,8 @@ alberta,190,173,4	script	Phelix	85,{
 			if (countitem(909) < 10) {
 				mes "Ei! Não é o suficiente. Eu disse 1 Poção Vermelha por 10 Jellopy. Entendeu?";
 				close;
-			} else {
+			}
 				set .@max,countitem(909)/10;
-				mes "[Phelix]";
 				mes "Nada mal...";
 				mes "Quantas poções quer?";
 				next;
@@ -254,19 +246,7 @@ alberta,190,173,4	script	Phelix	85,{
 					input .@amount;
 					next;
 					mes "[Phelix]";
-					if (.@amount <= 0) {
-						mes "Volte depois quando quiser.";
-						close;
-					}
-					if (.@amount > 100) {
-						mes "Mais que 100 é demais. Escolha outro número.";
-						close;
-					}
-					if (countitem(909) < .@amount*10) {
-						mes "Bem bem, você não tem o suficiente em Jellopy.";
-                        mes "Volte quando tiver mais Jellopy";
-						close;
-					}
+					callsub EVENT_ZELOPYCHECK,0;
 					delitem 909,.@amount*10;	// Jellopy
 					getitem 501,.@amount;	// Red_Potion
 					break;
@@ -278,7 +258,6 @@ alberta,190,173,4	script	Phelix	85,{
 				mes "[Phelix]";
 				mes "Aqui estão! Poções como prometido. Use-as sabiamente.";
 				close;
-			}
 		case 2:
 			mes "[Phelix]";
 			mes "Deixe-me ver o que trouxe..";
@@ -287,7 +266,7 @@ alberta,190,173,4	script	Phelix	85,{
 			if (countitem(909) < 3) {
 				mes "Ei! Não é o suficiente. Eu disse 1 Batata Doce por 3 Jellopy.. Entendeu?";
 				close;
-			} else {
+			}
 				set .@max,countitem(909)/3;
                 mes "Nada mal...";
                 mes "Quantas batatas vai querer?";
@@ -303,19 +282,7 @@ alberta,190,173,4	script	Phelix	85,{
 					input .@amount;
 					next;
 					mes "[Phelix]";
-					if (.@amount == 0) {
-						mes "Até a próxima.";
-						close;
-					}
-					if (.@amount > 100) {
-						mes "Escreva outro número, mais que 100 é demais.";
-						close;
-					}
-					if (countitem(909) < .@amount*10) {
-    	                mes "Bem bem, você não tem Jellopy o suficiente.";
-        	            mes "Traga-me mais Jellopy";
-						close;
-					}
+					callsub EVENT_ZELOPYCHECK,0;
 					delitem 909,.@amount*3;	// Jellopy
 					getitem 515,.@amount;	// Carrot
 					break;
@@ -327,7 +294,20 @@ alberta,190,173,4	script	Phelix	85,{
 				mes "[Phelix]";
 				mes "Aqui estão! Batatas doces como prometido. Use-as sabiamente.";
 				close;
-			}
 		}
-	}
+	EVENT_ZELOPYCHECK:
+		if (.@amount == 0) {
+			mes "Até a próxima.";
+			close;
+		}
+		if (.@amount > 100) {
+			mes "Escreva outro número, mais que 100 é demais.";
+			close;
+		}
+		if (countitem(909) < .@amount*10) {
+    	     mes "Bem bem, você não tem Jellopy o suficiente.";
+        	 mes "Traga-me mais Jellopy";
+			 close;
+		}
+	return;
 }
