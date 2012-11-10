@@ -6,6 +6,7 @@
 #include "../common/malloc.h"
 #include "../common/mmo.h"
 #include "../common/showmsg.h"
+
 #include "../config/renewal.h"
 
 #include <stdio.h>
@@ -19,12 +20,8 @@
 #define NO_WATER 1000000
 
 char grf_list_file[256] = "conf/grf-files.txt";
-#ifdef RENEWAL
-char map_list_file[256] = "db/re/map_index.txt";
-#else
-char map_list_file[256] = "db/pre-re/map_index.txt";
-#endif
-char map_cache_file[256] = "db/map_cache.dat";
+char map_list_file[256] = "db/map_index.txt";
+char map_cache_file[256];
 int rebuild = 0;
 
 FILE *map_cache_fp;
@@ -259,18 +256,27 @@ int do_init(int argc, char** argv)
 	struct map_data map;
 	char name[MAP_NAME_LENGTH_EXT];
 
+	/* setup pre-defined, #define-dependant */
+	sprintf(map_cache_file,"db/%s/map_cache.dat",
+#ifdef RENEWAL
+			"re"
+#else
+			"pre-re"
+#endif
+			);
+	
 	// Process the command-line arguments
 	process_args(argc, argv);
 
-	ShowStatus("Inicializando I/O da GRF com %s\n", grf_list_file);
+	ShowStatus("Initializing grfio with %s\n", grf_list_file);
 	grfio_init(grf_list_file);
 
 	// Attempt to open the map cache file and force rebuild if not found
-	ShowStatus("Abrindo cache de mapas: %s\n", map_cache_file);
+	ShowStatus("Opening map cache: %s\n", map_cache_file);
 	if(!rebuild) {
 		map_cache_fp = fopen(map_cache_file, "rb");
 		if(map_cache_fp == NULL) {
-			ShowNotice("Cache de mapas existente não funciona, forçando o modo de recompilação\n");
+			ShowNotice("Existing map cache not found, forcing rebuild mode\n");
 			rebuild = 1;
 		} else
 			fclose(map_cache_fp);
@@ -280,15 +286,15 @@ int do_init(int argc, char** argv)
 	else
 		map_cache_fp = fopen(map_cache_file, "r+b");
 	if(map_cache_fp == NULL) {
-		ShowError("Falha enquanto abria o arquivo de cache de mapas %s\n", map_cache_file);
+		ShowError("Failure when opening map cache file %s\n", map_cache_file);
 		exit(EXIT_FAILURE);
 	}
 
 	// Open the map list
-	ShowStatus("Abrindo lista de mapas: %s\n", map_list_file);
+	ShowStatus("Opening map list: %s\n", map_list_file);
 	list = fopen(map_list_file, "r");
 	if(list == NULL) {
-		ShowError("Falha enquanto abria o arquivo da lista de mapas %s\n", map_list_file);
+		ShowError("Failure when opening maps list file %s\n", map_list_file);
 		exit(EXIT_FAILURE);
 	}
 
@@ -312,34 +318,34 @@ int do_init(int argc, char** argv)
 		if(sscanf(line, "%15s", name) < 1)
 			continue;
 
-		if(strcmp("mapa:", name) == 0 && sscanf(line, "%*s %15s", name) < 1)
+		if(strcmp("map:", name) == 0 && sscanf(line, "%*s %15s", name) < 1)
 			continue;
 
 		name[MAP_NAME_LENGTH_EXT-1] = '\0';
 		remove_extension(name);
 		if(find_map(name))
-			ShowInfo("Mapa '"CL_WHITE"%s"CL_RESET"' já está no cache.\n", name);
+			ShowInfo("Map '"CL_WHITE"%s"CL_RESET"' already in cache.\n", name);
 		else if(read_map(name, &map)) {
 			cache_map(name, &map);
-			ShowInfo("Mapa '"CL_WHITE"%s"CL_RESET"' adicionado ao cache com sucesso.\n", name);
+			ShowInfo("Map '"CL_WHITE"%s"CL_RESET"' successfully cached.\n", name);
 		} else
-			ShowError("Mapa '"CL_WHITE"%s"CL_RESET"' não funciona.!\n", name);
+			ShowError("Map '"CL_WHITE"%s"CL_RESET"' not found!\n", name);
 
 	}
 
-	ShowStatus("Fechando lista de mapas: %s\n", map_list_file);
+	ShowStatus("Closing map list: %s\n", map_list_file);
 	fclose(list);
 
 	// Write the main header and close the map cache
-	ShowStatus("Fechando cache de mapas: %s\n", map_cache_file);
+	ShowStatus("Closing map cache: %s\n", map_cache_file);
 	fseek(map_cache_fp, 0, SEEK_SET);
 	fwrite(&header, sizeof(struct main_header), 1, map_cache_fp);
 	fclose(map_cache_fp);
 
-	ShowStatus("Finalizando I/O da GRF\n");
+	ShowStatus("Finalizing grfio\n");
 	grfio_final();
 
-	ShowInfo("%d mapas em cache agora\n", header.map_count);
+	ShowInfo("%d maps now in cache\n", header.map_count);
 
 	return 0;
 }
