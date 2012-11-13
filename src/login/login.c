@@ -1045,7 +1045,15 @@ int mmo_auth(struct login_session_data* sd, bool isServer)
 	if( !check_password(sd->md5key, sd->passwdenc, sd->passwd, acc.pass) )
 	{
 		ShowNotice("Senha "CL_RED"incorreta"CL_RESET" (conta: "CL_WHITE"%s"CL_RESET", ip: "CL_WHITE"%s"CL_RESET")\n", sd->userid, ip); // Senha correta e senha recebida retiradas de mensagem por motivos de segurança
-		return 1; // 1 = Incorrect Password
+		//return 1; // 1 = Incorrect Password
+		{
+			int fd = sd->fd;
+
+			WFIFOHEAD(fd,3);
+			WFIFOW(fd,0) = 0x6c;
+			WFIFOB(fd,2) = 0;
+			WFIFOSET(fd,3);
+		}
 	}
 
 	if( acc.expiration_time != 0 && acc.expiration_time < time(NULL) )
